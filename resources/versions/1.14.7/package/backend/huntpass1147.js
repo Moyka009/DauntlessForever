@@ -10,7 +10,12 @@ function error(message,status=409){const e=Error(message);e.status=status;return
 function integer(n,label){if(!Number.isSafeInteger(n)||n<0)throw error('Invalid '+label,400);return n;}
 function level(xp,data=baseData){return Math.min(data.levels,Math.floor(integer(xp,'Hunt Pass XP')/data.xp_per_level));}
 function emptyReward(rank){return{rank_id:rank,entitlements:[],instanced_items:[],ordered_instanced_items:[],stacked_items:[]};}
-function pathConfig(data=baseData){const path={progression_id:PASS,premium_gating_entitlement:PREMIUM,reset_with_character:false,progression_multiplier:1,start_date:data.start_date,end_date:data.end_date,requirements:[{rank_id:0,xp_required:0}],free_rewards:[emptyReward(0)],premium_rewards:[emptyReward(0)]};
+// DF-PASSWINDOW-1147 (Addison2k): the game builds one weekly Challenges header per week of the pass season. A season
+// running to 2099 made it build thousands, which is the lag when opening Bounties/Challenges. The pass stays
+// permanent, but the game is shown a rolling 12-week season starting at the pass's own start date.
+function passWindow(data){const W=12*7*864e5,base=Date.parse(data.start_date)||Date.UTC(2026,9,17),n=Math.max(0,Math.floor((Date.now()-base)/W));
+ const iso=t=>new Date(t).toISOString().replace(/\.\d{3}Z$/,'+00:00');return{start:iso(base+n*W),end:iso(base+(n+1)*W)};}
+function pathConfig(data=baseData){const path={progression_id:PASS,premium_gating_entitlement:PREMIUM,reset_with_character:false,progression_multiplier:1,start_date:passWindow(data).start,end_date:passWindow(data).end,requirements:[{rank_id:0,xp_required:0}],free_rewards:[emptyReward(0)],premium_rewards:[emptyReward(0)]};
  for(let rank=1;rank<=data.levels;rank++){
   path.requirements.push({rank_id:rank,xp_required:data.xp_per_level});
   for(const side of ['free','premium']){const r=emptyReward(rank);

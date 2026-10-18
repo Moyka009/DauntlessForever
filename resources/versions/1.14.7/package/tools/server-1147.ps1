@@ -215,7 +215,12 @@ while ($true) {
     if ($listening -and -not $NoSecondServer) { try { Step-Hunt } catch { Write-Host "  [2nd] error: $($_.Exception.Message)" -ForegroundColor Yellow } }
     if ($p.HasExited) { $stopReason = "the server process ended by itself (exit code $($p.ExitCode))"; break }
     if (-not $listening -and ((Get-Date) - $start).TotalSeconds -gt $WaitSeconds) { $stopReason = "it did not start listening within $WaitSeconds s"; break }
-    if ([Console]::KeyAvailable) { $k = [Console]::ReadKey($true); if ($k.Key -eq 'Q') { $stopReason = "stopped with Q"; break } }
+    # Q stops the server by hand. On some PCs this window has no usable console (input redirected, Windows Terminal
+    # as the default console, Host Mode's hidden window): asking for a key then throws, and with 'Stop' as the error
+    # setting that ended the whole server. Now a missing console just means no Q. (Oct 18)
+    $q = $false
+    try { if (-not [Console]::IsInputRedirected -and [Console]::KeyAvailable) { $k = [Console]::ReadKey($true); if ($k.Key -eq 'Q') { $q = $true } } } catch { }
+    if ($q) { $stopReason = "stopped with Q"; break }
     Start-Sleep -Milliseconds 500
 }
 if (Test-Path -LiteralPath $marker) { Remove-Item -LiteralPath $marker -Force }

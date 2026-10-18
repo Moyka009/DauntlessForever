@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-18.3",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-18.3.zip",
-                         "sha256":  "8cb3e3b3285f6a0ac940aea6fafa7b964eb772ae09ad64ec9f8d04032fbc0c34",
+                         "packageVersion":  "2026-10-18.4",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-18.4.zip",
+                         "sha256":  "103cc6e85d0217c6471e2291bc218fb0f30e2cd183c63c747e3965ce3d053c04",
                          "date":  "2026-10-18",
-                         "note":  "Sparkforge reforge works: weapon back to level 1, reforge badge, Aetherheart right away"
+                         "note":  "Fixed the lag when opening Bounties and Challenges; fixed the game server stopping before it was ready on PCs whose server window has no keyboard input"
                      }
                  ],
     "launcher":  {
