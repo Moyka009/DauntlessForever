@@ -44,6 +44,21 @@ function backup(tag) {
   for (const f of all.slice(0, Math.max(0, all.length - 20))) { try { fs.unlinkSync(path.join(dir, f)); } catch (e) {} }
   return to;
 }
+// DF-TRAVEL-LOCAL: the pending note keeps a fingerprint of the home save as it was sent (and after each save home).
+// If the home save changed since (solo play, the launcher's Inventory page), an older copy from the host must not
+// overwrite it when a game did not bring the character home at the end.
+const fingerprint = (p) => crypto.createHash('sha256').update(JSON.stringify(p)).digest('hex');
+function notePending(extra) {
+  let cur = {}; try { cur = JSON.parse(fs.readFileSync(pendingFile, 'utf8')); } catch (e) {}
+  fs.writeFileSync(pendingFile, JSON.stringify(Object.assign(cur, extra)));
+}
+function changedSinceSent(mine) {
+  let pd = null; try { pd = JSON.parse(fs.readFileSync(pendingFile, 'utf8')); } catch (e) { return false; }
+  if (pd.local) return fingerprint(mine) !== pd.local;
+  // older notes have no fingerprint: a home save written well after that game started was played or edited here
+  const at = Date.parse(pd.at) || 0;
+  try { return at > 0 && fs.statSync(stateFile).mtimeMs > at + 15 * 60 * 1000; } catch (e) { return false; }
+}
 function itemCount(p) {
   let n = 0;
   for (const inv of Object.values(p.inventory || {})) if (inv) n += (inv.instancedItems || []).length + (inv.stackedItems || []).length;
@@ -61,13 +76,18 @@ function itemCount(p) {
       backup('before-join');
       const r = await request('PUT', { player: me });
       if (r.status !== 200) { console.log(`The host did not take your character (${r.status}${r.json && r.json.error ? ': ' + r.json.error : ''}). You play with the host's copy.`); process.exit(3); }
-      fs.writeFileSync(pendingFile, JSON.stringify({ host: process.env.TRAVEL_LABEL || host, epicId, at: new Date().toISOString() }));   // the join code, so the right host brings it home
+      fs.writeFileSync(pendingFile, JSON.stringify({ host: process.env.TRAVEL_LABEL || host, epicId, at: new Date().toISOString(), local: fingerprint(me) }));   // the join code, so the right host brings it home
       console.log(`Your character${me.characters.length > 1 ? 's' : ''} went to the host (${me.characters.map((c) => c.name).join(', ')}).`);
       process.exit(0);
     }
     // home (save: the same copy home, but the character stays at the host: the host is closing soon, or a check-in
     // while playing; the final home at the end still happens. Oct 17)
     const keep = what === 'save';
+    if (!keep && process.env.TRAVEL_PENDING === '1' && hk && changedSinceSent(st.players[hk])) {
+      console.log('Your character on this PC changed since that game (solo play or the Inventory page), so this copy is kept.');
+      try { fs.unlinkSync(pendingFile); } catch (e) {}
+      process.exit(4);
+    }
     const r = await request('GET');
     if (r.status === 404) { console.log('The host has no character of yours to send back.'); if (!keep) { try { fs.unlinkSync(pendingFile); } catch (e) {} } process.exit(2); }
     if (r.status !== 200 || !r.json || !r.json.player) throw new Error(`the host answered ${r.status}`);
@@ -91,7 +111,7 @@ function itemCount(p) {
     st.players[hk] = home;
     const tmp = stateFile + '.tmp';
     fs.writeFileSync(tmp, JSON.stringify(st, null, 2)); fs.renameSync(tmp, stateFile);
-    if (keep) { console.log('Saved your character home (it stays at the host until you leave).'); process.exit(0); }
+    if (keep) { try { notePending({ local: fingerprint(JSON.parse(JSON.stringify(home))) }); } catch (e) {} console.log('Saved your character home (it stays at the host until you leave).'); process.exit(0); }
     try { fs.unlinkSync(pendingFile); } catch (e) {}
     console.log(`Your character is home again (backup of the save before: ${path.relative(root, saved)}).`);
     process.exit(0);

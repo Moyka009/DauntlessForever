@@ -78,7 +78,8 @@ if ($node -and (Test-Path -LiteralPath $travel)) {
     $pending = $null; try { $pending = Get-Content -LiteralPath $pendingFile -Raw | ConvertFrom-Json } catch {}
     if ($pending -and $pending.key -eq $travelKey) {
         Say 'Your last game with this host did not bring your character home. Doing that first...'
-        if ((Invoke-Travel 'fetch') -ne 1) { Remove-Item -LiteralPath $pendingFile -Force -ErrorAction SilentlyContinue }
+        # fetch-pending keeps this PC's copy when it changed since that game (solo play, Inventory page): exit 4
+        if ((Invoke-Travel 'fetch-pending') -ne 1) { Remove-Item -LiteralPath $pendingFile -Force -ErrorAction SilentlyContinue }
     }
     $null = Invoke-Travel 'backup'    # DF-ONLINE-1: a copy from before this game stays in data\travel-backups
     Say 'Bringing your character along...'

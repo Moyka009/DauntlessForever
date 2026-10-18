@@ -8,6 +8,8 @@
 //   node travel.js send  <host:port> <key>   take your character to a friend's game (before joining it)
 //   node travel.js fetch <host:port> <key>   bring it home again, with what you earned there (after the game)
 //   node travel.js autosave <host:port> <key>  while you play there: bring it home now and then (DF-ONLINE-1)
+//   node travel.js fetch-pending <host:port> <key>  a game that did not bring it home: fetch it, unless this PC's copy
+//                                            changed since (solo play, the launcher's Inventory page): exit 4 = kept
 //   node travel.js backup                    keep a copy of your character in data\travel-backups (before joining)
 //   node travel.js name  <name>              set your player name (the launcher keeps it the same everywhere)
 //   node travel.js export <file> | import <file>
@@ -43,6 +45,21 @@ function myAccount(db) {
     return row ? row.userId : null;
 }
 function travel() { return require(path.join(META, 'dist', 'travel162.js')); }
+// (a canonical form: the same rows in another order or with keys in another order are the same character)
+const canon = (v) => Array.isArray(v) ? '[' + v.map(canon).sort().join(',') + ']'
+    : (v && typeof v === 'object') ? '{' + Object.keys(v).sort().map((k) => JSON.stringify(k) + ':' + canon(v[k])).join(',') + '}' : JSON.stringify(v);
+const bundleHash = (b) => crypto.createHash('sha256').update(canon([b.characters, b.tables, b.files])).digest('hex');
+// DF-TRAVEL-LOCAL: what this PC's copy looked like right after the last send or bring-home. If it differs later, the
+// player changed it here (solo play, Inventory page), and an old copy from a host must not overwrite that.
+const LOCAL_STAMP = path.join(DATA, 'travel_local.json');
+function noteLocal(db, me) { try { fs.writeFileSync(LOCAL_STAMP, JSON.stringify({ hash: bundleHash(travel().ExportAccount(db, DATA, me)), at: new Date().toISOString() })); } catch { /* only a guard */ } }
+function localChangedSince(db, me) {
+    let st = null; try { st = JSON.parse(fs.readFileSync(LOCAL_STAMP, 'utf8')); } catch { /* none yet */ }
+    if (st && st.hash) return bundleHash(travel().ExportAccount(db, DATA, me)) !== st.hash;
+    // older installs have no stamp: the save written after that game started means it was played or edited here
+    let since = 0; try { since = Date.parse(JSON.parse(fs.readFileSync(path.join(DATA, 'travel_pending.json'), 'utf8')).since) || 0; } catch { /* none */ }
+    try { return since > 0 && fs.statSync(DB_FILE).mtimeMs > since + 15 * 60 * 1000; } catch { return false; }
+}
 
 function request(method, hostPort, apiPath, key, body) {
     const [host, port] = hostPort.split(':');
@@ -83,6 +100,7 @@ async function main() {
         const bundle = travel().ExportAccount(db, dataDir, me);
         if (!bundle.characters.length) { out('You have no character on this PC yet: the host makes a new one for you.'); process.exit(2); }
         const r = await request('POST', a, '/undaunted/api/travel/import', b, { bundle });
+        noteLocal(db, me);
         out(`Your character came along (${r.characters} character(s)).`);
         return;
     }
@@ -92,26 +110,28 @@ async function main() {
         out('Kept a copy of your character in data\\travel-backups.');
         return;
     }
-    if (cmd === 'fetch' || cmd === 'autosave') {
+    if (cmd === 'fetch-pending' && localChangedSince(db, me)) {
+        out('Your character on this PC changed since that game (solo play or the Inventory page), so this copy is kept.');
+        process.exit(4);
+    }
+    if (cmd === 'fetch' || cmd === 'autosave' || cmd === 'fetch-pending') {
         const auto = cmd === 'autosave';
         const bundle = await request('GET', a, '/undaunted/api/travel/export', b);
         if (!bundle.characters || !bundle.characters.length) { if (!auto) out('The host has no character for you: nothing to bring home.'); process.exit(2); }
         // autosave: only when something changed since the last one
         const stamp = path.join(DATA, 'travel_autosave.json');
-        // (a canonical form: the same rows in another order or with keys in another order are the same character)
-        const canon = (v) => Array.isArray(v) ? '[' + v.map(canon).sort().join(',') + ']'
-            : (v && typeof v === 'object') ? '{' + Object.keys(v).sort().map((k) => JSON.stringify(k) + ':' + canon(v[k])).join(',') + '}' : JSON.stringify(v);
-        const hash = crypto.createHash('sha256').update(canon([bundle.characters, bundle.tables, bundle.files])).digest('hex');
+        const hash = bundleHash(bundle);
         if (auto) { let last = null; try { last = JSON.parse(fs.readFileSync(stamp, 'utf8')); } catch { /* first one */ } if (last && last.hash === hash && last.host === a) process.exit(2); }
         const t = travel();
         const bad = t.CheckHomecoming ? t.CheckHomecoming(db, dataDir, me, bundle) : '';
         if (bad) { out(`Not brought home: what the host sent back looks wrong (${bad}). Your own character on this PC is unchanged.`); process.exit(3); }
         const r = t.ImportAccount(db, dataDir, me, bundle, auto ? 'autosave' : 'home');
         try { fs.writeFileSync(stamp, JSON.stringify({ hash, host: a, at: new Date().toISOString() })); } catch { /* only saves a repeat */ }
+        noteLocal(db, me);
         if (auto) out(`Saved your character home (${new Date().toTimeString().slice(0, 5)}).`);
         else out(`Your character is home again, with what you earned (${r.characters} character(s)).`);
         return;
     }
-    fail('usage: node travel.js send|fetch|autosave <host:port> <key> | backup | name <name> | export <file> | import <file>');
+    fail('usage: node travel.js send|fetch|fetch-pending|autosave <host:port> <key> | backup | name <name> | export <file> | import <file>');
 }
 main().catch((e) => fail(e.message));

@@ -131,7 +131,9 @@ if ($node -and (Test-Path -LiteralPath $travelJs)) {
     $pending = $null; try { $pending = Get-Content -LiteralPath $pendingFile -Raw | ConvertFrom-Json } catch {}
     if ($pending -and ($pending.host -eq $hostLabel -or $pending.host -eq $addr)) {
         Say 'Your last game with this host did not bring your character home. Doing that first...'
+        $env:TRAVEL_PENDING = '1'   # travel-1147.js keeps this PC's copy when it changed since that game (exit 4)
         $c = Invoke-Travel 'home'
+        Remove-Item Env:\TRAVEL_PENDING -ErrorAction SilentlyContinue
         if ($c -eq 1) { Stop-Proxy; Fail 'could not bring your character home from the host. Try again in a moment (your home save was not changed).' }
     } elseif ($pending) {
         # another host has a copy from a game that ended without coming home. Your home save was kept up to date

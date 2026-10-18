@@ -2,19 +2,19 @@
     "packages":  [
                      {
                          "id":  "1.6.2",
-                         "packageVersion":  "2026-10-17",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-17.zip",
-                         "sha256":  "701e00aac3d70a1c35fac69a72cfec44b220d4024b4172a8acdec4349904e8c0",
-                         "date":  "2026-10-17",
-                         "note":  "No more black console window (fixes the game freezing when it was clicked); Modded mode no longer hangs; DamageMeter included"
+                         "packageVersion":  "2026-10-18",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-18.zip",
+                         "sha256":  "f8d53fe2bf3f351704581245863aedfe5934d7c6cf800c596192b0d9dcf93efb",
+                         "date":  "2026-10-18",
+                         "note":  "Items you add or earn on your own PC are no longer lost when you next join a friend"
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-18.4",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-18.4.zip",
-                         "sha256":  "103cc6e85d0217c6471e2291bc218fb0f30e2cd183c63c747e3965ce3d053c04",
+                         "packageVersion":  "2026-10-18.5",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-18.5.zip",
+                         "sha256":  "102984f98d2cbb221aa973ee574def35e446eec8f29ce58b83e910a1adfcf542",
                          "date":  "2026-10-18",
-                         "note":  "Fixed the lag when opening Bounties and Challenges; fixed the game server stopping before it was ready on PCs whose server window has no keyboard input"
+                         "note":  "Items you add or earn on your own PC are no longer lost when you next join a friend"
                      }
                  ],
     "launcher":  {
