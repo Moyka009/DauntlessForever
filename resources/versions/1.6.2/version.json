@@ -1,0 +1,68 @@
+{
+    "id":  "1.6.2",
+    "name":  "Dauntless 1.6.2",
+    "build":  "271281",
+    "released":  "Early 2021",
+    "era":  "Reforged",
+    "blurb":  "The Reforged era: the Slayer\u0027s Path, the Hunting Grounds, the first season of the new progression. The most complete offline port so far.",
+    "works":  [
+                  "Log in, the tutorial hunt, Ramsgate, hunts",
+                  "Weapon XP and mastery, the Slayer\u0027s Path, crafting, cores, bounties",
+                  "Cell fusion (all three slots)",
+                  "Play with friends: host or join from the Friends panel (parties, voice)",
+                  "Play online: join a game that is open to everyone, or host one"
+              ],
+    "notWorking":  [
+                       "Factions, challenges"
+                   ],
+    "exeRel":  "Archon/Binaries/Win64/Dauntless-Win64-Shipping.exe",
+    "exeSha256":  "E7ACBA587320491B71CB53BB8F8CBF5F3760BB52F78E74A82384B8BC42D05FD6",
+    "download":  {
+                     "manifestUrl":  "https://raw.githubusercontent.com/addison2k/DauntlessManifestArchive/main/manifests/Windows/Dauntless_1.6.2.271281.manifest",
+                     "manifestSha1":  "1d98a586c34a69d3ea8d26bcd1e4dcfd3113e751",
+                     "downloadGB":  11.08,
+                     "installedGB":  11.56,
+                     "files":  444,
+                     "folderName":  "Dauntless_1.6.2"
+                 },
+    "package":  {
+                    "dir":  "package",
+                    "packageVersion":  "2026-10-17",
+                    "setup":  "tools/setup.ps1",
+                    "uninstallArgs":  [
+                                          "-Uninstall"
+                                      ],
+                    "play":  "tools/start.ps1",
+                    "stop":  {
+                                 "scripts":  [
+                                                 [
+                                                     "tools/stop.ps1"
+                                                 ]
+                                             ],
+                                 "pidFiles":  [
+
+                                              ]
+                             },
+                    "installedFiles":  [
+                                           {
+                                               "rel":  "Archon/Binaries/Win64/dxgi.dll",
+                                               "sha256":  "89F34F6CB1B442B8456420A3DA2E3EC78C894B095D21D752D79FB20D1E95878B"
+                                           },
+                                           {
+                                               "rel":  "Archon/Binaries/Win64/UndauntedInternalServer.dll",
+                                               "sha256":  "332708E7660110E8B9669654708C81A1F3CB2B90E78A163082EE376223BE2FF2"
+                                           }
+                                       ],
+                    "setupDoneFiles":  [
+                                           "backend/metagame/node_modules/.installed-for-node",
+                                           "backend/deploy/node_modules/.installed-for-node",
+                                           "data/player.key"
+                                       ],
+                    "saveFiles":  [
+                                      "data"
+                                  ],
+                    "needsNode":  "20.6",
+                    "ports":  "61000-61001, 8770-8777",
+                    "readme":  "README.txt"
+                }
+}

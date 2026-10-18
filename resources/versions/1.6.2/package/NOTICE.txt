@@ -1,0 +1,38 @@
+DAUNTLESS 1.6.2 OFFLINE PACKAGE - NOTICE
+======================================
+Part of Dauntless Forever. Copyright (C) 2026 Addison2k. https://github.com/addison2k/DauntlessForever
+
+Made by Addison2k: the port of Undaunted's server DLL and backend to Dauntless 1.6.2, the set-up and play scripts,
+the Hunt Pass seasons system, bounties, progression, cooldowns and mastery rewards.
+Based on Undaunted by gwog and contributors (AGPL-3.0), https://github.com/SyST3MDeV/Undaunted .
+bin\dxgi.dll is Undaunted's own loader, unchanged. MinHook by Tsuda Kageyu (BSD-2-Clause).
+By KombatKing (from his Consolidated Patches 0.2, AGPL-3.0): the Lady Luck / Trials shop, daily
+Ramsgate shard pickups, the weekly Trials rotation and the safer port check. Credited in those files too.
+Also by KombatKing (from his All-in-One R4, AGPL-3.0): the holiday calendar, event mail, Ozz holiday shop, daily
+Ramsgate gift, the Mega Hunt Pass (Expanded) and its reward helper, and the add-on paks in paks\ (goat fix, holiday
+quests, art and maps, Mega dye bundles). Their builders are in his published source.
+Also by KombatKing (AGPL-3.0): the All Dyes Collection store offer and Unlimited Resupply Beacons (his "Resupply
+Beacons 162": tools\resupply162.*, backend\deploy\*\resupply162.js), and the hunt XP captures behind the Slayer's Path fix.
+Also by KombatKing (All-in-One R10, AGPL-3.0): no duplicate one-copy items on a Revived import
+(tools\import-singletons162.json) and the duplicate cleanup (tools\inventory-deduplicate162.cjs, FIX duplicate items.bat).
+Also by KombatKing (Inventory Editor Cosmetics 162, AGPL-3.0): cosmetics added on the Inventory page are stored in the
+format the game uses, and the extra rare materials on that page (tools\items.js, items.json).
+Also by KombatKing (Inventory Expansion 162 R1, AGPL-3.0): 868 more dyes, emotes, titles, emojis and other
+cosmetics in the Inventory picker (tools\gear-162.json).
+Also by KombatKing (Revived Gear Conversion 162 R1, AGPL-3.0): Revived imports turn 1.4.4 upgrade levels into crafted or
+power-surged 1.6.2 gear with Aethersparks for lost levels (tools\import-gear-*), and FIX imported gear levels.bat.
+Also by KombatKing (Weapon Ammo Defaults 162 R1, AGPL-3.0): the War Hammer ammo fix, 4 capsules instead of the
+Blueprint's 7 (tools\hammer-ammo-fix.cjs builds it from your own game files).
+Trials schedule fix (tools\trials-fix.cjs): the idea of moving the game's expired weekly Trials rows to now is
+from Dauntless Revived (mixutin/dauntless-revived, TrialsSchedule.h); done here as a pak built from your own game files.
+Chinese text: zgh95's translation ("Zhongwen buding" 1.0), given to the project; downloaded only when
+picked as the game language (paks\paks.json).
+Source: backend\*\src and source\ in this folder.
+
+WHAT THE LICENCE ASKS OF ANYONE WHO REUSES THIS
+  You may copy, change and share this work under the GNU Affero General Public License v3.0 (AGPL-3.0-only).
+  If you pass it on, changed or not, or run a changed version for other people over a network, you must:
+    - keep every copyright notice, including the ones at the top of the source files and this file;
+    - say that you changed it, and when;
+    - give everyone who gets it the complete source of your version, under the same licence.
+  Taking this work into a closed or source-less program, or removing the credits, is not allowed.

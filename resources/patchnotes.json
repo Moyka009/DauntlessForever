@@ -1,0 +1,167 @@
+{
+  "_comment": "Patch notes shown in the launcher (newest first). The launcher also reads this file from the repo, so new notes need no build.",
+  "notes": [
+    {
+      "date": "2026-10-17",
+      "title": "1.14.7: potions, hunt quests, equipment",
+      "items": [
+        "Potions, self-revives, tonics, grenades, pylons, lantern and Omnicell abilities and weapon specials work on 1.14.7 servers. The server's 'use this ability' step was empty; it now runs the game's own code. Fix by KombatKing (test build: tell us what still misbehaves).",
+        "Recruit's Repeaters sort under repeaters instead of swords (KombatKing).",
+        "Quest goals that need a kill on a certain island (\"Slay 3 Behemoths on Boreal Outpost\" and the like) now count. Before, the hunt server was never told which hunt you were on.",
+        "Needs 1.14.7 server files 2026-10-17.2 (the launcher gets them by itself and asks you to run Set up again once)."
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "title": "1.14.7: quest and dialogue text",
+      "items": [
+        "1.14.7 quests and NPC dialogue now show their real text instead of \"*** Missing translation ... Addressee: Unspecified\", in all eight languages. Quests can be read, accepted and turned in. Fix by KombatKing.",
+        "It is one extra file set-up puts in the game's Paks folder; the game itself is not changed and Uninstall takes it out again. Needs 1.14.7 server files 2026-10-17: the launcher asks you to run Set up again once."
+      ]
+    },
+    {
+      "date": "2026-10-16",
+      "title": "Mods: play with UE4SS mods",
+      "items": [
+        "New Mods page (1.6.2): turn on Modded mode to play with UE4SS mods. It loads only in your own game, with no extra windows, and turning it off gives you the normal game.",
+        "Get UE4SS with one button, open the mods folder, and switch each mod on or off. Mods are never deleted.",
+        "Also run mods on my servers: for gameplay mods. Friends who join your server play with them too. Other people's servers are never affected.",
+        "Comes with the DamageMeter mod: a small damage meter window on top of the game (play in borderless or windowed mode to see it). Needs 1.6.2 server files .17."
+      ]
+    },
+    {
+      "date": "2026-10-16",
+      "title": "Host with friends: your server starts first",
+      "items": [
+        "Host with friends now starts your own server first, then opens your game on it. Friends can join as soon as it is up, even before you are in, and it stays up until you press Stop hosting.",
+        "Allow randoms moved under Play online. New option under Host with friends: Light hosting, the old way for older PCs (the server only runs while your game is open).",
+        "Host Mode and Host with friends start Public by default (anyone using Play online can join). Starting Private tells you how many people on your Friends list can join.",
+        "Inventory page: new Unlock all cosmetics button, and 868 more dyes, emotes, titles and emojis to pick from (thanks KombatKing). Needs 1.6.2 server files .10."
+      ]
+    },
+    {
+      "date": "2026-10-16",
+      "title": "Keep my server files (for modders)",
+      "items": [
+        "Settings: Keep my server files. While it is on, the launcher does not update or replace your installed server files, so changes you made yourself (backend, tools, paks) stay. Updates that come out are listed but not applied; turn it off to get them.",
+        "This is the first launcher update that downloads by itself (a few MB)."
+      ]
+    },
+    {
+      "date": "2026-10-16",
+      "title": "Small launcher updates, a please-wait window, and more for 1.6.2",
+      "items": [
+        "From this version on, most launcher updates download by themselves in the background (a few MB instead of the whole launcher). When one is ready, the banner says so: press Restart now, or it is used the next time you open the launcher.",
+        "1.6.2 server files: Unlimited Resupply Beacons (Game Rules, solo only) and the All Dyes Collection in the store, by KombatKing; the free store pack is on.",
+        "Settings: Chinese (community translation) as a game language, by zgh95. It downloads once (33 MB) the first time you pick it.",
+        "1.6.2: the Slayer's Path total no longer lags behind in hunts (thanks to KombatKing's XP captures).",
+        "After a launcher update, the first start copies the new server files before the launcher opens. That can take a minute; a small window now says so, instead of nothing showing up.",
+        "Game Rules: 10x is now a choice for Weapon XP, Hunt Pass XP and Loot (1.6.2 server files)."
+      ]
+    },
+    {
+      "date": "2026-10-16",
+      "title": "Play the game in your language, and a new title bar",
+      "items": [
+        "Settings: a new Game language setting starts the game in English, German, Spanish, French, Italian, Portuguese (Brazil), Russian, Polish, Turkish, Japanese, Korean or Chinese. Windows stays as it is.",
+        "Part breaks work again on non-English Windows (French, German, Italian...): tails sever and grey damage shows (1.6.2 server files).",
+        "A clean dark title bar on the launcher window, and an updated Credits page."
+      ]
+    },
+    {
+      "date": "2026-10-16",
+      "title": "Pick the game's main menu background (1.6.2)",
+      "items": [
+        "Settings: a new Main menu background setting changes the art behind the game's start screen to any of 12 Hunt Pass seasons, from Myth & Legend to Time Strike.",
+        "Your own picture: choose any PNG, JPG or BMP and it shows behind the start screen. It is cropped to a wide shape from the middle and built on your PC from your own game files.",
+        "Picking another background takes your picture out of the game folder again, and Uninstall removes it too."
+      ]
+    },
+    {
+      "date": "2026-10-15",
+      "title": "Host Mode: keep a server running",
+      "items": [
+        "New Host Mode page: this PC keeps a Ramsgate up that players join from their launcher, party up in and start hunts from. No game window opens; press Play to join it from the same PC.",
+        "Private (your friends only) or Public (anyone using Play online), with a server name, a welcome line in chat, a player limit and a ban list.",
+        "For a PC that hosts all day: start with the launcher or with Windows, restart by itself, keep the PC awake, a daily restart and a daily save backup. Each one is an option you switch on."
+      ]
+    },
+    {
+      "date": "2026-10-14",
+      "title": "Bring your Revived character, and add gear (1.6.2)",
+      "items": [
+        "New: IMPORT from Dauntless Revived (1.4.4).bat in the 1.6.2 folder brings your 1.4.4 gear, Rams, cells and materials into your 1.6.2 character. Your Revived save is only read; your 1.6.2 save is backed up first.",
+        "Inventory page: a new Gear section lists your weapons, armour and lanterns, adds any 1.6.2 gear by name, and removes gear you are not wearing."
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "title": "Downloads: space checks",
+      "items": [
+        "Before downloading, the launcher checks the drive has enough free space and tells you how much it needs.",
+        "A full drive or a folder Windows won't let it write to now gives a clear message with what to do.",
+        "New under More: delete an unfinished download to get the space back."
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "title": "Node.js included",
+      "items": [
+        "The launcher now includes Node.js (the official build). Set-up no longer asks to install it or opens the Node.js website.",
+        "Already set up? Nothing to do. If you run Set up again it switches to the included Node.js and downloads the server parts once more (about 30 MB)."
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "title": "Clearer version on Game Rules and Inventory",
+      "items": [
+        "Game Rules and Inventory now show a big banner with the version you are changing, and the Save button names it too. Each version keeps its own rules and its own save.",
+        "Versions that don't have these pages yet show as \"soon\" in the version tabs."
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "title": "Inventory page (1.6.2)",
+      "items": [
+        "New Inventory page: add or remove Rams, Merits, Aetherhearts, Patrol Keys, Bounty Tokens, cell cores and anything else in your save.",
+        "Close the game first. Every save here makes a backup of your save in backup\\inventory (the last 10 are kept)."
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "title": "Game Rules (1.6.2)",
+      "items": [
+        "New Game Rules page: weapon XP speed, Hunt Pass XP speed, loot amount and free crafting. Your picks apply the next time you press Play.",
+        "Weapon XP is now 2x by default on 1.6.2. Set it back to Normal on the Game Rules page if you prefer the original pace.",
+        "Loot amount and free crafting are marked Experimental until they have been checked in real hunts."
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "title": "Ramsgate events (1.6.2)",
+      "items": [
+        "New Events page: switch Ramsgate's event decorations on before you play. Springtide 2021 (spring/Easter) works; Saint's Bond, the event stall and older season decorations are there to try.",
+        "Setting is kept per version and applies the next time you press Play."
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "title": "1.14.7 server files: Windows 11 25H2",
+      "items": [
+        "The 1.14.7 loader no longer gives up when Windows 11 25H2 delays loading its graphics file; the game window and the game server now start on 25H2.",
+        "Run Set up once on 1.14.7 after the update."
+      ]
+    },
+    {
+      "date": "2026-10-12",
+      "title": "Dauntless Forever 0.1.5",
+      "items": [
+        "New name: Dauntless Forever.",
+        "Seasons page for 1.6.2: 36 Hunt Passes to pick from, each keeps its own level.",
+        "The launcher tells you when a new version is out.",
+        "Uninstall always works and only removes our own files; set-up window stays open on errors.",
+        "Log zips include the game's own logs, with tokens and keys hidden."
+      ]
+    }
+  ]
+}

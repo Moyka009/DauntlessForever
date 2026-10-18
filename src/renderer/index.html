@@ -1,0 +1,471 @@
+<!doctype html>
+<!--
+  Dauntless Forever - launcher
+  Copyright (C) 2026 Addison2k. https://github.com/addison2k/DauntlessForever
+  Licence: AGPL-3.0-only. Keep this notice: the licence requires it.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+<title>Dauntless Forever</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="friends.css">
+<link rel="stylesheet" href="hostmode.css">
+</head>
+<body>
+<header class="titlebar"><img class="titlebar-mark" src="mark.png" alt="" width="16" height="16"><span class="titlebar-name">Dauntless Forever</span></header>
+<div class="app">
+<aside class="side">
+  <div class="side-brand">
+    <img class="mark" src="mark.png" alt="" width="40" height="40">
+    <div><div class="brand-name">Dauntless Forever</div><div class="brand-sub" id="brand-sub">solo or with friends</div></div>
+  </div>
+  <nav class="nav" id="nav">
+    <button class="nav-item selected" data-page="play"><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M4.5 3v10l8-5z" fill="currentColor"/></svg></span>Play</button>
+    <button class="nav-item" data-page="host"><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="4.5" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="2.5" y="9" width="11" height="4.5" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="5.2" cy="4.75" r=".9" fill="currentColor"/><circle cx="5.2" cy="11.25" r=".9" fill="currentColor"/></svg></span>Host Mode<span class="nav-dot" id="nav-host-dot" hidden></span></button>
+    <button class="nav-item" data-page="seasons"><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 1.5 9.4 6.6 14.5 8 9.4 9.4 8 14.5 6.6 9.4 1.5 8 6.6 6.6z" fill="currentColor"/></svg></span>Seasons</button>
+    <button class="nav-item" data-page="events"><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 2.5 13.5 8 8 13.5 2.5 8z" fill="currentColor"/></svg></span>Events</button>
+    <button class="nav-item" data-page="rules"><span class="nav-ico ic-rules" aria-hidden="true"></span>Game Rules</button>
+    <button class="nav-item" data-page="items"><span class="nav-ico ic-items" aria-hidden="true"></span>Inventory</button>
+    <button class="nav-item" data-page="mods"><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 1.8 13.4 4.9v6.2L8 14.2 2.6 11.1V4.9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>Mods</button>
+    <button class="nav-item" data-page="patches"><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 4.5h10M3 8h10M3 11.5h10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>Patch notes</button>
+    <button class="nav-item" data-page="settings"><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M6.7 1.5h2.6l.4 1.8 1.2.7 1.8-.6 1.3 2.2-1.4 1.3v1.4l1.4 1.3-1.3 2.2-1.8-.6-1.2.7-.4 1.8H6.7l-.4-1.8-1.2-.7-1.8.6-1.3-2.2 1.4-1.3V7.6L2 6.3l1.3-2.2 1.8.6 1.2-.7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="8" cy="8" r="2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>Settings</button>
+    <button class="nav-item" data-page="credits"><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 13.6 2.6 8.4A3.2 3.2 0 0 1 8 4.2a3.2 3.2 0 0 1 5.4 4.2z" fill="currentColor"/></svg></span>Credits</button>
+    <button class="nav-item" data-page="help"><span class="nav-ico">?</span>Help</button>
+  </nav>
+  <div class="side-foot">
+    <a class="side-link discord" id="lnk-discord" data-url="" hidden><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg></span><span id="lnk-discord-text">Join the Discord</span></a>
+    <div class="side-rule"></div>
+    <a class="side-link ask" id="lnk-ask" data-url="" hidden>
+      <span class="ask-ico dc" aria-hidden="true"></span>
+      <span class="ask-text"><span class="ask-title" id="lnk-ask-title">Join the Discord</span><span class="ask-sub">Questions, groups, news</span></span>
+    </a>
+    <a class="side-link" id="lnk-patreon" data-url="" hidden><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 2.5 13.5 8 8 13.5 2.5 8z" fill="currentColor"/></svg></span>Support on Patreon</a>
+    <div class="side-meta"><span id="side-ver">Dauntless Forever</span> - <a href="#" id="lnk-source" data-url="https://github.com/addison2k/DauntlessForever">source</a></div>
+  </div>
+</aside>
+
+<main class="content">
+<canvas class="sky" id="sky" aria-hidden="true"></canvas>
+<div class="banner launcher-up" id="banner-up" hidden><span id="banner-up-text"></span><span class="banner-acts"><button class="ghost" id="banner-up-get">Download</button><button class="link" id="banner-up-close">Later</button></span></div>
+<div class="banner" id="banner" hidden><span id="banner-text"></span><button class="link" id="banner-close">Dismiss</button></div>
+
+<!-- ============================================================ Play -->
+<section class="page" id="page-play">
+  <ol class="strip" id="shelf" aria-label="Versions"></ol>
+
+  <div class="detail-empty" id="detail-empty">Pick a build above.</div>
+  <div class="detail-body" id="detail-body" hidden>
+    <div class="title-block">
+      <div class="title-row">
+        <h1 class="ver" id="d-ver">1.14.7</h1>
+        <span class="pill" id="d-pill">Ready</span>
+      </div>
+      <p class="meta" id="d-meta"></p>
+      <p class="blurb" id="d-blurb"></p>
+    </div>
+
+    <ol class="path" id="path">
+      <li class="step" data-step="game"><span class="step-n">1</span><div><div class="step-name">Game files</div><div class="step-sub" id="s-game"></div></div></li>
+      <li class="step" data-step="setup"><span class="step-n">2</span><div><div class="step-name">Set-up</div><div class="step-sub" id="s-setup"></div></div></li>
+      <li class="step" data-step="play"><span class="step-n">3</span><div><div class="step-name">Play</div><div class="step-sub" id="s-play"></div></div></li>
+    </ol>
+
+    <div class="action-row">
+      <div class="action-main">
+        <button class="primary" id="btn-primary">Play</button>
+        <button class="host-btn online-btn" id="btn-online" hidden><span class="ic-globe host-ico" aria-hidden="true"></span><span class="lbl">Play online</span></button>
+        <button class="host-btn" id="btn-host" hidden><span class="ic-friends host-ico" aria-hidden="true"></span>Host with friends</button>
+      </div>
+      <div class="action-side">
+        <button class="ghost" id="btn-stop" hidden>Stop everything</button>
+        <button class="ghost" id="btn-cancel" hidden>Cancel download</button>
+        <button class="ghost" id="btn-more">More</button>
+      </div>
+      <label class="host-opt" id="host-opt" hidden><input type="checkbox" id="opt-randoms"><span><span class="opt-name">Allow randoms</span><span class="opt-sub">Play online players can join you</span></span></label>
+      <label class="host-opt" id="host-light-opt" hidden><input type="checkbox" id="opt-light"><span><span class="opt-name">Light hosting</span><span class="opt-sub">For older PCs: the server only runs while your game is open</span></span></label>
+
+    </div>
+    <div class="warn-box" id="d-warn" hidden></div>
+    <p class="action-note" id="action-note"></p>
+
+    <div class="menu" id="more-menu" hidden>
+      <button data-act="pick">Use a game folder I already have</button>
+      <button data-act="setup">Run set-up again</button>
+      <button data-act="import" hidden>Bring my Dauntless Revived (1.4.4) character</button>
+      <button data-act="importfix" hidden>Fix the tutorial after a Revived import</button>
+      <button data-act="opengame">Open the game folder</button>
+      <button data-act="openver">Open this version's launcher folder (save, logs)</button>
+      <button data-act="logs">Get the logs for asking for help</button>
+      <button data-act="readme">Read this version's README</button>
+      <button data-act="delpartial" class="danger">Delete the unfinished download (frees space)</button>
+      <button data-act="uninstall" class="danger">Uninstall: put the game folder back</button>
+    </div>
+
+    <div class="progress" id="progress" hidden>
+      <div class="progress-head"><span id="p-label">Downloading</span><span id="p-right"></span></div>
+      <div class="bar"><div class="bar-fill" id="p-fill"></div></div>
+      <div class="progress-foot" id="p-foot"></div>
+    </div>
+
+    <div class="log" id="log" hidden>
+      <div class="log-head"><span id="log-title">What's happening</span><button class="link" id="btn-log-clear">Clear</button></div>
+      <pre class="log-body" id="log-body"></pre>
+    </div>
+
+    <div class="notes" id="notes">
+      <div class="note-col"><h3>Works so far</h3><ul id="d-works"></ul></div>
+      <div class="note-col"><h3>Not yet</h3><ul id="d-not"></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ Host Mode -->
+<section class="page" id="page-host" hidden>
+  <h1 class="page-title">Host Mode</h1>
+  <p class="lead">Keep a server running on this PC: a Ramsgate that players join from their launcher, party up in and start hunts from. No game window opens here, and you can still press Play to join it yourself.</p>
+  <div id="hm-none" class="card" hidden>
+    <div class="card-head"><h2>Host Mode needs a version that can host online</h2><span class="pill">Not yet</span></div>
+    <p id="hm-none-text">Download 1.6.2 or 1.14.7 on the Play page and let set-up finish. Host Mode comes with its server files (they update by themselves when the launcher opens).</p>
+  </div>
+  <div id="hm-body" hidden>
+    <div class="hm-top">
+      <div class="hm-status">
+        <span class="hm-dot" id="hm-dot" aria-hidden="true"></span>
+        <div class="hm-status-text"><div class="hm-state" id="hm-state">Off</div><div class="hm-sub" id="hm-sub"></div></div>
+      </div>
+      <div class="hm-acts">
+        <label class="hm-ver" id="hm-ver-wrap" hidden>Version <select id="hm-version"></select></label>
+        <button class="primary-sm" id="hm-start">Start Host Mode</button>
+        <button class="ghost" id="hm-stop-later" hidden title="Players in your server get a line in chat and 60 seconds; their characters are saved home">Stop in 60 s</button>
+        <button class="ghost" id="hm-stop" hidden>Stop now</button>
+      </div>
+    </div>
+    <p class="action-note" id="hm-note" aria-live="polite"></p>
+    <div class="hm-stats" id="hm-stats">
+      <div class="hm-tile"><div class="hm-tile-k">Players</div><div class="hm-tile-v" id="hm-t-players">-</div><div class="hm-tile-s" id="hm-t-players-s"></div></div>
+      <div class="hm-tile"><div class="hm-tile-k">Hunts running</div><div class="hm-tile-v" id="hm-t-hunts">-</div><div class="hm-tile-s" id="hm-t-hunts-s"></div></div>
+      <div class="hm-tile"><div class="hm-tile-k">Up for</div><div class="hm-tile-v" id="hm-t-up">-</div><div class="hm-tile-s" id="hm-t-up-s"></div></div>
+      <div class="hm-tile"><div class="hm-tile-k">Relay</div><div class="hm-tile-v" id="hm-t-relay">-</div><div class="hm-tile-s" id="hm-t-relay-s"></div></div>
+      <div class="hm-tile"><div class="hm-tile-k">This PC</div><div class="hm-tile-v" id="hm-t-pc">-</div><div class="hm-tile-s" id="hm-t-pc-s"></div></div>
+      <div class="hm-tile"><div class="hm-tile-k">Last backup</div><div class="hm-tile-v" id="hm-t-backup">-</div><div class="hm-tile-s" id="hm-t-backup-s"></div></div>
+    </div>
+    <div class="hm-cols">
+      <div class="hm-col">
+        <h2 class="list-head">In your server</h2>
+        <div class="season-list hm-list" id="hm-players"></div>
+        <h2 class="list-head">Ban list</h2>
+        <div class="season-list hm-list" id="hm-bans"></div>
+        <p class="small">A ban stops someone joining again, on a public server too. Someone already in stays until they leave.</p>
+      </div>
+      <div class="hm-col">
+        <h2 class="list-head">Server</h2>
+        <div class="settings">
+          <div class="setting hm-setting"><div><div class="setting-name">Who can join</div><div class="setting-sub" id="hm-mode-sub"></div></div>
+            <div class="hm-seg" role="radiogroup" aria-label="Who can join"><button class="hm-seg-b" id="hm-mode-private" role="radio">Private</button><button class="hm-seg-b" id="hm-mode-public" role="radio">Public</button></div></div>
+          <div class="setting hm-setting"><div><div class="setting-name">Server name</div><div class="setting-sub">Shown to players in their Friends panel and in Play online</div></div><input class="fr-input hm-input" id="hm-name" maxlength="32" spellcheck="false" autocomplete="off"></div>
+          <div class="setting hm-setting"><div><div class="setting-name">Welcome line</div><div class="setting-sub">Said in game chat when someone arrives (optional)</div></div><input class="fr-input hm-input" id="hm-welcome" maxlength="140" spellcheck="false" autocomplete="off" placeholder="Be nice, have fun"></div>
+          <div class="setting hm-setting"><div><div class="setting-name">Player limit</div><div class="setting-sub">Players in the server at once, you not counted. Hunts take 4 each; this PC runs up to 6 hunts at a time.</div></div><select class="hm-select" id="hm-limit"></select></div>
+        </div>
+      </div>
+    </div>
+    <h2 class="list-head">This PC</h2>
+    <div class="settings">
+      <label class="setting hm-check"><div><div class="setting-name">Start when the launcher opens</div><div class="setting-sub">Host Mode starts by itself every time</div></div><input type="checkbox" id="hm-autostart"></label>
+      <label class="setting hm-check" id="hm-windows-row"><div><div class="setting-name">Start with Windows</div><div class="setting-sub" id="hm-windows-sub">The launcher opens minimized when you sign in to Windows and starts Host Mode</div></div><input type="checkbox" id="hm-windows"></label>
+      <label class="setting hm-check"><div><div class="setting-name">Restart by itself</div><div class="setting-sub">If the server or the connection stops, start it again (after a short pause)</div></div><input type="checkbox" id="hm-autorestart"></label>
+      <label class="setting hm-check"><div><div class="setting-name">Keep this PC awake</div><div class="setting-sub">Windows does not go to sleep while Host Mode runs (the screen still turns off)</div></div><input type="checkbox" id="hm-awake"></label>
+      <div class="setting hm-check"><label class="hm-check-l" for="hm-daily"><div class="setting-name">Daily restart</div><div class="setting-sub">A fresh start once a day: players get a line in chat and 60 seconds first, and their characters are saved home</div></label><span class="hm-inline"><input type="time" class="hm-time" id="hm-daily-at" step="60"><input type="checkbox" id="hm-daily"></span></div>
+      <div class="setting hm-check"><label class="hm-check-l" for="hm-backup"><div class="setting-name">Daily save backup</div><div class="setting-sub">A copy of the server's save once a day, newest <select class="hm-select hm-keep" id="hm-keep"></select> kept</div></label><span class="hm-inline"><button class="ghost hm-small" id="hm-backup-now">Back up now</button><button class="ghost hm-small" id="hm-backup-open">Open</button><input type="checkbox" id="hm-backup"></span></div>
+    </div>
+    <details class="hm-log-box" id="hm-log-box"><summary>Host Mode log</summary><pre class="hm-log" id="hm-log"></pre></details>
+  </div>
+</section>
+
+<!-- ============================================================ Seasons & mods -->
+<!-- ============================================================ Friends (friends.js / friends.css) -->
+<section class="page" id="page-seasons" hidden>
+  <h1 class="page-title">Seasons</h1>
+  <p class="lead">Pick the Hunt Pass you want to play on. Every season keeps its own level, so you can switch and come back to where you were.</p>
+  <div class="season-tabs" id="season-vtabs" role="tablist"></div>
+  <div id="season-none" class="card" hidden>
+    <div class="card-head"><h2>No seasons for this version yet</h2><span class="pill">Planned</span></div>
+    <p>Seasons are ready for 1.6.2 first. Other versions get theirs through a server-file update, with no new launcher needed.</p>
+  </div>
+  <div id="season-body" hidden>
+    <div class="season-now">
+      <div class="season-now-text">
+        <div class="season-now-label">Playing on</div>
+        <div class="season-now-title" id="season-now-title"></div>
+        <div class="season-now-sub" id="season-now-sub"></div>
+      </div>
+      <div class="season-now-bar"><div class="bar"><div class="bar-fill" id="season-now-fill"></div></div></div>
+    </div>
+    <p class="action-note" id="season-note" aria-live="polite"></p>
+    <div class="season-filters" id="season-filters" role="group" aria-label="Show"></div>
+    <div class="season-list" id="season-list"></div>
+    <p class="small">The game's own Hunt Pass screen always says "Time Strike": 1.6.2 can only show its own pass. The levels and rewards are the season you picked here. A few original rewards (account unlocks, loot boxes) cannot be given offline; the rewards list marks them.</p>
+  </div>
+</section>
+
+<!-- ============================================================ Events -->
+<section class="page" id="page-events" hidden>
+  <h1 class="page-title">Events</h1>
+  <p class="lead">Dress Ramsgate up for an old event before you play. The choice is kept and applies the next time you press Play.</p>
+  <div class="season-tabs" id="event-vtabs" role="tablist"></div>
+  <div id="event-none" class="card" hidden>
+    <div class="card-head"><h2>No events for this version yet</h2><span class="pill">Planned</span></div>
+    <p>Events are ready for 1.6.2 first. Other versions get theirs through a server-file update.</p>
+  </div>
+  <div id="event-body" hidden>
+    <p class="action-note" id="event-note" aria-live="polite"></p>
+    <h2 class="list-head">Ramsgate event</h2>
+    <div class="season-list" id="event-list"></div>
+    <h2 class="list-head">Season decorations</h2>
+    <div class="season-list" id="dressing-list"></div>
+    <p class="small">"Experimental" means the decorations are in the game files and switch on the same way as Springtide, but nobody has seen them in game yet. If one looks wrong or Ramsgate will not load, pick "No event" / "Time Strike" again. Frostfall's Ramsgate decorations are not in 1.6.2's files, so they cannot be offered here.</p>
+  </div>
+</section>
+
+<!-- ============================================================ Game Rules -->
+<section class="page" id="page-rules" hidden>
+  <h1 class="page-title">Game Rules</h1>
+  <p class="lead">Play it your way: level faster or slower, get more loot, craft for free. Your picks are kept and apply the next time you press Play. They never touch your save on their own, so you can change them any time.</p>
+  <div class="season-tabs" id="rule-vtabs" role="tablist" aria-label="Version"></div>
+  <div class="ver-banner" id="rule-vbanner"></div>
+  <div id="rule-none" class="card" hidden>
+    <div class="card-head"><h2 id="rule-none-title">No Game Rules for this version yet</h2><span class="pill">Planned</span></div>
+    <p>Game Rules are ready for 1.6.2 first. Other versions get them through a server-file update.</p>
+  </div>
+  <div id="rule-body" hidden>
+    <p class="action-note" id="rule-note" aria-live="polite"></p>
+    <div class="season-list" id="rule-list"></div>
+    <div class="rule-foot"><button class="ghost" id="rule-reset">Back to the defaults</button></div>
+    <p class="small">"Experimental" means it works in the server files but has not been checked in a real hunt yet. If something looks wrong, set it back to Normal or Off. Whatever you earned while a rule was on stays earned.</p>
+  </div>
+</section>
+
+<!-- ============================================================ Inventory -->
+<section class="page" id="page-items" hidden>
+  <h1 class="page-title">Inventory</h1>
+  <p class="lead">Add or remove currencies, tokens and keys in your save. Close the game first. A backup of your save is made every time you save here.</p>
+  <div class="season-tabs" id="item-vtabs" role="tablist" aria-label="Version"></div>
+  <div class="ver-banner" id="item-vbanner"></div>
+  <div id="item-none" class="card" hidden>
+    <div class="card-head"><h2 id="item-none-title">No inventory editing for this version yet</h2><span class="pill" id="item-none-pill">Planned</span></div>
+    <p id="item-none-text">The Inventory page is ready for 1.6.2 first. Other versions get it through a server-file update.</p>
+  </div>
+  <div id="item-body" hidden>
+    <div class="item-bar">
+      <label class="item-char" id="item-char-wrap" hidden>Character <select id="item-char"></select></label>
+      <p class="action-note" id="item-note" aria-live="polite"></p>
+      <div class="item-acts"><button class="ghost" id="item-undo" disabled>Undo</button><button class="primary-sm" id="item-save" disabled>Save changes</button></div>
+    </div>
+    <div id="item-groups"></div>
+    <div id="item-gear" hidden>
+      <h2 class="list-head">Gear and cosmetics</h2>
+      <p class="small">Weapons, armour, lanterns, parts, accessories, banners, flares, dyes, emotes, titles and other cosmetics. New gear starts at level 0. Gear you have equipped can't be removed; unequip it in game first.</p>
+      <div class="item-add-row" id="gear-all-row" hidden><button class="ghost" id="gear-all-btn">Unlock all cosmetics</button><span class="small">Every dye, emote, title, skin, banner and flare in the list below, for this character.</span></div>
+      <div class="item-add-row"><input id="gear-add" list="gear-options" placeholder="Type a name or ID, e.g. Skarn's Vengeance" spellcheck="false" autocomplete="off"><button class="ghost" id="gear-add-btn">Add gear</button></div>
+      <datalist id="gear-options"></datalist>
+      <div class="season-list gear-list" id="gear-list"></div>
+    </div>
+    <details class="item-more" id="item-more">
+      <summary>Everything else in your save <span class="n" id="item-more-n"></span></summary>
+      <div class="season-list" id="item-other"></div>
+    </details>
+    <div class="item-add">
+      <h2 class="list-head">Add another item by its ID</h2>
+      <div class="item-add-row"><input id="item-add-id" placeholder="CURRENCY_NOTES" spellcheck="false" autocomplete="off"><input id="item-add-n" type="number" min="0" value="1"><button class="ghost" id="item-add-btn">Add to the list</button></div>
+      <p class="small">IDs are the game's catalog names (capital letters, digits and _). An ID the game doesn't know does nothing in game and can be removed again here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ Patch notes -->
+<section class="page" id="page-patches" hidden>
+  <h1 class="page-title">Patch notes</h1>
+  <p class="lead">What changed in the launcher and the server files. Server-file updates arrive by themselves when you start the launcher.</p>
+  <div id="patch-list" class="patch-list"></div>
+</section>
+
+<!-- ============================================================ Mods -->
+<section class="page" id="page-mods" hidden>
+  <h1 class="page-title">Mods</h1>
+  <p class="lead">Play with UE4SS mods: Lua and Blueprint mods made by the community. Turn on Modded mode, put mods in the mods folder, and pick which ones run. Changes apply the next time you press Play.</p>
+  <div class="season-tabs" id="mods-vtabs" role="tablist" aria-label="Version"></div>
+  <div class="ver-banner" id="mods-vbanner"></div>
+  <div id="mods-none" class="card" hidden>
+    <div class="card-head"><h2 id="mods-none-title">No mods for this version yet</h2><span class="pill">Planned</span></div>
+    <p id="mods-none-text">Modded mode is ready for 1.6.2 first. Other versions get it through a server-file update.</p>
+  </div>
+  <div id="mods-body" hidden>
+    <p class="action-note" id="mods-note" aria-live="polite"></p>
+    <div class="season-list">
+      <div class="season-row rule-row" id="mods-get-row">
+        <div><div class="season-name">UE4SS</div><div class="season-kind">The mod loader (RE-UE4SS, free and open source). Downloaded once, about 6 MB, into the game folder.</div></div>
+        <div class="rule-choices"><button class="primary-sm" id="mods-get">Get UE4SS</button></div>
+      </div>
+      <div class="season-row rule-row" id="mods-on-row">
+        <div><div class="season-name">Modded mode</div><div class="season-kind">Loads UE4SS in your game only, with its windows hidden. Off = the normal game, nothing loaded.</div></div>
+        <div class="rule-choices" role="group" aria-label="Modded mode"><button class="season-filter rule-choice" id="mods-off-btn">Off</button><button class="season-filter rule-choice" id="mods-on-btn">On</button></div>
+      </div>
+      <div class="season-row rule-row" id="mods-srv-row">
+        <div><div class="season-name">Also run mods on my servers</div><div class="season-kind">For mods that change gameplay. Your servers decide hunts for everyone on them, so friends who join your server play with these mods too. Other people's servers are never affected.</div></div>
+        <div class="rule-choices" role="group" aria-label="Server mods"><button class="season-filter rule-choice" id="mods-srv-off">Off</button><button class="season-filter rule-choice" id="mods-srv-on">On</button></div>
+      </div>
+    </div>
+    <div class="rule-foot"><button class="ghost" id="mods-folder">Open the mods folder</button></div>
+    <h2 class="list-head">Your mods</h2>
+    <div class="season-list" id="mods-list"></div>
+    <p class="small">Put each mod's folder inside the mods folder (it has a Scripts folder or a dlls folder in it), then switch it on here. Mods are never deleted by the launcher. Your mods only change your own game; a joiner's mods never change your server or anyone's save. Mods are made by other people: only use ones you trust.</p>
+  </div>
+</section>
+
+<!-- ============================================================ Settings -->
+<section class="page" id="page-settings" hidden>
+  <h1 class="page-title">Settings</h1>
+  <div class="settings">
+    <div class="setting"><div><div class="setting-name">Player name</div><div class="setting-sub"><span id="set-name"></span>, used in every version and on the Friends page</div></div><button class="ghost" id="set-name-change">Change</button></div>
+    <div class="setting"><div><div class="setting-name">Downloaded games go to</div><div class="setting-sub" id="set-games"></div></div><button class="ghost" id="set-games-pick">Change folder</button></div>
+    <div class="setting"><div><div class="setting-name">Launcher data (saves, settings, logs)</div><div class="setting-sub" id="set-data"></div></div><button class="ghost" id="set-data-open">Open folder</button></div>
+    <div class="setting"><div><div class="setting-name">Node.js</div><div class="setting-sub" id="set-node"></div></div></div>
+    <div class="setting"><div><div class="setting-name">Download tool</div><div class="setting-sub" id="set-tool"></div></div></div>
+    <div class="setting"><div><div class="setting-name">Server files</div><div class="setting-sub" id="set-pkgs"></div></div><button class="ghost" id="set-pkgs-check">Check for updates</button></div>
+    <div class="setting"><div><div class="setting-name">Keep my server files</div><div class="setting-sub" id="set-keep-sub" style="word-break: normal">For modders: the launcher stops updating or replacing the installed server files (backend, tools, paks), so your own changes stay. Turn it off to get the latest server files again.</div></div><button class="ghost" id="set-keep">Turn on</button></div>
+    <div class="setting"><div><div class="setting-name">Offline Forever mode</div><div class="setting-sub" id="set-offline-sub">Play only on this PC: no Friends page, nobody sees you online, no hosting or joining. Server-file updates still come in.</div></div><button class="ghost" id="set-offline">Turn on</button></div>
+    <div class="setting"><div><div class="setting-name">Background</div><div class="setting-sub">Aurora and snow behind the pages. Paused while a game is running.</div></div><button class="ghost" id="set-sky">Turn off</button></div>
+    <div class="setting" id="set-lang-row" hidden><div><div class="setting-name">Game language</div><div class="setting-sub" id="set-lang-sub" style="word-break: normal">The language of the game's text and voices. Windows and the launcher stay as they are. Changes at the next game start.</div></div><select class="hm-select" id="set-lang" style="max-width: 260px"></select></div>
+    <div class="setting" id="set-menu-row" hidden><div><div class="setting-name">Main menu background in the game (<span id="set-menu-ver">1.6.2</span>)</div><div class="setting-sub" id="set-menu-sub" style="word-break: normal">The art behind the game's start and login screen, from any Hunt Pass season. Changes at the next game start.</div><img id="set-menu-preview" alt="Your main menu picture" hidden style="display: block; width: 256px; height: 128px; object-fit: cover; margin-top: 8px; border-radius: 6px; border: 1px solid var(--line-2)"></div><span style="display: flex; flex-direction: column; gap: 8px; align-items: flex-end; flex-shrink: 0"><select class="hm-select" id="set-menu" style="max-width: 260px"></select><button class="ghost" id="set-menu-pick" hidden>Choose picture</button></span></div>
+    <div class="setting"><div style="min-width: 0"><div class="setting-name">What you are running</div><div class="setting-sub" id="set-files" style="word-break: normal; white-space: pre-line; font-family: Consolas, monospace; font-size: 12px">Checking...</div></div><button class="ghost" id="set-files-copy">Copy</button></div>
+    <div class="setting"><div><div class="setting-name">Launcher</div><div class="setting-sub"><span id="set-ver"></span> <span id="set-launcher"></span></div></div></div>
+  </div>
+  <p class="small">Each version keeps its own save, settings and logs in the launcher data folder. Nothing is written into your Windows Dauntless settings. Uninstalling the launcher does not delete that folder.</p>
+</section>
+
+<!-- ============================================================ Credits -->
+<section class="page" id="page-credits" hidden>
+  <h1 class="page-title">Credits</h1>
+  <p class="lead" id="credits-intro"></p>
+  <div id="credits-sections"></div>
+  <div class="credits-section" id="supporters-section" hidden>
+    <h2>Supporters</h2>
+    <p class="small" id="supporters-intro"></p>
+    <div class="supporters" id="supporters-list"></div>
+    <p class="small" id="supporters-anon" hidden></p>
+    <p class="small"><a href="#" id="lnk-patreon-2" data-url="" hidden>Support on Patreon</a></p>
+  </div>
+</section>
+
+<!-- ============================================================ Help -->
+<section class="page" id="page-help" hidden>
+  <h1 class="page-title">How this works</h1>
+  <ol class="help-steps">
+    <li><strong>Game files.</strong> Press Download and the launcher fetches that exact build from Epic's servers (11 to 15 GB; you need about twice that free while it runs). Already have the game? "More" lets you point at the folder instead.</li>
+    <li><strong>Set-up.</strong> A black window opens and asks one or two questions (press Enter for the defaults). It installs Node.js if needed, puts two files into the game folder (originals are kept, never deleted) and makes your offline account.</li>
+    <li><strong>Play.</strong> Starts the local backend and the hidden game servers (about a minute), then the game. Closing the game closes the rest.</li>
+  </ol>
+  <h2 class="h2">If something goes wrong</h2>
+  <ul class="help-list">
+    <li>Stuck, or "a Dauntless process is running": press "Stop everything", then Play again.</li>
+    <li>"The game folder is missing files": the game was repaired or updated. Press Set up again; it only fixes what is missing.</li>
+    <li>If Windows asks whether Node.js or Dauntless may use the network, click Cancel. Everything stays on your PC.</li>
+    <li>Windows SmartScreen on first start: "More info" then "Run anyway". The launcher is not signed; signing costs money the project does not spend.</li>
+    <li>Asking for help: "More" then "Get the logs", and send the two zips. Your PC name and user name are blanked out in them.</li>
+  </ul>
+  <p class="small">Fan project, solo play, unofficial. Built on <a href="#" data-url="https://github.com/SyST3MDeV/Undaunted">Undaunted</a> (AGPL-3.0). Download tool: <a href="#" data-url="https://github.com/meszmate/manifest">meszmate/manifest</a> (MIT). Dauntless belongs to its owners; this includes no game files.</p>
+</section>
+</main>
+<!-- ============================================================ Friends panel (friends.js, voice.js) -->
+<aside class="fp" id="fp" aria-label="Friends" hidden>
+  <div class="fp-rail">
+    <button class="fp-rail-btn" id="fp-open" title="Friends"><span class="ic-friends fp-rail-ico" aria-hidden="true"></span><span class="fp-rail-count" id="fp-rail-count"></span></button>
+    <span class="fp-rail-req" id="fp-rail-req" hidden title="Friend requests"></span>
+    <span class="fp-rail-voice" id="fp-rail-voice" hidden title="In voice"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><rect x="5.5" y="1.5" width="5" height="8.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 7.5a5 5 0 0 0 10 0M8 12.5V15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+  </div>
+  <div class="fp-body" id="fp-body">
+    <div class="fp-head">
+      <h2>Friends</h2>
+      <span class="fp-online" id="fp-online"></span>
+      <button class="fp-fold" id="fp-fold" title="Fold the panel" aria-label="Fold the panel"><span class="chev" aria-hidden="true"></span></button>
+    </div>
+    <div class="fp-connecting" id="fr-signup" hidden><p id="fr-signup-text">Signing you in...</p></div>
+    <div class="fp-main" id="fr-main" hidden>
+      <div class="fp-me">Signed in as <span class="fr-me" id="fr-me"></span><span class="fr-code" id="fr-code" title="Your friend code: give it to friends if someone else has the same name"></span><button class="fr-link" id="fr-rename">change name</button></div>
+      <div class="fp-add"><input id="fr-addname" class="fr-input" maxlength="26" placeholder="Add a friend (name or name#1234)" autocomplete="off" spellcheck="false"><button class="fp-add-btn" id="fr-add" title="Send a friend request" aria-label="Send a friend request"><span aria-hidden="true">+</span></button></div>
+      <p class="fp-note" id="fr-note" aria-live="polite"></p>
+      <div class="fp-hosting" id="fp-hosting" hidden></div>
+      <div class="fp-scroll" id="fp-scroll"></div>
+      <div class="fp-foot"><button class="fr-link" id="fp-manage">Manage friends</button></div>
+    </div>
+    <div class="fp-voice" id="vc-card">
+      <div class="vc-bar">
+        <span class="vc-mic" id="vc-mic"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><rect x="5.5" y="1.5" width="5" height="8.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 7.5a5 5 0 0 0 10 0M8 12.5V15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+        <div class="vc-bar-text"><div class="vc-title" id="vc-title">Voice</div><div class="vc-status" id="vc-status"></div></div>
+        <button class="vc-icon-btn" id="vc-mute" hidden title="Mute your microphone">Mute</button>
+        <button class="vc-icon-btn vc-gear" id="vc-gear" title="Voice settings" aria-label="Voice settings" aria-expanded="false"><svg viewBox="0 0 16 16" width="17" height="17" aria-hidden="true"><path d="M6.7 1.5h2.6l.4 1.8 1.2.7 1.8-.6 1.3 2.2-1.4 1.3v1.4l1.4 1.3-1.3 2.2-1.8-.6-1.2.7-.4 1.8H6.7l-.4-1.8-1.2-.7-1.8.6-1.3-2.2 1.4-1.3V7.6L2 6.3l1.3-2.2 1.8.6 1.2-.7z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></button>
+      </div>
+      <dialog class="vc-pop" id="vc-pop">
+        <div class="vc-pop-head"><h2 class="vc-pop-title">Voice settings</h2><span class="vc-actions"><button class="ghost fr-small" id="vc-leave" hidden>Leave voice</button><button class="primary-sm" id="vc-join" hidden>Join voice</button></span></div>
+        <div class="vc-people" id="vc-people" hidden></div>
+        <p class="action-note" id="vc-note" aria-live="polite"></p>
+        <div class="vc-set" id="vc-ptt-row">
+          <label class="vc-radio"><input type="radio" name="vc-mode" id="vc-mode-ptt"> Push to talk</label>
+          <span class="vc-keyrow"><span class="vc-key" id="vc-key">not set</span><button class="ghost fr-small" id="vc-setkey">Set key</button><button class="fr-link" id="vc-clearkey">clear</button></span>
+        </div>
+        <div class="vc-set" id="vc-vad-row">
+          <label class="vc-radio"><input type="radio" name="vc-mode" id="vc-mode-vad"> When I speak</label>
+          <div class="vc-level" title="Your microphone level. You are heard while it is right of the line."><div class="vc-meter" id="vc-meter"></div><div class="vc-line" id="vc-line"></div></div>
+          <label class="vc-sens">Sensitivity <input type="range" id="vc-sens" min="0" max="100"></label>
+        </div>
+        <div class="vc-set"><label class="vc-field">Microphone <select id="vc-input" class="fr-input vc-select"></select></label></div>
+        <div class="vc-set"><label class="vc-radio"><input type="checkbox" id="vc-auto"> Join voice by itself when I host or join (not in games open to everyone)</label></div>
+        <p class="small">Push to talk works while you are in the game; the game still sees the key, so pick one it does not use (mouse 4 or 5 work well).</p>
+        <div class="dlg-actions"><button class="ghost" id="vc-close">Done</button></div>
+      </dialog>
+    </div>
+  </div>
+</aside>
+</div>
+
+<dialog id="dlg-readme" class="wide">
+  <h2 id="readme-title">README</h2>
+  <pre class="readme" id="readme-body"></pre>
+  <form method="dialog"><button class="ghost">Close</button></form>
+</dialog>
+
+<dialog id="dlg-season" class="wide">
+  <h2 id="season-doc-title">Rewards</h2>
+  <div class="season-doc" id="season-doc-body"></div>
+  <form method="dialog"><button class="ghost">Close</button></form>
+</dialog>
+
+<dialog id="dlg-name">
+  <h2 id="name-title">Your player name</h2>
+  <p id="name-text"></p>
+  <div class="fr-line"><input id="name-input" class="fr-input" maxlength="16" autocomplete="off" spellcheck="false" placeholder="Your name"></div>
+  <p class="action-note err" id="name-err" aria-live="polite"></p>
+  <div class="dlg-actions">
+    <button class="ghost" id="name-cancel">Cancel</button>
+    <button class="primary small-btn" id="name-save">Continue</button>
+  </div>
+</dialog>
+
+<dialog id="dlg-confirm">
+  <h2 id="confirm-title"></h2>
+  <p id="confirm-text"></p>
+  <div class="dlg-actions">
+    <button class="ghost" id="confirm-no">Cancel</button>
+    <button class="primary small-btn" id="confirm-yes">Continue</button>
+  </div>
+</dialog>
+
+<script src="sky.js"></script>
+<script src="app.js"></script>
+<script src="friends.js"></script>
+<script src="voice.js"></script>
+<script src="player.js"></script>
+<script src="hostmode.js"></script>
+</body>
+</html>

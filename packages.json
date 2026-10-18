@@ -1,0 +1,32 @@
+{
+    "packages":  [
+                     {
+                         "id":  "1.6.2",
+                         "packageVersion":  "2026-10-17",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-17.zip",
+                         "sha256":  "701e00aac3d70a1c35fac69a72cfec44b220d4024b4172a8acdec4349904e8c0",
+                         "date":  "2026-10-17",
+                         "note":  "No more black console window (fixes the game freezing when it was clicked); Modded mode no longer hangs; DamageMeter included"
+                     },
+                     {
+                         "id":  "1.14.7",
+                         "packageVersion":  "2026-10-18",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-18.zip",
+                         "sha256":  "81587752d0e87820a199d71cda0c8afc9dcb1555998166a9b4ced3c65b4b467f",
+                         "date":  "2026-10-18",
+                         "note":  "Parties: group up in Ramsgate, the party follows the leader into the training grounds and hunts"
+                     }
+                 ],
+    "launcher":  {
+                     "version":  "0.2.9",
+                     "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.4",
+                     "notes":  "1.14.7 online from the launcher: Host with friends, Play online, Friends Join, and Host Mode with a version picker",
+                     "date":  "2026-10-17",
+                     "app":  {
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.9.asar",
+                                 "sha256":  "24157dbdca243fb9bb0ce44bf32ce6b017e5c684d1f2e61260942155af907577",
+                                 "size":  681685,
+                                 "minShell":  "0.2.4"
+                             }
+                 }
+}

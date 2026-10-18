@@ -1,0 +1,144 @@
+# Dauntless Forever - Dauntless 1.14.7 offline package
+# Copyright (C) 2026 Addison2k. https://github.com/addison2k/DauntlessForever
+# Licence: AGPL-3.0-only. Keep this notice: the licence requires it.
+# online-host-1147.ps1 - "ONLINE - HOST.bat": play 1.14.7 with friends anywhere, hosted on this PC, through the
+# Dauntless Forever relay (same relay and same steps as 1.6.2's ONLINE - HOST). No router settings, no administrator
+# rights: this PC only makes outgoing connections to the relay.
+#   - tools\df-gateway-1147.js: the relay's one TCP port -> the right one of the 28 backend ports (63000-63027)
+#   - tools\relay-client.js: connects to the relay (game servers UDP 8780-8787, the gateway for the backend)
+#   - starts the normal PLAY in its own window, telling every game to use the relay's address
+#   - shows the join code (address:port) for the friend's "LAN - JOIN.bat"
+#   - when PLAY is closed: disconnects from the relay
+# The launcher runs this too (version.json "online"): its Friends page ("Host with friends"), Play online and Host Mode.
+#   -Public (Play online, or "Allow randoms"): the launcher lets anyone in; nothing changes on this PC.
+#   -HostMode (the Host Mode page): no game window here; the server stays up (start.ps1 -NoGame) until the launcher
+#   stops it. Exit codes: 0 stopped on request, 3 the relay connection was lost, else start.ps1's. (Oct 17)
+param([switch]$Public, [switch]$HostMode)
+. (Join-Path $PSScriptRoot 'common.ps1')
+. (Join-Path $PSScriptRoot 'relay-failover.ps1')
+$DataDir = Join-Path $Root 'data'
+$DefaultRelay = '209.145.57.41'          # the Dauntless Forever relay; data\relay_host.txt overrides it
+$RelayControlPort = 7000
+$GatewayPort = 63099
+$StatusFile = Join-Path $DataDir 'relay-1147.json'   # not relay.json: the launcher's Friends page reads that one for 1.6.2
+
+Say ''
+Say '=== Dauntless 1.14.7 - ONLINE host (friends join from anywhere) ===' 'Cyan'
+$cfg = Get-Config
+if (-not $cfg) { Fail 'set-up has not been run yet. Double-click "1 - SETUP.bat" first.' }
+$node = $cfg.Node
+if (-not $node -or -not (Test-Path -LiteralPath $node)) { $node = Find-Node }
+if (-not $node -or -not (Test-Path -LiteralPath $node)) { Fail 'Node.js from set-up is missing. Run "1 - SETUP.bat" again.' }
+if (Test-Recorder) { Fail 'Dauntless 1.14.7 is already running on this PC (its backend answers). Close the game and PLAY first, then start ONLINE - HOST again.' }
+New-Item -ItemType Directory -Force $DataDir | Out-Null
+
+# --- which relay (network.json in the Dauntless Forever repo, as for 1.6.2; data\relay_host.txt overrides it)
+$relayHost = $DefaultRelay
+$netCache = Join-Path $DataDir 'network.json'
+$net = $null
+try {
+    $net = Invoke-RestMethod -Uri ("https://raw.githubusercontent.com/addison2k/DauntlessForever/main/network.json?t=" + [DateTime]::UtcNow.Ticks) -TimeoutSec 8
+    if ($net.relay.host) { $relayHost = "$($net.relay.host)"; if ($net.relay.controlPort) { $RelayControlPort = [int]$net.relay.controlPort }; ($net | ConvertTo-Json -Depth 5) | Set-Content -LiteralPath $netCache -Encoding ASCII }
+} catch {
+    try { $net = Get-Content -LiteralPath $netCache -Raw | ConvertFrom-Json; if ($net.relay.host) { $relayHost = "$($net.relay.host)"; if ($net.relay.controlPort) { $RelayControlPort = [int]$net.relay.controlPort } } } catch {}
+}
+if ($net -and $net.online -and ($net.online.enabled -eq $false)) {
+    $why = if ($net.online.message) { "$($net.online.message)" } else { 'The Dauntless Forever online server is being worked on.' }
+    Fail "online play is switched off right now: $why Solo play (PLAY) still works."
+}
+# Several relays ("relays": [...], one per region): fastest first, your preferred server (launcher Settings) first,
+# and the next one when a relay does not hand out a slot (tools\relay-failover.ps1).
+$relayCands = Get-RelayCandidates $net $relayHost $RelayControlPort $DataDir
+
+# --- 1. the gateway, then the relay connection
+$logDir = Join-Path $Root 'logs'
+New-Item -ItemType Directory -Force $logDir | Out-Null
+Remove-Item -LiteralPath $StatusFile -Force -ErrorAction SilentlyContinue
+# A gateway or relay connection left over from an earlier host (window closed early) still holds port 63099 or a
+# relay slot. 1.14.7 is not running here (checked above), so they are leftovers: stop only those. (Oct 17)
+try {
+    Get-CimInstance Win32_Process -Filter "Name = 'node.exe'" -ErrorAction Stop |
+        Where-Object { $_.CommandLine -and ($_.CommandLine -like '*df-gateway-1147.js*' -or ($_.CommandLine -like '*relay-client.js*' -and $_.CommandLine -like '*relay-1147.json*')) } |
+        ForEach-Object { Say "Closing a 1.14.7 helper left over from last time (process $($_.ProcessId))."; Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
+    Start-Sleep -Milliseconds 500
+} catch {}
+$gateway = Start-Process -FilePath $node -PassThru -WindowStyle Hidden -WorkingDirectory $Root `
+    -ArgumentList @("`"$(Join-Path $PSScriptRoot 'df-gateway-1147.js')`"") `
+    -RedirectStandardOutput (Join-Path $logDir 'gateway.log') -RedirectStandardError (Join-Path $logDir 'gateway.err')
+Start-Sleep -Milliseconds 800
+if ($gateway.HasExited) { Fail 'the backend gateway did not start (port 63099 in use?). See logs\gateway.log.' }
+$env:LOCAL_BACKEND_PORT = "$GatewayPort"          # relay-client.js: friends' backend connections go to the gateway
+$env:LOCAL_GAME_PORT_BASE = '8780'                # ...and game traffic to this version's servers (UDP 8780-8787)
+Say 'Connecting to the Dauntless Forever relay...'
+$conn = Connect-Relay $relayCands $node $Root $logDir $StatusFile -Live:(-not $HostMode)
+if (-not $conn) { try { $gateway.Kill() } catch {}; Fail "no relay server answered (tried: $RelayTried). Is this PC online? (Details: logs\relay.log)" }
+$relay = $conn.proc; $relayHost = $conn.host; $RelayControlPort = $conn.port
+$st = Get-Content -LiteralPath $StatusFile -Raw | ConvertFrom-Json
+$ip = "$($st.ip)"; $base = [int]$st.base
+if (-not ($ip -match '^\d{1,3}(\.\d{1,3}){3}$')) { $ip = $relayHost }
+Say "Relay connected. Friends reach this PC at ${ip}:$base." 'Green'
+
+try {
+    # --- 2. the normal PLAY: backend stays on this PC only (the relay reaches it from inside), games are sent to the relay
+    Remove-Item Env:\RECORDER_BIND -ErrorAction SilentlyContinue
+    $env:RECORDER_PUBLIC_HOST = $ip
+    $env:RECORDER_PUBLIC_PORT_OFFSET = "$($base - 8780)"
+    $env:RECORDER_PUBLIC_BACKEND_PORT = "$base"
+    Say ''
+    if ($HostMode) {
+        Say 'Starting Host Mode: the backend and the game server, no game window (log: logs\hostmode.log)...'
+        $play = Start-Process -FilePath 'powershell.exe' -PassThru -WindowStyle Hidden -WorkingDirectory $Root `
+            -ArgumentList @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', "`"$(Join-Path $PSScriptRoot 'start.ps1')`"", '-NoGame') `
+            -RedirectStandardOutput (Join-Path $logDir 'hostmode.log') -RedirectStandardError (Join-Path $logDir 'hostmode.err')
+    } else {
+        Say 'Starting PLAY in its own window (backend, game server, then your game)...'
+        $play = Start-Process -FilePath 'powershell.exe' -PassThru -WorkingDirectory $Root `
+            -ArgumentList @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', "`"$(Join-Path $PSScriptRoot 'start.ps1')`"")
+    }
+    $code = "${ip}:$base"
+    [IO.File]::WriteAllText((Join-Path $Root 'ONLINE-join-code.txt'), $code)
+    # self-check once the backend is up: it answers through the relay
+    $t0 = Get-Date
+    while (-not (Test-Recorder) -and -not $play.HasExited -and ((Get-Date) - $t0).TotalSeconds -lt 120) { Start-Sleep -Seconds 1 }
+    $ok = $false
+    try { Invoke-RestMethod -Uri "http://${ip}:$base/_recorder/ping" -TimeoutSec 8 | Out-Null; $ok = $true } catch {}
+    if ($ok) { Say 'Checked: your backend answers through the relay.' 'Green' }
+    else { Say 'Warning: your backend did not answer through the relay yet. If your friend cannot join, send logs\relay.log and logs\gateway.log.' 'Yellow' }
+    if ($HostMode) {
+        Say 'Host Mode is running. Players join from their launcher (Friends, or Play online when it is open to everyone).' 'Green'
+        $relayLost = $false
+        while (-not $play.HasExited) {
+            if ($relay.HasExited) { Say 'The relay connection was lost: stopping, so the launcher can start Host Mode again.' 'Yellow'; $relayLost = $true; break }
+            Start-Sleep -Seconds 2
+        }
+        if ($relayLost) {
+            [IO.File]::WriteAllText((Join-Path $DataDir 'hostmode_stop'), 'relay lost')
+            if (-not $play.WaitForExit(90000)) { try { $play.Kill() } catch {} }
+            $script:hostExit = 3
+        } else { $play.WaitForExit(); $script:hostExit = $play.ExitCode }
+        exit ([int]$script:hostExit)   # the finally below still runs (disconnects from the relay)
+    }
+    Say ''
+    Say '============================================================' 'Cyan'
+    Say ' Your friend: double-click "LAN - JOIN.bat" and paste this join code:' 'Cyan'
+    Say ''
+    Say "   $code" 'White'
+    Say ''
+    Say ' (Also saved in ONLINE-join-code.txt. It changes each time you start ONLINE - HOST.'
+    Say '  Anyone with it can join while you host: send it privately.)'
+    Say '============================================================' 'Cyan'
+    Say ''
+    Say 'Keep this window open. When you close your game, PLAY shuts everything down and this window disconnects.'
+    while (-not $play.HasExited) {
+        if ($relay.HasExited) { Say 'The relay connection program stopped. Friends cannot reach you until you start ONLINE - HOST again.' 'Yellow'; break }
+        Start-Sleep -Seconds 2
+    }
+    $play.WaitForExit()
+}
+finally {
+    try { if (-not $relay.HasExited) { $relay.Kill() } } catch {}
+    try { if (-not $gateway.HasExited) { $gateway.Kill() } } catch {}
+    Remove-Item -LiteralPath $StatusFile -Force -ErrorAction SilentlyContinue
+    Say ''
+    Say 'Online session over: disconnected from the relay.' 'Green'
+}

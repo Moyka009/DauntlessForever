@@ -1,0 +1,93 @@
+{
+    "id":  "1.14.7",
+    "name":  "Dauntless 1.14.7",
+    "build":  "647472",
+    "released":  "April 9, 2024",
+    "era":  "Last pre-Awakening build",
+    "blurb":  "The last build before Awakening: the full 2023 Ramsgate, every weapon line as it was, and the Hunting Grounds as most players remember them.",
+    "warning":  "Experimental. 1.14.7 is much less complete than 1.6.2: expect missing features, odd behaviour and the occasional crash. Play 1.6.2 for the full experience.",
+    "works":  [
+                  "Sign in offline, Ramsgate, NPCs and quests (quest progress is saved)",
+                  "Quest and dialogue text (fix by KombatKing)",
+                  "Hunt quests (kills on the right island count)",
+                  "Potions, lanterns, Omnicells and weapon specials (equipment fix by KombatKing, test build)",
+                  "Training grounds, sprint, attacking",
+                  "Hunts (tested: the first Embermane hunt)",
+                  "Online with friends: the launcher\u0027s Friends page, Play online and Host Mode (and ONLINE - HOST / LAN - JOIN by hand)",
+                  "Parties: invite a player in Ramsgate (Q on them); the party follows the leader into the training grounds and hunts (test)"
+              ],
+    "notWorking":  [
+                       "New characters joining a friend get stuck loading the tutorial: do the tutorial in solo play first. Hunting together as a party is new and only lightly tested. Much else may not work yet."
+                   ],
+    "exeRel":  "Archon/Binaries/Win64/Dauntless-Win64-Shipping.exe",
+    "exeSha256":  "F3F95FBF22709EF077A11632ED95D675B7209B7E0172D9ECB9BA7D02A1FBB66B",
+    "download":  {
+                     "manifestUrl":  "https://raw.githubusercontent.com/addison2k/DauntlessManifestArchive/main/manifests/Windows/Dauntless_1.14.7.647472.manifest",
+                     "manifestSha1":  "aa70748e4c0a776a991f2bac10ad342adaa31476",
+                     "downloadGB":  14.89,
+                     "installedGB":  15.39,
+                     "files":  611,
+                     "folderName":  "Dauntless_1.14.7"
+                 },
+    "package":  {
+                    "dir":  "package",
+                    "packageVersion":  "2026-10-18",
+                    "setup":  "tools/setup.ps1",
+                    "uninstallArgs":  [
+                                          "-Uninstall"
+                                      ],
+                    "play":  "tools/start.ps1",
+                    "stop":  {
+                                 "scripts":  [
+                                                 [
+                                                     "tools/server-1147.ps1",
+                                                     "-Stop"
+                                                 ]
+                                             ],
+                                 "pidFiles":  [
+                                                  "data/recorder.pid"
+                                              ]
+                             },
+                    "installedFiles":  [
+                                           {
+                                               "rel":  "Archon/Binaries/Win64/EOSSDK-Win64-Shipping.dll",
+                                               "sha256":  "4113C9EEBFBAC08532B6566A48F69E4F64A6B8E18A18AAFBA43F62F8F7DFDF70"
+                                           },
+                                           {
+                                               "rel":  "Archon/Binaries/Win64/dxgi.dll",
+                                               "sha256":  "A495AEACDB69365B1B140AA30B33ADE73493C868AB5D9CBDA9C41F4EF1666D25"
+                                           },
+                                           {
+                                               "rel":  "Archon/Content/Paks/zzzzzzzzzzzzzzzz_QuestDialogueFallback1147_P.pak",
+                                               "sha256":  "6F12AA1B3856D2A485851A4857150DCC072B2461128F862E3C351B796E33A00E"
+                                           },
+                                           {
+                                               "rel":  "Archon/Content/Paks/zzzzzzzz_Equipment1147_P.pak",
+                                               "sha256":  "9A2B3AF97304AE8CDD49BFC605A2E2C34657B0707A02076A0EFB6F62C7C80E65"
+                                           }
+                                       ],
+                    "setupDoneFiles":  [
+                                           "eos/eos_offline.ini",
+                                           "captures"
+                                       ],
+                    "saveFiles":  [
+                                      "data/state.json"
+                                  ],
+                    "needsNode":  "16",
+                    "ports":  "63000-63027",
+                    "readme":  "README.txt",
+                    "online":  {
+                                   "hostScript":  "tools/online-host-1147.ps1",
+                                   "joinScript":  "tools/lan-join-1147.ps1",
+                                   "relayFile":  "data/relay-1147.json",
+                                   "statusPort":  63000,
+                                   "statusPath":  "/_recorder/ping",
+                                   "accounts":  false,
+                                   "hostPlay":  "tools/play-1147.ps1",
+                                   "huntPorts":  [
+                                                     8781,
+                                                     8787
+                                                 ]
+                               }
+                }
+}
