@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-18",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-18.zip",
-                         "sha256":  "81587752d0e87820a199d71cda0c8afc9dcb1555998166a9b4ced3c65b4b467f",
+                         "packageVersion":  "2026-10-18.2",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-18.2.zip",
+                         "sha256":  "47b2654efbf48af98030c9513c643b1d886d8a894d6627563e7adf6fc67ebe50",
                          "date":  "2026-10-18",
-                         "note":  "Parties: group up in Ramsgate, the party follows the leader into the training grounds and hunts"
+                         "note":  "KombatKing\u0027s All-in-One R1: fountain, Middleman, Trials store, Hunt Pass seasons, bounties, power surge, hammer reload, Game Rules, All Dyes, Gauntlet (test); safer saves"
                      }
                  ],
     "launcher":  {

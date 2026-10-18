@@ -1,0 +1,1055 @@
+{
+  "revision": "season1147-season09a-v1",
+  "pass_id": "season27",
+  "key": "season09a",
+  "title": "Searing Talons",
+  "kind": "original",
+  "levels": 50,
+  "xp_per_level": 100,
+  "start_date": "2020-01-01T00:00:00+00:00",
+  "end_date": "2099-01-01T00:00:00+00:00",
+  "items": {
+    "EJ_HP09A_ASSASSINS_00": {
+      "kind": "stack",
+      "name": "Dagger Emoji",
+      "source": "emojis_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_HP09A_ASSASSINS_00": {
+      "kind": "stack",
+      "name": "Firewalker",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP09A_ASSASSINS_HELM_00": {
+      "kind": "stack",
+      "name": "Raptor's Hood",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP09A_ASSASSINS_LEGS_00": {
+      "kind": "stack",
+      "name": "Raptor's Stride",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP09A_ASSASSINS_ARMS_00": {
+      "kind": "stack",
+      "name": "Raptor's Grips",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP09A_ASSASSINS_CHEST_00": {
+      "kind": "stack",
+      "name": "Raptor's Cloak",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "DYE_HP09A_ASSASSINS_01_DURABLE": {
+      "kind": "stack",
+      "name": "DYE_HP09A_ASSASSINS_01_DURABLE",
+      "source": "dyes_item_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_TOKEN_EXCHANGE_SPEED_UP": {
+      "kind": "stack",
+      "name": "Ace Chips",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_TOKEN_TRANSMOG": {
+      "kind": "stack",
+      "name": "Transmog Stone",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "WP_EB_HP09A_ASSASSINS_00": {
+      "kind": "stack",
+      "name": "Desert Raptor",
+      "source": "Gear_Catalogs/weapon_eblade_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP09A_ASSASSINS_03": {
+      "kind": "stack",
+      "name": "That Sinking Feeling",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "TOKEN_BOUNTY_DRAFT": {
+      "kind": "stack",
+      "name": "Bounty Token",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "TOKEN_DAILY_PATROL_BONUS_PURCHASED": {
+      "kind": "stack",
+      "name": "Patrol Key",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "QI_DAMAGE_BLOCK_POTION": {
+      "kind": "stack",
+      "name": "Bulwark Tonic",
+      "source": "quick_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_PLATINUM_UNIV": {
+      "kind": "stack",
+      "name": "Platinum",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "LT_HP09A_ASSASSINS_00": {
+      "kind": "stack",
+      "name": "Hawklight",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "DYE_HP09A_ASSASSINS_02_DURABLE": {
+      "kind": "stack",
+      "name": "DYE_HP09A_ASSASSINS_02_DURABLE",
+      "source": "dyes_item_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_STAMINA_POTION_00": {
+      "kind": "stack",
+      "name": "Stamina Tonic",
+      "source": "quick_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_FABRIC_EVENT_HP09A_ASSASSINS_01": {
+      "kind": "stack",
+      "name": "Hawk's Cry",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "EJ_HP09A_ASSASSINS_01": {
+      "kind": "stack",
+      "name": "Laughing Hood Emoji",
+      "source": "emojis_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_CB_HP09A_ASSASSINS_00": {
+      "kind": "stack",
+      "name": "Swift Kestrels",
+      "source": "Gear_Catalogs/weapon_cblades_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_MARKS_STEEL": {
+      "kind": "stack",
+      "name": "Steel Marks",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "QI_HEALING_PYLON_BIG": {
+      "kind": "stack",
+      "name": "Lifespring Pylon",
+      "source": "quick_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "WP_DP_HP09A_ASSASSINS_00": {
+      "kind": "stack",
+      "name": "Peregrine Smiles",
+      "source": "Gear_Catalogs/weapon_dp_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP09A_ASSASSINS_01": {
+      "kind": "stack",
+      "name": "Reading the Signs",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_MS_HP09A_ASSASSINS_00": {
+      "kind": "stack",
+      "name": "Vigilant Falcon",
+      "source": "Gear_Catalogs/weapon_mspear_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "DYE_HP09A_ASSASSINS_00_DURABLE": {
+      "kind": "stack",
+      "name": "DYE_HP09A_ASSASSINS_00_DURABLE",
+      "source": "dyes_item_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP09A_00": {
+      "kind": "stack",
+      "name": "Justice of the Blaze Hawk",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_IH_HP09A_ASSASSINS_00": {
+      "kind": "stack",
+      "name": "Thundering Hawk",
+      "source": "Gear_Catalogs/weapon_ihammer_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP09A_ASSASSINS_02": {
+      "kind": "stack",
+      "name": "The Sneak",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_STAGGER_POTION": {
+      "kind": "stack",
+      "name": "Assault Tonic",
+      "source": "quick_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "WP_GA_HP09A_ASSASSINS_00": {
+      "kind": "stack",
+      "name": "Razor Eagle",
+      "source": "Gear_Catalogs/weapon_gaxe_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_STANDARD_HP09A_ASSASSINS_00": {
+      "kind": "stack",
+      "name": "Wings of the Blaze Hawk",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_DAMAGE_PYLON": {
+      "kind": "stack",
+      "name": "Inspiring Pylon",
+      "source": "quick_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_SIGIL_EVENT_HP09A_ASSASSINS_00": {
+      "kind": "stack",
+      "name": "Justice of the Blaze Hawk",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_AC_HP09A_ASSASSINS_00": {
+      "kind": "stack",
+      "name": "Dazzling Owls",
+      "source": "Gear_Catalogs/weapon_ac_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EJ_HP09A_ASSASSINS_02": {
+      "kind": "stack",
+      "name": "Blaze Emoji",
+      "source": "emojis_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_INTRO_HP09A_ASSASSINS_00": {
+      "kind": "stack",
+      "name": "Sand Devil",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_ANIMATION_HP09A_ASSASSINS_00": {
+      "kind": "stack",
+      "name": "Desert Cyclone",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP09A_ASSASSINS_04": {
+      "kind": "stack",
+      "name": "Take a Seat",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_HP09A_ASSASSINS_01": {
+      "kind": "stack",
+      "name": "Blaze Hawk",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP09A_ASSASSINS_HELM_00_ULTRA": {
+      "kind": "stack",
+      "name": "Visage of the Blaze Hawk",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP09A_ASSASSINS_CHEST_00_ULTRA": {
+      "kind": "stack",
+      "name": "Mantle of the Blaze Hawk",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP09A_ASSASSINS_ARMS_00_ULTRA": {
+      "kind": "stack",
+      "name": "Vambraces of the Blaze Hawk",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP09A_ASSASSINS_LEGS_00_ULTRA": {
+      "kind": "stack",
+      "name": "Greaves of the Blaze Hawk",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    }
+  },
+  "bundles": {},
+  "bundle_names": {},
+  "rewards": {
+    "1": [
+      "EJ_HP09A_ASSASSINS_00",
+      "TITLE_HP09A_ASSASSINS_00",
+      "AR_HP09A_ASSASSINS_HELM_00",
+      "AR_HP09A_ASSASSINS_LEGS_00",
+      "AR_HP09A_ASSASSINS_ARMS_00",
+      "AR_HP09A_ASSASSINS_CHEST_00"
+    ],
+    "2": [
+      "DYE_HP09A_ASSASSINS_01_DURABLE"
+    ],
+    "3": [
+      "CURRENCY_TOKEN_EXCHANGE_SPEED_UP",
+      "CURRENCY_TOKEN_TRANSMOG"
+    ],
+    "4": [
+      "WP_EB_HP09A_ASSASSINS_00"
+    ],
+    "5": [
+      "EM_PLAYER_HP09A_ASSASSINS_03"
+    ],
+    "6": [
+      "TOKEN_BOUNTY_DRAFT"
+    ],
+    "7": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "8": [
+      "QI_DAMAGE_BLOCK_POTION",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "9": [],
+    "10": [
+      "CURRENCY_PLATINUM_UNIV",
+      "LT_HP09A_ASSASSINS_00"
+    ],
+    "11": [
+      "TOKEN_BOUNTY_DRAFT",
+      "DYE_HP09A_ASSASSINS_02_DURABLE"
+    ],
+    "12": [
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "13": [
+      "QI_STAMINA_POTION_00",
+      "BNC_FABRIC_EVENT_HP09A_ASSASSINS_01"
+    ],
+    "14": [
+      "CURRENCY_TOKEN_TRANSMOG"
+    ],
+    "15": [
+      "EJ_HP09A_ASSASSINS_01",
+      "WP_CB_HP09A_ASSASSINS_00"
+    ],
+    "16": [
+      "TOKEN_BOUNTY_DRAFT"
+    ],
+    "17": [
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "18": [
+      "QI_HEALING_PYLON_BIG",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "19": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "20": [
+      "CURRENCY_TOKEN_EXCHANGE_SPEED_UP",
+      "WP_DP_HP09A_ASSASSINS_00"
+    ],
+    "21": [
+      "TOKEN_BOUNTY_DRAFT",
+      "EM_PLAYER_HP09A_ASSASSINS_01"
+    ],
+    "22": [
+      "CURRENCY_TOKEN_TRANSMOG"
+    ],
+    "23": [
+      "QI_STAMINA_POTION_00",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "24": [],
+    "25": [
+      "CURRENCY_PLATINUM_UNIV",
+      "WP_MS_HP09A_ASSASSINS_00"
+    ],
+    "26": [
+      "TOKEN_BOUNTY_DRAFT",
+      "CURRENCY_TOKEN_TRANSMOG"
+    ],
+    "27": [
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "28": [
+      "DYE_HP09A_ASSASSINS_00_DURABLE",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "29": [],
+    "30": [
+      "QI_FLARE_HP09A_00",
+      "WP_IH_HP09A_ASSASSINS_00"
+    ],
+    "31": [
+      "TOKEN_BOUNTY_DRAFT",
+      "EM_PLAYER_HP09A_ASSASSINS_02"
+    ],
+    "32": [
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "33": [
+      "QI_STAGGER_POTION",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "34": [],
+    "35": [
+      "CURRENCY_PLATINUM_UNIV",
+      "WP_GA_HP09A_ASSASSINS_00"
+    ],
+    "36": [
+      "TOKEN_BOUNTY_DRAFT",
+      "BNC_STANDARD_HP09A_ASSASSINS_00"
+    ],
+    "37": [
+      "CURRENCY_TOKEN_TRANSMOG"
+    ],
+    "38": [
+      "QI_DAMAGE_PYLON",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "39": [
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "40": [
+      "BNC_SIGIL_EVENT_HP09A_ASSASSINS_00",
+      "WP_AC_HP09A_ASSASSINS_00"
+    ],
+    "41": [
+      "TOKEN_BOUNTY_DRAFT",
+      "TOKEN_BOUNTY_DRAFT"
+    ],
+    "42": [],
+    "43": [
+      "EJ_HP09A_ASSASSINS_02",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "44": [
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "45": [
+      "CURRENCY_PLATINUM_UNIV",
+      "EM_INTRO_HP09A_ASSASSINS_00"
+    ],
+    "46": [
+      "TOKEN_BOUNTY_DRAFT",
+      "TOKEN_BOUNTY_DRAFT"
+    ],
+    "47": [],
+    "48": [
+      "CURRENCY_TOKEN_TRANSMOG",
+      "BNC_ANIMATION_HP09A_ASSASSINS_00"
+    ],
+    "49": [],
+    "50": [
+      "EM_PLAYER_HP09A_ASSASSINS_04",
+      "TITLE_HP09A_ASSASSINS_01",
+      "AR_HP09A_ASSASSINS_HELM_00_ULTRA",
+      "AR_HP09A_ASSASSINS_CHEST_00_ULTRA",
+      "AR_HP09A_ASSASSINS_ARMS_00_ULTRA",
+      "AR_HP09A_ASSASSINS_LEGS_00_ULTRA"
+    ]
+  },
+  "grants": {
+    "1": {
+      "free": [
+        [
+          "EJ_HP09A_ASSASSINS_00",
+          1
+        ],
+        [
+          "TITLE_HP09A_ASSASSINS_00",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "AR_HP09A_ASSASSINS_HELM_00",
+          1
+        ],
+        [
+          "AR_HP09A_ASSASSINS_LEGS_00",
+          1
+        ],
+        [
+          "AR_HP09A_ASSASSINS_ARMS_00",
+          1
+        ],
+        [
+          "AR_HP09A_ASSASSINS_CHEST_00",
+          1
+        ]
+      ]
+    },
+    "2": {
+      "free": [],
+      "premium": [
+        [
+          "DYE_HP09A_ASSASSINS_01_DURABLE",
+          1
+        ]
+      ]
+    },
+    "3": {
+      "free": [
+        [
+          "CURRENCY_TOKEN_EXCHANGE_SPEED_UP",
+          25
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ]
+    },
+    "4": {
+      "free": [],
+      "premium": [
+        [
+          "WP_EB_HP09A_ASSASSINS_00",
+          1
+        ]
+      ]
+    },
+    "5": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_HP09A_ASSASSINS_03",
+          1
+        ]
+      ]
+    },
+    "6": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": []
+    },
+    "7": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          5
+        ]
+      ]
+    },
+    "8": {
+      "free": [
+        [
+          "QI_DAMAGE_BLOCK_POTION",
+          15
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ]
+    },
+    "9": {
+      "free": [],
+      "premium": []
+    },
+    "10": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "LT_HP09A_ASSASSINS_00",
+          1
+        ]
+      ]
+    },
+    "11": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": [
+        [
+          "DYE_HP09A_ASSASSINS_02_DURABLE",
+          1
+        ]
+      ]
+    },
+    "12": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ]
+    },
+    "13": {
+      "free": [
+        [
+          "QI_STAMINA_POTION_00",
+          25
+        ]
+      ],
+      "premium": [
+        [
+          "BNC_FABRIC_EVENT_HP09A_ASSASSINS_01",
+          1
+        ]
+      ]
+    },
+    "14": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ]
+    },
+    "15": {
+      "free": [
+        [
+          "EJ_HP09A_ASSASSINS_01",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "WP_CB_HP09A_ASSASSINS_00",
+          1
+        ]
+      ]
+    },
+    "16": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": []
+    },
+    "17": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_MARKS_STEEL",
+          100
+        ]
+      ]
+    },
+    "18": {
+      "free": [
+        [
+          "QI_HEALING_PYLON_BIG",
+          10
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ]
+    },
+    "19": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          5
+        ]
+      ]
+    },
+    "20": {
+      "free": [
+        [
+          "CURRENCY_TOKEN_EXCHANGE_SPEED_UP",
+          25
+        ]
+      ],
+      "premium": [
+        [
+          "WP_DP_HP09A_ASSASSINS_00",
+          1
+        ]
+      ]
+    },
+    "21": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": [
+        [
+          "EM_PLAYER_HP09A_ASSASSINS_01",
+          1
+        ]
+      ]
+    },
+    "22": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ]
+    },
+    "23": {
+      "free": [
+        [
+          "QI_STAMINA_POTION_00",
+          25
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ]
+    },
+    "24": {
+      "free": [],
+      "premium": []
+    },
+    "25": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "WP_MS_HP09A_ASSASSINS_00",
+          1
+        ]
+      ]
+    },
+    "26": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ]
+    },
+    "27": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_MARKS_STEEL",
+          100
+        ]
+      ]
+    },
+    "28": {
+      "free": [
+        [
+          "DYE_HP09A_ASSASSINS_00_DURABLE",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ]
+    },
+    "29": {
+      "free": [],
+      "premium": []
+    },
+    "30": {
+      "free": [
+        [
+          "QI_FLARE_HP09A_00",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "WP_IH_HP09A_ASSASSINS_00",
+          1
+        ]
+      ]
+    },
+    "31": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": [
+        [
+          "EM_PLAYER_HP09A_ASSASSINS_02",
+          1
+        ]
+      ]
+    },
+    "32": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_MARKS_STEEL",
+          100
+        ]
+      ]
+    },
+    "33": {
+      "free": [
+        [
+          "QI_STAGGER_POTION",
+          25
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ]
+    },
+    "34": {
+      "free": [],
+      "premium": []
+    },
+    "35": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "WP_GA_HP09A_ASSASSINS_00",
+          1
+        ]
+      ]
+    },
+    "36": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": [
+        [
+          "BNC_STANDARD_HP09A_ASSASSINS_00",
+          1
+        ]
+      ]
+    },
+    "37": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ]
+    },
+    "38": {
+      "free": [
+        [
+          "QI_DAMAGE_PYLON",
+          10
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ]
+    },
+    "39": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_MARKS_STEEL",
+          100
+        ]
+      ]
+    },
+    "40": {
+      "free": [
+        [
+          "BNC_SIGIL_EVENT_HP09A_ASSASSINS_00",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "WP_AC_HP09A_ASSASSINS_00",
+          1
+        ]
+      ]
+    },
+    "41": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          5
+        ]
+      ]
+    },
+    "42": {
+      "free": [],
+      "premium": []
+    },
+    "43": {
+      "free": [
+        [
+          "EJ_HP09A_ASSASSINS_02",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ]
+    },
+    "44": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_MARKS_STEEL",
+          100
+        ]
+      ]
+    },
+    "45": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "EM_INTRO_HP09A_ASSASSINS_00",
+          1
+        ]
+      ]
+    },
+    "46": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          5
+        ]
+      ]
+    },
+    "47": {
+      "free": [],
+      "premium": []
+    },
+    "48": {
+      "free": [
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "BNC_ANIMATION_HP09A_ASSASSINS_00",
+          1
+        ]
+      ]
+    },
+    "49": {
+      "free": [],
+      "premium": []
+    },
+    "50": {
+      "free": [
+        [
+          "EM_PLAYER_HP09A_ASSASSINS_04",
+          1
+        ],
+        [
+          "TITLE_HP09A_ASSASSINS_01",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "AR_HP09A_ASSASSINS_HELM_00_ULTRA",
+          1
+        ],
+        [
+          "AR_HP09A_ASSASSINS_CHEST_00_ULTRA",
+          1
+        ],
+        [
+          "AR_HP09A_ASSASSINS_ARMS_00_ULTRA",
+          1
+        ],
+        [
+          "AR_HP09A_ASSASSINS_LEGS_00_ULTRA",
+          1
+        ]
+      ]
+    }
+  },
+  "unavailable_rewards": [
+    {
+      "rank": 5,
+      "track": "free",
+      "catalog_id": "Container_Core_Slayer_Silver",
+      "quantity": 1
+    }
+  ],
+  "source": {
+    "game": "1.6.2 layout; 1.14.7 item catalog",
+    "file": "season09a.json",
+    "sha256": "46b1c61a9ca20527cfb644132547621b662cb20365002855d87e3b7135c92ea0"
+  }
+}

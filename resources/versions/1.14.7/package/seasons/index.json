@@ -1,0 +1,366 @@
+{
+  "default": "mega",
+  "game": "1.14.7 CL647472",
+  "seasons": [
+    {
+      "key": "mega",
+      "title": "Mega Hunt Pass",
+      "kind": "mega",
+      "levels": 400,
+      "file": "mega.json",
+      "doc": "docs/mega.md",
+      "save_key": "mega",
+      "xp_per_level": 100
+    },
+    {
+      "key": "reimagined_frost18",
+      "title": "Frostfall (2018)",
+      "kind": "reimagined",
+      "levels": 50,
+      "file": "reimagined_frost18.json",
+      "doc": "docs/reimagined_frost18.md",
+      "save_key": "reimagined_frost18",
+      "xp_per_level": 100
+    },
+    {
+      "key": "reimagined_saints19",
+      "title": "Saint's Bond (2019)",
+      "kind": "reimagined",
+      "levels": 50,
+      "file": "reimagined_saints19.json",
+      "doc": "docs/reimagined_saints19.md",
+      "save_key": "reimagined_saints19",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season03_vault",
+      "title": "Overgrowth",
+      "kind": "vault",
+      "levels": 30,
+      "file": "season03_vault.json",
+      "doc": "docs/season03_vault.md",
+      "save_key": "season03_vault",
+      "xp_per_level": 100
+    },
+    {
+      "key": "reimagined_hp03",
+      "title": "Overgrowth",
+      "kind": "reimagined",
+      "levels": 50,
+      "file": "reimagined_hp03.json",
+      "doc": "docs/reimagined_hp03.md",
+      "save_key": "reimagined_hp03",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season04_vault",
+      "title": "Burndown",
+      "kind": "vault",
+      "levels": 30,
+      "file": "season04_vault.json",
+      "doc": "docs/season04_vault.md",
+      "save_key": "season04_vault",
+      "xp_per_level": 100
+    },
+    {
+      "key": "reimagined_hp04",
+      "title": "Burndown",
+      "kind": "reimagined",
+      "levels": 50,
+      "file": "reimagined_hp04.json",
+      "doc": "docs/reimagined_hp04.md",
+      "save_key": "reimagined_hp04",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season05_vault",
+      "title": "Hidden Blades",
+      "kind": "vault",
+      "levels": 30,
+      "file": "season05_vault.json",
+      "doc": "docs/season05_vault.md",
+      "save_key": "season05_vault",
+      "xp_per_level": 100
+    },
+    {
+      "key": "reimagined_hp05",
+      "title": "Hidden Blades",
+      "kind": "reimagined",
+      "levels": 50,
+      "file": "reimagined_hp05.json",
+      "doc": "docs/reimagined_hp05.md",
+      "save_key": "reimagined_hp05",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season06a_vault",
+      "title": "Fortune & Glory",
+      "kind": "vault",
+      "levels": 30,
+      "file": "season06a_vault.json",
+      "doc": "docs/season06a_vault.md",
+      "save_key": "season06a_vault",
+      "xp_per_level": 100
+    },
+    {
+      "key": "reimagined_hp06",
+      "title": "Fortune & Glory",
+      "kind": "reimagined",
+      "levels": 50,
+      "file": "reimagined_hp06.json",
+      "doc": "docs/reimagined_hp06.md",
+      "save_key": "reimagined_hp06",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season06b_vault",
+      "title": "Zephyr Strike",
+      "kind": "vault",
+      "levels": 30,
+      "file": "season06b_vault.json",
+      "doc": "docs/season06b_vault.md",
+      "save_key": "season06b_vault",
+      "xp_per_level": 100
+    },
+    {
+      "key": "reimagined_hp06b",
+      "title": "Zephyr Strike",
+      "kind": "reimagined",
+      "levels": 50,
+      "file": "reimagined_hp06b.json",
+      "doc": "docs/reimagined_hp06b.md",
+      "save_key": "reimagined_hp06b",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season07a_vault",
+      "title": "Way of the Fist",
+      "kind": "vault",
+      "levels": 30,
+      "file": "season07a_vault.json",
+      "doc": "docs/season07a_vault.md",
+      "save_key": "season07a_vault",
+      "xp_per_level": 100
+    },
+    {
+      "key": "reimagined_hp07a",
+      "title": "Way of the Fist",
+      "kind": "reimagined",
+      "levels": 50,
+      "file": "reimagined_hp07a.json",
+      "doc": "docs/reimagined_hp07a.md",
+      "save_key": "reimagined_hp07a",
+      "xp_per_level": 100
+    },
+    {
+      "key": "reimagined_hp07b",
+      "title": "Haunted Shadows",
+      "kind": "reimagined",
+      "levels": 50,
+      "file": "reimagined_hp07b.json",
+      "doc": "docs/reimagined_hp07b.md",
+      "save_key": "reimagined_hp07b",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season08a_vault",
+      "title": "Myth & Legend",
+      "kind": "vault",
+      "levels": 30,
+      "file": "season08a_vault.json",
+      "doc": "docs/season08a_vault.md",
+      "save_key": "season08a_vault",
+      "xp_per_level": 100
+    },
+    {
+      "key": "reimagined_hp08a",
+      "title": "Myth & Legend",
+      "kind": "reimagined",
+      "levels": 50,
+      "file": "reimagined_hp08a.json",
+      "doc": "docs/reimagined_hp08a.md",
+      "save_key": "reimagined_hp08a",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season08b_vault",
+      "title": "Aetherpunk",
+      "kind": "vault",
+      "levels": 30,
+      "file": "season08b_vault.json",
+      "doc": "docs/season08b_vault.md",
+      "save_key": "season08b_vault",
+      "xp_per_level": 100
+    },
+    {
+      "key": "reimagined_hp08b",
+      "title": "Aetherpunk",
+      "kind": "reimagined",
+      "levels": 50,
+      "file": "reimagined_hp08b.json",
+      "doc": "docs/reimagined_hp08b.md",
+      "save_key": "reimagined_hp08b",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season09a",
+      "title": "Searing Talons",
+      "kind": "original",
+      "levels": 50,
+      "file": "season09a.json",
+      "doc": "docs/season09a.md",
+      "save_key": "season09a",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season09b",
+      "title": "Rogue Elements",
+      "kind": "original",
+      "levels": 50,
+      "file": "season09b.json",
+      "doc": "docs/season09b.md",
+      "save_key": "season09b",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season10a",
+      "title": "Relics & Ruin",
+      "kind": "original",
+      "levels": 50,
+      "file": "season10a.json",
+      "doc": "docs/season10a.md",
+      "save_key": "season10a",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season10b",
+      "title": "Clear Skies",
+      "kind": "original",
+      "levels": 50,
+      "file": "season10b.json",
+      "doc": "docs/season10b.md",
+      "save_key": "season10b",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season10c",
+      "title": "Farslayer's Fall",
+      "kind": "original",
+      "levels": 25,
+      "file": "season10c.json",
+      "doc": "docs/season10c.md",
+      "save_key": "season10c",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season11a",
+      "title": "Strange Horizons",
+      "kind": "original",
+      "levels": 50,
+      "file": "season11a.json",
+      "doc": "docs/season11a.md",
+      "save_key": "season11a",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season11b",
+      "title": "Alchemy of War",
+      "kind": "original",
+      "levels": 50,
+      "file": "season11b.json",
+      "doc": "docs/season11b.md",
+      "save_key": "season11b",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season12a",
+      "title": "Cold Front",
+      "kind": "original",
+      "levels": 50,
+      "file": "season12a.json",
+      "doc": "docs/season12a.md",
+      "save_key": "season12a",
+      "xp_per_level": 100
+    },
+    {
+      "key": "eventpass_frostfall_nikola",
+      "title": "The Legend of Silver Nikola",
+      "kind": "event",
+      "levels": 10,
+      "file": "eventpass_frostfall_nikola.json",
+      "doc": "docs/eventpass_frostfall_nikola.md",
+      "save_key": "eventpass_frostfall_nikola",
+      "xp_per_level": 100
+    },
+    {
+      "key": "eventpass_frostfall_holiday",
+      "title": "Frostfall in Ramsgate",
+      "kind": "event",
+      "levels": 15,
+      "file": "eventpass_frostfall_holiday.json",
+      "doc": "docs/eventpass_frostfall_holiday.md",
+      "save_key": "eventpass_frostfall_holiday",
+      "xp_per_level": 100
+    },
+    {
+      "key": "eventpass_frostfall_ostian",
+      "title": "Ostian Winter",
+      "kind": "event",
+      "levels": 10,
+      "file": "eventpass_frostfall_ostian.json",
+      "doc": "docs/eventpass_frostfall_ostian.md",
+      "save_key": "eventpass_frostfall_ostian",
+      "xp_per_level": 100
+    },
+    {
+      "key": "eventpass_farslayer_arid",
+      "title": "The Burning Heights",
+      "kind": "event",
+      "levels": 30,
+      "file": "eventpass_farslayer_arid.json",
+      "doc": "docs/eventpass_farslayer_arid.md",
+      "save_key": "eventpass_farslayer_arid",
+      "xp_per_level": 100
+    },
+    {
+      "key": "eventpass_ragnar",
+      "title": "Ragnar's Folly",
+      "kind": "event",
+      "levels": 10,
+      "file": "eventpass_ragnar.json",
+      "doc": "docs/eventpass_ragnar.md",
+      "save_key": "eventpass_ragnar",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season12b",
+      "title": "Realm of Ice",
+      "kind": "original",
+      "levels": 50,
+      "file": "season12b.json",
+      "doc": "docs/season12b.md",
+      "save_key": "season12b",
+      "xp_per_level": 100
+    },
+    {
+      "key": "eventpass_saintsbond2021",
+      "title": "Bonds of Honour",
+      "kind": "event",
+      "levels": 10,
+      "file": "eventpass_saintsbond2021.json",
+      "doc": "docs/eventpass_saintsbond2021.md",
+      "save_key": "eventpass_saintsbond2021",
+      "xp_per_level": 100
+    },
+    {
+      "key": "season13a_og",
+      "title": "Time Strike",
+      "kind": "original",
+      "levels": 50,
+      "file": "season13a_og.json",
+      "doc": "docs/season13a_og.md",
+      "save_key": "season13a_og",
+      "xp_per_level": 100
+    }
+  ]
+}

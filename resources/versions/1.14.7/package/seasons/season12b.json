@@ -1,0 +1,1056 @@
+{
+  "revision": "season1147-season12b-v1",
+  "pass_id": "season27",
+  "key": "season12b",
+  "title": "Realm of Ice",
+  "kind": "original",
+  "levels": 50,
+  "xp_per_level": 100,
+  "start_date": "2020-01-01T00:00:00+00:00",
+  "end_date": "2099-01-01T00:00:00+00:00",
+  "items": {
+    "CURRENCY_TOKEN_EXCHANGE_SPEED_UP": {
+      "kind": "stack",
+      "name": "Ace Chips",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "AR_HP12B_MAGICAL_HELM_00_ULTRA": {
+      "kind": "stack",
+      "name": "AR_HP12B_MAGICAL_HELM_00_ULTRA",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP12B_MAGICAL_CHEST_00_ULTRA": {
+      "kind": "stack",
+      "name": "AR_HP12B_MAGICAL_CHEST_00_ULTRA",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP12B_MAGICAL_ARMS_00_ULTRA": {
+      "kind": "stack",
+      "name": "AR_HP12B_MAGICAL_ARMS_00_ULTRA",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP12B_MAGICAL_LEGS_00_ULTRA": {
+      "kind": "stack",
+      "name": "AR_HP12B_MAGICAL_LEGS_00_ULTRA",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_PJM_PRESTIGE_EMPTY": {
+      "kind": "stack",
+      "name": "CURRENCY_PJM_PRESTIGE_EMPTY",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "TOKEN_BOUNTY_DRAFT": {
+      "kind": "stack",
+      "name": "Bounty Token",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_PLATINUM_UNIV": {
+      "kind": "stack",
+      "name": "Platinum",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "WP_EB_HP12B_MAGICAL_00": {
+      "kind": "stack",
+      "name": "WP_EB_HP12B_MAGICAL_00",
+      "source": "Gear_Catalogs/weapon_eblade_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP12B_MAGICAL_02": {
+      "kind": "stack",
+      "name": "EM_PLAYER_HP12B_MAGICAL_02",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_NOTES": {
+      "kind": "stack",
+      "name": "Rams",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_PJM_WEAPON": {
+      "kind": "stack",
+      "name": "CURRENCY_PJM_WEAPON",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "LT_HP12B_MAGICAL_00": {
+      "kind": "stack",
+      "name": "LT_HP12B_MAGICAL_00",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EJ_HP12B_MAGICAL_01": {
+      "kind": "stack",
+      "name": "EJ_HP12B_MAGICAL_01",
+      "source": "emojis_catalog.uasset",
+      "cosmetic": true
+    },
+    "TOKEN_DAILY_PATROL_BONUS_PURCHASED": {
+      "kind": "stack",
+      "name": "Patrol Key",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "DYE_HP12B_MAGICAL_00_DURABLE": {
+      "kind": "stack",
+      "name": "DYE_HP12B_MAGICAL_00_DURABLE",
+      "source": "dyes_item_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_FABRIC_EVENT_HP12B_MAGICAL_00": {
+      "kind": "stack",
+      "name": "BNC_FABRIC_EVENT_HP12B_MAGICAL_00",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_PJM_AIRSHIP": {
+      "kind": "stack",
+      "name": "CURRENCY_PJM_AIRSHIP",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_MARKS_STEEL": {
+      "kind": "stack",
+      "name": "Steel Marks",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_SIGIL_HP12B_MAGICAL_00": {
+      "kind": "stack",
+      "name": "BNC_SIGIL_HP12B_MAGICAL_00",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_IH_HP12B_MAGICAL_00": {
+      "kind": "stack",
+      "name": "WP_IH_HP12B_MAGICAL_00",
+      "source": "Gear_Catalogs/weapon_ihammer_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_MS_HP12B_MAGICAL_00": {
+      "kind": "stack",
+      "name": "WP_MS_HP12B_MAGICAL_00",
+      "source": "Gear_Catalogs/weapon_mspear_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP12B_MAGICAL_CHEST_01": {
+      "kind": "stack",
+      "name": "AR_HP12B_MAGICAL_CHEST_01",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_AC_HP12B_MAGICAL_00": {
+      "kind": "stack",
+      "name": "WP_AC_HP12B_MAGICAL_00",
+      "source": "Gear_Catalogs/weapon_ac_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP12B_MAGICAL_00": {
+      "kind": "stack",
+      "name": "QI_FLARE_HP12B_MAGICAL_00",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_CB_HP12B_MAGICAL_00": {
+      "kind": "stack",
+      "name": "WP_CB_HP12B_MAGICAL_00",
+      "source": "Gear_Catalogs/weapon_cblades_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP12B_MAGICAL_01": {
+      "kind": "stack",
+      "name": "EM_PLAYER_HP12B_MAGICAL_01",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "EJ_HP12B_MAGICAL_00": {
+      "kind": "stack",
+      "name": "EJ_HP12B_MAGICAL_00",
+      "source": "emojis_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_GA_HP12B_MAGICAL_00": {
+      "kind": "stack",
+      "name": "WP_GA_HP12B_MAGICAL_00",
+      "source": "Gear_Catalogs/weapon_gaxe_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_ANIMATION_HP12B_MAGICAL_00": {
+      "kind": "stack",
+      "name": "BNC_ANIMATION_HP12B_MAGICAL_00",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_DP_HP12B_MAGICAL_00": {
+      "kind": "stack",
+      "name": "WP_DP_HP12B_MAGICAL_00",
+      "source": "Gear_Catalogs/weapon_dp_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP12B_MAGICAL_00": {
+      "kind": "stack",
+      "name": "EM_PLAYER_HP12B_MAGICAL_00",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_INTRO_HP12B_MAGICAL_00": {
+      "kind": "stack",
+      "name": "Impact Winter",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_HP12B_MAGICAL_00": {
+      "kind": "stack",
+      "name": "TITLE_HP12B_MAGICAL_00",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP12B_MAGICAL_HELM_00": {
+      "kind": "stack",
+      "name": "AR_HP12B_MAGICAL_HELM_00",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP12B_MAGICAL_LEGS_00": {
+      "kind": "stack",
+      "name": "AR_HP12B_MAGICAL_LEGS_00",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP12B_MAGICAL_ARMS_00": {
+      "kind": "stack",
+      "name": "AR_HP12B_MAGICAL_ARMS_00",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP12B_MAGICAL_CHEST_00": {
+      "kind": "stack",
+      "name": "AR_HP12B_MAGICAL_CHEST_00",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    }
+  },
+  "bundles": {},
+  "bundle_names": {},
+  "rewards": {
+    "1": [
+      "CURRENCY_TOKEN_EXCHANGE_SPEED_UP",
+      "AR_HP12B_MAGICAL_HELM_00_ULTRA",
+      "AR_HP12B_MAGICAL_CHEST_00_ULTRA",
+      "AR_HP12B_MAGICAL_ARMS_00_ULTRA",
+      "AR_HP12B_MAGICAL_LEGS_00_ULTRA"
+    ],
+    "2": [
+      "CURRENCY_PJM_PRESTIGE_EMPTY"
+    ],
+    "3": [
+      "TOKEN_BOUNTY_DRAFT",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "4": [
+      "WP_EB_HP12B_MAGICAL_00"
+    ],
+    "5": [
+      "CURRENCY_PLATINUM_UNIV",
+      "EM_PLAYER_HP12B_MAGICAL_02"
+    ],
+    "6": [
+      "CURRENCY_NOTES"
+    ],
+    "7": [
+      "TOKEN_BOUNTY_DRAFT"
+    ],
+    "8": [
+      "CURRENCY_PJM_WEAPON",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "9": [
+      "LT_HP12B_MAGICAL_00"
+    ],
+    "10": [
+      "EJ_HP12B_MAGICAL_01",
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "11": [
+      "CURRENCY_NOTES",
+      "DYE_HP12B_MAGICAL_00_DURABLE"
+    ],
+    "12": [
+      "BNC_FABRIC_EVENT_HP12B_MAGICAL_00"
+    ],
+    "13": [
+      "CURRENCY_PJM_AIRSHIP",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "14": [
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "15": [
+      "BNC_SIGIL_HP12B_MAGICAL_00",
+      "WP_IH_HP12B_MAGICAL_00"
+    ],
+    "16": [
+      "CURRENCY_NOTES",
+      "TOKEN_BOUNTY_DRAFT"
+    ],
+    "17": [
+      "CURRENCY_PJM_WEAPON"
+    ],
+    "18": [
+      "CURRENCY_PJM_WEAPON",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "19": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "20": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+      "WP_MS_HP12B_MAGICAL_00"
+    ],
+    "21": [
+      "CURRENCY_NOTES",
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "22": [
+      "AR_HP12B_MAGICAL_CHEST_01"
+    ],
+    "23": [
+      "CURRENCY_PJM_AIRSHIP",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "24": [
+      "CURRENCY_TOKEN_EXCHANGE_SPEED_UP"
+    ],
+    "25": [
+      "CURRENCY_PJM_PRESTIGE_EMPTY",
+      "WP_AC_HP12B_MAGICAL_00"
+    ],
+    "26": [
+      "CURRENCY_NOTES",
+      "CURRENCY_PJM_AIRSHIP"
+    ],
+    "27": [],
+    "28": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "29": [
+      "TOKEN_BOUNTY_DRAFT"
+    ],
+    "30": [
+      "QI_FLARE_HP12B_MAGICAL_00",
+      "WP_CB_HP12B_MAGICAL_00"
+    ],
+    "31": [
+      "CURRENCY_NOTES",
+      "EM_PLAYER_HP12B_MAGICAL_01"
+    ],
+    "32": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "33": [
+      "EJ_HP12B_MAGICAL_00",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "34": [
+      "CURRENCY_PJM_WEAPON"
+    ],
+    "35": [
+      "CURRENCY_PLATINUM_UNIV",
+      "WP_GA_HP12B_MAGICAL_00"
+    ],
+    "36": [
+      "CURRENCY_NOTES",
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "37": [
+      "BNC_ANIMATION_HP12B_MAGICAL_00"
+    ],
+    "38": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "39": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "40": [
+      "WP_DP_HP12B_MAGICAL_00"
+    ],
+    "41": [
+      "CURRENCY_NOTES",
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "42": [
+      "TOKEN_BOUNTY_DRAFT"
+    ],
+    "43": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "44": [
+      "EM_PLAYER_HP12B_MAGICAL_00",
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "45": [
+      "CURRENCY_PLATINUM_UNIV",
+      "EM_INTRO_HP12B_MAGICAL_00"
+    ],
+    "46": [
+      "CURRENCY_NOTES",
+      "CURRENCY_PJM_AIRSHIP"
+    ],
+    "47": [
+      "CURRENCY_PLATINUM_UNIV",
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "48": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "49": [
+      "CURRENCY_PJM_PRESTIGE_EMPTY"
+    ],
+    "50": [
+      "TITLE_HP12B_MAGICAL_00",
+      "AR_HP12B_MAGICAL_HELM_00",
+      "AR_HP12B_MAGICAL_LEGS_00",
+      "AR_HP12B_MAGICAL_ARMS_00",
+      "AR_HP12B_MAGICAL_CHEST_00"
+    ]
+  },
+  "grants": {
+    "1": {
+      "free": [
+        [
+          "CURRENCY_TOKEN_EXCHANGE_SPEED_UP",
+          25
+        ]
+      ],
+      "premium": [
+        [
+          "AR_HP12B_MAGICAL_HELM_00_ULTRA",
+          1
+        ],
+        [
+          "AR_HP12B_MAGICAL_CHEST_00_ULTRA",
+          1
+        ],
+        [
+          "AR_HP12B_MAGICAL_ARMS_00_ULTRA",
+          1
+        ],
+        [
+          "AR_HP12B_MAGICAL_LEGS_00_ULTRA",
+          1
+        ]
+      ]
+    },
+    "2": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_PRESTIGE_EMPTY",
+          50
+        ]
+      ]
+    },
+    "3": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          3
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          75
+        ]
+      ]
+    },
+    "4": {
+      "free": [],
+      "premium": [
+        [
+          "WP_EB_HP12B_MAGICAL_00",
+          1
+        ]
+      ]
+    },
+    "5": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "EM_PLAYER_HP12B_MAGICAL_02",
+          1
+        ]
+      ]
+    },
+    "6": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          500
+        ]
+      ],
+      "premium": []
+    },
+    "7": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          3
+        ]
+      ]
+    },
+    "8": {
+      "free": [
+        [
+          "CURRENCY_PJM_WEAPON",
+          75
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          75
+        ]
+      ]
+    },
+    "9": {
+      "free": [],
+      "premium": [
+        [
+          "LT_HP12B_MAGICAL_00",
+          1
+        ]
+      ]
+    },
+    "10": {
+      "free": [
+        [
+          "EJ_HP12B_MAGICAL_01",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          3
+        ]
+      ]
+    },
+    "11": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          500
+        ]
+      ],
+      "premium": [
+        [
+          "DYE_HP12B_MAGICAL_00_DURABLE",
+          1
+        ]
+      ]
+    },
+    "12": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_FABRIC_EVENT_HP12B_MAGICAL_00",
+          1
+        ]
+      ]
+    },
+    "13": {
+      "free": [
+        [
+          "CURRENCY_PJM_AIRSHIP",
+          75
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          75
+        ]
+      ]
+    },
+    "14": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ]
+      ]
+    },
+    "15": {
+      "free": [
+        [
+          "BNC_SIGIL_HP12B_MAGICAL_00",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "WP_IH_HP12B_MAGICAL_00",
+          1
+        ]
+      ]
+    },
+    "16": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          500
+        ]
+      ],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          3
+        ]
+      ]
+    },
+    "17": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_WEAPON",
+          75
+        ]
+      ]
+    },
+    "18": {
+      "free": [
+        [
+          "CURRENCY_PJM_WEAPON",
+          75
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          75
+        ]
+      ]
+    },
+    "19": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          3
+        ]
+      ]
+    },
+    "20": {
+      "free": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          3
+        ]
+      ],
+      "premium": [
+        [
+          "WP_MS_HP12B_MAGICAL_00",
+          1
+        ]
+      ]
+    },
+    "21": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          500
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ]
+      ]
+    },
+    "22": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP12B_MAGICAL_CHEST_01",
+          1
+        ]
+      ]
+    },
+    "23": {
+      "free": [
+        [
+          "CURRENCY_PJM_AIRSHIP",
+          75
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          75
+        ]
+      ]
+    },
+    "24": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_TOKEN_EXCHANGE_SPEED_UP",
+          50
+        ]
+      ]
+    },
+    "25": {
+      "free": [
+        [
+          "CURRENCY_PJM_PRESTIGE_EMPTY",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "WP_AC_HP12B_MAGICAL_00",
+          1
+        ]
+      ]
+    },
+    "26": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          1000
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PJM_AIRSHIP",
+          75
+        ]
+      ]
+    },
+    "27": {
+      "free": [],
+      "premium": []
+    },
+    "28": {
+      "free": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          3
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          75
+        ]
+      ]
+    },
+    "29": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          3
+        ]
+      ]
+    },
+    "30": {
+      "free": [
+        [
+          "QI_FLARE_HP12B_MAGICAL_00",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "WP_CB_HP12B_MAGICAL_00",
+          1
+        ]
+      ]
+    },
+    "31": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          1000
+        ]
+      ],
+      "premium": [
+        [
+          "EM_PLAYER_HP12B_MAGICAL_01",
+          1
+        ]
+      ]
+    },
+    "32": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          3
+        ]
+      ]
+    },
+    "33": {
+      "free": [
+        [
+          "EJ_HP12B_MAGICAL_00",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          75
+        ]
+      ]
+    },
+    "34": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_WEAPON",
+          75
+        ]
+      ]
+    },
+    "35": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "WP_GA_HP12B_MAGICAL_00",
+          1
+        ]
+      ]
+    },
+    "36": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          1000
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ]
+      ]
+    },
+    "37": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_ANIMATION_HP12B_MAGICAL_00",
+          1
+        ]
+      ]
+    },
+    "38": {
+      "free": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          3
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          75
+        ]
+      ]
+    },
+    "39": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          3
+        ]
+      ]
+    },
+    "40": {
+      "free": [],
+      "premium": [
+        [
+          "WP_DP_HP12B_MAGICAL_00",
+          1
+        ]
+      ]
+    },
+    "41": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          1000
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ]
+      ]
+    },
+    "42": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          5
+        ]
+      ]
+    },
+    "43": {
+      "free": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          3
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          75
+        ]
+      ]
+    },
+    "44": {
+      "free": [
+        [
+          "EM_PLAYER_HP12B_MAGICAL_00",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          3
+        ]
+      ]
+    },
+    "45": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "EM_INTRO_HP12B_MAGICAL_00",
+          1
+        ]
+      ]
+    },
+    "46": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          1000
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PJM_AIRSHIP",
+          75
+        ]
+      ]
+    },
+    "47": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          3
+        ]
+      ]
+    },
+    "48": {
+      "free": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          3
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          75
+        ]
+      ]
+    },
+    "49": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_PRESTIGE_EMPTY",
+          50
+        ]
+      ]
+    },
+    "50": {
+      "free": [
+        [
+          "TITLE_HP12B_MAGICAL_00",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "AR_HP12B_MAGICAL_HELM_00",
+          1
+        ],
+        [
+          "AR_HP12B_MAGICAL_LEGS_00",
+          1
+        ],
+        [
+          "AR_HP12B_MAGICAL_ARMS_00",
+          1
+        ],
+        [
+          "AR_HP12B_MAGICAL_CHEST_00",
+          1
+        ]
+      ]
+    }
+  },
+  "unavailable_rewards": [],
+  "source": {
+    "game": "1.6.2 layout; 1.14.7 item catalog",
+    "file": "season12b.json",
+    "sha256": "b46689392893768619ae14d7bcec9db67f89e22af1e8030cc6a3131770cf2e64"
+  }
+}

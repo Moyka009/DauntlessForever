@@ -1,0 +1,517 @@
+{
+  "revision": "season1147-season08b_vault-v1",
+  "pass_id": "season27",
+  "key": "season08b_vault",
+  "title": "Aetherpunk",
+  "kind": "vault",
+  "levels": 30,
+  "xp_per_level": 100,
+  "start_date": "2020-01-01T00:00:00+00:00",
+  "end_date": "2099-01-01T00:00:00+00:00",
+  "items": {
+    "WP_EB_HP08B_PUNK_00": {
+      "kind": "stack",
+      "name": "Sawbones Sally",
+      "source": "Gear_Catalogs/weapon_eblade_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_NOTES": {
+      "kind": "stack",
+      "name": "Rams",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "AR_HP08B_PUNK_HELM_ULTRA": {
+      "kind": "stack",
+      "name": "Cross-Eyed Metavizor",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "TOKEN_DAILY_PATROL_BONUS_PURCHASED": {
+      "kind": "stack",
+      "name": "Patrol Key",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "LT_HP08B_PUNK_00": {
+      "kind": "stack",
+      "name": "Pokey Jones",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "TOKEN_BOUNTY_DRAFT_PREMIUM": {
+      "kind": "stack",
+      "name": "TOKEN_BOUNTY_DRAFT_PREMIUM",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_FABRIC_EVENT_HP08B_02": {
+      "kind": "stack",
+      "name": "Shredded Future",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_PJM_PRESTIGE_EMPTY": {
+      "kind": "stack",
+      "name": "CURRENCY_PJM_PRESTIGE_EMPTY",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "AR_HP08B_PUNK_CHEST_ULTRA": {
+      "kind": "stack",
+      "name": "Slaypunk X-Thousand",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_CB_HP08B_PUNK_00": {
+      "kind": "stack",
+      "name": "Bitter and Biter",
+      "source": "Gear_Catalogs/weapon_cblades_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_PJM_WEAPON": {
+      "kind": "stack",
+      "name": "CURRENCY_PJM_WEAPON",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "AR_HP08B_PUNK_LEGS_ULTRA": {
+      "kind": "stack",
+      "name": "Hypersonic Radpants",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_IH_HP08B_PUNK_00": {
+      "kind": "stack",
+      "name": "Captain Crushly",
+      "source": "Gear_Catalogs/weapon_ihammer_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_ANIMATION_HP08B_PUNK_00": {
+      "kind": "stack",
+      "name": "Fractal Mindlock",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_DP_HP08B_PUNK_00": {
+      "kind": "stack",
+      "name": "Stark and Raving",
+      "source": "Gear_Catalogs/weapon_dp_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_INTRO_HP08B_TRASHKICK_00": {
+      "kind": "stack",
+      "name": "Kick the Can",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_GA_HP08B_PUNK_00": {
+      "kind": "stack",
+      "name": "Rippin' Rude",
+      "source": "Gear_Catalogs/weapon_gaxe_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_AC_HP08B_PUNK_00": {
+      "kind": "stack",
+      "name": "Smiley and Smacker",
+      "source": "Gear_Catalogs/weapon_ac_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_STANDARD_HP08B_PUNK_00": {
+      "kind": "stack",
+      "name": "Spine of Anarchy",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP08B_PUNK_ARMS_ULTRA": {
+      "kind": "stack",
+      "name": "Bioplasmic Cybersleeves",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_MS_HP08B_PUNK_00": {
+      "kind": "stack",
+      "name": "Slashbang Spike",
+      "source": "Gear_Catalogs/weapon_mspear_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP08B_GLOWSTICK_00": {
+      "kind": "stack",
+      "name": "Swirling Streamers",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    }
+  },
+  "bundles": {},
+  "bundle_names": {},
+  "rewards": {
+    "1": [
+      "WP_EB_HP08B_PUNK_00"
+    ],
+    "2": [
+      "CURRENCY_NOTES"
+    ],
+    "3": [
+      "AR_HP08B_PUNK_HELM_ULTRA"
+    ],
+    "4": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "5": [
+      "LT_HP08B_PUNK_00"
+    ],
+    "6": [
+      "TOKEN_BOUNTY_DRAFT_PREMIUM"
+    ],
+    "7": [
+      "BNC_FABRIC_EVENT_HP08B_02"
+    ],
+    "8": [
+      "CURRENCY_PJM_PRESTIGE_EMPTY"
+    ],
+    "9": [
+      "AR_HP08B_PUNK_CHEST_ULTRA"
+    ],
+    "10": [
+      "WP_CB_HP08B_PUNK_00"
+    ],
+    "11": [
+      "CURRENCY_PJM_WEAPON"
+    ],
+    "12": [
+      "CURRENCY_NOTES"
+    ],
+    "13": [
+      "AR_HP08B_PUNK_LEGS_ULTRA"
+    ],
+    "14": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "15": [
+      "WP_IH_HP08B_PUNK_00"
+    ],
+    "16": [
+      "BNC_ANIMATION_HP08B_PUNK_00"
+    ],
+    "17": [
+      "WP_DP_HP08B_PUNK_00"
+    ],
+    "18": [
+      "EM_INTRO_HP08B_TRASHKICK_00"
+    ],
+    "19": [
+      "CURRENCY_NOTES"
+    ],
+    "20": [
+      "WP_GA_HP08B_PUNK_00"
+    ],
+    "21": [
+      "CURRENCY_PJM_WEAPON"
+    ],
+    "22": [
+      "WP_AC_HP08B_PUNK_00"
+    ],
+    "23": [
+      "BNC_STANDARD_HP08B_PUNK_00"
+    ],
+    "24": [
+      "CURRENCY_PJM_PRESTIGE_EMPTY"
+    ],
+    "25": [
+      "AR_HP08B_PUNK_ARMS_ULTRA"
+    ],
+    "26": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "27": [
+      "WP_MS_HP08B_PUNK_00"
+    ],
+    "28": [
+      "TOKEN_BOUNTY_DRAFT_PREMIUM"
+    ],
+    "29": [
+      "CURRENCY_PJM_WEAPON"
+    ],
+    "30": [
+      "EM_PLAYER_HP08B_GLOWSTICK_00"
+    ]
+  },
+  "grants": {
+    "1": {
+      "free": [],
+      "premium": [
+        [
+          "WP_EB_HP08B_PUNK_00",
+          1
+        ]
+      ]
+    },
+    "2": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          10000
+        ]
+      ]
+    },
+    "3": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP08B_PUNK_HELM_ULTRA",
+          1
+        ]
+      ]
+    },
+    "4": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          1
+        ]
+      ]
+    },
+    "5": {
+      "free": [],
+      "premium": [
+        [
+          "LT_HP08B_PUNK_00",
+          1
+        ]
+      ]
+    },
+    "6": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT_PREMIUM",
+          5
+        ]
+      ]
+    },
+    "7": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_FABRIC_EVENT_HP08B_02",
+          1
+        ]
+      ]
+    },
+    "8": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_PRESTIGE_EMPTY",
+          50
+        ]
+      ]
+    },
+    "9": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP08B_PUNK_CHEST_ULTRA",
+          1
+        ]
+      ]
+    },
+    "10": {
+      "free": [],
+      "premium": [
+        [
+          "WP_CB_HP08B_PUNK_00",
+          1
+        ]
+      ]
+    },
+    "11": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_WEAPON",
+          200
+        ]
+      ]
+    },
+    "12": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          10000
+        ]
+      ]
+    },
+    "13": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP08B_PUNK_LEGS_ULTRA",
+          1
+        ]
+      ]
+    },
+    "14": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          5
+        ]
+      ]
+    },
+    "15": {
+      "free": [],
+      "premium": [
+        [
+          "WP_IH_HP08B_PUNK_00",
+          1
+        ]
+      ]
+    },
+    "16": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_ANIMATION_HP08B_PUNK_00",
+          1
+        ]
+      ]
+    },
+    "17": {
+      "free": [],
+      "premium": [
+        [
+          "WP_DP_HP08B_PUNK_00",
+          1
+        ]
+      ]
+    },
+    "18": {
+      "free": [],
+      "premium": [
+        [
+          "EM_INTRO_HP08B_TRASHKICK_00",
+          1
+        ]
+      ]
+    },
+    "19": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          10000
+        ]
+      ]
+    },
+    "20": {
+      "free": [],
+      "premium": [
+        [
+          "WP_GA_HP08B_PUNK_00",
+          1
+        ]
+      ]
+    },
+    "21": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_WEAPON",
+          200
+        ]
+      ]
+    },
+    "22": {
+      "free": [],
+      "premium": [
+        [
+          "WP_AC_HP08B_PUNK_00",
+          1
+        ]
+      ]
+    },
+    "23": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_STANDARD_HP08B_PUNK_00",
+          1
+        ]
+      ]
+    },
+    "24": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_PRESTIGE_EMPTY",
+          50
+        ]
+      ]
+    },
+    "25": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP08B_PUNK_ARMS_ULTRA",
+          1
+        ]
+      ]
+    },
+    "26": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          1
+        ]
+      ]
+    },
+    "27": {
+      "free": [],
+      "premium": [
+        [
+          "WP_MS_HP08B_PUNK_00",
+          1
+        ]
+      ]
+    },
+    "28": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT_PREMIUM",
+          5
+        ]
+      ]
+    },
+    "29": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_WEAPON",
+          200
+        ]
+      ]
+    },
+    "30": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_HP08B_GLOWSTICK_00",
+          1
+        ]
+      ]
+    }
+  },
+  "unavailable_rewards": [],
+  "source": {
+    "game": "1.6.2 layout; 1.14.7 item catalog",
+    "file": "season08b_vault.json",
+    "sha256": "505c7d65c4aa46eba3712d997d6b6e5057f6c9e5716da9be0a722309322ae58d"
+  }
+}

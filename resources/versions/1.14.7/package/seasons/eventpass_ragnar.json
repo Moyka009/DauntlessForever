@@ -1,0 +1,175 @@
+{
+  "revision": "season1147-eventpass_ragnar-v1",
+  "pass_id": "season27",
+  "key": "eventpass_ragnar",
+  "title": "Ragnar's Folly",
+  "kind": "event",
+  "levels": 10,
+  "xp_per_level": 100,
+  "start_date": "2020-01-01T00:00:00+00:00",
+  "end_date": "2099-01-01T00:00:00+00:00",
+  "items": {
+    "CURRENCY_NOTES": {
+      "kind": "stack",
+      "name": "Rams",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "TOKEN_DAILY_PATROL_BONUS_PURCHASED": {
+      "kind": "stack",
+      "name": "Patrol Key",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "TOKEN_BOUNTY_DRAFT_PREMIUM": {
+      "kind": "stack",
+      "name": "TOKEN_BOUNTY_DRAFT_PREMIUM",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "AR_HP12A_FROSTWARDEN_CHEST_01": {
+      "kind": "stack",
+      "name": "Ragnar's Bryjind",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP12A_FROSTWARDEN_HELM_01": {
+      "kind": "stack",
+      "name": "Ragnar's Jehylm",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    }
+  },
+  "bundles": {},
+  "bundle_names": {},
+  "rewards": {
+    "1": [
+      "CURRENCY_NOTES"
+    ],
+    "2": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "3": [
+      "CURRENCY_NOTES"
+    ],
+    "4": [
+      "TOKEN_BOUNTY_DRAFT_PREMIUM"
+    ],
+    "5": [
+      "AR_HP12A_FROSTWARDEN_CHEST_01"
+    ],
+    "6": [
+      "CURRENCY_NOTES"
+    ],
+    "7": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "8": [
+      "CURRENCY_NOTES"
+    ],
+    "9": [
+      "TOKEN_BOUNTY_DRAFT_PREMIUM"
+    ],
+    "10": [
+      "AR_HP12A_FROSTWARDEN_HELM_01"
+    ]
+  },
+  "grants": {
+    "1": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          5000
+        ]
+      ]
+    },
+    "2": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          10
+        ]
+      ]
+    },
+    "3": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          10000
+        ]
+      ]
+    },
+    "4": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT_PREMIUM",
+          10
+        ]
+      ]
+    },
+    "5": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP12A_FROSTWARDEN_CHEST_01",
+          1
+        ]
+      ]
+    },
+    "6": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          15000
+        ]
+      ]
+    },
+    "7": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          10
+        ]
+      ]
+    },
+    "8": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          20000
+        ]
+      ]
+    },
+    "9": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT_PREMIUM",
+          10
+        ]
+      ]
+    },
+    "10": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP12A_FROSTWARDEN_HELM_01",
+          1
+        ]
+      ]
+    }
+  },
+  "unavailable_rewards": [],
+  "source": {
+    "game": "1.6.2 layout; 1.14.7 item catalog",
+    "file": "eventpass_ragnar.json",
+    "sha256": "2472a9d5f23ae460028751fc0b746a12e75d290bd8d9cd2162d39a9171ba4e27"
+  }
+}

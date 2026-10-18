@@ -1,0 +1,1115 @@
+{
+  "revision": "season1147-season10b-v1",
+  "pass_id": "season27",
+  "key": "season10b",
+  "title": "Clear Skies",
+  "kind": "original",
+  "levels": 50,
+  "xp_per_level": 100,
+  "start_date": "2020-01-01T00:00:00+00:00",
+  "end_date": "2099-01-01T00:00:00+00:00",
+  "items": {
+    "TITLE_HP10B_RAIDERS_00": {
+      "kind": "stack",
+      "name": "Freelancer",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "EJ_HP10B_RAIDERS_02": {
+      "kind": "stack",
+      "name": "Anticipation Pup",
+      "source": "emojis_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP10B_RAIDERS_HELM_00": {
+      "kind": "stack",
+      "name": "Survival Goggles",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP10B_RAIDERS_LEGS_00": {
+      "kind": "stack",
+      "name": "Delving Denims",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP10B_RAIDERS_ARMS_00": {
+      "kind": "stack",
+      "name": "Climbing Grips",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP10B_RAIDERS_CHEST_00": {
+      "kind": "stack",
+      "name": "Expedition Jacket",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_PRESTIGE": {
+      "kind": "stack",
+      "name": "Vault Coins",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_TOKEN_EXCHANGE_SPEED_UP": {
+      "kind": "stack",
+      "name": "Ace Chips",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_TOKEN_TRANSMOG": {
+      "kind": "stack",
+      "name": "Transmog Stone",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "WP_EB_HP10B_RAIDERS_00": {
+      "kind": "stack",
+      "name": "Arc-Rigged Cutlass",
+      "source": "Gear_Catalogs/weapon_eblade_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP10B_RAIDERS_02": {
+      "kind": "stack",
+      "name": "Lashing Out",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "TOKEN_BOUNTY_DRAFT": {
+      "kind": "stack",
+      "name": "Bounty Token",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "TOKEN_DAILY_PATROL_BONUS_PURCHASED": {
+      "kind": "stack",
+      "name": "Patrol Key",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "QI_DAMAGE_BLOCK_POTION": {
+      "kind": "stack",
+      "name": "Bulwark Tonic",
+      "source": "quick_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_PLATINUM_UNIV": {
+      "kind": "stack",
+      "name": "Platinum",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "LT_HP10B_RAIDERS_00": {
+      "kind": "stack",
+      "name": "Trusty Whip-Flash",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "DYE_HP10B_RAIDERS_00_DURABLE": {
+      "kind": "stack",
+      "name": "DYE_HP10B_RAIDERS_00_DURABLE",
+      "source": "dyes_item_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_STAMINA_POTION_00": {
+      "kind": "stack",
+      "name": "Stamina Tonic",
+      "source": "quick_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_FABRIC_EVENT_HP10B_RAIDERS_00": {
+      "kind": "stack",
+      "name": "Precious Cargo",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "EJ_HP10B_RAIDERS_00": {
+      "kind": "stack",
+      "name": "Skepticism Ram",
+      "source": "emojis_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_CB_HP10B_RAIDERS_00": {
+      "kind": "stack",
+      "name": "Raging Trailblazers",
+      "source": "Gear_Catalogs/weapon_cblades_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_MARKS_STEEL": {
+      "kind": "stack",
+      "name": "Steel Marks",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "QI_HEALING_PYLON_BIG": {
+      "kind": "stack",
+      "name": "Lifespring Pylon",
+      "source": "quick_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "WP_IH_HP10B_RAIDERS_00": {
+      "kind": "stack",
+      "name": "Driven Pathbreaker",
+      "source": "Gear_Catalogs/weapon_ihammer_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP10B_RAIDERS_01": {
+      "kind": "stack",
+      "name": "Get Your Bearings",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_MS_HP10B_RAIDERS_00": {
+      "kind": "stack",
+      "name": "Hullcutter Glaive",
+      "source": "Gear_Catalogs/weapon_mspear_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP10B_RAIDERS_00": {
+      "kind": "stack",
+      "name": "True Lodestar",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_GA_HP10B_RAIDERS_00": {
+      "kind": "stack",
+      "name": "Chopping Maul",
+      "source": "Gear_Catalogs/weapon_gaxe_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP10B_RAIDERS_03": {
+      "kind": "stack",
+      "name": "Skip a Beat",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "EJ_HP10B_RAIDERS_01": {
+      "kind": "stack",
+      "name": "Happiness Dog",
+      "source": "emojis_catalog.uasset",
+      "cosmetic": true
+    },
+    "LT_HP10B_RAIDERS_01": {
+      "kind": "stack",
+      "name": "Universal Glyphbreaker",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_DP_HP10B_RAIDERS_00": {
+      "kind": "stack",
+      "name": "Old-Fashioned Blasters",
+      "source": "Gear_Catalogs/weapon_dp_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_STANDARD_HP10B_RAIDERS_00": {
+      "kind": "stack",
+      "name": "Raider's Flagstaff",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_DAMAGE_PYLON": {
+      "kind": "stack",
+      "name": "Inspiring Pylon",
+      "source": "quick_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_SIGIL_HP10B_RAIDERS_00": {
+      "kind": "stack",
+      "name": "True Lodestar",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_AC_HP10B_RAIDERS_00": {
+      "kind": "stack",
+      "name": "Pneumatic Fisticuffs",
+      "source": "Gear_Catalogs/weapon_ac_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP10B_RAIDERS_00": {
+      "kind": "stack",
+      "name": "Dance-Crazed",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_INTRO_HP10B_RAIDERS_00": {
+      "kind": "stack",
+      "name": "The Brave & the Boulder",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "TOKEN_UNLOCK_EXOTIC_CROWBEAR_EBLADE": {
+      "kind": "stack",
+      "name": "Blueprint: The Hunger",
+      "source": "Token_Catalogs/tokens_unlock_exotics_catalog.uasset",
+      "cosmetic": false
+    },
+    "WP_EB_CROWBEAR_EXOTIC": {
+      "kind": "instance",
+      "name": "The Hunger",
+      "source": "Gear_Catalogs/weapon_eblade_gameplay_catalog.uasset",
+      "cosmetic": false
+    },
+    "TITLE_HP10B_RAIDERS_01": {
+      "kind": "stack",
+      "name": "The Navigator",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP10B_RAIDERS_HELM_00_ULTRA": {
+      "kind": "stack",
+      "name": "Wayfinder's Trinoculars",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP10B_RAIDERS_CHEST_00_ULTRA": {
+      "kind": "stack",
+      "name": "Wayfinder's Flight Suit",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP10B_RAIDERS_ARMS_00_ULTRA": {
+      "kind": "stack",
+      "name": "Wayfinder's Flight Gloves",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP10B_RAIDERS_LEGS_00_ULTRA": {
+      "kind": "stack",
+      "name": "Wayfinder's Grav-Boots",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    }
+  },
+  "bundles": {},
+  "bundle_names": {},
+  "rewards": {
+    "1": [
+      "TITLE_HP10B_RAIDERS_00",
+      "EJ_HP10B_RAIDERS_02",
+      "AR_HP10B_RAIDERS_HELM_00",
+      "AR_HP10B_RAIDERS_LEGS_00",
+      "AR_HP10B_RAIDERS_ARMS_00",
+      "AR_HP10B_RAIDERS_CHEST_00"
+    ],
+    "2": [
+      "CURRENCY_PRESTIGE"
+    ],
+    "3": [
+      "CURRENCY_TOKEN_EXCHANGE_SPEED_UP",
+      "CURRENCY_TOKEN_TRANSMOG"
+    ],
+    "4": [
+      "WP_EB_HP10B_RAIDERS_00"
+    ],
+    "5": [
+      "EM_PLAYER_HP10B_RAIDERS_02"
+    ],
+    "6": [
+      "TOKEN_BOUNTY_DRAFT"
+    ],
+    "7": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "8": [
+      "QI_DAMAGE_BLOCK_POTION",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "9": [
+      "TOKEN_BOUNTY_DRAFT"
+    ],
+    "10": [
+      "CURRENCY_PLATINUM_UNIV",
+      "LT_HP10B_RAIDERS_00"
+    ],
+    "11": [
+      "TOKEN_BOUNTY_DRAFT",
+      "DYE_HP10B_RAIDERS_00_DURABLE"
+    ],
+    "12": [
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "13": [
+      "QI_STAMINA_POTION_00",
+      "BNC_FABRIC_EVENT_HP10B_RAIDERS_00"
+    ],
+    "14": [
+      "CURRENCY_TOKEN_TRANSMOG"
+    ],
+    "15": [
+      "EJ_HP10B_RAIDERS_00",
+      "WP_CB_HP10B_RAIDERS_00"
+    ],
+    "16": [
+      "TOKEN_BOUNTY_DRAFT"
+    ],
+    "17": [
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "18": [
+      "QI_HEALING_PYLON_BIG",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "19": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "20": [
+      "CURRENCY_TOKEN_EXCHANGE_SPEED_UP",
+      "WP_IH_HP10B_RAIDERS_00"
+    ],
+    "21": [
+      "TOKEN_BOUNTY_DRAFT",
+      "EM_PLAYER_HP10B_RAIDERS_01"
+    ],
+    "22": [
+      "CURRENCY_TOKEN_TRANSMOG"
+    ],
+    "23": [
+      "QI_STAMINA_POTION_00",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "24": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "25": [
+      "CURRENCY_PLATINUM_UNIV",
+      "WP_MS_HP10B_RAIDERS_00"
+    ],
+    "26": [
+      "TOKEN_BOUNTY_DRAFT",
+      "CURRENCY_TOKEN_TRANSMOG"
+    ],
+    "27": [
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "28": [
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "29": [],
+    "30": [
+      "QI_FLARE_HP10B_RAIDERS_00",
+      "WP_GA_HP10B_RAIDERS_00"
+    ],
+    "31": [
+      "TOKEN_BOUNTY_DRAFT",
+      "EM_PLAYER_HP10B_RAIDERS_03"
+    ],
+    "32": [
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "33": [
+      "EJ_HP10B_RAIDERS_01",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "34": [
+      "LT_HP10B_RAIDERS_01"
+    ],
+    "35": [
+      "CURRENCY_PLATINUM_UNIV",
+      "WP_DP_HP10B_RAIDERS_00"
+    ],
+    "36": [
+      "TOKEN_BOUNTY_DRAFT",
+      "BNC_STANDARD_HP10B_RAIDERS_00"
+    ],
+    "37": [
+      "CURRENCY_PRESTIGE"
+    ],
+    "38": [
+      "QI_DAMAGE_PYLON",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "39": [
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "40": [
+      "BNC_SIGIL_HP10B_RAIDERS_00",
+      "WP_AC_HP10B_RAIDERS_00"
+    ],
+    "41": [
+      "TOKEN_BOUNTY_DRAFT",
+      "TOKEN_BOUNTY_DRAFT"
+    ],
+    "42": [],
+    "43": [
+      "EM_PLAYER_HP10B_RAIDERS_00",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "44": [
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "45": [
+      "CURRENCY_PLATINUM_UNIV",
+      "EM_INTRO_HP10B_RAIDERS_00"
+    ],
+    "46": [
+      "TOKEN_BOUNTY_DRAFT",
+      "TOKEN_BOUNTY_DRAFT"
+    ],
+    "47": [],
+    "48": [
+      "CURRENCY_TOKEN_TRANSMOG",
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "49": [
+      "CURRENCY_PRESTIGE",
+      "TOKEN_UNLOCK_EXOTIC_CROWBEAR_EBLADE",
+      "WP_EB_CROWBEAR_EXOTIC"
+    ],
+    "50": [
+      "AR_HP10B_RAIDERS_HELM_00",
+      "AR_HP10B_RAIDERS_LEGS_00",
+      "AR_HP10B_RAIDERS_ARMS_00",
+      "AR_HP10B_RAIDERS_CHEST_00",
+      "TITLE_HP10B_RAIDERS_01",
+      "AR_HP10B_RAIDERS_HELM_00_ULTRA",
+      "AR_HP10B_RAIDERS_CHEST_00_ULTRA",
+      "AR_HP10B_RAIDERS_ARMS_00_ULTRA",
+      "AR_HP10B_RAIDERS_LEGS_00_ULTRA"
+    ]
+  },
+  "grants": {
+    "1": {
+      "free": [
+        [
+          "TITLE_HP10B_RAIDERS_00",
+          1
+        ],
+        [
+          "EJ_HP10B_RAIDERS_02",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "AR_HP10B_RAIDERS_HELM_00",
+          1
+        ],
+        [
+          "AR_HP10B_RAIDERS_LEGS_00",
+          1
+        ],
+        [
+          "AR_HP10B_RAIDERS_ARMS_00",
+          1
+        ],
+        [
+          "AR_HP10B_RAIDERS_CHEST_00",
+          1
+        ]
+      ]
+    },
+    "2": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PRESTIGE",
+          50
+        ]
+      ]
+    },
+    "3": {
+      "free": [
+        [
+          "CURRENCY_TOKEN_EXCHANGE_SPEED_UP",
+          25
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ]
+    },
+    "4": {
+      "free": [],
+      "premium": [
+        [
+          "WP_EB_HP10B_RAIDERS_00",
+          1
+        ]
+      ]
+    },
+    "5": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_HP10B_RAIDERS_02",
+          1
+        ]
+      ]
+    },
+    "6": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": []
+    },
+    "7": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          5
+        ]
+      ]
+    },
+    "8": {
+      "free": [
+        [
+          "QI_DAMAGE_BLOCK_POTION",
+          15
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ]
+    },
+    "9": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          5
+        ]
+      ]
+    },
+    "10": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "LT_HP10B_RAIDERS_00",
+          1
+        ]
+      ]
+    },
+    "11": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": [
+        [
+          "DYE_HP10B_RAIDERS_00_DURABLE",
+          1
+        ]
+      ]
+    },
+    "12": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ]
+    },
+    "13": {
+      "free": [
+        [
+          "QI_STAMINA_POTION_00",
+          25
+        ]
+      ],
+      "premium": [
+        [
+          "BNC_FABRIC_EVENT_HP10B_RAIDERS_00",
+          1
+        ]
+      ]
+    },
+    "14": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ]
+    },
+    "15": {
+      "free": [
+        [
+          "EJ_HP10B_RAIDERS_00",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "WP_CB_HP10B_RAIDERS_00",
+          1
+        ]
+      ]
+    },
+    "16": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": []
+    },
+    "17": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_MARKS_STEEL",
+          100
+        ]
+      ]
+    },
+    "18": {
+      "free": [
+        [
+          "QI_HEALING_PYLON_BIG",
+          10
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ]
+    },
+    "19": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          5
+        ]
+      ]
+    },
+    "20": {
+      "free": [
+        [
+          "CURRENCY_TOKEN_EXCHANGE_SPEED_UP",
+          25
+        ]
+      ],
+      "premium": [
+        [
+          "WP_IH_HP10B_RAIDERS_00",
+          1
+        ]
+      ]
+    },
+    "21": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": [
+        [
+          "EM_PLAYER_HP10B_RAIDERS_01",
+          1
+        ]
+      ]
+    },
+    "22": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ]
+    },
+    "23": {
+      "free": [
+        [
+          "QI_STAMINA_POTION_00",
+          25
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ]
+    },
+    "24": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          5
+        ]
+      ]
+    },
+    "25": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "WP_MS_HP10B_RAIDERS_00",
+          1
+        ]
+      ]
+    },
+    "26": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ]
+    },
+    "27": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_MARKS_STEEL",
+          100
+        ]
+      ]
+    },
+    "28": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ]
+    },
+    "29": {
+      "free": [],
+      "premium": []
+    },
+    "30": {
+      "free": [
+        [
+          "QI_FLARE_HP10B_RAIDERS_00",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "WP_GA_HP10B_RAIDERS_00",
+          1
+        ]
+      ]
+    },
+    "31": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": [
+        [
+          "EM_PLAYER_HP10B_RAIDERS_03",
+          1
+        ]
+      ]
+    },
+    "32": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_MARKS_STEEL",
+          100
+        ]
+      ]
+    },
+    "33": {
+      "free": [
+        [
+          "EJ_HP10B_RAIDERS_01",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ]
+    },
+    "34": {
+      "free": [],
+      "premium": [
+        [
+          "LT_HP10B_RAIDERS_01",
+          1
+        ]
+      ]
+    },
+    "35": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "WP_DP_HP10B_RAIDERS_00",
+          1
+        ]
+      ]
+    },
+    "36": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": [
+        [
+          "BNC_STANDARD_HP10B_RAIDERS_00",
+          1
+        ]
+      ]
+    },
+    "37": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PRESTIGE",
+          50
+        ]
+      ]
+    },
+    "38": {
+      "free": [
+        [
+          "QI_DAMAGE_PYLON",
+          10
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ]
+    },
+    "39": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_MARKS_STEEL",
+          100
+        ]
+      ]
+    },
+    "40": {
+      "free": [
+        [
+          "BNC_SIGIL_HP10B_RAIDERS_00",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "WP_AC_HP10B_RAIDERS_00",
+          1
+        ]
+      ]
+    },
+    "41": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          5
+        ]
+      ]
+    },
+    "42": {
+      "free": [],
+      "premium": []
+    },
+    "43": {
+      "free": [
+        [
+          "EM_PLAYER_HP10B_RAIDERS_00",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ]
+    },
+    "44": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_MARKS_STEEL",
+          100
+        ]
+      ]
+    },
+    "45": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "EM_INTRO_HP10B_RAIDERS_00",
+          1
+        ]
+      ]
+    },
+    "46": {
+      "free": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          2
+        ]
+      ],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          5
+        ]
+      ]
+    },
+    "47": {
+      "free": [],
+      "premium": []
+    },
+    "48": {
+      "free": [
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_MARKS_STEEL",
+          100
+        ]
+      ]
+    },
+    "49": {
+      "free": [
+        [
+          "CURRENCY_PRESTIGE",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "TOKEN_UNLOCK_EXOTIC_CROWBEAR_EBLADE",
+          1
+        ],
+        [
+          "WP_EB_CROWBEAR_EXOTIC",
+          1
+        ]
+      ]
+    },
+    "50": {
+      "free": [
+        [
+          "AR_HP10B_RAIDERS_HELM_00",
+          1
+        ],
+        [
+          "AR_HP10B_RAIDERS_LEGS_00",
+          1
+        ],
+        [
+          "AR_HP10B_RAIDERS_ARMS_00",
+          1
+        ],
+        [
+          "AR_HP10B_RAIDERS_CHEST_00",
+          1
+        ],
+        [
+          "TITLE_HP10B_RAIDERS_01",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "AR_HP10B_RAIDERS_HELM_00_ULTRA",
+          1
+        ],
+        [
+          "AR_HP10B_RAIDERS_CHEST_00_ULTRA",
+          1
+        ],
+        [
+          "AR_HP10B_RAIDERS_ARMS_00_ULTRA",
+          1
+        ],
+        [
+          "AR_HP10B_RAIDERS_LEGS_00_ULTRA",
+          1
+        ]
+      ]
+    }
+  },
+  "unavailable_rewards": [
+    {
+      "rank": 4,
+      "track": "free",
+      "catalog_id": "Container_Core_Slayer_Silver",
+      "quantity": 1
+    },
+    {
+      "rank": 5,
+      "track": "free",
+      "catalog_id": "COL_SEASON_S10B_PAGE_01",
+      "quantity": 1
+    },
+    {
+      "rank": 28,
+      "track": "free",
+      "catalog_id": "COL_SEASON_S10B_PAGE_02",
+      "quantity": 1
+    }
+  ],
+  "source": {
+    "game": "1.6.2 layout; 1.14.7 item catalog",
+    "file": "season10b.json",
+    "sha256": "9ddd9e7029f29199fff7b31bff69428db011c9030a8c4ca6795908ad61f8c476"
+  }
+}

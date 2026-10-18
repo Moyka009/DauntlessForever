@@ -1,0 +1,1493 @@
+{
+  "revision": "season1147-reimagined_hp04-v1",
+  "pass_id": "season27",
+  "key": "reimagined_hp04",
+  "title": "Burndown",
+  "kind": "reimagined",
+  "levels": 50,
+  "xp_per_level": 100,
+  "start_date": "2020-01-01T00:00:00+00:00",
+  "end_date": "2099-01-01T00:00:00+00:00",
+  "items": {
+    "BNC_ANIMATION_HP04_FIRE_00": {
+      "kind": "stack",
+      "name": "Burning Banner",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_FABRIC_EVENT_HP04_00": {
+      "kind": "stack",
+      "name": "Tattered Brutality",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_NOTES": {
+      "kind": "stack",
+      "name": "Rams",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "EM_INTRO_HP04_BLAZE_00": {
+      "kind": "stack",
+      "name": "Firewalker",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "CONTAINER_CORE_BRONZE_CELLCORE": {
+      "kind": "stack",
+      "name": "Common Cell Core",
+      "source": "containers_core_cellcores.uasset",
+      "cosmetic": false
+    },
+    "EM_INTRO_HP04_HEAVYLAND_00": {
+      "kind": "stack",
+      "name": "Hard Landing",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_FABRIC_EVENT_HP04_01": {
+      "kind": "stack",
+      "name": "Aegis of the Restless King",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_FABRIC_EVENT_HP04_02": {
+      "kind": "stack",
+      "name": "Barbarian's Gate",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP04_BOULDER_00": {
+      "kind": "stack",
+      "name": "Rock Monster",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_HP04_00": {
+      "kind": "stack",
+      "name": "Vicious Shield",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_HP04_01": {
+      "kind": "stack",
+      "name": "Barricade of Iron",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP04_DANCE_00": {
+      "kind": "stack",
+      "name": "The Barbarian Two-Step",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "CONTAINER_CORE_SILVER_CELLCORE": {
+      "kind": "stack",
+      "name": "Uncommon Cell Core",
+      "source": "containers_core_cellcores.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_TOKEN_TRANSMOG": {
+      "kind": "stack",
+      "name": "Transmog Stone",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_MARKS_STEEL": {
+      "kind": "stack",
+      "name": "Steel Marks",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_SIGIL_EVENT_HP04_02": {
+      "kind": "stack",
+      "name": "Brutal Executioner",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_HP04_03": {
+      "kind": "stack",
+      "name": "Iron Triblade",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP04_FIREBREATH_00": {
+      "kind": "stack",
+      "name": "Dragon Breath",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP04_NECKCRACK_00": {
+      "kind": "stack",
+      "name": "Crackle and Pop",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_HP04_04": {
+      "kind": "stack",
+      "name": "Cruciform Ward",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_HP04_05": {
+      "kind": "stack",
+      "name": "Cruelty's Edge",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP04_SHOUT_00": {
+      "kind": "stack",
+      "name": "Barbarian's Roar",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_HP04_06": {
+      "kind": "stack",
+      "name": "Heart of the Warrior",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_HP04_07": {
+      "kind": "stack",
+      "name": "Rain of Spikes",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "LT_HP04_ARID_00": {
+      "kind": "stack",
+      "name": "Savage Light",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_HP04_08": {
+      "kind": "stack",
+      "name": "Barbaric Cross",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_STANDARD_HP04_ARID_00": {
+      "kind": "stack",
+      "name": "Staff of Bones",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "LT_HP04_ARID_01": {
+      "kind": "stack",
+      "name": "Beacon of the Heights",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CONTAINER_CORE_GOLD_CELLCORE": {
+      "kind": "stack",
+      "name": "Rare Cell Core",
+      "source": "containers_core_cellcores.uasset",
+      "cosmetic": false
+    },
+    "QI_FLARE_HP04_00": {
+      "kind": "stack",
+      "name": "Vicious Shield",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP04_01": {
+      "kind": "stack",
+      "name": "Barricade of Iron",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_CB_HP04_ARID": {
+      "kind": "stack",
+      "name": "Blades of the Warlord",
+      "source": "Gear_Catalogs/weapon_cblades_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_DP_HP04_ARID": {
+      "kind": "stack",
+      "name": "Guns of the Tyrant",
+      "source": "Gear_Catalogs/weapon_dp_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP04_02": {
+      "kind": "stack",
+      "name": "Brutal Executioner",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP04_03": {
+      "kind": "stack",
+      "name": "Iron Triblade",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_EB_HP04_ARID": {
+      "kind": "stack",
+      "name": "Sword of the Destroyer",
+      "source": "Gear_Catalogs/weapon_eblade_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP04_04": {
+      "kind": "stack",
+      "name": "Cruciform Ward",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP04_05": {
+      "kind": "stack",
+      "name": "Cruelty's Edge",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_GA_HP04_ARID": {
+      "kind": "stack",
+      "name": "Axe of the Nomad",
+      "source": "Gear_Catalogs/weapon_gaxe_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP04_06": {
+      "kind": "stack",
+      "name": "Heart of the Warrior",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP04_07": {
+      "kind": "stack",
+      "name": "Rain of Spikes",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_IH_HP04_ARID": {
+      "kind": "stack",
+      "name": "Maul of the Brute",
+      "source": "Gear_Catalogs/weapon_ihammer_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_MS_HP04_ARID": {
+      "kind": "stack",
+      "name": "Spear of the Gladiator",
+      "source": "Gear_Catalogs/weapon_mspear_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP04_08": {
+      "kind": "stack",
+      "name": "Barbaric Cross",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_HP04_00": {
+      "kind": "stack",
+      "name": "Dustlander",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP04_ARID_HELM_01": {
+      "kind": "stack",
+      "name": "Helm of Conquest",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_HP04_01": {
+      "kind": "stack",
+      "name": "Relentless Tracker",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_HP04_02": {
+      "kind": "stack",
+      "name": "Demon of the Sands",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP04_ARID_ARMS": {
+      "kind": "stack",
+      "name": "Barbaric Strength",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP04_ARID_LEGS": {
+      "kind": "stack",
+      "name": "Barbaric Tread",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_HP04_03": {
+      "kind": "stack",
+      "name": "The Barbarian",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP04_ARID_CHEST": {
+      "kind": "stack",
+      "name": "Barbaric Courage",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP04_ARID_HELM_00": {
+      "kind": "stack",
+      "name": "Barbaric Crown",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    }
+  },
+  "bundles": {},
+  "bundle_names": {},
+  "rewards": {
+    "1": [
+      "BNC_ANIMATION_HP04_FIRE_00",
+      "BNC_FABRIC_EVENT_HP04_00",
+      "CURRENCY_NOTES",
+      "EM_INTRO_HP04_BLAZE_00"
+    ],
+    "2": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "3": [
+      "CURRENCY_NOTES",
+      "EM_INTRO_HP04_HEAVYLAND_00"
+    ],
+    "4": [
+      "BNC_FABRIC_EVENT_HP04_01",
+      "BNC_FABRIC_EVENT_HP04_02",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "5": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_NOTES"
+    ],
+    "6": [
+      "CURRENCY_NOTES",
+      "EM_PLAYER_HP04_BOULDER_00"
+    ],
+    "7": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "8": [
+      "BNC_SIGIL_EVENT_HP04_00",
+      "BNC_SIGIL_EVENT_HP04_01",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "9": [
+      "CURRENCY_NOTES",
+      "EM_PLAYER_HP04_DANCE_00"
+    ],
+    "10": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_SILVER_CELLCORE",
+      "CURRENCY_TOKEN_TRANSMOG",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "11": [
+      "BNC_SIGIL_EVENT_HP04_02",
+      "BNC_SIGIL_EVENT_HP04_03",
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "12": [
+      "CURRENCY_NOTES",
+      "EM_PLAYER_HP04_FIREBREATH_00"
+    ],
+    "13": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "14": [
+      "CURRENCY_NOTES",
+      "EM_PLAYER_HP04_NECKCRACK_00"
+    ],
+    "15": [
+      "BNC_SIGIL_EVENT_HP04_04",
+      "BNC_SIGIL_EVENT_HP04_05",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_NOTES"
+    ],
+    "16": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "17": [
+      "CURRENCY_NOTES",
+      "EM_PLAYER_HP04_SHOUT_00"
+    ],
+    "18": [
+      "BNC_SIGIL_EVENT_HP04_06",
+      "BNC_SIGIL_EVENT_HP04_07",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "19": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "20": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_SILVER_CELLCORE",
+      "CURRENCY_TOKEN_TRANSMOG",
+      "LT_HP04_ARID_00",
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "21": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "22": [
+      "BNC_SIGIL_EVENT_HP04_08",
+      "BNC_STANDARD_HP04_ARID_00",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "23": [
+      "CURRENCY_NOTES",
+      "LT_HP04_ARID_01"
+    ],
+    "24": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "25": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_GOLD_CELLCORE",
+      "CURRENCY_NOTES"
+    ],
+    "26": [
+      "QI_FLARE_HP04_00",
+      "QI_FLARE_HP04_01",
+      "CURRENCY_NOTES",
+      "WP_CB_HP04_ARID"
+    ],
+    "27": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "28": [
+      "CURRENCY_NOTES",
+      "WP_DP_HP04_ARID"
+    ],
+    "29": [
+      "QI_FLARE_HP04_02",
+      "QI_FLARE_HP04_03",
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "30": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_SILVER_CELLCORE",
+      "CURRENCY_TOKEN_TRANSMOG",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "31": [
+      "CURRENCY_NOTES",
+      "WP_EB_HP04_ARID"
+    ],
+    "32": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "33": [
+      "QI_FLARE_HP04_04",
+      "QI_FLARE_HP04_05",
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "34": [
+      "CURRENCY_NOTES",
+      "WP_GA_HP04_ARID"
+    ],
+    "35": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_NOTES"
+    ],
+    "36": [
+      "QI_FLARE_HP04_06",
+      "QI_FLARE_HP04_07",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "37": [
+      "CURRENCY_NOTES",
+      "WP_IH_HP04_ARID"
+    ],
+    "38": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "39": [
+      "CURRENCY_NOTES",
+      "WP_MS_HP04_ARID"
+    ],
+    "40": [
+      "QI_FLARE_HP04_08",
+      "TITLE_HP04_00",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_SILVER_CELLCORE",
+      "CURRENCY_TOKEN_TRANSMOG",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "41": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "42": [
+      "CURRENCY_NOTES",
+      "AR_HP04_ARID_HELM_01"
+    ],
+    "43": [
+      "TITLE_HP04_01",
+      "TITLE_HP04_02",
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "44": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "45": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "AR_HP04_ARID_ARMS",
+      "AR_HP04_ARID_LEGS"
+    ],
+    "46": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "47": [
+      "TITLE_HP04_03",
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "48": [
+      "CURRENCY_NOTES",
+      "AR_HP04_ARID_CHEST",
+      "AR_HP04_ARID_HELM_00"
+    ],
+    "49": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "50": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_GOLD_CELLCORE",
+      "CURRENCY_TOKEN_TRANSMOG",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_MARKS_STEEL",
+      "CONTAINER_CORE_SILVER_CELLCORE"
+    ]
+  },
+  "grants": {
+    "1": {
+      "free": [
+        [
+          "BNC_ANIMATION_HP04_FIRE_00",
+          1
+        ],
+        [
+          "BNC_FABRIC_EVENT_HP04_00",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "EM_INTRO_HP04_BLAZE_00",
+          1
+        ]
+      ]
+    },
+    "2": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "3": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "EM_INTRO_HP04_HEAVYLAND_00",
+          1
+        ]
+      ]
+    },
+    "4": {
+      "free": [
+        [
+          "BNC_FABRIC_EVENT_HP04_01",
+          1
+        ],
+        [
+          "BNC_FABRIC_EVENT_HP04_02",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "5": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "6": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "EM_PLAYER_HP04_BOULDER_00",
+          1
+        ]
+      ]
+    },
+    "7": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "8": {
+      "free": [
+        [
+          "BNC_SIGIL_EVENT_HP04_00",
+          1
+        ],
+        [
+          "BNC_SIGIL_EVENT_HP04_01",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "9": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "EM_PLAYER_HP04_DANCE_00",
+          1
+        ]
+      ]
+    },
+    "10": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_SILVER_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ]
+      ]
+    },
+    "11": {
+      "free": [
+        [
+          "BNC_SIGIL_EVENT_HP04_02",
+          1
+        ],
+        [
+          "BNC_SIGIL_EVENT_HP04_03",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "12": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "EM_PLAYER_HP04_FIREBREATH_00",
+          1
+        ]
+      ]
+    },
+    "13": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "14": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "EM_PLAYER_HP04_NECKCRACK_00",
+          1
+        ]
+      ]
+    },
+    "15": {
+      "free": [
+        [
+          "BNC_SIGIL_EVENT_HP04_04",
+          1
+        ],
+        [
+          "BNC_SIGIL_EVENT_HP04_05",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "16": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "17": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "EM_PLAYER_HP04_SHOUT_00",
+          1
+        ]
+      ]
+    },
+    "18": {
+      "free": [
+        [
+          "BNC_SIGIL_EVENT_HP04_06",
+          1
+        ],
+        [
+          "BNC_SIGIL_EVENT_HP04_07",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "19": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "20": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_SILVER_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "LT_HP04_ARID_00",
+          1
+        ],
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ]
+      ]
+    },
+    "21": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "22": {
+      "free": [
+        [
+          "BNC_SIGIL_EVENT_HP04_08",
+          1
+        ],
+        [
+          "BNC_STANDARD_HP04_ARID_00",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "23": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "LT_HP04_ARID_01",
+          1
+        ]
+      ]
+    },
+    "24": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "25": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_GOLD_CELLCORE",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "26": {
+      "free": [
+        [
+          "QI_FLARE_HP04_00",
+          1
+        ],
+        [
+          "QI_FLARE_HP04_01",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "WP_CB_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "27": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "28": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "WP_DP_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "29": {
+      "free": [
+        [
+          "QI_FLARE_HP04_02",
+          1
+        ],
+        [
+          "QI_FLARE_HP04_03",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "30": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_SILVER_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ]
+      ]
+    },
+    "31": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "WP_EB_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "32": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "33": {
+      "free": [
+        [
+          "QI_FLARE_HP04_04",
+          1
+        ],
+        [
+          "QI_FLARE_HP04_05",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "34": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "WP_GA_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "35": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "36": {
+      "free": [
+        [
+          "QI_FLARE_HP04_06",
+          1
+        ],
+        [
+          "QI_FLARE_HP04_07",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "37": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "WP_IH_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "38": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "39": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "WP_MS_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "40": {
+      "free": [
+        [
+          "QI_FLARE_HP04_08",
+          1
+        ],
+        [
+          "TITLE_HP04_00",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_SILVER_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ]
+      ]
+    },
+    "41": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "42": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "AR_HP04_ARID_HELM_01",
+          1
+        ]
+      ]
+    },
+    "43": {
+      "free": [
+        [
+          "TITLE_HP04_01",
+          1
+        ],
+        [
+          "TITLE_HP04_02",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "44": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "45": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "AR_HP04_ARID_ARMS",
+          1
+        ],
+        [
+          "AR_HP04_ARID_LEGS",
+          1
+        ]
+      ]
+    },
+    "46": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "47": {
+      "free": [
+        [
+          "TITLE_HP04_03",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "48": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "AR_HP04_ARID_CHEST",
+          1
+        ],
+        [
+          "AR_HP04_ARID_HELM_00",
+          1
+        ]
+      ]
+    },
+    "49": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "50": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_GOLD_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ],
+        [
+          "CONTAINER_CORE_SILVER_CELLCORE",
+          1
+        ]
+      ]
+    }
+  },
+  "unavailable_rewards": [],
+  "source": {
+    "game": "1.6.2 layout; 1.14.7 item catalog",
+    "file": "reimagined_hp04.json",
+    "sha256": "8813f25547cbbf3828fa80ee5578c410ddb34fe3a308bf37dd32fb640f5709aa"
+  }
+}

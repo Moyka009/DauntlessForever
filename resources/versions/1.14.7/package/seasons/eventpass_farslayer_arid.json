@@ -1,0 +1,598 @@
+{
+  "revision": "season1147-eventpass_farslayer_arid-v1",
+  "pass_id": "season27",
+  "key": "eventpass_farslayer_arid",
+  "title": "The Burning Heights",
+  "kind": "event",
+  "levels": 30,
+  "xp_per_level": 100,
+  "start_date": "2020-01-01T00:00:00+00:00",
+  "end_date": "2099-01-01T00:00:00+00:00",
+  "items": {
+    "WP_GA_HP04_ARID": {
+      "kind": "stack",
+      "name": "Axe of the Nomad",
+      "source": "Gear_Catalogs/weapon_gaxe_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP04_04": {
+      "kind": "stack",
+      "name": "Cruciform Ward",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_ANIMATION_HP04_FIRE_00": {
+      "kind": "stack",
+      "name": "Burning Banner",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP04_07": {
+      "kind": "stack",
+      "name": "Rain of Spikes",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_EB_HP04_ARID": {
+      "kind": "stack",
+      "name": "Sword of the Destroyer",
+      "source": "Gear_Catalogs/weapon_eblade_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP04_00": {
+      "kind": "stack",
+      "name": "Vicious Shield",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_FABRIC_EVENT_HP04_01": {
+      "kind": "stack",
+      "name": "Aegis of the Restless King",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_HP04_03": {
+      "kind": "stack",
+      "name": "Iron Triblade",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP04_NECKCRACK_00": {
+      "kind": "stack",
+      "name": "Crackle and Pop",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_CB_HP04_ARID": {
+      "kind": "stack",
+      "name": "Blades of the Warlord",
+      "source": "Gear_Catalogs/weapon_cblades_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP04_02": {
+      "kind": "stack",
+      "name": "Brutal Executioner",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_HP04_00": {
+      "kind": "stack",
+      "name": "Vicious Shield",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_STANDARD_HP04_ARID_00": {
+      "kind": "stack",
+      "name": "Staff of Bones",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_HP04_05": {
+      "kind": "stack",
+      "name": "Cruelty's Edge",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_IH_HP04_ARID": {
+      "kind": "stack",
+      "name": "Maul of the Brute",
+      "source": "Gear_Catalogs/weapon_ihammer_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP04_03": {
+      "kind": "stack",
+      "name": "Iron Triblade",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_HP04_02": {
+      "kind": "stack",
+      "name": "Brutal Executioner",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP04_ARID_HELM_01": {
+      "kind": "stack",
+      "name": "Helm of Conquest",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP04_FIREBREATH_00": {
+      "kind": "stack",
+      "name": "Dragon Breath",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_MS_HP04_ARID": {
+      "kind": "stack",
+      "name": "Spear of the Gladiator",
+      "source": "Gear_Catalogs/weapon_mspear_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP04_06": {
+      "kind": "stack",
+      "name": "Heart of the Warrior",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_FABRIC_EVENT_HP04_00": {
+      "kind": "stack",
+      "name": "Tattered Brutality",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "LT_HP04_ARID_00": {
+      "kind": "stack",
+      "name": "Savage Light",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_HP04_06": {
+      "kind": "stack",
+      "name": "Heart of the Warrior",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_DP_HP04_ARID": {
+      "kind": "stack",
+      "name": "Guns of the Tyrant",
+      "source": "Gear_Catalogs/weapon_dp_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP04_05": {
+      "kind": "stack",
+      "name": "Cruelty's Edge",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_INTRO_HP04_BLAZE_00": {
+      "kind": "stack",
+      "name": "Firewalker",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP04_SHOUT_00": {
+      "kind": "stack",
+      "name": "Barbarian's Roar",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_HP04_02": {
+      "kind": "stack",
+      "name": "Demon of the Sands",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP04_ARID_ARMS": {
+      "kind": "stack",
+      "name": "Barbaric Strength",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP04_ARID_CHEST": {
+      "kind": "stack",
+      "name": "Barbaric Courage",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP04_ARID_HELM_00": {
+      "kind": "stack",
+      "name": "Barbaric Crown",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP04_ARID_LEGS": {
+      "kind": "stack",
+      "name": "Barbaric Tread",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    }
+  },
+  "bundles": {},
+  "bundle_names": {},
+  "rewards": {
+    "1": [
+      "WP_GA_HP04_ARID"
+    ],
+    "2": [
+      "QI_FLARE_HP04_04"
+    ],
+    "3": [
+      "BNC_ANIMATION_HP04_FIRE_00"
+    ],
+    "4": [
+      "QI_FLARE_HP04_07"
+    ],
+    "5": [
+      "WP_EB_HP04_ARID"
+    ],
+    "6": [
+      "QI_FLARE_HP04_00"
+    ],
+    "7": [
+      "BNC_FABRIC_EVENT_HP04_01"
+    ],
+    "8": [
+      "BNC_SIGIL_EVENT_HP04_03"
+    ],
+    "9": [
+      "EM_PLAYER_HP04_NECKCRACK_00"
+    ],
+    "10": [
+      "WP_CB_HP04_ARID"
+    ],
+    "11": [
+      "QI_FLARE_HP04_02"
+    ],
+    "12": [
+      "BNC_SIGIL_EVENT_HP04_00"
+    ],
+    "13": [
+      "BNC_STANDARD_HP04_ARID_00"
+    ],
+    "14": [
+      "BNC_SIGIL_EVENT_HP04_05"
+    ],
+    "15": [
+      "WP_IH_HP04_ARID"
+    ],
+    "16": [
+      "QI_FLARE_HP04_03"
+    ],
+    "17": [
+      "BNC_SIGIL_EVENT_HP04_02"
+    ],
+    "18": [
+      "AR_HP04_ARID_HELM_01"
+    ],
+    "19": [
+      "EM_PLAYER_HP04_FIREBREATH_00"
+    ],
+    "20": [
+      "WP_MS_HP04_ARID"
+    ],
+    "21": [
+      "QI_FLARE_HP04_06"
+    ],
+    "22": [
+      "BNC_FABRIC_EVENT_HP04_00"
+    ],
+    "23": [
+      "LT_HP04_ARID_00"
+    ],
+    "24": [
+      "BNC_SIGIL_EVENT_HP04_06"
+    ],
+    "25": [
+      "WP_DP_HP04_ARID"
+    ],
+    "26": [
+      "QI_FLARE_HP04_05"
+    ],
+    "27": [
+      "EM_INTRO_HP04_BLAZE_00"
+    ],
+    "28": [
+      "EM_PLAYER_HP04_SHOUT_00"
+    ],
+    "29": [
+      "TITLE_HP04_02"
+    ],
+    "30": [
+      "AR_HP04_ARID_ARMS",
+      "AR_HP04_ARID_CHEST",
+      "AR_HP04_ARID_HELM_00",
+      "AR_HP04_ARID_LEGS"
+    ]
+  },
+  "grants": {
+    "1": {
+      "free": [],
+      "premium": [
+        [
+          "WP_GA_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "2": {
+      "free": [],
+      "premium": [
+        [
+          "QI_FLARE_HP04_04",
+          1
+        ]
+      ]
+    },
+    "3": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_ANIMATION_HP04_FIRE_00",
+          1
+        ]
+      ]
+    },
+    "4": {
+      "free": [],
+      "premium": [
+        [
+          "QI_FLARE_HP04_07",
+          1
+        ]
+      ]
+    },
+    "5": {
+      "free": [],
+      "premium": [
+        [
+          "WP_EB_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "6": {
+      "free": [],
+      "premium": [
+        [
+          "QI_FLARE_HP04_00",
+          1
+        ]
+      ]
+    },
+    "7": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_FABRIC_EVENT_HP04_01",
+          1
+        ]
+      ]
+    },
+    "8": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_SIGIL_EVENT_HP04_03",
+          1
+        ]
+      ]
+    },
+    "9": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_HP04_NECKCRACK_00",
+          1
+        ]
+      ]
+    },
+    "10": {
+      "free": [],
+      "premium": [
+        [
+          "WP_CB_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "11": {
+      "free": [],
+      "premium": [
+        [
+          "QI_FLARE_HP04_02",
+          1
+        ]
+      ]
+    },
+    "12": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_SIGIL_EVENT_HP04_00",
+          1
+        ]
+      ]
+    },
+    "13": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_STANDARD_HP04_ARID_00",
+          1
+        ]
+      ]
+    },
+    "14": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_SIGIL_EVENT_HP04_05",
+          1
+        ]
+      ]
+    },
+    "15": {
+      "free": [],
+      "premium": [
+        [
+          "WP_IH_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "16": {
+      "free": [],
+      "premium": [
+        [
+          "QI_FLARE_HP04_03",
+          1
+        ]
+      ]
+    },
+    "17": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_SIGIL_EVENT_HP04_02",
+          1
+        ]
+      ]
+    },
+    "18": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP04_ARID_HELM_01",
+          1
+        ]
+      ]
+    },
+    "19": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_HP04_FIREBREATH_00",
+          1
+        ]
+      ]
+    },
+    "20": {
+      "free": [],
+      "premium": [
+        [
+          "WP_MS_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "21": {
+      "free": [],
+      "premium": [
+        [
+          "QI_FLARE_HP04_06",
+          1
+        ]
+      ]
+    },
+    "22": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_FABRIC_EVENT_HP04_00",
+          1
+        ]
+      ]
+    },
+    "23": {
+      "free": [],
+      "premium": [
+        [
+          "LT_HP04_ARID_00",
+          1
+        ]
+      ]
+    },
+    "24": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_SIGIL_EVENT_HP04_06",
+          1
+        ]
+      ]
+    },
+    "25": {
+      "free": [],
+      "premium": [
+        [
+          "WP_DP_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "26": {
+      "free": [],
+      "premium": [
+        [
+          "QI_FLARE_HP04_05",
+          1
+        ]
+      ]
+    },
+    "27": {
+      "free": [],
+      "premium": [
+        [
+          "EM_INTRO_HP04_BLAZE_00",
+          1
+        ]
+      ]
+    },
+    "28": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_HP04_SHOUT_00",
+          1
+        ]
+      ]
+    },
+    "29": {
+      "free": [],
+      "premium": [
+        [
+          "TITLE_HP04_02",
+          1
+        ]
+      ]
+    },
+    "30": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP04_ARID_ARMS",
+          1
+        ],
+        [
+          "AR_HP04_ARID_CHEST",
+          1
+        ],
+        [
+          "AR_HP04_ARID_HELM_00",
+          1
+        ],
+        [
+          "AR_HP04_ARID_LEGS",
+          1
+        ]
+      ]
+    }
+  },
+  "unavailable_rewards": [],
+  "source": {
+    "game": "1.6.2 layout; 1.14.7 item catalog",
+    "file": "eventpass_farslayer_arid.json",
+    "sha256": "fdd5ded46e410504ceb041e5a476080d890342cb04578c59d0f195709ba30a8d"
+  }
+}

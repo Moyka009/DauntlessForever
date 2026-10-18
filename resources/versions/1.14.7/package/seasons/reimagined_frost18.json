@@ -1,0 +1,1380 @@
+{
+  "revision": "season1147-reimagined_frost18-v1",
+  "pass_id": "season27",
+  "key": "reimagined_frost18",
+  "title": "Frostfall (2018)",
+  "kind": "reimagined",
+  "levels": 50,
+  "xp_per_level": 100,
+  "start_date": "2020-01-01T00:00:00+00:00",
+  "end_date": "2099-01-01T00:00:00+00:00",
+  "items": {
+    "BNC_FABRIC_EVENT_FROST18_00": {
+      "kind": "stack",
+      "name": "Frostfall Firs",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_FABRIC_EVENT_FROST18_01": {
+      "kind": "stack",
+      "name": "Frostfall Fringe",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_NOTES": {
+      "kind": "stack",
+      "name": "Rams",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "EM_PLAYER_EVENT_FROST18_000": {
+      "kind": "stack",
+      "name": "For The Queen",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "CONTAINER_CORE_BRONZE_CELLCORE": {
+      "kind": "stack",
+      "name": "Common Cell Core",
+      "source": "containers_core_cellcores.uasset",
+      "cosmetic": false
+    },
+    "BNC_FABRIC_EVENT_FROST18_02": {
+      "kind": "stack",
+      "name": "Frostfall Icicles",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_FROST18_00": {
+      "kind": "stack",
+      "name": "Frostfall Bells",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_FROST18_01": {
+      "kind": "stack",
+      "name": "Frostfall Candy Cane",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_FROST18_02": {
+      "kind": "stack",
+      "name": "Frostfall Shrike",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "CONTAINER_CORE_SILVER_CELLCORE": {
+      "kind": "stack",
+      "name": "Uncommon Cell Core",
+      "source": "containers_core_cellcores.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_TOKEN_TRANSMOG": {
+      "kind": "stack",
+      "name": "Transmog Stone",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_MARKS_STEEL": {
+      "kind": "stack",
+      "name": "Steel Marks",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_SIGIL_EVENT_FROST18_03": {
+      "kind": "stack",
+      "name": "Frostfall Mead",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_FROST18_04": {
+      "kind": "stack",
+      "name": "Frostfall Present",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_FROST18_05": {
+      "kind": "stack",
+      "name": "Frostfall Snowflakes",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_FROST18_06": {
+      "kind": "stack",
+      "name": "Frostfall Snowman",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_FROST18_07": {
+      "kind": "stack",
+      "name": "Frostfall Stocking",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_FROST18_08": {
+      "kind": "stack",
+      "name": "Frostfall Wreath",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_FROST18_09": {
+      "kind": "stack",
+      "name": "Frostfall Sigil 09",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_FROST18_10": {
+      "kind": "stack",
+      "name": "Frostfall Sigil 10",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "CONTAINER_CORE_GOLD_CELLCORE": {
+      "kind": "stack",
+      "name": "Rare Cell Core",
+      "source": "containers_core_cellcores.uasset",
+      "cosmetic": false
+    },
+    "QI_FLARE_FROST18_00": {
+      "kind": "stack",
+      "name": "Frostfall Bells",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_FROST18_01": {
+      "kind": "stack",
+      "name": "Frostfall Candy Cane",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_FROST18_02": {
+      "kind": "stack",
+      "name": "Frostfall Shrike",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_FROST18_03": {
+      "kind": "stack",
+      "name": "Frostfall Mead",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_FROST18_04": {
+      "kind": "stack",
+      "name": "Frostfall Present",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_FROST18_05": {
+      "kind": "stack",
+      "name": "Frostfall Snowflakes",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_FROST18_06": {
+      "kind": "stack",
+      "name": "Frostfall Snowman",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_FROST18_07": {
+      "kind": "stack",
+      "name": "Frostfall Stocking",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_FROST18_08": {
+      "kind": "stack",
+      "name": "Frostfall Wreath",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_FROST18_09": {
+      "kind": "stack",
+      "name": "Frostfall Crown",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_FROST18_10": {
+      "kind": "stack",
+      "name": "Spirit of Frostfall",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_FROST18_00": {
+      "kind": "stack",
+      "name": "The Frostslayer",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_FROST18_01": {
+      "kind": "stack",
+      "name": "Silver Champion",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_FROST18_02": {
+      "kind": "stack",
+      "name": "Gift of Nikola",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    }
+  },
+  "bundles": {},
+  "bundle_names": {},
+  "rewards": {
+    "1": [
+      "BNC_FABRIC_EVENT_FROST18_00",
+      "BNC_FABRIC_EVENT_FROST18_01",
+      "CURRENCY_NOTES",
+      "EM_PLAYER_EVENT_FROST18_000"
+    ],
+    "2": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "3": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "4": [
+      "BNC_FABRIC_EVENT_FROST18_02",
+      "BNC_SIGIL_EVENT_FROST18_00",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "5": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_NOTES"
+    ],
+    "6": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "7": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "8": [
+      "BNC_SIGIL_EVENT_FROST18_01",
+      "BNC_SIGIL_EVENT_FROST18_02",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "9": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "10": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_SILVER_CELLCORE",
+      "CURRENCY_TOKEN_TRANSMOG",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "11": [
+      "BNC_SIGIL_EVENT_FROST18_03",
+      "BNC_SIGIL_EVENT_FROST18_04",
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "12": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "13": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "14": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "15": [
+      "BNC_SIGIL_EVENT_FROST18_05",
+      "BNC_SIGIL_EVENT_FROST18_06",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_NOTES"
+    ],
+    "16": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "17": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "18": [
+      "BNC_SIGIL_EVENT_FROST18_07",
+      "BNC_SIGIL_EVENT_FROST18_08",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "19": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "20": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_SILVER_CELLCORE",
+      "CURRENCY_TOKEN_TRANSMOG",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "21": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "22": [
+      "BNC_SIGIL_EVENT_FROST18_09",
+      "BNC_SIGIL_EVENT_FROST18_10",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "23": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "24": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "25": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_GOLD_CELLCORE",
+      "CURRENCY_NOTES"
+    ],
+    "26": [
+      "QI_FLARE_FROST18_00",
+      "QI_FLARE_FROST18_01",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "27": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "28": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "29": [
+      "QI_FLARE_FROST18_02",
+      "QI_FLARE_FROST18_03",
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "30": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_SILVER_CELLCORE",
+      "CURRENCY_TOKEN_TRANSMOG",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "31": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "32": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "33": [
+      "QI_FLARE_FROST18_04",
+      "QI_FLARE_FROST18_05",
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "34": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "35": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_NOTES"
+    ],
+    "36": [
+      "QI_FLARE_FROST18_06",
+      "QI_FLARE_FROST18_07",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "37": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "38": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "39": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "40": [
+      "QI_FLARE_FROST18_08",
+      "QI_FLARE_FROST18_09",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_SILVER_CELLCORE",
+      "CURRENCY_TOKEN_TRANSMOG",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "41": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "42": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "43": [
+      "QI_FLARE_FROST18_10",
+      "TITLE_FROST18_00",
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "44": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "45": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_NOTES"
+    ],
+    "46": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "47": [
+      "TITLE_FROST18_01",
+      "TITLE_FROST18_02",
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "48": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "49": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "50": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_GOLD_CELLCORE",
+      "CURRENCY_TOKEN_TRANSMOG",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_MARKS_STEEL",
+      "CONTAINER_CORE_SILVER_CELLCORE"
+    ]
+  },
+  "grants": {
+    "1": {
+      "free": [
+        [
+          "BNC_FABRIC_EVENT_FROST18_00",
+          1
+        ],
+        [
+          "BNC_FABRIC_EVENT_FROST18_01",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "EM_PLAYER_EVENT_FROST18_000",
+          1
+        ]
+      ]
+    },
+    "2": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "3": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "4": {
+      "free": [
+        [
+          "BNC_FABRIC_EVENT_FROST18_02",
+          1
+        ],
+        [
+          "BNC_SIGIL_EVENT_FROST18_00",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "5": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "6": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "7": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "8": {
+      "free": [
+        [
+          "BNC_SIGIL_EVENT_FROST18_01",
+          1
+        ],
+        [
+          "BNC_SIGIL_EVENT_FROST18_02",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "9": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "10": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_SILVER_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ]
+      ]
+    },
+    "11": {
+      "free": [
+        [
+          "BNC_SIGIL_EVENT_FROST18_03",
+          1
+        ],
+        [
+          "BNC_SIGIL_EVENT_FROST18_04",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "12": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "13": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "14": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "15": {
+      "free": [
+        [
+          "BNC_SIGIL_EVENT_FROST18_05",
+          1
+        ],
+        [
+          "BNC_SIGIL_EVENT_FROST18_06",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "16": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "17": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "18": {
+      "free": [
+        [
+          "BNC_SIGIL_EVENT_FROST18_07",
+          1
+        ],
+        [
+          "BNC_SIGIL_EVENT_FROST18_08",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "19": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "20": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_SILVER_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ]
+      ]
+    },
+    "21": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "22": {
+      "free": [
+        [
+          "BNC_SIGIL_EVENT_FROST18_09",
+          1
+        ],
+        [
+          "BNC_SIGIL_EVENT_FROST18_10",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "23": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "24": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "25": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_GOLD_CELLCORE",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "26": {
+      "free": [
+        [
+          "QI_FLARE_FROST18_00",
+          1
+        ],
+        [
+          "QI_FLARE_FROST18_01",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "27": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "28": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "29": {
+      "free": [
+        [
+          "QI_FLARE_FROST18_02",
+          1
+        ],
+        [
+          "QI_FLARE_FROST18_03",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "30": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_SILVER_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ]
+      ]
+    },
+    "31": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "32": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "33": {
+      "free": [
+        [
+          "QI_FLARE_FROST18_04",
+          1
+        ],
+        [
+          "QI_FLARE_FROST18_05",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "34": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "35": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "36": {
+      "free": [
+        [
+          "QI_FLARE_FROST18_06",
+          1
+        ],
+        [
+          "QI_FLARE_FROST18_07",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "37": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "38": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "39": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "40": {
+      "free": [
+        [
+          "QI_FLARE_FROST18_08",
+          1
+        ],
+        [
+          "QI_FLARE_FROST18_09",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_SILVER_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ]
+      ]
+    },
+    "41": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "42": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "43": {
+      "free": [
+        [
+          "QI_FLARE_FROST18_10",
+          1
+        ],
+        [
+          "TITLE_FROST18_00",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "44": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "45": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "46": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "47": {
+      "free": [
+        [
+          "TITLE_FROST18_01",
+          1
+        ],
+        [
+          "TITLE_FROST18_02",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "48": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "49": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "50": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_GOLD_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ],
+        [
+          "CONTAINER_CORE_SILVER_CELLCORE",
+          1
+        ]
+      ]
+    }
+  },
+  "unavailable_rewards": [],
+  "source": {
+    "game": "1.6.2 layout; 1.14.7 item catalog",
+    "file": "reimagined_frost18.json",
+    "sha256": "ff72f7d9763d8378cbae5f6291eb70d6b940f4c57649f9fd0d26262c3f61dad1"
+  }
+}

@@ -1,0 +1,523 @@
+{
+  "revision": "season1147-season05_vault-v1",
+  "pass_id": "season27",
+  "key": "season05_vault",
+  "title": "Hidden Blades",
+  "kind": "vault",
+  "levels": 30,
+  "xp_per_level": 100,
+  "start_date": "2020-01-01T00:00:00+00:00",
+  "end_date": "2099-01-01T00:00:00+00:00",
+  "items": {
+    "EM_INTRO_HP05_NINJASTAR_00": {
+      "kind": "stack",
+      "name": "Threat Display",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_NOTES": {
+      "kind": "stack",
+      "name": "Rams",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "WP_EB_HP05_NINJA_00": {
+      "kind": "stack",
+      "name": "Ripper",
+      "source": "Gear_Catalogs/weapon_eblade_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "TOKEN_DAILY_PATROL_BONUS_PURCHASED": {
+      "kind": "stack",
+      "name": "Patrol Key",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "LT_HP05_NINJA_00": {
+      "kind": "stack",
+      "name": "Night Beacon",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "TOKEN_BOUNTY_DRAFT_PREMIUM": {
+      "kind": "stack",
+      "name": "TOKEN_BOUNTY_DRAFT_PREMIUM",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "AR_HP05_NINJA_HELM_00": {
+      "kind": "stack",
+      "name": "Shadow's Face",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_PJM_PRESTIGE_EMPTY": {
+      "kind": "stack",
+      "name": "CURRENCY_PJM_PRESTIGE_EMPTY",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "WP_GA_HP05_NINJA_01": {
+      "kind": "stack",
+      "name": "Ogre's Claw",
+      "source": "Gear_Catalogs/weapon_gaxe_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP05_NINJA_ARMS": {
+      "kind": "stack",
+      "name": "Shadow's Grasp",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_PJM_WEAPON": {
+      "kind": "stack",
+      "name": "CURRENCY_PJM_WEAPON",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "EM_PLAYER_HP05_SHURIKEN_00": {
+      "kind": "stack",
+      "name": "Throwing Stars",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_CB_HP05_NINJA_00": {
+      "kind": "stack",
+      "name": "Mortality's Bite",
+      "source": "Gear_Catalogs/weapon_cblades_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_ANIMATION_HP05_NINJASTARS_00": {
+      "kind": "stack",
+      "name": "Starstruck",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP05_CHERRYBLOSSOM_00": {
+      "kind": "stack",
+      "name": "Festival Dance",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_IH_HP05_NINJA_02": {
+      "kind": "stack",
+      "name": "Demonic Brute",
+      "source": "Gear_Catalogs/weapon_ihammer_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP05_NINJA_LEGS": {
+      "kind": "stack",
+      "name": "Shadow's Step",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_DP_HP05_NINJA_01": {
+      "kind": "stack",
+      "name": "Fatal Flourish",
+      "source": "Gear_Catalogs/weapon_dp_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP05_PUSHUP_00_0": {
+      "kind": "stack",
+      "name": "One-Fingered Pushups",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_MS_HP05_NINJA_00": {
+      "kind": "stack",
+      "name": "Dark Finality",
+      "source": "Gear_Catalogs/weapon_mspear_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP05_NINJA_CHEST": {
+      "kind": "stack",
+      "name": "Shadow's Mettle",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP05_NINJA_HELM_02": {
+      "kind": "stack",
+      "name": "Ghost Fox",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP05_NINJA_HELM_03": {
+      "kind": "stack",
+      "name": "Laughing Death",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    }
+  },
+  "bundles": {},
+  "bundle_names": {},
+  "rewards": {
+    "1": [
+      "EM_INTRO_HP05_NINJASTAR_00"
+    ],
+    "2": [
+      "CURRENCY_NOTES"
+    ],
+    "3": [
+      "WP_EB_HP05_NINJA_00"
+    ],
+    "4": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "5": [
+      "LT_HP05_NINJA_00"
+    ],
+    "6": [
+      "TOKEN_BOUNTY_DRAFT_PREMIUM"
+    ],
+    "7": [
+      "AR_HP05_NINJA_HELM_00"
+    ],
+    "8": [
+      "CURRENCY_PJM_PRESTIGE_EMPTY"
+    ],
+    "9": [
+      "WP_GA_HP05_NINJA_01"
+    ],
+    "10": [
+      "AR_HP05_NINJA_ARMS"
+    ],
+    "11": [
+      "CURRENCY_PJM_WEAPON"
+    ],
+    "12": [
+      "EM_PLAYER_HP05_SHURIKEN_00"
+    ],
+    "13": [
+      "CURRENCY_NOTES"
+    ],
+    "14": [
+      "WP_CB_HP05_NINJA_00"
+    ],
+    "15": [
+      "BNC_ANIMATION_HP05_NINJASTARS_00"
+    ],
+    "16": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "17": [
+      "EM_PLAYER_HP05_CHERRYBLOSSOM_00"
+    ],
+    "18": [
+      "TOKEN_BOUNTY_DRAFT_PREMIUM"
+    ],
+    "19": [
+      "WP_IH_HP05_NINJA_02"
+    ],
+    "20": [
+      "AR_HP05_NINJA_LEGS"
+    ],
+    "21": [
+      "CURRENCY_PJM_PRESTIGE_EMPTY"
+    ],
+    "22": [
+      "WP_DP_HP05_NINJA_01"
+    ],
+    "23": [
+      "CURRENCY_PJM_WEAPON"
+    ],
+    "24": [
+      "CURRENCY_NOTES"
+    ],
+    "25": [
+      "EM_PLAYER_HP05_PUSHUP_00_0"
+    ],
+    "26": [
+      "WP_MS_HP05_NINJA_00"
+    ],
+    "27": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "28": [
+      "AR_HP05_NINJA_CHEST"
+    ],
+    "29": [
+      "AR_HP05_NINJA_HELM_02"
+    ],
+    "30": [
+      "AR_HP05_NINJA_HELM_03"
+    ]
+  },
+  "grants": {
+    "1": {
+      "free": [],
+      "premium": [
+        [
+          "EM_INTRO_HP05_NINJASTAR_00",
+          1
+        ]
+      ]
+    },
+    "2": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          10000
+        ]
+      ]
+    },
+    "3": {
+      "free": [],
+      "premium": [
+        [
+          "WP_EB_HP05_NINJA_00",
+          1
+        ]
+      ]
+    },
+    "4": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          5
+        ]
+      ]
+    },
+    "5": {
+      "free": [],
+      "premium": [
+        [
+          "LT_HP05_NINJA_00",
+          1
+        ]
+      ]
+    },
+    "6": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT_PREMIUM",
+          5
+        ]
+      ]
+    },
+    "7": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP05_NINJA_HELM_00",
+          1
+        ]
+      ]
+    },
+    "8": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_PRESTIGE_EMPTY",
+          50
+        ]
+      ]
+    },
+    "9": {
+      "free": [],
+      "premium": [
+        [
+          "WP_GA_HP05_NINJA_01",
+          1
+        ]
+      ]
+    },
+    "10": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP05_NINJA_ARMS",
+          1
+        ]
+      ]
+    },
+    "11": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_WEAPON",
+          200
+        ]
+      ]
+    },
+    "12": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_HP05_SHURIKEN_00",
+          1
+        ]
+      ]
+    },
+    "13": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          10000
+        ]
+      ]
+    },
+    "14": {
+      "free": [],
+      "premium": [
+        [
+          "WP_CB_HP05_NINJA_00",
+          1
+        ]
+      ]
+    },
+    "15": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_ANIMATION_HP05_NINJASTARS_00",
+          1
+        ]
+      ]
+    },
+    "16": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          5
+        ]
+      ]
+    },
+    "17": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_HP05_CHERRYBLOSSOM_00",
+          1
+        ]
+      ]
+    },
+    "18": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT_PREMIUM",
+          5
+        ]
+      ]
+    },
+    "19": {
+      "free": [],
+      "premium": [
+        [
+          "WP_IH_HP05_NINJA_02",
+          1
+        ]
+      ]
+    },
+    "20": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP05_NINJA_LEGS",
+          1
+        ]
+      ]
+    },
+    "21": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_PRESTIGE_EMPTY",
+          50
+        ]
+      ]
+    },
+    "22": {
+      "free": [],
+      "premium": [
+        [
+          "WP_DP_HP05_NINJA_01",
+          1
+        ]
+      ]
+    },
+    "23": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_WEAPON",
+          200
+        ]
+      ]
+    },
+    "24": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          10000
+        ]
+      ]
+    },
+    "25": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_HP05_PUSHUP_00_0",
+          1
+        ]
+      ]
+    },
+    "26": {
+      "free": [],
+      "premium": [
+        [
+          "WP_MS_HP05_NINJA_00",
+          1
+        ]
+      ]
+    },
+    "27": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          5
+        ]
+      ]
+    },
+    "28": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP05_NINJA_CHEST",
+          1
+        ]
+      ]
+    },
+    "29": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP05_NINJA_HELM_02",
+          1
+        ]
+      ]
+    },
+    "30": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP05_NINJA_HELM_03",
+          1
+        ]
+      ]
+    }
+  },
+  "unavailable_rewards": [],
+  "source": {
+    "game": "1.6.2 layout; 1.14.7 item catalog",
+    "file": "season05_vault.json",
+    "sha256": "cef4abbebb8244891e4b198985ae673b62adf423e02f684a6ae79bf0f6ca27a8"
+  }
+}

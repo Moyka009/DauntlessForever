@@ -1,0 +1,347 @@
+{
+  "_comment": "1.14.7 Game Rules. Launcher writes choices to data/rules.txt. Backend reads them at startup. All native gameplay checks remain pending.",
+  "rules": [
+    {
+      "key": "universal_xp",
+      "env": "RULE_UNIVERSAL_XP",
+      "title": "Universal progression rate",
+      "blurb": "Applies to recognized player, weapon, Hunt Pass and mastery progression grants. Does not change Escalation saves.",
+      "default": "1",
+      "tested": false,
+      "choices": [
+        [
+          "0.5",
+          "0.5x"
+        ],
+        [
+          "1",
+          "1x"
+        ],
+        [
+          "1.5",
+          "1.5x"
+        ],
+        [
+          "2",
+          "2x"
+        ],
+        [
+          "3",
+          "3x"
+        ],
+        [
+          "5",
+          "5x"
+        ]
+      ]
+    },
+    {
+      "key": "weapon_xp",
+      "env": "RULE_WEAPON_XP",
+      "title": "Weapon XP speed",
+      "blurb": "Multiplies recognized weapon ExperienceTrack grants. Requires the game server to send those grants.",
+      "default": "1",
+      "tested": false,
+      "choices": [
+        [
+          "0.5",
+          "0.5x"
+        ],
+        [
+          "1",
+          "1x"
+        ],
+        [
+          "1.5",
+          "1.5x"
+        ],
+        [
+          "2",
+          "2x"
+        ],
+        [
+          "3",
+          "3x"
+        ],
+        [
+          "5",
+          "5x"
+        ]
+      ]
+    },
+    {
+      "key": "pass_xp",
+      "env": "RULE_PASS_XP",
+      "title": "Hunt Pass XP speed",
+      "blurb": "Multiplies progress grants for Hunt Pass tracks found in the original 1.14.7 season table.",
+      "default": "1",
+      "tested": false,
+      "choices": [
+        [
+          "0.5",
+          "0.5x"
+        ],
+        [
+          "1",
+          "1x"
+        ],
+        [
+          "1.5",
+          "1.5x"
+        ],
+        [
+          "2",
+          "2x"
+        ],
+        [
+          "3",
+          "3x"
+        ],
+        [
+          "5",
+          "5x"
+        ]
+      ]
+    },
+    {
+      "key": "mastery_xp",
+      "env": "RULE_MASTERY_XP",
+      "title": "Mastery progress speed",
+      "blurb": "Multiplies mastery-track progress grants; quest and challenge objective counters are unchanged.",
+      "default": "1",
+      "tested": false,
+      "choices": [
+        [
+          "0.5",
+          "0.5x"
+        ],
+        [
+          "1",
+          "1x"
+        ],
+        [
+          "1.5",
+          "1.5x"
+        ],
+        [
+          "2",
+          "2x"
+        ],
+        [
+          "3",
+          "3x"
+        ],
+        [
+          "5",
+          "5x"
+        ]
+      ]
+    },
+    {
+      "key": "materials",
+      "env": "RULE_MATERIALS",
+      "title": "Material reward amount",
+      "blurb": "Multiplies catalog-verified material rewards, including Aethersparks and Cell Dust. Costs and purchases keep normal quantities.",
+      "default": "1",
+      "tested": false,
+      "choices": [
+        [
+          "0.5",
+          "0.5x"
+        ],
+        [
+          "1",
+          "1x"
+        ],
+        [
+          "1.5",
+          "1.5x"
+        ],
+        [
+          "2",
+          "2x"
+        ],
+        [
+          "3",
+          "3x"
+        ],
+        [
+          "5",
+          "5x"
+        ]
+      ]
+    },
+    {
+      "key": "rams",
+      "env": "RULE_RAMS",
+      "title": "Rams reward amount",
+      "blurb": "Multiplies Rams rewards in eligible additive transactions, not shop purchases or refunds.",
+      "default": "1",
+      "tested": false,
+      "choices": [
+        [
+          "0.5",
+          "0.5x"
+        ],
+        [
+          "1",
+          "1x"
+        ],
+        [
+          "1.5",
+          "1.5x"
+        ],
+        [
+          "2",
+          "2x"
+        ],
+        [
+          "3",
+          "3x"
+        ],
+        [
+          "5",
+          "5x"
+        ]
+      ]
+    },
+    {
+      "key": "weapon_merits",
+      "env": "RULE_WEAPON_MERITS",
+      "title": "Combat Merit reward amount",
+      "blurb": "Multiplies Combat Merit rewards. Spending remains normal.",
+      "default": "1",
+      "tested": false,
+      "choices": [
+        [
+          "0.5",
+          "0.5x"
+        ],
+        [
+          "1",
+          "1x"
+        ],
+        [
+          "1.5",
+          "1.5x"
+        ],
+        [
+          "2",
+          "2x"
+        ],
+        [
+          "3",
+          "3x"
+        ],
+        [
+          "5",
+          "5x"
+        ]
+      ]
+    },
+    {
+      "key": "exploration_merits",
+      "env": "RULE_EXPLORATION_MERITS",
+      "title": "Exploration Merit reward amount",
+      "blurb": "Multiplies Airship/Exploration Merit rewards. Spending remains normal.",
+      "default": "1",
+      "tested": false,
+      "choices": [
+        [
+          "0.5",
+          "0.5x"
+        ],
+        [
+          "1",
+          "1x"
+        ],
+        [
+          "1.5",
+          "1.5x"
+        ],
+        [
+          "2",
+          "2x"
+        ],
+        [
+          "3",
+          "3x"
+        ],
+        [
+          "5",
+          "5x"
+        ]
+      ]
+    },
+    {
+      "key": "rare_cores",
+      "env": "RULE_RARE_CORES",
+      "title": "Rare Core reward amount",
+      "blurb": "Multiplies Rare Cell Core quantities, including cores added by the per-kill toggle.",
+      "default": "1",
+      "tested": false,
+      "choices": [
+        [
+          "0.5",
+          "0.5x"
+        ],
+        [
+          "1",
+          "1x"
+        ],
+        [
+          "1.5",
+          "1.5x"
+        ],
+        [
+          "2",
+          "2x"
+        ],
+        [
+          "3",
+          "3x"
+        ],
+        [
+          "5",
+          "5x"
+        ]
+      ]
+    },
+    {
+      "key": "rare_core_kill",
+      "env": "RULE_RARE_CORE_KILL",
+      "title": "Rare Core per Behemoth kill",
+      "blurb": "Adds a Rare Cell Core when an eligible inventory transaction contains a known Behemoth kill token. Does not invent kill events.",
+      "default": "0",
+      "tested": false,
+      "choices": [
+        [
+          "0",
+          "Off"
+        ],
+        [
+          "1",
+          "On"
+        ]
+      ]
+    },
+    {
+      "key": "free_crafting",
+      "env": "RULE_FREE_CRAFTING",
+      "title": "Free crafting",
+      "blurb": "Keeps ingredients for exact catalog-matched equipment crafting and upgrade transactions. You still need the recipe unlock and ingredients once. Does not waive shop, fusion or reforge costs.",
+      "default": "0",
+      "tested": false,
+      "choices": [
+        [
+          "0",
+          "Off"
+        ],
+        [
+          "1",
+          "On"
+        ]
+      ]
+    }
+  ]
+}

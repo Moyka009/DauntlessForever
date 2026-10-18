@@ -1,0 +1,249 @@
+{
+  "revision": "season1147-eventpass_saintsbond2021-v1",
+  "pass_id": "season27",
+  "key": "eventpass_saintsbond2021",
+  "title": "Bonds of Honour",
+  "kind": "event",
+  "levels": 10,
+  "xp_per_level": 100,
+  "start_date": "2020-01-01T00:00:00+00:00",
+  "end_date": "2099-01-01T00:00:00+00:00",
+  "items": {
+    "TITLE_SAINTS19_09": {
+      "kind": "stack",
+      "name": "The Ardent Flame",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_SAINTS19_05": {
+      "kind": "stack",
+      "name": "Hearts United",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_SAINTS19_05": {
+      "kind": "stack",
+      "name": "Hearts United",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_KISSES_00": {
+      "kind": "stack",
+      "name": "Kisses!",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_STANDARD_SAINTS19_01": {
+      "kind": "stack",
+      "name": "Standard of the Artisan",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_ANIMATION_SAINTS_BOND_00": {
+      "kind": "stack",
+      "name": "Reign of Hearts",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_SAINTS19_ROMANTIC_HELM_02": {
+      "kind": "stack",
+      "name": "Artisan's Circlet",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_FABRIC_EVENT_SAINTS19_01": {
+      "kind": "stack",
+      "name": "Lover's Window",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_FLOWERS_00": {
+      "kind": "stack",
+      "name": "A Certain Bouquet",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "LT_SAINTS19_ROMANTIC_01": {
+      "kind": "stack",
+      "name": "Soul's Brilliance",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_SAINTS19_ROMANTIC_HELM_00": {
+      "kind": "stack",
+      "name": "The Adoration Plume",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_SAINTS19_ROMANTIC_ARMS": {
+      "kind": "stack",
+      "name": "The Rapturous Embrace",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_SAINTS19_ROMANTIC_CHEST": {
+      "kind": "stack",
+      "name": "The Steadfast Heart",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_SAINTS19_ROMANTIC_LEGS": {
+      "kind": "stack",
+      "name": "The Star-Crossed Walk",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    }
+  },
+  "bundles": {},
+  "bundle_names": {},
+  "rewards": {
+    "1": [
+      "TITLE_SAINTS19_09"
+    ],
+    "2": [
+      "QI_FLARE_SAINTS19_05",
+      "BNC_SIGIL_EVENT_SAINTS19_05"
+    ],
+    "3": [
+      "EM_PLAYER_KISSES_00"
+    ],
+    "4": [
+      "BNC_STANDARD_SAINTS19_01"
+    ],
+    "5": [
+      "BNC_ANIMATION_SAINTS_BOND_00"
+    ],
+    "6": [
+      "AR_SAINTS19_ROMANTIC_HELM_02"
+    ],
+    "7": [
+      "BNC_FABRIC_EVENT_SAINTS19_01"
+    ],
+    "8": [
+      "EM_PLAYER_FLOWERS_00"
+    ],
+    "9": [
+      "LT_SAINTS19_ROMANTIC_01"
+    ],
+    "10": [
+      "AR_SAINTS19_ROMANTIC_HELM_00",
+      "AR_SAINTS19_ROMANTIC_ARMS",
+      "AR_SAINTS19_ROMANTIC_CHEST",
+      "AR_SAINTS19_ROMANTIC_LEGS"
+    ]
+  },
+  "grants": {
+    "1": {
+      "free": [],
+      "premium": [
+        [
+          "TITLE_SAINTS19_09",
+          1
+        ]
+      ]
+    },
+    "2": {
+      "free": [],
+      "premium": [
+        [
+          "QI_FLARE_SAINTS19_05",
+          1
+        ],
+        [
+          "BNC_SIGIL_EVENT_SAINTS19_05",
+          2
+        ]
+      ]
+    },
+    "3": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_KISSES_00",
+          1
+        ]
+      ]
+    },
+    "4": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_STANDARD_SAINTS19_01",
+          1
+        ]
+      ]
+    },
+    "5": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_ANIMATION_SAINTS_BOND_00",
+          1
+        ]
+      ]
+    },
+    "6": {
+      "free": [],
+      "premium": [
+        [
+          "AR_SAINTS19_ROMANTIC_HELM_02",
+          1
+        ]
+      ]
+    },
+    "7": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_FABRIC_EVENT_SAINTS19_01",
+          1
+        ]
+      ]
+    },
+    "8": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_FLOWERS_00",
+          1
+        ]
+      ]
+    },
+    "9": {
+      "free": [],
+      "premium": [
+        [
+          "LT_SAINTS19_ROMANTIC_01",
+          1
+        ]
+      ]
+    },
+    "10": {
+      "free": [],
+      "premium": [
+        [
+          "AR_SAINTS19_ROMANTIC_HELM_00",
+          1
+        ],
+        [
+          "AR_SAINTS19_ROMANTIC_ARMS",
+          1
+        ],
+        [
+          "AR_SAINTS19_ROMANTIC_CHEST",
+          1
+        ],
+        [
+          "AR_SAINTS19_ROMANTIC_LEGS",
+          1
+        ]
+      ]
+    }
+  },
+  "unavailable_rewards": [],
+  "source": {
+    "game": "1.6.2 layout; 1.14.7 item catalog",
+    "file": "eventpass_saintsbond2021.json",
+    "sha256": "b56079f5049378cc1aaea442423c3077710aba82c672a88912b7a4fc14e8ccc2"
+  }
+}

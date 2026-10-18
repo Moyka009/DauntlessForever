@@ -23,10 +23,17 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const quality = require('./quality');
+let runtime = null;
+let quiet = false;
+const metrics = { requests: 0, failed: 0, unsupported: 0, saves: 0, recovered: false, missing: new Map() };
+let nextConsoleWarning = 0;
 
 const args = process.argv.slice(2);
 const argVal = (name) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : undefined; };
 const ROOT = path.resolve(argVal('--dir') || path.join(__dirname, '..'));
+// Game Rules 1.14.7: isolated settings and catalog-verified transformations.
+const gameRules = require('./game-rules1147').create(ROOT);
 // DF-LAN-1147: LAN play. RECORDER_BIND=0.0.0.0 lets other PCs on the home network in (LAN - HOST also opens the
 // firewall for the home network only); RECORDER_PUBLIC_HOST is this PC's address, given to games for the servers.
 const BIND_HOST = argVal('--bind') || process.env.RECORDER_BIND || '127.0.0.1';
@@ -110,7 +117,10 @@ let state = { players: {}, lastPlayer: null };
 const sessions = new Map(); // session token -> player key (kept in memory only)
 
 function loadState() {
-  try { state = JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')); } catch (e) { /* first run */ }
+  // KK-QUALITY-1147 (KombatKing, AGPL): a damaged save falls back to the last good copy (state.json.bak)
+  const loaded = quality.loadState(STATE_FILE); state = loaded.state;
+  metrics.recovered = loaded.recovered;
+  if (loaded.recovered) console.warn('[Backend] Recovered the previous valid save; the damaged file was preserved.');
   if (!state.players) state.players = {};
   // DF-HOSTID-1147: this server's own id (made once). Joiners remember which host has their character by it, not by
   // the join code, which changes every time the host goes online.
@@ -151,6 +161,8 @@ function huntUrl(id) {
   return url;
 }
 function destinationFor(b) {
+  const modesDestination = require('./modes1147').destination(b);
+  if (modesDestination) return modesDestination;
   const mode = b.gameMode || 'CITY', type = b.gameType || '';
   const hunt = Array.isArray(b.hunts) && b.hunts.length ? String(b.hunts[0]) : '';
   const label = `${mode}/${type || '-'} ${b.playerHuntId || hunt || ''}`.trim();
@@ -205,12 +217,15 @@ function setWanted(w) {
   try {
     if (!w) { if (fs.existsSync(WANTED_FILE)) fs.unlinkSync(WANTED_FILE); return; }
     const tmp = WANTED_FILE + '.tmp'; fs.writeFileSync(tmp, JSON.stringify(w)); fs.renameSync(tmp, WANTED_FILE);
-  } catch (e) { /* the server script will simply not see it */ }
+  } catch (e) { throw quality.httpError(503, 'Hunt request could not be saved; retry after checking disk space'); }
 }
-function saveState() {
-  const tmp = STATE_FILE + '.tmp';
-  fs.writeFileSync(tmp, JSON.stringify(state, null, 2));
-  fs.renameSync(tmp, STATE_FILE);
+function saveStateNative() {
+  try { if (quality.saveState(STATE_FILE, state)) metrics.saves++; }
+  catch (error) {
+    // A failed disk write must not leave unsaved rewards or equipment in memory.
+    try { state = quality.loadState(STATE_FILE).state; } catch {}
+    throw quality.httpError(503, 'Player save could not be written; previous save preserved');
+  }
 }
 // Ids in the same format the live game used: 26 characters (base32 of 16 bytes).
 function base32(buf) {
@@ -366,12 +381,35 @@ function inventoryOf(player, characterId) {
   return player.inventory[id];
 }
 function applyInventory(inv, body) {
+  body = huntpass1147.inventory(inv, body);
+  body = gameRules.inventory(inv, body);
+  quality.validateInventory(body);
+  for(const item of body.removeInstancedItems || []) if(typeof item!=='string' && (!item || typeof item.instanceId!=='string')) throw quality.httpError(400,'Invalid equipment removal');
+  const incomingIds = new Map(inv.instancedItems.map(x => [x.instanceId,x.catalogId]));
+  for (const item of body.addInstancedItems || []) if (item.instanceId) {
+    if(incomingIds.has(item.instanceId) && incomingIds.get(item.instanceId)!==item.catalogId) throw quality.httpError(409,'Equipment instanceId belongs to another item');
+    incomingIds.set(item.instanceId,item.catalogId);
+  }
+  for(const item of body.saveInstancedItems || []) {
+    const existing=inv.instancedItems.find(x=>x.instanceId===item.instanceId);
+    if(!existing&&!item.catalogId)throw quality.httpError(400,'New equipment requires catalogId');
+    if(existing&&item.catalogId&&existing.catalogId!==item.catalogId)throw quality.httpError(409,'Equipment catalogId cannot change');
+  }
+  const quantities=new Map(inv.stackedItems.map(x=>[x.catalogId,x.quantity]));
+  for(const item of body.addStackedItems||[]) {
+    const total=(quantities.get(item.catalogId)||0)+Number(item.quantity);
+    if(!Number.isSafeInteger(total))throw quality.httpError(400,'Stacked quantity is too large');
+    quantities.set(item.catalogId,total);
+  }
   const arr = (x) => (Array.isArray(x) ? x : []);
   const created = [], updatedInst = [], updatedStack = [], removed = [];
   for (const it of arr(body.addInstancedItems)) {
     const item = Object.assign({}, it);
     if (!item.instanceId) item.instanceId = crypto.randomUUID();
     if (typeof item.updateVersion !== 'number') item.updateVersion = 1;
+    const existing = inv.instancedItems.find(x => x.instanceId === item.instanceId);
+    if (existing && existing.catalogId !== item.catalogId) throw quality.httpError(409, 'Equipment instanceId belongs to another item');
+    if (existing) { created.push(existing); continue; }
     inv.instancedItems.push(item); created.push(item);
   }
   for (const it of arr(body.saveInstancedItems)) {
@@ -386,6 +424,7 @@ function applyInventory(inv, body) {
   }
   const bump = (it, sign) => {
     const q = Number(it.quantity) || 0;
+    if (!q) return;
     let s = inv.stackedItems.find((x) => x.catalogId === it.catalogId);
     if (!s) { s = { catalogId: it.catalogId, quantity: 0 }; inv.stackedItems.push(s); }
     s.quantity = Math.max(0, s.quantity + sign * q);
@@ -483,13 +522,13 @@ const trackOut = (p, id, t) => ({ phx_account_id: p.accountId, progression_id: i
   confirmed_premium_rank: t.confirmed_premium_rank || 0, confirmed_date: t.confirmed_date || null });
 const objectiveOut = (p, id, o) => ({ completed_count: o.completed_count || 0, created_date: o.created_date || isoNow(), last_modified_date: o.last_modified_date || isoNow(),
   objective_id: id, phx_account_id: p.accountId, progress: o.progress || 0 });
-function grantProgress(c) {
-  const p = playerFor(c.req); const pr = progressOf(p); const b = c.body && typeof c.body === 'object' ? c.body : {};
+function grantProgressNative(c) {
+  const p = playerFor(c.req); const pr = clone(progressOf(p)); const b = gameRules.progress(huntpass1147.progressBody(c.body && typeof c.body === 'object' ? c.body : {}));
   const tracks = [], objectives = [];
   for (const t of Array.isArray(b.progress_tracks) ? b.progress_tracks : []) {
     if (!t || !t.progression_id) continue;
     const cur = pr.tracks[t.progression_id] || (pr.tracks[t.progression_id] = { progress: 0 });
-    cur.progress = (Number(cur.progress) || 0) + (Number(t.progress) || 0); tracks.push(trackOut(p, t.progression_id, cur));
+    cur.progress = gameRules.sumTrack(t.progression_id, cur.progress, Number(t.progress) || 0); tracks.push(trackOut(p, t.progression_id, cur));
   }
   for (const o of Array.isArray(b.objectives) ? b.objectives : []) {
     if (!o || !o.objective_id) continue;
@@ -498,15 +537,18 @@ function grantProgress(c) {
     if (o.completed_count !== undefined) cur.completed_count = Number(o.completed_count) || 0;
     cur.last_modified_date = isoNow(); objectives.push(objectiveOut(p, o.objective_id, cur));
   }
-  saveState();
-  return J(wrapped({ progress_tracks: tracks, objectives }), `${tracks.length} track(s), ${objectives.length} objective(s) saved, guess`);
+  p.progress = pr; huntpass1147.settle(p); saveState();
+  return J(wrapped({ progress_tracks: tracks.map(t=>trackOut(p,t.progression_id,p.progress.tracks[t.progression_id])), objectives }), `${tracks.length} track(s), ${objectives.length} objective(s) saved, guess`);
 }
-function grantTrack(c) {
+function grantTrackNative(c) {
   const p = playerFor(c.req); const pr = progressOf(p); const id = decodeURIComponent(c.match[1]);
+  huntpass1147.assertDelta(id, Number(c.match[2]));
   const cur = pr.tracks[id] || (pr.tracks[id] = { progress: 0 });
-  cur.progress = (Number(cur.progress) || 0) + (Number(c.match[2]) || 0); saveState();
+  cur.progress = gameRules.sumTrack(id, cur.progress, gameRules.track(id, Number(c.match[2]) || 0)); huntpass1147.settle(p); saveState();
   return J(wrapped(trackOut(p, id, cur)), `${id} +${c.match[2]}, guess`);
 }
+function grantProgress(c) { const p=playerFor(c.req); return huntpass1147.atomic(p,()=>grantProgressNative(c)); }
+function grantTrack(c) { const p=playerFor(c.req); return huntpass1147.atomic(p,()=>grantTrackNative(c)); }
 function saveBounties(c) {
   const p = playerFor(c.req); const b = c.body && typeof c.body === 'object' ? (c.body.payload && typeof c.body.payload === 'object' ? c.body.payload : c.body) : {};
   const cur = Object.assign(emptyBounties(), p.bounties || {});
@@ -609,12 +651,12 @@ function partyHunt(P) {
   const lp = playerOfAcc(P.leader); const cd = lp && lp.candidate;
   if (!cd || cd.city !== false || (!PARTY_FOLLOW_TRAINING && cd.gameType === 'TRAINING_GROUND') || Date.now() - (cd.asked || 0) > PARTY_HUNT_FOLLOW_MS) return null;
   const srv = liveServer(HUNT_SERVER_FILE);
-  return { id: cd.id, playerHuntId: cd.playerHuntId || null, live: !!(srv && srv.id === cd.id) };
+  return { id: cd.id, playerHuntId: cd.playerHuntId || null, gauntletLevel: cd.gauntletLevel ?? null, live: !!(srv && srv.id === cd.id) };
 }
 function partyReply(P) {
   const hunt = partyHunt(P);
   return {
-    candidateId: hunt ? hunt.id : null, candidateState: hunt ? (hunt.live ? 'IN_PROGRESS' : 'MATCHING') : null, gauntletLevel: null,
+    candidateId: hunt ? hunt.id : null, candidateState: hunt ? (hunt.live ? 'IN_PROGRESS' : 'MATCHING') : null, gauntletLevel: hunt ? hunt.gauntletLevel : null,
     leaderPlayerId: P.leader, partyId: P.id, playerHuntId: hunt ? hunt.playerHuntId : null, playerIds: [...P.members],
     playerStates: P.members.map((m) => ({ consoleSessionId: null, displayName: nameOfAcc(m), isMemberOfCandidate: !!hunt, platform: 'win', playerId: m })),
   };
@@ -622,7 +664,7 @@ function partyReply(P) {
 function soloReply(p, build) {
   if (!p.partyId) { p.partyId = partyIdFor(build); saveState(); }
   const cd = p.candidate || null;
-  return { candidateId: cd ? cd.id : null, candidateState: cd ? (liveServer() ? 'IN_PROGRESS' : 'MATCHING') : null, gauntletLevel: null, leaderPlayerId: p.accountId, partyId: p.partyId, playerHuntId: cd ? cd.playerHuntId : null,
+  return { candidateId: cd ? cd.id : null, candidateState: cd ? (liveServer() ? 'IN_PROGRESS' : 'MATCHING') : null, gauntletLevel: (cd && cd.gauntletLevel) ?? null, leaderPlayerId: p.accountId, partyId: p.partyId, playerHuntId: cd ? cd.playerHuntId : null,
     playerStates: [{ consoleSessionId: null, displayName: p.username, isMemberOfCandidate: !!cd, platform: 'win', playerId: p.accountId }] };
 }
 function partyPoll(p, build) {
@@ -823,8 +865,20 @@ const routes = [
   ['dauntless', 'POST', /^\/inventory\/?$/, (c) => {
     const p = playerFor(c.req);
     const b = c.body || {};
-    const result = applyInventory(inventoryOf(p, b.characterId), b); saveState();
-    return J(result);
+    const transaction=typeof b.transactionId==='string'&&b.transactionId.length<=128?b.transactionId:null;
+    const digest=crypto.createHash('sha256').update(JSON.stringify(b)).digest('hex');
+    const history=p.inventoryTransactions||[];
+    const prior=transaction&&history.find(x=>x.id===transaction&&x.character===b.characterId);
+    if(prior) {
+      if(prior.digest!==digest)throw quality.httpError(409,'Inventory transactionId was reused with different data');
+      return J(prior.result,'repeated inventory request; already saved');
+    }
+    // Work on a copy: a rejected batch must never leave half its changes in memory.
+    const inv=JSON.parse(JSON.stringify(inventoryOf(p,b.characterId)));
+    const result = applyInventory(inv,b);
+    p.inventory[b.characterId||p.characters[0]?.id||'none']=inv;
+    if(transaction){history.push({id:transaction,character:b.characterId,digest,result});p.inventoryTransactions=history.slice(-128);}
+    saveState();return J(result);
   }],
 
   ['tracking', 'POST', /^\/heartbeat\/?$/, () => TEXT('20000', 'guess')],
@@ -876,7 +930,7 @@ const routes = [
       }
     } else leavePlace(me);
     p.candidate = { id: joinId || ('local1$' + crypto.randomBytes(16).toString('hex')), gameMode: b.gameMode || 'CITY', gameType: b.gameType || null,
-      huntId: Array.isArray(b.hunts) && b.hunts.length ? b.hunts[0] : null, playerHuntId: b.playerHuntId || null,
+      huntId: Array.isArray(b.hunts) && b.hunts.length ? b.hunts[0] : null, playerHuntId: b.playerHuntId || null, gauntletLevel: b.gameType === 'GAUNTLET' ? b.gauntlet_level : null,
       buildId: b.buildId || '647472_rel-1.14.7_shipping', gameSessionId: crypto.randomBytes(16).toString('hex'),
       city: dest.city, url: dest.url || null, label: dest.label, asked: Date.now() };
     // Outside the city: ask server-211.ps1 (through a small file) to start a second server on that map.
@@ -1078,14 +1132,37 @@ const routes = [
 
 // ---------------------------------------------------------------- server
 function logLine(entry) {
-  fs.appendFileSync(LOG_FILE, JSON.stringify(entry) + '\n');
+  try { quality.appendLog(LOG_FILE, entry); }
+  catch (error) { if (Date.now() > nextConsoleWarning) { console.error('[Backend] Request log could not be written: ' + error.code); nextConsoleWarning = Date.now() + 30000; } }
+  metrics.requests++; if (entry.status >= 500) metrics.failed++;
+  if (!entry.known) {
+    metrics.unsupported++;
+    const route = entry.svc + ' ' + entry.m + ' ' + entry.path.replace(/[A-Z2-7]{26}|[0-9a-f]{24,}/gi, '{id}');
+    if (metrics.missing.size < 250 || metrics.missing.has(route)) metrics.missing.set(route, (metrics.missing.get(route) || 0) + 1);
+  }
+  if (quiet && entry.known && entry.status < 400) return;
+  if (quiet && Date.now() < nextConsoleWarning) return;
+  if (quiet) nextConsoleWarning = Date.now() + 10000;
   const t = entry.t.slice(11, 19);
   const mark = entry.known ? ' ' : '?';
   console.log(`${t} ${mark} ${String(entry.status).padEnd(3)} ${entry.svc.padEnd(16)} ${entry.m.padEnd(6)} ${entry.path}${entry.note ? '   [' + entry.note + ']' : ''}`);
 }
 
+// Version-specific Ramsgate feature routes.
+const mega1147 = require('./mega1147').create({playerFor,bearerOf,sessions,inventoryOf,saveState,loadCapture});
+const middleman1147 = require('./middleman1147').create({playerFor,bearerOf,sessions,inventoryOf,applyInventory,saveState,next:c=>mega1147.handle(c)});
+const trials1147 = require('./trials1147').create({playerFor,bearerOf,sessions,inventoryOf,saveState,next:c=>middleman1147.handle(c)});
+var huntpassSeasons1147 = require('./huntpass-seasons1147').create(ROOT);
+const huntpass1147 = require('./huntpass1147').create({playerFor,bearerOf,sessions,inventoryOf,saveState,loadCapture,next:c=>trials1147.handle(c)}, {data:huntpassSeasons1147.data,seasons:huntpassSeasons1147});
+const bounties1147 = require('./bounties1147').create({playerFor,bearerOf,sessions,getPlayers:()=>Object.values(state.players||{}),saveState,loadCapture,next:c=>huntpass1147.handle(c)});
+const equipment1147 = require('./equipment1147').create({playerFor,bearerOf,sessions,getPlayers:()=>Object.values(state.players||{}),saveState,next:c=>bounties1147.handle(c)});
+const dyes1147 = require('./dyes1147').create({playerFor,bearerOf,sessions,inventoryOf,saveState,next:c=>equipment1147.handle(c)});
+const modes1147 = require('./modes1147').create({playerFor,bearerOf,sessions,getPlayers:()=>Object.values(state.players||{}),saveState,next:c=>dyes1147.handle(c)});
+
+
 function handle(svc, port, req, res, bodyBuf) {
-  const url = new URL(req.url, 'http://127.0.0.1');
+  let url;
+  try { url = new URL(req.url, 'http://127.0.0.1'); } catch { res.writeHead(400); res.end(); return; }
   const pathName = url.pathname;
   if (!privateAddress(req.socket && req.socket.remoteAddress)) { res.writeHead(403, { 'Content-Length': 0 }); res.end(); return; }
   let body;
@@ -1095,12 +1172,16 @@ function handle(svc, port, req, res, bodyBuf) {
   let reply = null, known = false;
   if (pathName === '/_recorder/ping') { reply = J({ ok: true, service: svc.service, port, host: state.hostId }); known = true; }
   else if (/^\/_travel\/[0-9a-f]{32}$/.test(pathName)) { reply = travel(req.method, pathName.slice(9), body); known = true; }
+  else if (pathName === '/_recorder/status') { reply = J(status()); known = true; }
   else {
+    try { reply = modes1147.handle({service:svc.service,method:req.method,path:pathName,req,body,url}); known=!!reply; }
+    catch(e) { reply={status:e.status||500,note:'feature module: '+scrubString(e.message)}; known=true; }
     for (const [rSvc, rMethod, rPath, fn] of routes) {
+      if(reply) break;
       if (rSvc !== svc.service || rMethod !== req.method) continue;
       const match = rPath.exec(pathName);
       if (!match) continue;
-      try { reply = fn({ req, body, match, url, basePort: BASE_PORT }); } catch (e) { reply = { status: 500, note: 'handler error: ' + e.message }; }
+      try { reply = fn({ req, body, match, url, basePort: BASE_PORT }); } catch (e) { reply = { status: e.status || (e instanceof URIError ? 400 : 500), note: 'handler error: ' + scrubString(e.message) }; }
       known = true; break;
     }
   }
@@ -1234,3 +1315,12 @@ function events() {
 }
 
 if (args.includes('--summary')) summary(); else if (args.includes('--events')) events(); else start();
+
+// KK-QUALITY-1147: backend status for checks (GET /_recorder/status)
+function status() {
+  return { ok: true, version: '1147-df-kk-r1', captures_available: !!capRoot, requests: metrics.requests, errors: metrics.failed,
+    unsupported_requests: metrics.unsupported, saves_written: metrics.saves, recovered_save: metrics.recovered,
+    unsupported_routes: [...metrics.missing].map(([route, count]) => ({ route, count })) };
+}
+// Hunt Pass seasons (KombatKing) keep each season's progress apart; they wrap the save.
+function saveState() { return huntpassSeasons1147 ? huntpassSeasons1147.save(state, saveStateNative) : saveStateNative(); }

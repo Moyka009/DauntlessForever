@@ -1,0 +1,903 @@
+{
+  "revision": "season1147-season13a_og-v1",
+  "pass_id": "season27",
+  "key": "season13a_og",
+  "title": "Time Strike",
+  "kind": "original",
+  "levels": 50,
+  "xp_per_level": 100,
+  "start_date": "2020-01-01T00:00:00+00:00",
+  "end_date": "2099-01-01T00:00:00+00:00",
+  "items": {
+    "CURRENCY_NOTES": {
+      "kind": "stack",
+      "name": "Rams",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "AR_HP13A_ANCIENT_HELM_01": {
+      "kind": "stack",
+      "name": "AR_HP13A_ANCIENT_HELM_01",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_PJM_PRESTIGE_EMPTY": {
+      "kind": "stack",
+      "name": "CURRENCY_PJM_PRESTIGE_EMPTY",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_PLATINUM_UNIV": {
+      "kind": "stack",
+      "name": "Platinum",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "CELL_ENCHANTER_UC": {
+      "kind": "stack",
+      "name": "+1 Cascade Cell",
+      "source": "generated_cell_catalog.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_SEASON_13_PAST": {
+      "kind": "stack",
+      "name": "Fragment of Times Past",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "EM_PLAYER_HP13A_ANCIENT_00": {
+      "kind": "stack",
+      "name": "EM_PLAYER_HP13A_ANCIENT_00",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_TOKEN_EXCHANGE_SPEED_UP": {
+      "kind": "stack",
+      "name": "Ace Chips",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_ANIMATION_HP13A_ANCIENT_00": {
+      "kind": "stack",
+      "name": "BNC_ANIMATION_HP13A_ANCIENT_00",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "TOKEN_BOUNTY_DRAFT": {
+      "kind": "stack",
+      "name": "Bounty Token",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_PJM_WEAPON": {
+      "kind": "stack",
+      "name": "CURRENCY_PJM_WEAPON",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_PJM_AIRSHIP": {
+      "kind": "stack",
+      "name": "CURRENCY_PJM_AIRSHIP",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "EJ_HP13A_ANCIENT_00": {
+      "kind": "stack",
+      "name": "EJ_HP13A_ANCIENT_00",
+      "source": "emojis_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_HP13A_ANCIENT_00": {
+      "kind": "stack",
+      "name": "BNC_SIGIL_HP13A_ANCIENT_00",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP13A_ANCIENT_00": {
+      "kind": "stack",
+      "name": "QI_FLARE_HP13A_ANCIENT_00",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP13A_ANCIENT_CHEST_01": {
+      "kind": "stack",
+      "name": "AR_HP13A_ANCIENT_CHEST_01",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "TOKEN_DAILY_PATROL_BONUS_PURCHASED": {
+      "kind": "stack",
+      "name": "Patrol Key",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_FABRIC_HP13A_ANCIENT_00": {
+      "kind": "stack",
+      "name": "BNC_FABRIC_HP13A_ANCIENT_00",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "LT_HP13A_ANCIENT_01": {
+      "kind": "stack",
+      "name": "LT_HP13A_ANCIENT_01",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EJ_HP13A_ANCIENT_01": {
+      "kind": "stack",
+      "name": "EJ_HP13A_ANCIENT_01",
+      "source": "emojis_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_HP13A_ANCIENT_00": {
+      "kind": "stack",
+      "name": "TITLE_HP13A_ANCIENT_00",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP13A_ANCIENT_HELM_00_ULTRA": {
+      "kind": "stack",
+      "name": "AR_HP13A_ANCIENT_HELM_00_ULTRA",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP13A_ANCIENT_LEGS_00_ULTRA": {
+      "kind": "stack",
+      "name": "AR_HP13A_ANCIENT_LEGS_00_ULTRA",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP13A_ANCIENT_ARMS_00_ULTRA": {
+      "kind": "stack",
+      "name": "AR_HP13A_ANCIENT_ARMS_00_ULTRA",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP13A_ANCIENT_CHEST_00_ULTRA": {
+      "kind": "stack",
+      "name": "AR_HP13A_ANCIENT_CHEST_00_ULTRA",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    }
+  },
+  "bundles": {},
+  "bundle_names": {},
+  "rewards": {
+    "1": [
+      "CURRENCY_NOTES",
+      "AR_HP13A_ANCIENT_HELM_01"
+    ],
+    "2": [
+      "CURRENCY_PJM_PRESTIGE_EMPTY"
+    ],
+    "3": [
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "4": [
+      "CELL_ENCHANTER_UC"
+    ],
+    "5": [
+      "CURRENCY_SEASON_13_PAST",
+      "EM_PLAYER_HP13A_ANCIENT_00"
+    ],
+    "6": [],
+    "7": [
+      "CURRENCY_TOKEN_EXCHANGE_SPEED_UP"
+    ],
+    "8": [
+      "CURRENCY_NOTES",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "9": [
+      "CURRENCY_NOTES"
+    ],
+    "10": [
+      "CURRENCY_SEASON_13_PAST",
+      "BNC_ANIMATION_HP13A_ANCIENT_00"
+    ],
+    "11": [
+      "TOKEN_BOUNTY_DRAFT"
+    ],
+    "12": [
+      "CURRENCY_PJM_WEAPON"
+    ],
+    "13": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "14": [
+      "CURRENCY_PJM_AIRSHIP"
+    ],
+    "15": [
+      "CURRENCY_SEASON_13_PAST",
+      "EJ_HP13A_ANCIENT_00"
+    ],
+    "16": [
+      "BNC_SIGIL_HP13A_ANCIENT_00"
+    ],
+    "17": [
+      "CELL_ENCHANTER_UC"
+    ],
+    "18": [
+      "CURRENCY_PLATINUM_UNIV",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "19": [
+      "CURRENCY_NOTES"
+    ],
+    "20": [
+      "CURRENCY_SEASON_13_PAST",
+      "QI_FLARE_HP13A_ANCIENT_00"
+    ],
+    "21": [
+      "TOKEN_BOUNTY_DRAFT"
+    ],
+    "22": [
+      "CELL_ENCHANTER_UC"
+    ],
+    "23": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "24": [
+      "CURRENCY_PJM_PRESTIGE_EMPTY"
+    ],
+    "25": [
+      "CURRENCY_SEASON_13_PAST",
+      "AR_HP13A_ANCIENT_CHEST_01"
+    ],
+    "26": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "27": [
+      "CURRENCY_TOKEN_EXCHANGE_SPEED_UP"
+    ],
+    "28": [
+      "CURRENCY_PLATINUM_UNIV",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "29": [
+      "CURRENCY_NOTES"
+    ],
+    "30": [
+      "CURRENCY_SEASON_13_PAST",
+      "BNC_FABRIC_HP13A_ANCIENT_00"
+    ],
+    "31": [
+      "TOKEN_BOUNTY_DRAFT"
+    ],
+    "32": [
+      "CURRENCY_PJM_WEAPON"
+    ],
+    "33": [
+      "CURRENCY_PJM_AIRSHIP",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "34": [
+      "CURRENCY_PJM_AIRSHIP"
+    ],
+    "35": [
+      "CURRENCY_SEASON_13_PAST",
+      "LT_HP13A_ANCIENT_01"
+    ],
+    "36": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "37": [
+      "CELL_ENCHANTER_UC"
+    ],
+    "38": [
+      "CURRENCY_PLATINUM_UNIV",
+      "CURRENCY_NOTES"
+    ],
+    "39": [
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "40": [
+      "CURRENCY_SEASON_13_PAST",
+      "EJ_HP13A_ANCIENT_01"
+    ],
+    "41": [
+      "TOKEN_BOUNTY_DRAFT"
+    ],
+    "42": [
+      "CURRENCY_TOKEN_EXCHANGE_SPEED_UP"
+    ],
+    "43": [
+      "CURRENCY_NOTES",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "44": [
+      "CURRENCY_NOTES"
+    ],
+    "45": [
+      "CURRENCY_SEASON_13_PAST"
+    ],
+    "46": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "47": [
+      "CURRENCY_PLATINUM_UNIV",
+      "CELL_ENCHANTER_UC"
+    ],
+    "48": [
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "49": [
+      "CURRENCY_SEASON_13_PAST",
+      "CURRENCY_PJM_PRESTIGE_EMPTY"
+    ],
+    "50": [
+      "TITLE_HP13A_ANCIENT_00",
+      "AR_HP13A_ANCIENT_HELM_00_ULTRA",
+      "AR_HP13A_ANCIENT_LEGS_00_ULTRA",
+      "AR_HP13A_ANCIENT_ARMS_00_ULTRA",
+      "AR_HP13A_ANCIENT_CHEST_00_ULTRA"
+    ]
+  },
+  "grants": {
+    "1": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          5000
+        ]
+      ],
+      "premium": [
+        [
+          "AR_HP13A_ANCIENT_HELM_01",
+          1
+        ]
+      ]
+    },
+    "2": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_PRESTIGE_EMPTY",
+          50
+        ]
+      ]
+    },
+    "3": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ]
+    },
+    "4": {
+      "free": [],
+      "premium": [
+        [
+          "CELL_ENCHANTER_UC",
+          1
+        ]
+      ]
+    },
+    "5": {
+      "free": [
+        [
+          "CURRENCY_SEASON_13_PAST",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "EM_PLAYER_HP13A_ANCIENT_00",
+          1
+        ]
+      ]
+    },
+    "6": {
+      "free": [],
+      "premium": []
+    },
+    "7": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_TOKEN_EXCHANGE_SPEED_UP",
+          100
+        ]
+      ]
+    },
+    "8": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          5000
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          100
+        ]
+      ]
+    },
+    "9": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          5000
+        ]
+      ]
+    },
+    "10": {
+      "free": [
+        [
+          "CURRENCY_SEASON_13_PAST",
+          200
+        ]
+      ],
+      "premium": [
+        [
+          "BNC_ANIMATION_HP13A_ANCIENT_00",
+          1
+        ]
+      ]
+    },
+    "11": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          5
+        ]
+      ]
+    },
+    "12": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_WEAPON",
+          200
+        ]
+      ]
+    },
+    "13": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          5000
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          5000
+        ]
+      ]
+    },
+    "14": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_AIRSHIP",
+          200
+        ]
+      ]
+    },
+    "15": {
+      "free": [
+        [
+          "CURRENCY_SEASON_13_PAST",
+          200
+        ]
+      ],
+      "premium": [
+        [
+          "EJ_HP13A_ANCIENT_00",
+          1
+        ]
+      ]
+    },
+    "16": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_SIGIL_HP13A_ANCIENT_00",
+          1
+        ]
+      ]
+    },
+    "17": {
+      "free": [],
+      "premium": [
+        [
+          "CELL_ENCHANTER_UC",
+          1
+        ]
+      ]
+    },
+    "18": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          100
+        ]
+      ]
+    },
+    "19": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          10000
+        ]
+      ]
+    },
+    "20": {
+      "free": [
+        [
+          "CURRENCY_SEASON_13_PAST",
+          200
+        ]
+      ],
+      "premium": [
+        [
+          "QI_FLARE_HP13A_ANCIENT_00",
+          1
+        ]
+      ]
+    },
+    "21": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          5
+        ]
+      ]
+    },
+    "22": {
+      "free": [],
+      "premium": [
+        [
+          "CELL_ENCHANTER_UC",
+          1
+        ]
+      ]
+    },
+    "23": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          5000
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          5000
+        ]
+      ]
+    },
+    "24": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_PRESTIGE_EMPTY",
+          50
+        ]
+      ]
+    },
+    "25": {
+      "free": [
+        [
+          "CURRENCY_SEASON_13_PAST",
+          200
+        ]
+      ],
+      "premium": [
+        [
+          "AR_HP13A_ANCIENT_CHEST_01",
+          1
+        ]
+      ]
+    },
+    "26": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          5
+        ]
+      ]
+    },
+    "27": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_TOKEN_EXCHANGE_SPEED_UP",
+          100
+        ]
+      ]
+    },
+    "28": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          100
+        ]
+      ]
+    },
+    "29": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          10000
+        ]
+      ]
+    },
+    "30": {
+      "free": [
+        [
+          "CURRENCY_SEASON_13_PAST",
+          200
+        ]
+      ],
+      "premium": [
+        [
+          "BNC_FABRIC_HP13A_ANCIENT_00",
+          1
+        ]
+      ]
+    },
+    "31": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          5
+        ]
+      ]
+    },
+    "32": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_WEAPON",
+          200
+        ]
+      ]
+    },
+    "33": {
+      "free": [
+        [
+          "CURRENCY_PJM_AIRSHIP",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          100
+        ]
+      ]
+    },
+    "34": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_AIRSHIP",
+          100
+        ]
+      ]
+    },
+    "35": {
+      "free": [
+        [
+          "CURRENCY_SEASON_13_PAST",
+          200
+        ]
+      ],
+      "premium": [
+        [
+          "LT_HP13A_ANCIENT_01",
+          1
+        ]
+      ]
+    },
+    "36": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          5
+        ]
+      ]
+    },
+    "37": {
+      "free": [],
+      "premium": [
+        [
+          "CELL_ENCHANTER_UC",
+          1
+        ]
+      ]
+    },
+    "38": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          10000
+        ]
+      ]
+    },
+    "39": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          100
+        ]
+      ]
+    },
+    "40": {
+      "free": [
+        [
+          "CURRENCY_SEASON_13_PAST",
+          200
+        ]
+      ],
+      "premium": [
+        [
+          "EJ_HP13A_ANCIENT_01",
+          1
+        ]
+      ]
+    },
+    "41": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT",
+          5
+        ]
+      ]
+    },
+    "42": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_TOKEN_EXCHANGE_SPEED_UP",
+          100
+        ]
+      ]
+    },
+    "43": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          5000
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          100
+        ]
+      ]
+    },
+    "44": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          5000
+        ]
+      ]
+    },
+    "45": {
+      "free": [
+        [
+          "CURRENCY_SEASON_13_PAST",
+          200
+        ]
+      ],
+      "premium": []
+    },
+    "46": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          5
+        ]
+      ]
+    },
+    "47": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "CELL_ENCHANTER_UC",
+          1
+        ]
+      ]
+    },
+    "48": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          100
+        ]
+      ]
+    },
+    "49": {
+      "free": [
+        [
+          "CURRENCY_SEASON_13_PAST",
+          200
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PJM_PRESTIGE_EMPTY",
+          50
+        ]
+      ]
+    },
+    "50": {
+      "free": [
+        [
+          "TITLE_HP13A_ANCIENT_00",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "AR_HP13A_ANCIENT_HELM_00_ULTRA",
+          1
+        ],
+        [
+          "AR_HP13A_ANCIENT_LEGS_00_ULTRA",
+          1
+        ],
+        [
+          "AR_HP13A_ANCIENT_ARMS_00_ULTRA",
+          1
+        ],
+        [
+          "AR_HP13A_ANCIENT_CHEST_00_ULTRA",
+          1
+        ]
+      ]
+    }
+  },
+  "unavailable_rewards": [],
+  "source": {
+    "game": "1.6.2 layout; 1.14.7 item catalog",
+    "file": "season13a_og.json",
+    "sha256": "5837893981988f770cc8e19a98d53fea6dac4b385fe23af7271f02d088ed3689"
+  }
+}

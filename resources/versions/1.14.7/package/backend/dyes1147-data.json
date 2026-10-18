@@ -1,0 +1,6268 @@
+[
+  {
+    "catalogId": "DYE_ASHORANGE_DURABLE",
+    "name": "Heatwave Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_ashorange_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BABYBLUE_DURABLE",
+    "name": "Heaven Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_babyblue_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BANNER_BACKGROUND_DEFAULT",
+    "name": "Neutral Banner Fabric Dye",
+    "kind": "instance",
+    "sku": "dye1147_dye_banner_background_default",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_banner",
+      "cat_item_banner_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BANNER_SIGIL_DEFAULT",
+    "name": "Dark Banner Fabric Dye",
+    "kind": "instance",
+    "sku": "dye1147_dye_banner_sigil_default",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_banner",
+      "cat_item_banner_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BEAVER_DURABLE",
+    "name": "Gnasher Dye",
+    "kind": "instance",
+    "sku": "dye1147_dye_beaver_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE01_DURABLE",
+    "name": "Tempest Dye",
+    "kind": "stack",
+    "sku": "sku_dye_blue01_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE01_GLOSSY_DURABLE",
+    "name": "Glossy Lapis Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue01_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE01_GLOWING_DURABLE",
+    "name": "Glowing Lapis Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue01_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE01_METALLIC_DURABLE",
+    "name": "Metallic Lapis Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue01_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE01_VELVET_DURABLE",
+    "name": "Velvet Lapis Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue01_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE02_DURABLE",
+    "name": "Nauticus Dye",
+    "kind": "stack",
+    "sku": "sku_dye_blue02_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE02_GLOSSY_DURABLE",
+    "name": "Glossy Storm Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue02_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE02_GLOWING_DURABLE",
+    "name": "Glowing Storm Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue02_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE02_METALLIC_DURABLE",
+    "name": "Metallic Storm Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue02_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE02_VELVET_DURABLE",
+    "name": "Velvet Storm Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue02_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE03_DURABLE",
+    "name": "Lagoon Dye",
+    "kind": "stack",
+    "sku": "sku_dye_blue03_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE03_GLOSSY_DURABLE",
+    "name": "Glossy Faded Denim Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue03_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE03_GLOWING_DURABLE",
+    "name": "Glowing Faded Denim Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue03_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE03_METALLIC_DURABLE",
+    "name": "Metallic Faded Denim Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue03_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE03_VELVET_DURABLE",
+    "name": "Velvet Faded Denim Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue03_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE04_DURABLE",
+    "name": "Altitude Dye",
+    "kind": "stack",
+    "sku": "sku_dye_blue04_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE04_GLOSSY_DURABLE",
+    "name": "Glossy Azure Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue04_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE04_GLOWING_DURABLE",
+    "name": "Glowing Azure Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue04_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE04_METALLIC_DURABLE",
+    "name": "Metallic Azure Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue04_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE04_VELVET_DURABLE",
+    "name": "Velvet Azure Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue04_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE05_DURABLE",
+    "name": "Jawbreaker Dye",
+    "kind": "stack",
+    "sku": "sku_dye_blue05_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE05_GLOSSY_DURABLE",
+    "name": "Glossy Oceanic Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue05_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE05_GLOWING_DURABLE",
+    "name": "Glowing Oceanic Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue05_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE05_METALLIC_DURABLE",
+    "name": "Metallic Oceanic Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue05_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE05_VELVET_DURABLE",
+    "name": "Velvet Oceanic Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue05_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE06_DURABLE",
+    "name": "DYE_BLUE06_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_blue06_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE06_GLOSSY_DURABLE",
+    "name": "Glossy Navy Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue06_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE06_GLOWING_DURABLE",
+    "name": "Glowing Navy Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue06_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE06_METALLIC_DURABLE",
+    "name": "Metallic Navy Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue06_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE06_VELVET_DURABLE",
+    "name": "Velvet Navy Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue06_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE07_DURABLE",
+    "name": "Plunge Dye",
+    "kind": "stack",
+    "sku": "sku_dye_blue07_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE07_GLOSSY_DURABLE",
+    "name": "Glossy Cornflower Blue Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue07_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE07_GLOWING_DURABLE",
+    "name": "Glowing Cornflower Blue Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue07_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE07_METALLIC_DURABLE",
+    "name": "Metallic Cornflower Blue Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue07_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE07_VELVET_DURABLE",
+    "name": "Velvet Cornflower Blue Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue07_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE08_DURABLE",
+    "name": "Glacier Dye",
+    "kind": "stack",
+    "sku": "sku_dye_blue08_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE08_GLOSSY_DURABLE",
+    "name": "Glossy Glacier Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue08_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE08_GLOWING_DURABLE",
+    "name": "Glowing Glacier Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue08_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE08_METALLIC_DURABLE",
+    "name": "Metallic Glacier Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue08_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE08_VELVET_DURABLE",
+    "name": "Velvet Glacier Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue08_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE09_DURABLE",
+    "name": "Battalion Dye",
+    "kind": "stack",
+    "sku": "sku_dye_blue09_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE09_GLOSSY_DURABLE",
+    "name": "Glossy Cold Steel Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue09_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE09_GLOWING_DURABLE",
+    "name": "Glowing Cold Steel Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue09_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE09_METALLIC_DURABLE",
+    "name": "Metallic Cold Steel Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue09_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE09_VELVET_DURABLE",
+    "name": "Velvet Cold Steel Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue09_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE10_DURABLE",
+    "name": "Virtuoso Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue10_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE10_GLOSSY_DURABLE",
+    "name": "Glossy Titan Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue10_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE10_GLOWING_DURABLE",
+    "name": "Glowing Titan Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue10_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE10_METALLIC_DURABLE",
+    "name": "Metallic Titan Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue10_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE10_VELVET_DURABLE",
+    "name": "Velvet Titan Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue10_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE11_DURABLE",
+    "name": "Gravity Dye",
+    "kind": "stack",
+    "sku": "sku_dye_blue11_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE11_GLOSSY_DURABLE",
+    "name": "Glossy Gravity Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue11_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE11_GLOWING_DURABLE",
+    "name": "Glowing Gravity Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue11_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE11_METALLIC_DURABLE",
+    "name": "Metallic Gravity Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue11_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE11_VELVET_DURABLE",
+    "name": "Velvet Gravity Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue11_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE12_DURABLE",
+    "name": "Sagacity Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue12_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE12_GLOSSY_DURABLE",
+    "name": "Glossy Mystic Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue12_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE12_GLOWING_DURABLE",
+    "name": "Glowing Mystic Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue12_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE12_METALLIC_DURABLE",
+    "name": "Metallic Mystic Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue12_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE12_VELVET_DURABLE",
+    "name": "Velvet Mystic Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue12_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE13_DURABLE",
+    "name": "Subzero Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue13_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE13_GLOSSY_DURABLE",
+    "name": "Vibrant Sapphire Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue13_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE13_GLOWING_DURABLE",
+    "name": "Vibrant Sapphire Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue13_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE13_METALLIC_DURABLE",
+    "name": "Vibrant Sapphire Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue13_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BLUE13_VELVET_DURABLE",
+    "name": "Vibrant Sapphire Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_blue13_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN01_DURABLE",
+    "name": "Sandstone Dye",
+    "kind": "stack",
+    "sku": "sku_dye_brown01_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN01_GLOSSY_DURABLE",
+    "name": "Glossy Tan Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown01_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN01_GLOWING_DURABLE",
+    "name": "Glowing Tan Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown01_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN01_METALLIC_DURABLE",
+    "name": "Metallic Tan Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown01_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN01_VELVET_DURABLE",
+    "name": "Velvet Tan Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown01_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN02_DURABLE",
+    "name": "Espresso Dye",
+    "kind": "stack",
+    "sku": "sku_dye_brown02_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN02_GLOSSY_DURABLE",
+    "name": "Glossy Espresso Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown02_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN02_GLOWING_DURABLE",
+    "name": "Glowing Espresso Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown02_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN02_METALLIC_DURABLE",
+    "name": "Metallic Espresso Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown02_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN02_VELVET_DURABLE",
+    "name": "Velvet Espresso Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown02_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN03_DURABLE",
+    "name": "Straw Dye",
+    "kind": "stack",
+    "sku": "sku_dye_brown03_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN03_GLOSSY_DURABLE",
+    "name": "Glossy Straw Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown03_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN03_GLOWING_DURABLE",
+    "name": "Glowing Straw Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown03_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN03_METALLIC_DURABLE",
+    "name": "Metallic Straw Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown03_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN03_VELVET_DURABLE",
+    "name": "Velvet Straw Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown03_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN04_DURABLE",
+    "name": "Ashen Brown Dye",
+    "kind": "stack",
+    "sku": "sku_dye_brown04_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN04_GLOSSY_DURABLE",
+    "name": "Glossy Ashen Brown Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown04_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN04_GLOWING_DURABLE",
+    "name": "Glowing Ashen Brown Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown04_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN04_METALLIC_DURABLE",
+    "name": "Metallic Ashen Brown Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown04_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN04_VELVET_DURABLE",
+    "name": "Velvet Ashen Brown Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown04_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN05_DURABLE",
+    "name": "DYE_BROWN05_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_brown05_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN05_GLOSSY_DURABLE",
+    "name": "Glossy Rose Gold Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown05_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN05_GLOWING_DURABLE",
+    "name": "Glowing Rose Gold Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown05_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN05_METALLIC_DURABLE",
+    "name": "Metallic Rose Gold Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown05_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN05_VELVET_DURABLE",
+    "name": "Velvet Rose Gold Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown05_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN06_DURABLE",
+    "name": "Dust Dye",
+    "kind": "stack",
+    "sku": "sku_dye_brown06_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN06_GLOSSY_DURABLE",
+    "name": "Glossy Dust Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown06_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN06_GLOWING_DURABLE",
+    "name": "Glowing Dust Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown06_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN06_METALLIC_DURABLE",
+    "name": "Metallic Dust Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown06_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN06_VELVET_DURABLE",
+    "name": "Velvet Dust Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown06_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN07_DURABLE",
+    "name": "Walnut Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown07_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN07_GLOSSY_DURABLE",
+    "name": "Glossy Leather Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown07_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN07_GLOWING_DURABLE",
+    "name": "Glowing Leather Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown07_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN07_METALLIC_DURABLE",
+    "name": "Metallic Leather Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown07_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN07_VELVET_DURABLE",
+    "name": "Velvet Leather Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown07_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN09_DURABLE",
+    "name": "Groundbreak Dye",
+    "kind": "stack",
+    "sku": "sku_dye_brown09_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN09_GLOSSY_DURABLE",
+    "name": "Glossy Chocolate Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown09_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN09_GLOWING_DURABLE",
+    "name": "Glowing Chocolate Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown09_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN09_METALLIC_DURABLE",
+    "name": "Metallic Chocolate Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown09_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BROWN09_VELVET_DURABLE",
+    "name": "Velvet Chocolate Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_brown09_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BULLSEYEPRIMARY",
+    "name": "Quillshot Dye",
+    "kind": "instance",
+    "sku": "dye1147_dye_bullseyeprimary",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_BULLSEYESECONDARY",
+    "name": "Quillshot Spine Dye",
+    "kind": "instance",
+    "sku": "dye1147_dye_bullseyesecondary",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_CROWBEAR_DURABLE",
+    "name": "Crowbear Dye",
+    "kind": "instance",
+    "sku": "dye1147_dye_crowbear_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_DARKEGGPLANT_DURABLE",
+    "name": "DYE_DARKEGGPLANT_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_darkeggplant_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_DARKORANGE_DURABLE",
+    "name": "Sunburn Dye",
+    "kind": "stack",
+    "sku": "sku_dye_darkorange_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_DARKTEAL_DURABLE",
+    "name": "Grove Dye",
+    "kind": "stack",
+    "sku": "sku_dye_darkteal_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_DARKYELLOW_DURABLE",
+    "name": "Honey Dye",
+    "kind": "stack",
+    "sku": "sku_dye_darkyellow_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_FORESTGREEN_DURABLE",
+    "name": "Timberland Dye",
+    "kind": "stack",
+    "sku": "sku_dye_forestgreen_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_FULGAR_DURABLE",
+    "name": "Drask Dye",
+    "kind": "instance",
+    "sku": "dye1147_dye_fulgar_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY01_DURABLE",
+    "name": "DYE_GRAY01_DURABLE",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray01_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY01_GLOSSY_DURABLE",
+    "name": "Glossy White Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray01_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY01_GLOWING_DURABLE",
+    "name": "Glowing White Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray01_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY01_METALLIC_DURABLE",
+    "name": "Metallic White Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray01_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY01_VELVET_DURABLE",
+    "name": "Velvet White Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray01_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY02_DURABLE",
+    "name": "DYE_GRAY02_DURABLE",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray02_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY02_GLOSSY_DURABLE",
+    "name": "Glossy Black Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray02_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY02_GLOWING_DURABLE",
+    "name": "Glowing Black Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray02_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY02_METALLIC_DURABLE",
+    "name": "Metallic Black Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray02_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY02_VELVET_DURABLE",
+    "name": "Velvet Black Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray02_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY03_DURABLE",
+    "name": "Sterling Dye",
+    "kind": "stack",
+    "sku": "sku_dye_gray03_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY03_GLOSSY_DURABLE",
+    "name": "Glossy White Gold Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray03_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY03_GLOWING_DURABLE",
+    "name": "Glowing White Gold Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray03_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY03_METALLIC_DURABLE",
+    "name": "Metallic White Gold Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray03_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY03_VELVET_DURABLE",
+    "name": "Velvet White Gold Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray03_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY04_DURABLE",
+    "name": "Ice Gray Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray04_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY04_GLOSSY_DURABLE",
+    "name": "Glossy Ice Gray Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray04_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY04_GLOWING_DURABLE",
+    "name": "Glowing Ice Gray Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray04_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY04_METALLIC_DURABLE",
+    "name": "Metallic Ice Gray Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray04_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY04_VELVET_DURABLE",
+    "name": "Velvet Ice Gray Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray04_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY05_DURABLE",
+    "name": "Eclipse Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray05_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY05_GLOSSY_DURABLE",
+    "name": "Glossy Oil Slick Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray05_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY05_GLOWING_DURABLE",
+    "name": "Glowing Oil Slick Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray05_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY05_METALLIC_DURABLE",
+    "name": "Metallic Oil Slick Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray05_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY05_VELVET_DURABLE",
+    "name": "Velvet Oil Slick Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray05_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY06_DURABLE",
+    "name": "Black Pearl Dye",
+    "kind": "stack",
+    "sku": "sku_dye_gray06_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY06_GLOSSY_DURABLE",
+    "name": "Glossy Black Pearl Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray06_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY06_GLOWING_DURABLE",
+    "name": "Glowing Black Pearl Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray06_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY06_METALLIC_DURABLE",
+    "name": "Metallic Black Pearl Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray06_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY06_VELVET_DURABLE",
+    "name": "Velvet Black Pearl Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray06_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY07_DURABLE",
+    "name": "Supernova Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray07_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY07_GLOSSY_DURABLE",
+    "name": "Glossy Pearl Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray07_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY07_GLOWING_DURABLE",
+    "name": "Glowing Pearl Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray07_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY07_METALLIC_DURABLE",
+    "name": "Metallic Pearl Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray07_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY07_VELVET_DURABLE",
+    "name": "Velvet Pearl Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray07_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY08_DURABLE",
+    "name": "Gunmetal Dye",
+    "kind": "stack",
+    "sku": "sku_dye_gray08_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY08_GLOSSY_DURABLE",
+    "name": "Glossy Gunmetal Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray08_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY08_GLOWING_DURABLE",
+    "name": "Glowing Gunmetal Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray08_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY08_METALLIC_DURABLE",
+    "name": "Metallic Gunmetal Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray08_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY08_VELVET_DURABLE",
+    "name": "Velvet Gunmetal Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray08_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY09_DURABLE",
+    "name": "Smoke Dye",
+    "kind": "stack",
+    "sku": "sku_dye_gray09_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY09_GLOSSY_DURABLE",
+    "name": "Glossy Silver Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray09_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY09_GLOWING_DURABLE",
+    "name": "Glowing Silver Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray09_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY09_METALLIC_DURABLE",
+    "name": "Metallic Silver Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray09_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY09_VELVET_DURABLE",
+    "name": "Velvet Silver Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray09_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GRAY10_DURABLE",
+    "name": "DYE_GRAY10_DURABLE",
+    "kind": "stack",
+    "sku": "dye1147_dye_gray10_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN01_DURABLE",
+    "name": "Meadow Dye",
+    "kind": "stack",
+    "sku": "sku_dye_green01_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN01_GLOSSY_DURABLE",
+    "name": "Glossy Pale Olive Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green01_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN01_GLOWING_DURABLE",
+    "name": "Glowing Pale Olive Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green01_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN01_METALLIC_DURABLE",
+    "name": "Metallic Pale Olive Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green01_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN01_VELVET_DURABLE",
+    "name": "Velvet Pale Olive Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green01_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN02_DURABLE",
+    "name": "Guerilla Dye",
+    "kind": "stack",
+    "sku": "sku_dye_green02_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN02_GLOSSY_DURABLE",
+    "name": "Glossy Moss Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green02_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN02_GLOWING_DURABLE",
+    "name": "Glowing Moss Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green02_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN02_METALLIC_DURABLE",
+    "name": "Metallic Moss Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green02_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN02_VELVET_DURABLE",
+    "name": "Velvet Moss Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green02_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN03_DURABLE",
+    "name": "Sapling Dye",
+    "kind": "stack",
+    "sku": "sku_dye_green03_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN03_GLOSSY_DURABLE",
+    "name": "Glossy Lichen Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green03_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN03_GLOWING_DURABLE",
+    "name": "Glowing Lichen Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green03_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN03_METALLIC_DURABLE",
+    "name": "Metallic Lichen Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green03_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN03_VELVET_DURABLE",
+    "name": "Velvet Lichen Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green03_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN04_DURABLE",
+    "name": "Evergreen Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green04_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN04_GLOSSY_DURABLE",
+    "name": "Glossy Sage Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green04_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN04_GLOWING_DURABLE",
+    "name": "Glowing Sage Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green04_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN04_METALLIC_DURABLE",
+    "name": "Metallic Sage Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green04_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN04_VELVET_DURABLE",
+    "name": "Velvet Sage Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green04_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN05_DURABLE",
+    "name": "Solitude Dye",
+    "kind": "stack",
+    "sku": "sku_dye_green05_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN05_GLOSSY_DURABLE",
+    "name": "Glossy Mint Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green05_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN05_GLOWING_DURABLE",
+    "name": "Glowing Mint Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green05_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN05_METALLIC_DURABLE",
+    "name": "Metallic Mint Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green05_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN05_VELVET_DURABLE",
+    "name": "Velvet Mint Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green05_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN06_DURABLE",
+    "name": "Obscura Dye",
+    "kind": "stack",
+    "sku": "sku_dye_green06_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN06_GLOSSY_DURABLE",
+    "name": "Glossy Camouflage Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green06_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN06_GLOWING_DURABLE",
+    "name": "Glowing Camouflage Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green06_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN06_METALLIC_DURABLE",
+    "name": "Metallic Camouflage Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green06_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN06_VELVET_DURABLE",
+    "name": "Velvet Camouflage Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green06_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN07_DURABLE",
+    "name": "Woodland Dye",
+    "kind": "stack",
+    "sku": "sku_dye_green07_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN07_GLOSSY_DURABLE",
+    "name": "Glossy Fern Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green07_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN07_GLOWING_DURABLE",
+    "name": "Glowing Fern Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green07_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN07_METALLIC_DURABLE",
+    "name": "Metallic Fern Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green07_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN07_VELVET_DURABLE",
+    "name": "Velvet Fern Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green07_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN08_DURABLE",
+    "name": "Grievance Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green08_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN08_GLOSSY_DURABLE",
+    "name": "Glossy Dark Teal Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green08_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN08_GLOWING_DURABLE",
+    "name": "Glowing Dark Teal Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green08_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN08_METALLIC_DURABLE",
+    "name": "Metallic Dark Teal Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green08_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN08_VELVET_DURABLE",
+    "name": "Velvet Dark Teal Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green08_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN09_DURABLE",
+    "name": "Vicious Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green09_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN09_GLOSSY_DURABLE",
+    "name": "Glossy Clover Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green09_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN09_GLOWING_DURABLE",
+    "name": "Glowing Clover Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green09_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN09_METALLIC_DURABLE",
+    "name": "Metallic Clover Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green09_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN09_VELVET_DURABLE",
+    "name": "Velvet Clover Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green09_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN10_DURABLE",
+    "name": "Rockstar Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green10_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN10_GLOSSY_DURABLE",
+    "name": "Glossy Lime Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green10_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN10_GLOWING_DURABLE",
+    "name": "Glowing Lime Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green10_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN10_METALLIC_DURABLE",
+    "name": "Metallic Lime Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green10_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN10_VELVET_DURABLE",
+    "name": "Velvet Lime Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green10_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN11_DURABLE",
+    "name": "Hyperion Dye",
+    "kind": "stack",
+    "sku": "sku_dye_green11_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN11_GLOSSY_DURABLE",
+    "name": "Glossy Hyperion Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green11_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN11_GLOWING_DURABLE",
+    "name": "Glowing Hyperion Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green11_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN11_METALLIC_DURABLE",
+    "name": "Metallic Hyperion Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green11_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN11_VELVET_DURABLE",
+    "name": "Velvet Hyperion Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green11_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN12_DURABLE",
+    "name": "Oasis Dye",
+    "kind": "stack",
+    "sku": "sku_dye_green12_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN12_GLOSSY_DURABLE",
+    "name": "Glossy Viridian Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green12_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN12_GLOWING_DURABLE",
+    "name": "Glowing Viridian Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green12_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN12_METALLIC_DURABLE",
+    "name": "Metallic Viridian Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green12_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN12_VELVET_DURABLE",
+    "name": "Velvet Viridian Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green12_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN13_DURABLE",
+    "name": "Mirage Dye",
+    "kind": "stack",
+    "sku": "sku_dye_green13_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN13_GLOSSY_DURABLE",
+    "name": "Glossy Copperwheel Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green13_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN13_GLOWING_DURABLE",
+    "name": "Glowing Copperwheel Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green13_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN13_METALLIC_DURABLE",
+    "name": "Metallic Copperwheel Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green13_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN13_VELVET_DURABLE",
+    "name": "Velvet Copperwheel Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green13_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN14_DURABLE",
+    "name": "Opalescence Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green14_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN14_GLOSSY_DURABLE",
+    "name": "Glossy Moonstone Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green14_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN14_GLOWING_DURABLE",
+    "name": "Glowing Moonstone Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green14_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN14_METALLIC_DURABLE",
+    "name": "Metallic Moonstone Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green14_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN14_VELVET_DURABLE",
+    "name": "Velvet Moonstone Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green14_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN15_DURABLE",
+    "name": "DYE_GREEN15_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_green15_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN15_GLOSSY_DURABLE",
+    "name": "Glossy Paradise Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green15_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN15_GLOWING_DURABLE",
+    "name": "Glowing Paradise Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green15_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN15_METALLIC_DURABLE",
+    "name": "Metallic Paradise Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green15_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN15_VELVET_DURABLE",
+    "name": "Velvet Paradise Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green15_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN16_DURABLE",
+    "name": "Harbinger Dye",
+    "kind": "stack",
+    "sku": "sku_dye_green16_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN16_GLOSSY_DURABLE",
+    "name": "Glossy Malachite Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green16_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN16_GLOWING_DURABLE",
+    "name": "Glowing Malachite Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green16_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN16_METALLIC_DURABLE",
+    "name": "Metallic Malachite Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green16_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN16_VELVET_DURABLE",
+    "name": "Velvet Malachite Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green16_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN17_DURABLE",
+    "name": "Sovereign Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green17_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN17_GLOSSY_DURABLE",
+    "name": "Vibrant Emerald Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green17_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN17_GLOWING_DURABLE",
+    "name": "Vibrant Emerald Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green17_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN17_METALLIC_DURABLE",
+    "name": "Vibrant Emerald Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green17_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN17_VELVET_DURABLE",
+    "name": "Vibrant Emerald Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_green17_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_GREEN18_DURABLE",
+    "name": "Endurance Dye",
+    "kind": "stack",
+    "sku": "single_dye_endurance",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_LERAWR_DURABLE",
+    "name": "Embermane Dye",
+    "kind": "instance",
+    "sku": "dye1147_dye_lerawr_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_LIGHTGREEN1_DURABLE",
+    "name": "Springtime Dye",
+    "kind": "stack",
+    "sku": "sku_dye_lightgreen1_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_LIGHTGREEN_DURABLE",
+    "name": "Greenwood Dye",
+    "kind": "stack",
+    "sku": "sku_dye_lightgreen_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_MCROLLIN_DURABLE",
+    "name": "Pangar Dye",
+    "kind": "instance",
+    "sku": "dye1147_dye_mcrollin_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_MOONFACE_DURABLE",
+    "name": "Shrike Dye",
+    "kind": "instance",
+    "sku": "dye1147_dye_moonface_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE01_DURABLE",
+    "name": "Sunset Dye",
+    "kind": "stack",
+    "sku": "sku_dye_orange01_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE01_GLOSSY_DURABLE",
+    "name": "Glossy Persimmon Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange01_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE01_GLOWING_DURABLE",
+    "name": "Glowing Persimmon Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange01_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE01_METALLIC_DURABLE",
+    "name": "Metallic Persimmon Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange01_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE01_VELVET_DURABLE",
+    "name": "Velvet Persimmon Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange01_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE02_DURABLE",
+    "name": "Plume Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange02_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE02_GLOSSY_DURABLE",
+    "name": "Glossy Sunset Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange02_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE02_GLOWING_DURABLE",
+    "name": "Glowing Sunset Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange02_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE02_METALLIC_DURABLE",
+    "name": "Metallic Sunset Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange02_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE02_VELVET_DURABLE",
+    "name": "Velvet Sunset Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange02_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE03_DURABLE",
+    "name": "Amaranth Dye",
+    "kind": "stack",
+    "sku": "sku_dye_orange03_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE03_GLOSSY_DURABLE",
+    "name": "Glossy Burnt Ochre Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange03_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE03_GLOWING_DURABLE",
+    "name": "Glowing Burnt Ochre Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange03_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE03_METALLIC_DURABLE",
+    "name": "Metallic Burnt Ochre Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange03_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE03_VELVET_DURABLE",
+    "name": "Velvet Burnt Ochre Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange03_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE05_DURABLE",
+    "name": "Unbreakable Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange05_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE05_GLOSSY_DURABLE",
+    "name": "Glossy Mango Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange05_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE05_GLOWING_DURABLE",
+    "name": "Glowing Mango Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange05_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE05_METALLIC_DURABLE",
+    "name": "Metallic Mango Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange05_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE05_VELVET_DURABLE",
+    "name": "Velvet Mango Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange05_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE06_DURABLE",
+    "name": "Peach Dye",
+    "kind": "stack",
+    "sku": "sku_dye_orange06_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE06_GLOSSY_DURABLE",
+    "name": "Glossy Peach Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange06_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE06_GLOWING_DURABLE",
+    "name": "Glowing Peach Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange06_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE06_METALLIC_DURABLE",
+    "name": "Metallic Peach Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange06_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE06_VELVET_DURABLE",
+    "name": "Velvet Peach Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange06_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE07_DURABLE",
+    "name": "Smoulder Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange07_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE07_GLOSSY_DURABLE",
+    "name": "Glossy Smoulder Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange07_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE07_GLOWING_DURABLE",
+    "name": "Glowing Smoulder Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange07_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE07_METALLIC_DURABLE",
+    "name": "Metallic Smoulder Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange07_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE07_VELVET_DURABLE",
+    "name": "Velvet Smoulder Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange07_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE08_DURABLE",
+    "name": "Ascendance Dye",
+    "kind": "stack",
+    "sku": "sku_dye_orange08_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE08_GLOSSY_DURABLE",
+    "name": "Glossy Citrine Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange08_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE08_GLOWING_DURABLE",
+    "name": "Glowing Citrine Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange08_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE08_METALLIC_DURABLE",
+    "name": "Metallic Citrine Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange08_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE08_VELVET_DURABLE",
+    "name": "Velvet Citrine Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_orange08_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_ORANGE09_DURABLE",
+    "name": "DYE_ORANGE09_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_orange09_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE01_DURABLE",
+    "name": "Twilight Dye",
+    "kind": "stack",
+    "sku": "sku_dye_purple01_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE01_GLOSSY_DURABLE",
+    "name": "Glossy Violet Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple01_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE01_GLOWING_DURABLE",
+    "name": "Glowing Violet Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple01_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE01_METALLIC_DURABLE",
+    "name": "Metallic Violet Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple01_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE01_VELVET_DURABLE",
+    "name": "Velvet Violet Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple01_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE02_DURABLE",
+    "name": "Eggplant Dye",
+    "kind": "stack",
+    "sku": "sku_dye_purple02_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE02_GLOSSY_DURABLE",
+    "name": "Glossy Eggplant Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple02_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE02_GLOWING_DURABLE",
+    "name": "Glowing Eggplant Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple02_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE02_METALLIC_DURABLE",
+    "name": "Metallic Eggplant Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple02_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE02_VELVET_DURABLE",
+    "name": "Velvet Eggplant Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple02_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE03_DURABLE",
+    "name": "Obelisk Dye",
+    "kind": "stack",
+    "sku": "sku_dye_purple03_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE03_GLOSSY_DURABLE",
+    "name": "Glossy Ash Violet Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple03_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE03_GLOWING_DURABLE",
+    "name": "Glowing Ash Violet Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple03_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE03_METALLIC_DURABLE",
+    "name": "Metallic Ash Violet Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple03_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE03_VELVET_DURABLE",
+    "name": "Velvet Ash Violet Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple03_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE04_DURABLE",
+    "name": "Lunar Dye",
+    "kind": "stack",
+    "sku": "sku_dye_purple04_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE04_GLOSSY_DURABLE",
+    "name": "Glossy Lavender Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple04_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE04_GLOWING_DURABLE",
+    "name": "Glowing Lavender Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple04_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE04_METALLIC_DURABLE",
+    "name": "Metallic Lavender Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple04_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE04_VELVET_DURABLE",
+    "name": "Velvet Lavender Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple04_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE05_GLOSSY_DURABLE",
+    "name": "Glossy Plum Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple05_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE05_DURABLE",
+    "name": "Royalty Dye",
+    "kind": "stack",
+    "sku": "sku_dye_purple05_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE05_GLOWING_DURABLE",
+    "name": "Glowing Plum Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple05_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE05_METALLIC_DURABLE",
+    "name": "Metallic Plum Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple05_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE05_VELVET_DURABLE",
+    "name": "Velvet Plum Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple05_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE06_DURABLE",
+    "name": "Orchid Dye",
+    "kind": "stack",
+    "sku": "sku_dye_purple06_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE06_GLOSSY_DURABLE",
+    "name": "Glossy Mauve Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple06_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE06_GLOWING_DURABLE",
+    "name": "Glowing Mauve Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple06_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE06_METALLIC_DURABLE",
+    "name": "Metallic Mauve Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple06_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE06_VELVET_DURABLE",
+    "name": "Velvet Mauve Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple06_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE07_DURABLE",
+    "name": "Riftborn Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple07_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE07_GLOSSY_DURABLE",
+    "name": "Glossy Magenta Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple07_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE07_GLOWING_DURABLE",
+    "name": "Glowing Magenta Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple07_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE07_METALLIC_DURABLE",
+    "name": "Metallic Magenta Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple07_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE07_VELVET_DURABLE",
+    "name": "Velvet Magenta Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple07_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE08_DURABLE",
+    "name": "Progenitor Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple08_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE08_GLOSSY_DURABLE",
+    "name": "Glossy Galaxy Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple08_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE08_GLOWING_DURABLE",
+    "name": "Glowing Galaxy Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple08_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE08_METALLIC_DURABLE",
+    "name": "Metallic Galaxy Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple08_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE08_VELVET_DURABLE",
+    "name": "Velvet Galaxy Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple08_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE09_DURABLE",
+    "name": "Dominion Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple09_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE09_GLOSSY_DURABLE",
+    "name": "Glossy Amethyst Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple09_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE09_GLOWING_DURABLE",
+    "name": "Glowing Amethyst Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple09_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE09_METALLIC_DURABLE",
+    "name": "Metallic Amethyst Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple09_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE09_VELVET_DURABLE",
+    "name": "Velvet Amethyst Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple09_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE10_DURABLE",
+    "name": "Revenant Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple10_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE10_GLOSSY_DURABLE",
+    "name": "Glossy Dark Lotus Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple10_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE10_GLOWING_DURABLE",
+    "name": "Glowing Dark Lotus Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple10_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE10_METALLIC_DURABLE",
+    "name": "Metallic Dark Lotus Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple10_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE10_VELVET_DURABLE",
+    "name": "Velvet Dark Lotus Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple10_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE11_DURABLE",
+    "name": "Quintessence Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple11_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE11_GLOSSY_DURABLE",
+    "name": "Glossy Pink Diamond Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple11_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE11_GLOWING_DURABLE",
+    "name": "Glowing Pink Diamond Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple11_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE11_METALLIC_DURABLE",
+    "name": "Metallic Pink Diamond Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple11_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE11_VELVET_DURABLE",
+    "name": "Velvet Pink Diamond Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple11_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE12_DURABLE",
+    "name": "Celestial Dye",
+    "kind": "stack",
+    "sku": "sku_dye_purple12_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE12_GLOSSY_DURABLE",
+    "name": "Glossy Lunar Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple12_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE12_GLOWING_DURABLE",
+    "name": "Glowing Lunar Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple12_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE12_METALLIC_DURABLE",
+    "name": "Metallic Lunar Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple12_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE12_VELVET_DURABLE",
+    "name": "Velvet Lunar Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple12_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE13_DURABLE",
+    "name": "Primus Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple13_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE13_GLOSSY_DURABLE",
+    "name": "Glossy Primus Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple13_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE13_GLOWING_DURABLE",
+    "name": "Glowing Primus Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple13_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE13_METALLIC_DURABLE",
+    "name": "Metallic Primus Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple13_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_PURPLE13_VELVET_DURABLE",
+    "name": "Velvet Primus Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_purple13_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED01_DURABLE",
+    "name": "Bloodfire Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red01_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED01_GLOSSY_DURABLE",
+    "name": "Glossy Red Currant Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red01_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED01_GLOWING_DURABLE",
+    "name": "Glowing Red Currant Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red01_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED01_METALLIC_DURABLE",
+    "name": "Metallic Red Currant Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red01_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED01_VELVET_DURABLE",
+    "name": "Velvet Red Currant Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red01_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED02_DURABLE",
+    "name": "Bubble Gum Dye",
+    "kind": "stack",
+    "sku": "sku_dye_red02_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED02_GLOSSY_DURABLE",
+    "name": "Glossy Bubble Gum Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red02_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED02_GLOWING_DURABLE",
+    "name": "Glowing Bubble Gum Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red02_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED02_METALLIC_DURABLE",
+    "name": "Metallic Bubble Gum Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red02_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED02_VELVET_DURABLE",
+    "name": "Velvet Bubble Gum Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red02_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED03_DURABLE",
+    "name": "Sanguine Dye",
+    "kind": "stack",
+    "sku": "sku_dye_red03_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED03_GLOSSY_DURABLE",
+    "name": "Glossy Blood Red Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red03_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED03_GLOWING_DURABLE",
+    "name": "Glowing Blood Red Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red03_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED03_METALLIC_DURABLE",
+    "name": "Metallic Blood Red Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red03_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED03_VELVET_DURABLE",
+    "name": "Velvet Blood Red Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red03_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED04_DURABLE",
+    "name": "Sakura Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red04_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED04_GLOSSY_DURABLE",
+    "name": "Glossy Sakura Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red04_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED04_GLOWING_DURABLE",
+    "name": "Glowing Sakura Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red04_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED04_METALLIC_DURABLE",
+    "name": "Metallic Sakura Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red04_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED04_VELVET_DURABLE",
+    "name": "Velvet Sakura Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red04_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED05_DURABLE",
+    "name": "Mandrake Dye",
+    "kind": "stack",
+    "sku": "sku_dye_red05_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED05_GLOSSY_DURABLE",
+    "name": "Glossy Salmon Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red05_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED05_GLOWING_DURABLE",
+    "name": "Glowing Salmon Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red05_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED05_METALLIC_DURABLE",
+    "name": "Metallic Salmon Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red05_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED05_VELVET_DURABLE",
+    "name": "Velvet Salmon Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red05_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED06_DURABLE",
+    "name": "Wildfire Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red06_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED06_GLOSSY_DURABLE",
+    "name": "Glossy Wildfire Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red06_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED06_GLOWING_DURABLE",
+    "name": "Glowing Wildfire Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red06_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED06_METALLIC_DURABLE",
+    "name": "Metallic Wildfire Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red06_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED06_VELVET_DURABLE",
+    "name": "Velvet Wildfire Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red06_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED07_DURABLE",
+    "name": "DYE_RED07_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_red07_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED07_GLOSSY_DURABLE",
+    "name": "Glossy Scarlet Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red07_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED07_GLOWING_DURABLE",
+    "name": "Glowing Scarlet Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red07_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED07_METALLIC_DURABLE",
+    "name": "Metallic Scarlet Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red07_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED07_VELVET_DURABLE",
+    "name": "Velvet Scarlet Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red07_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED08_DURABLE",
+    "name": "Vice Dye",
+    "kind": "stack",
+    "sku": "sku_dye_red08_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED08_GLOSSY_DURABLE",
+    "name": "Glossy Cerise Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red08_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED08_GLOWING_DURABLE",
+    "name": "Glowing Cerise Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red08_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED08_METALLIC_DURABLE",
+    "name": "Metallic Cerise Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red08_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED08_VELVET_DURABLE",
+    "name": "Velvet Cerise Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red08_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED09_DURABLE",
+    "name": "Blood Moon Dye",
+    "kind": "stack",
+    "sku": "sku_dye_red09_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED09_GLOSSY_DURABLE",
+    "name": "Glossy Blood Moon Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red09_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED09_GLOWING_DURABLE",
+    "name": "Glowing Blood Moon Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red09_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED09_METALLIC_DURABLE",
+    "name": "Metallic Blood Moon Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red09_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED09_VELVET_DURABLE",
+    "name": "Velvet Blood Moon Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red09_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED10_DURABLE",
+    "name": "Darling Dye",
+    "kind": "stack",
+    "sku": "sku_dye_red10_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED10_GLOSSY_DURABLE",
+    "name": "Glossy Rose Quartz Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red10_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED10_GLOWING_DURABLE",
+    "name": "Glowing Rose Quartz Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red10_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED10_METALLIC_DURABLE",
+    "name": "Metallic Rose Quartz Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red10_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED10_VELVET_DURABLE_1",
+    "name": "Velvet Rose Quartz Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_red10_velvet_durable_1",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_RED11_DURABLE",
+    "name": "Defiance Dye",
+    "kind": "stack",
+    "sku": "sku_dye_red11_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_RESTRICTED_ORANGE04_GLOWING_DURABLE",
+    "name": "DYE_RESTRICTED_ORANGE04_GLOWING_DURABLE",
+    "kind": "stack",
+    "sku": "dye1147_dye_restricted_orange04_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_SNOWFLAKE_DURABLE",
+    "name": "Skraev Dye",
+    "kind": "instance",
+    "sku": "dye1147_dye_snowflake_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW01_DURABLE",
+    "name": "Scintilla Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow01_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW01_GLOSSY_DURABLE",
+    "name": "Glossy Lemon Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow01_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW01_GLOWING_DURABLE",
+    "name": "Glowing Lemon Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow01_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW01_METALLIC_DURABLE",
+    "name": "Metallic Lemon Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow01_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW01_VELVET_DURABLE",
+    "name": "Velvet Lemon Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow01_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW02_DURABLE",
+    "name": "Gilded Dye",
+    "kind": "stack",
+    "sku": "sku_dye_yellow02_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW02_GLOSSY_DURABLE",
+    "name": "Glossy Gold Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow02_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW02_GLOWING_DURABLE",
+    "name": "Glowing Gold Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow02_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW02_METALLIC_DURABLE",
+    "name": "Metallic Gold Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow02_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW02_VELVET_DURABLE",
+    "name": "Velvet Gold Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow02_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW03_DURABLE",
+    "name": "Goldenrod Dye",
+    "kind": "stack",
+    "sku": "sku_dye_yellow03_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW03_GLOSSY_DURABLE",
+    "name": "Glossy Mustard Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow03_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW03_GLOWING_DURABLE",
+    "name": "Glowing Mustard Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow03_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW03_METALLIC_DURABLE",
+    "name": "Metallic Mustard Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow03_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW03_VELVET_DURABLE",
+    "name": "Velvet Mustard Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow03_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW04_DURABLE",
+    "name": "Alabaster Dye",
+    "kind": "stack",
+    "sku": "sku_dye_yellow04_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW04_GLOSSY_DURABLE",
+    "name": "Glossy Cream Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow04_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW04_GLOWING_DURABLE",
+    "name": "Glowing Cream Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow04_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW04_METALLIC_DURABLE",
+    "name": "Metallic Cream Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow04_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW04_VELVET_DURABLE",
+    "name": "Velvet Cream Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow04_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW05_DURABLE",
+    "name": "Daybreak Dye",
+    "kind": "stack",
+    "sku": "sku_dye_yellow05_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW05_GLOSSY_DURABLE",
+    "name": "Glossy Sunlight Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow05_glossy_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW05_GLOWING_DURABLE",
+    "name": "Glowing Sunlight Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow05_glowing_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW05_METALLIC_DURABLE",
+    "name": "Metallic Sunlight Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow05_metallic_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_YELLOW05_VELVET_DURABLE",
+    "name": "Velvet Sunlight Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_yellow05_velvet_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_MOONLIGHT_DURABLE",
+    "name": "DYE_MOONLIGHT_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_moonlight_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_NIGHTSHADE_DURABLE",
+    "name": "DYE_NIGHTSHADE_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_nightshade_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HERO_BLUE_DURABLE",
+    "name": "DYE_HERO_BLUE_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hero_blue_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HERO_ORANGE_DURABLE",
+    "name": "DYE_HERO_ORANGE_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hero_orange_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_TITAN_DURABLE",
+    "name": "Vengeance Dye",
+    "kind": "stack",
+    "sku": "sku_dye_titan_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP08B_PUNK_00_DURABLE",
+    "name": "DYE_HP08B_PUNK_00_DURABLE",
+    "kind": "stack",
+    "sku": "dye1147_dye_hp08b_punk_00_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP08B_PUNK_01_DURABLE",
+    "name": "DYE_HP08B_PUNK_01_DURABLE",
+    "kind": "stack",
+    "sku": "dye1147_dye_hp08b_punk_01_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP08B_PUNK_02_DURABLE",
+    "name": "DYE_HP08B_PUNK_02_DURABLE",
+    "kind": "stack",
+    "sku": "dye1147_dye_hp08b_punk_02_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP09A_ASSASSINS_00_DURABLE",
+    "name": "DYE_HP09A_ASSASSINS_00_DURABLE",
+    "kind": "stack",
+    "sku": "dye1147_dye_hp09a_assassins_00_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP09B_COMMANDO_00_DURABLE",
+    "name": "DYE_HP09B_COMMANDO_00_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp09b_commando_00_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP09A_ASSASSINS_01_DURABLE",
+    "name": "DYE_HP09A_ASSASSINS_01_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp09a_assassins_01_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP09B_COMMANDO_01_DURABLE",
+    "name": "DYE_HP09B_COMMANDO_01_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp09b_commando_01_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP09A_ASSASSINS_02_DURABLE",
+    "name": "DYE_HP09A_ASSASSINS_02_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp09a_assassins_02_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP09B_COMMANDO_02_DURABLE",
+    "name": "DYE_HP09B_COMMANDO_02_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp09b_commando_02_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP10A_CELESTIAL_00_DURABLE",
+    "name": "DYE_HP10A_CELESTIAL_00_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp10a_celestial_00_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP10B_RAIDERS_00_DURABLE",
+    "name": "DYE_HP10B_RAIDERS_00_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp10b_raiders_00_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_OSTIAN_WOOL_DURABLE",
+    "name": "~DNT~ Ostian Wool Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_ostian_wool_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_OSTIAN_ORE_DURABLE",
+    "name": "~DNT~ Ostian Ore Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_ostian_ore_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_OSTIAN_LEATHER_DURABLE",
+    "name": "~DNT~ Ostian Leather Dye",
+    "kind": "stack",
+    "sku": "dye1147_dye_ostian_leather_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP11A_ALCHEMIST_00_DURABLE",
+    "name": "DYE_HP11A_ALCHEMIST_00_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp11a_alchemist_00_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP11B_ENGINEER_00_DURABLE",
+    "name": "DYE_HP11B_ENGINEER_00_DURABLE",
+    "kind": "stack",
+    "sku": "dye1147_dye_hp11b_engineer_00_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP12A_FROSTWARDEN_00_DURABLE",
+    "name": "DYE_HP12A_FROSTWARDEN_00_DURABLE",
+    "kind": "stack",
+    "sku": "dye1147_dye_hp12a_frostwarden_00_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP12B_MAGICAL_00_DURABLE",
+    "name": "DYE_HP12B_MAGICAL_00_DURABLE",
+    "kind": "stack",
+    "sku": "dye1147_dye_hp12b_magical_00_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP13A_ANCIENT_00_DURABLE",
+    "name": "DYE_HP13A_ANCIENT_00_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp13a_ancient_00_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP13B_DIVINE_00_DURABLE",
+    "name": "DYE_HP13B_DIVINE_00_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp13b_divine_00_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP13B_DIVINE_01_DURABLE",
+    "name": "DYE_HP13B_DIVINE_01_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp13b_divine_01_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP13B_DIVINE_02_DURABLE",
+    "name": "DYE_HP13B_DIVINE_02_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp13b_divine_02_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP14A_RANGER_00_DURABLE",
+    "name": "DYE_HP14A_RANGER_00_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp14a_ranger_00_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP14A_RANGER_01_DURABLE",
+    "name": "DYE_HP14A_RANGER_01_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp14a_ranger_01_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP14A_RANGER_02_DURABLE",
+    "name": "DYE_HP14A_RANGER_02_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp14a_ranger_02_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP14A_RANGER_03_DURABLE",
+    "name": "DYE_HP14A_RANGER_03_DURABLE",
+    "kind": "stack",
+    "sku": "dye1147_dye_hp14a_ranger_03_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP14B_PROTECTOR_00_DURABLE",
+    "name": "DYE_HP14B_PROTECTOR_00_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp14b_protector_00_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP14B_PROTECTOR_01_DURABLE",
+    "name": "DYE_HP14B_PROTECTOR_01_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp14b_protector_01_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP14B_PROTECTOR_02_DURABLE",
+    "name": "DYE_HP14B_PROTECTOR_02_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp14b_protector_02_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP15A_BATTLESMITH_00_DURABLE",
+    "name": "DYE_HP15A_BATTLESMITH_00_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp15a_battlesmith_durable_00",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP15A_ELEGANCE_00_DURABLE",
+    "name": "DYE_HP15A_ELEGANCE_00_DURABLE",
+    "kind": "stack",
+    "sku": "sku_dye_hp15a_elegance_00_durable",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP15B_WARLORDS_DURABLE_00",
+    "name": "DYE_HP15B_WARLORDS_DURABLE_00",
+    "kind": "stack",
+    "sku": "dye1147_dye_hp15b_warlords_durable_00",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP15B_SEER_DURABLE_00",
+    "name": "DYE_HP15B_SEER_DURABLE_00",
+    "kind": "stack",
+    "sku": "sku_dye_hp15b_seer_durable_00",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_HP15B_GRIND_DURABLE_00",
+    "name": "DYE_HP15B_GRIND_DURABLE_00",
+    "kind": "stack",
+    "sku": "sku_dye_hp15b_grind_durable_00",
+    "price": 0,
+    "tags": [
+      "dye_armour",
+      "newdye",
+      "dyes",
+      "cat_item_armour_dye",
+      "webstore"
+    ]
+  },
+  {
+    "catalogId": "DYE_FENROAR_DURABLE",
+    "name": "DYE_FENROAR_DURABLE",
+    "kind": "stack",
+    "sku": "dye1147_dye_fenroar_durable",
+    "price": 0,
+    "tags": [
+      "dyes",
+      "webstore",
+      "dye_armour",
+      "cat_item_armour_dye"
+    ]
+  }
+]

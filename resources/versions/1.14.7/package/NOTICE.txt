@@ -11,6 +11,12 @@ source\QuestDialogue1147-R2-source.zip. Game text in it keeps its original right
 Equipment fix R1 by KombatKing, AGPL-3.0-only: the ability-activation bridge in the server loader (bin\dxgi.dll is
 fix5 + his equipment_bridge.h) and bin\zzzzzzzz_Equipment1147_P.pak (Recruit's Repeaters category). Full source,
 including the loader, in source\Equipment1147-R1-source.zip. The bridge follows the approach shown by Undaunted.
+1.14.7 All-in-One R1 by KombatKing, AGPL-3.0-only: the backend modules backend\quality.js, game-rules1147.js,
+mega1147.js, middleman1147.js, trials1147.js, huntpass1147.js, huntpass-seasons1147.js, bounties1147.js,
+equipment1147.js, dyes1147.js, modes1147.js (and their -data.json files), seasons\, rules.json and the paks
+bin\zzzz_Mega1147_Middleman_P.pak, bin\zzzz_Mega1147_HuntPass_P.pak and bin\zzzzzzzzzzzzzzzz_HammerReload1147_P.pak.
+Their hooks were merged into backend\recorder-1147.js by Addison2k (Oct 18, 2026), keeping parties and online play.
+Full source, patch notes and build tools: source\KombatKing-1147-AllInOne-R1-source.zip.
 
 WHAT THE LICENCE ASKS OF ANYONE WHO REUSES THIS
   You may copy, change and share this work under the GNU Affero General Public License v3.0 (AGPL-3.0-only).

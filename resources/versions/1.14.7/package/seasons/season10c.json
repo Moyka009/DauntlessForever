@@ -1,0 +1,680 @@
+{
+  "revision": "season1147-season10c-v1",
+  "pass_id": "season27",
+  "key": "season10c",
+  "title": "Farslayer's Fall",
+  "kind": "original",
+  "levels": 25,
+  "xp_per_level": 100,
+  "start_date": "2020-01-01T00:00:00+00:00",
+  "end_date": "2099-01-01T00:00:00+00:00",
+  "items": {
+    "CURRENCY_PRESTIGE": {
+      "kind": "stack",
+      "name": "Vault Coins",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_SIGIL_EVENT_HP03_03": {
+      "kind": "stack",
+      "name": "Mooncaps",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP03_03": {
+      "kind": "stack",
+      "name": "Mooncaps",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_GRENADE_HEALING": {
+      "kind": "stack",
+      "name": "Transfusion Grenade",
+      "source": "grenade_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "LT_HP03_MOSSY_00": {
+      "kind": "stack",
+      "name": "Farslayer's Promise",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_HEALING_PYLON_BIG": {
+      "kind": "stack",
+      "name": "Lifespring Pylon",
+      "source": "quick_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "WP_DP_HP03_MOSSY": {
+      "kind": "stack",
+      "name": "Wild Cry",
+      "source": "Gear_Catalogs/weapon_dp_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_DAMAGE_BLOCK_POTION": {
+      "kind": "stack",
+      "name": "Bulwark Tonic",
+      "source": "quick_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_STANDARD_HP03_MOSSY_00": {
+      "kind": "stack",
+      "name": "Xelya's Standard",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_ATTACK_SPEED_POTION": {
+      "kind": "stack",
+      "name": "Blitz Tonic",
+      "source": "quick_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_PLATINUM_UNIV": {
+      "kind": "stack",
+      "name": "Platinum",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_FABRIC_EVENT_HP03_00": {
+      "kind": "stack",
+      "name": "Verdant Song",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_STAMINA_POTION_00": {
+      "kind": "stack",
+      "name": "Stamina Tonic",
+      "source": "quick_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "EM_PLAYER_HP03_DANCE_00": {
+      "kind": "stack",
+      "name": "Farslayer's Pirouette",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_EB_HP03_MOSSY": {
+      "kind": "stack",
+      "name": "Wild Edge",
+      "source": "Gear_Catalogs/weapon_eblade_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_STAGGER_POTION": {
+      "kind": "stack",
+      "name": "Assault Tonic",
+      "source": "quick_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "AR_HP03_MOSSY_HELM_01": {
+      "kind": "stack",
+      "name": "Farsight Crest",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_MS_HP03_MOSSY": {
+      "kind": "stack",
+      "name": "Wild Howl",
+      "source": "Gear_Catalogs/weapon_mspear_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_LIFESTEAL_AOE_POTION": {
+      "kind": "stack",
+      "name": "Lifedrain Tonic",
+      "source": "quick_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_SIGIL_EVENT_HP03_00": {
+      "kind": "stack",
+      "name": "Aetherleaf",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_HP03_00": {
+      "kind": "stack",
+      "name": "Aetherleaf",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_DAMAGE_PYLON": {
+      "kind": "stack",
+      "name": "Inspiring Pylon",
+      "source": "quick_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "WP_IH_HP03_MOSSY": {
+      "kind": "stack",
+      "name": "Wild Triumph",
+      "source": "Gear_Catalogs/weapon_ihammer_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP03_THROW_00": {
+      "kind": "stack",
+      "name": "Skipping Stones",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_DAMAGE_ENRAGEBONUS_POTION": {
+      "kind": "stack",
+      "name": "Frenzy Tonic",
+      "source": "quick_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_FABRIC_EVENT_HP03_01": {
+      "kind": "stack",
+      "name": "Greenfall",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_CB_HP03_MOSSY": {
+      "kind": "stack",
+      "name": "Wild Strike",
+      "source": "Gear_Catalogs/weapon_cblades_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_GRENADE_CLUSTER": {
+      "kind": "stack",
+      "name": "Barrage Grenade",
+      "source": "grenade_item_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_ANIMATION_HP03_VINE_00": {
+      "kind": "stack",
+      "name": "Personal Growth",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_INTRO_HP03_VINE_00": {
+      "kind": "stack",
+      "name": "Vine Rider",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_GA_HP03_MOSSY": {
+      "kind": "stack",
+      "name": "Wild Divide",
+      "source": "Gear_Catalogs/weapon_gaxe_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_TOKEN_EXCHANGE_SPEED_UP": {
+      "kind": "stack",
+      "name": "Ace Chips",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_STANDARD_HP03_MOSSY_01": {
+      "kind": "stack",
+      "name": "Sylvan Spar",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP03_FIREFLY_00": {
+      "kind": "stack",
+      "name": "Aether Motes",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP03_MOSSY_HELM_00": {
+      "kind": "stack",
+      "name": "Farslayer's Vision",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP03_MOSSY_CHEST": {
+      "kind": "stack",
+      "name": "Farslayer's Marrow",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP03_MOSSY_ARMS": {
+      "kind": "stack",
+      "name": "Farslayer's Reach",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP03_MOSSY_LEGS": {
+      "kind": "stack",
+      "name": "Farslayer's Balance",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    }
+  },
+  "bundles": {},
+  "bundle_names": {},
+  "rewards": {
+    "1": [
+      "CURRENCY_PRESTIGE",
+      "BNC_SIGIL_EVENT_HP03_03",
+      "QI_FLARE_HP03_03"
+    ],
+    "2": [
+      "QI_GRENADE_HEALING",
+      "LT_HP03_MOSSY_00"
+    ],
+    "3": [
+      "QI_HEALING_PYLON_BIG",
+      "WP_DP_HP03_MOSSY"
+    ],
+    "4": [
+      "QI_DAMAGE_BLOCK_POTION",
+      "BNC_STANDARD_HP03_MOSSY_00"
+    ],
+    "5": [
+      "QI_ATTACK_SPEED_POTION",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "6": [
+      "BNC_FABRIC_EVENT_HP03_00"
+    ],
+    "7": [
+      "QI_STAMINA_POTION_00",
+      "EM_PLAYER_HP03_DANCE_00"
+    ],
+    "8": [
+      "WP_EB_HP03_MOSSY"
+    ],
+    "9": [
+      "QI_STAGGER_POTION",
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "10": [
+      "CURRENCY_PRESTIGE",
+      "AR_HP03_MOSSY_HELM_01"
+    ],
+    "11": [
+      "WP_MS_HP03_MOSSY"
+    ],
+    "12": [
+      "QI_LIFESTEAL_AOE_POTION",
+      "BNC_SIGIL_EVENT_HP03_00",
+      "QI_FLARE_HP03_00"
+    ],
+    "13": [
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "14": [
+      "QI_DAMAGE_PYLON",
+      "WP_IH_HP03_MOSSY"
+    ],
+    "15": [
+      "CURRENCY_PRESTIGE",
+      "EM_PLAYER_HP03_THROW_00"
+    ],
+    "16": [
+      "QI_DAMAGE_ENRAGEBONUS_POTION",
+      "BNC_FABRIC_EVENT_HP03_01"
+    ],
+    "17": [
+      "WP_CB_HP03_MOSSY"
+    ],
+    "18": [
+      "QI_GRENADE_CLUSTER",
+      "BNC_ANIMATION_HP03_VINE_00"
+    ],
+    "19": [
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "20": [
+      "CURRENCY_PLATINUM_UNIV",
+      "EM_INTRO_HP03_VINE_00"
+    ],
+    "21": [
+      "WP_GA_HP03_MOSSY"
+    ],
+    "22": [
+      "CURRENCY_TOKEN_EXCHANGE_SPEED_UP",
+      "BNC_STANDARD_HP03_MOSSY_01"
+    ],
+    "23": [
+      "CURRENCY_PRESTIGE",
+      "EM_PLAYER_HP03_FIREFLY_00"
+    ],
+    "24": [
+      "CURRENCY_PLATINUM_UNIV"
+    ],
+    "25": [
+      "CURRENCY_PLATINUM_UNIV",
+      "AR_HP03_MOSSY_HELM_00",
+      "AR_HP03_MOSSY_CHEST",
+      "AR_HP03_MOSSY_ARMS",
+      "AR_HP03_MOSSY_LEGS"
+    ]
+  },
+  "grants": {
+    "1": {
+      "free": [
+        [
+          "CURRENCY_PRESTIGE",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "BNC_SIGIL_EVENT_HP03_03",
+          1
+        ],
+        [
+          "QI_FLARE_HP03_03",
+          1
+        ]
+      ]
+    },
+    "2": {
+      "free": [
+        [
+          "QI_GRENADE_HEALING",
+          15
+        ]
+      ],
+      "premium": [
+        [
+          "LT_HP03_MOSSY_00",
+          1
+        ]
+      ]
+    },
+    "3": {
+      "free": [
+        [
+          "QI_HEALING_PYLON_BIG",
+          10
+        ]
+      ],
+      "premium": [
+        [
+          "WP_DP_HP03_MOSSY",
+          1
+        ]
+      ]
+    },
+    "4": {
+      "free": [
+        [
+          "QI_DAMAGE_BLOCK_POTION",
+          15
+        ]
+      ],
+      "premium": [
+        [
+          "BNC_STANDARD_HP03_MOSSY_00",
+          1
+        ]
+      ]
+    },
+    "5": {
+      "free": [
+        [
+          "QI_ATTACK_SPEED_POTION",
+          25
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          100
+        ]
+      ]
+    },
+    "6": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_FABRIC_EVENT_HP03_00",
+          1
+        ]
+      ]
+    },
+    "7": {
+      "free": [
+        [
+          "QI_STAMINA_POTION_00",
+          25
+        ]
+      ],
+      "premium": [
+        [
+          "EM_PLAYER_HP03_DANCE_00",
+          1
+        ]
+      ]
+    },
+    "8": {
+      "free": [],
+      "premium": [
+        [
+          "WP_EB_HP03_MOSSY",
+          1
+        ]
+      ]
+    },
+    "9": {
+      "free": [
+        [
+          "QI_STAGGER_POTION",
+          25
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          100
+        ]
+      ]
+    },
+    "10": {
+      "free": [
+        [
+          "CURRENCY_PRESTIGE",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "AR_HP03_MOSSY_HELM_01",
+          1
+        ]
+      ]
+    },
+    "11": {
+      "free": [],
+      "premium": [
+        [
+          "WP_MS_HP03_MOSSY",
+          1
+        ]
+      ]
+    },
+    "12": {
+      "free": [
+        [
+          "QI_LIFESTEAL_AOE_POTION",
+          15
+        ]
+      ],
+      "premium": [
+        [
+          "BNC_SIGIL_EVENT_HP03_00",
+          1
+        ],
+        [
+          "QI_FLARE_HP03_00",
+          1
+        ]
+      ]
+    },
+    "13": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          100
+        ]
+      ]
+    },
+    "14": {
+      "free": [
+        [
+          "QI_DAMAGE_PYLON",
+          10
+        ]
+      ],
+      "premium": [
+        [
+          "WP_IH_HP03_MOSSY",
+          1
+        ]
+      ]
+    },
+    "15": {
+      "free": [
+        [
+          "CURRENCY_PRESTIGE",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "EM_PLAYER_HP03_THROW_00",
+          1
+        ]
+      ]
+    },
+    "16": {
+      "free": [
+        [
+          "QI_DAMAGE_ENRAGEBONUS_POTION",
+          25
+        ]
+      ],
+      "premium": [
+        [
+          "BNC_FABRIC_EVENT_HP03_01",
+          1
+        ]
+      ]
+    },
+    "17": {
+      "free": [],
+      "premium": [
+        [
+          "WP_CB_HP03_MOSSY",
+          1
+        ]
+      ]
+    },
+    "18": {
+      "free": [
+        [
+          "QI_GRENADE_CLUSTER",
+          15
+        ]
+      ],
+      "premium": [
+        [
+          "BNC_ANIMATION_HP03_VINE_00",
+          1
+        ]
+      ]
+    },
+    "19": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          100
+        ]
+      ]
+    },
+    "20": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "EM_INTRO_HP03_VINE_00",
+          1
+        ]
+      ]
+    },
+    "21": {
+      "free": [],
+      "premium": [
+        [
+          "WP_GA_HP03_MOSSY",
+          1
+        ]
+      ]
+    },
+    "22": {
+      "free": [
+        [
+          "CURRENCY_TOKEN_EXCHANGE_SPEED_UP",
+          25
+        ]
+      ],
+      "premium": [
+        [
+          "BNC_STANDARD_HP03_MOSSY_01",
+          1
+        ]
+      ]
+    },
+    "23": {
+      "free": [
+        [
+          "CURRENCY_PRESTIGE",
+          50
+        ]
+      ],
+      "premium": [
+        [
+          "EM_PLAYER_HP03_FIREFLY_00",
+          1
+        ]
+      ]
+    },
+    "24": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          100
+        ]
+      ]
+    },
+    "25": {
+      "free": [
+        [
+          "CURRENCY_PLATINUM_UNIV",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "AR_HP03_MOSSY_HELM_00",
+          1
+        ],
+        [
+          "AR_HP03_MOSSY_CHEST",
+          1
+        ],
+        [
+          "AR_HP03_MOSSY_ARMS",
+          1
+        ],
+        [
+          "AR_HP03_MOSSY_LEGS",
+          1
+        ]
+      ]
+    }
+  },
+  "unavailable_rewards": [],
+  "source": {
+    "game": "1.6.2 layout; 1.14.7 item catalog",
+    "file": "season10c.json",
+    "sha256": "8a3844606ff6b55095e2a07b302c9bd2f322e34a5119c94757c656d86da01594"
+  }
+}

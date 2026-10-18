@@ -1,0 +1,529 @@
+{
+  "revision": "season1147-season07a_vault-v1",
+  "pass_id": "season27",
+  "key": "season07a_vault",
+  "title": "Way of the Fist",
+  "kind": "vault",
+  "levels": 30,
+  "xp_per_level": 100,
+  "start_date": "2020-01-01T00:00:00+00:00",
+  "end_date": "2099-01-01T00:00:00+00:00",
+  "items": {
+    "EM_PLAYER_HP07A_FIREBALL_00": {
+      "kind": "stack",
+      "name": "Ball of Fury",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_NOTES": {
+      "kind": "stack",
+      "name": "Rams",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "AR_HP07A_MONK_HELM_ULTRA": {
+      "kind": "stack",
+      "name": "Master's Hat",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "TOKEN_DAILY_PATROL_BONUS_PURCHASED": {
+      "kind": "stack",
+      "name": "Patrol Key",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "LT_HP07A_MONK_00": {
+      "kind": "stack",
+      "name": "Drake's Eye",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP07A_MONK_LEGS_ULTRA": {
+      "kind": "stack",
+      "name": "Master's Leg Wraps",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "TOKEN_BOUNTY_DRAFT_PREMIUM": {
+      "kind": "stack",
+      "name": "TOKEN_BOUNTY_DRAFT_PREMIUM",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "WP_GA_HP07A_MONK_00": {
+      "kind": "stack",
+      "name": "Elegant Wyvern",
+      "source": "Gear_Catalogs/weapon_gaxe_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_PJM_PRESTIGE_EMPTY": {
+      "kind": "stack",
+      "name": "CURRENCY_PJM_PRESTIGE_EMPTY",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_ANIMATION_HP07A_AETHER_00": {
+      "kind": "stack",
+      "name": "Inner Power",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_CB_HP07A_MONK_00": {
+      "kind": "stack",
+      "name": "Sublime Vipers",
+      "source": "Gear_Catalogs/weapon_cblades_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_PJM_WEAPON": {
+      "kind": "stack",
+      "name": "CURRENCY_PJM_WEAPON",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "WP_IH_HP07A_MONK_00": {
+      "kind": "stack",
+      "name": "Peerless Leviathan",
+      "source": "Gear_Catalogs/weapon_ihammer_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP07A_HEADSTAND_00": {
+      "kind": "stack",
+      "name": "Heads Down",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_AC_HP07A_MONK_00": {
+      "kind": "stack",
+      "name": "Deliberate Demons",
+      "source": "Gear_Catalogs/weapon_ac_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_EB_HP07A_MONK_00": {
+      "kind": "stack",
+      "name": "Relentless Serpent",
+      "source": "Gear_Catalogs/weapon_eblade_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP07A_MONK_ARMS_ULTRA": {
+      "kind": "stack",
+      "name": "Master's Fist Wraps",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_STANDARD_HP07A_MONK_00": {
+      "kind": "stack",
+      "name": "Eternal Wisdom Standard",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP07A_LEVITATION_00": {
+      "kind": "stack",
+      "name": "Elevated Spirit",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_FABRIC_EVENT_HP07A_00": {
+      "kind": "stack",
+      "name": "Eternal Wisdom",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_DP_HP07A_MONK_00": {
+      "kind": "stack",
+      "name": "Kind Ophidians",
+      "source": "Gear_Catalogs/weapon_dp_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_MS_HP07A_MONK_00": {
+      "kind": "stack",
+      "name": "Profound Basilisk",
+      "source": "Gear_Catalogs/weapon_mspear_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP07A_MONK_CHEST_ULTRA": {
+      "kind": "stack",
+      "name": "Master's Tunic",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_INTRO_HP07A_STONEBURST_00": {
+      "kind": "stack",
+      "name": "Stone Splitter",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    }
+  },
+  "bundles": {},
+  "bundle_names": {},
+  "rewards": {
+    "1": [
+      "EM_PLAYER_HP07A_FIREBALL_00"
+    ],
+    "2": [
+      "CURRENCY_NOTES"
+    ],
+    "3": [
+      "AR_HP07A_MONK_HELM_ULTRA"
+    ],
+    "4": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "5": [
+      "LT_HP07A_MONK_00"
+    ],
+    "6": [
+      "AR_HP07A_MONK_LEGS_ULTRA"
+    ],
+    "7": [
+      "TOKEN_BOUNTY_DRAFT_PREMIUM"
+    ],
+    "8": [
+      "WP_GA_HP07A_MONK_00"
+    ],
+    "9": [
+      "CURRENCY_PJM_PRESTIGE_EMPTY"
+    ],
+    "10": [
+      "BNC_ANIMATION_HP07A_AETHER_00"
+    ],
+    "11": [
+      "WP_CB_HP07A_MONK_00"
+    ],
+    "12": [
+      "CURRENCY_PJM_WEAPON"
+    ],
+    "13": [
+      "WP_IH_HP07A_MONK_00"
+    ],
+    "14": [
+      "CURRENCY_NOTES"
+    ],
+    "15": [
+      "EM_PLAYER_HP07A_HEADSTAND_00"
+    ],
+    "16": [
+      "WP_AC_HP07A_MONK_00"
+    ],
+    "17": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "18": [
+      "WP_EB_HP07A_MONK_00"
+    ],
+    "19": [
+      "AR_HP07A_MONK_ARMS_ULTRA"
+    ],
+    "20": [
+      "BNC_STANDARD_HP07A_MONK_00"
+    ],
+    "21": [
+      "TOKEN_BOUNTY_DRAFT_PREMIUM"
+    ],
+    "22": [
+      "EM_PLAYER_HP07A_LEVITATION_00"
+    ],
+    "23": [
+      "BNC_FABRIC_EVENT_HP07A_00"
+    ],
+    "24": [
+      "CURRENCY_PJM_PRESTIGE_EMPTY"
+    ],
+    "25": [
+      "WP_DP_HP07A_MONK_00"
+    ],
+    "26": [
+      "WP_MS_HP07A_MONK_00"
+    ],
+    "27": [
+      "CURRENCY_PJM_WEAPON"
+    ],
+    "28": [
+      "AR_HP07A_MONK_CHEST_ULTRA"
+    ],
+    "29": [
+      "CURRENCY_NOTES"
+    ],
+    "30": [
+      "EM_INTRO_HP07A_STONEBURST_00"
+    ]
+  },
+  "grants": {
+    "1": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_HP07A_FIREBALL_00",
+          1
+        ]
+      ]
+    },
+    "2": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          10000
+        ]
+      ]
+    },
+    "3": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP07A_MONK_HELM_ULTRA",
+          1
+        ]
+      ]
+    },
+    "4": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          5
+        ]
+      ]
+    },
+    "5": {
+      "free": [],
+      "premium": [
+        [
+          "LT_HP07A_MONK_00",
+          1
+        ]
+      ]
+    },
+    "6": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP07A_MONK_LEGS_ULTRA",
+          1
+        ]
+      ]
+    },
+    "7": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT_PREMIUM",
+          5
+        ]
+      ]
+    },
+    "8": {
+      "free": [],
+      "premium": [
+        [
+          "WP_GA_HP07A_MONK_00",
+          1
+        ]
+      ]
+    },
+    "9": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_PRESTIGE_EMPTY",
+          50
+        ]
+      ]
+    },
+    "10": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_ANIMATION_HP07A_AETHER_00",
+          1
+        ]
+      ]
+    },
+    "11": {
+      "free": [],
+      "premium": [
+        [
+          "WP_CB_HP07A_MONK_00",
+          1
+        ]
+      ]
+    },
+    "12": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_WEAPON",
+          200
+        ]
+      ]
+    },
+    "13": {
+      "free": [],
+      "premium": [
+        [
+          "WP_IH_HP07A_MONK_00",
+          1
+        ]
+      ]
+    },
+    "14": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          10000
+        ]
+      ]
+    },
+    "15": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_HP07A_HEADSTAND_00",
+          1
+        ]
+      ]
+    },
+    "16": {
+      "free": [],
+      "premium": [
+        [
+          "WP_AC_HP07A_MONK_00",
+          1
+        ]
+      ]
+    },
+    "17": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          5
+        ]
+      ]
+    },
+    "18": {
+      "free": [],
+      "premium": [
+        [
+          "WP_EB_HP07A_MONK_00",
+          1
+        ]
+      ]
+    },
+    "19": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP07A_MONK_ARMS_ULTRA",
+          1
+        ]
+      ]
+    },
+    "20": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_STANDARD_HP07A_MONK_00",
+          1
+        ]
+      ]
+    },
+    "21": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT_PREMIUM",
+          5
+        ]
+      ]
+    },
+    "22": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_HP07A_LEVITATION_00",
+          1
+        ]
+      ]
+    },
+    "23": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_FABRIC_EVENT_HP07A_00",
+          1
+        ]
+      ]
+    },
+    "24": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_PRESTIGE_EMPTY",
+          50
+        ]
+      ]
+    },
+    "25": {
+      "free": [],
+      "premium": [
+        [
+          "WP_DP_HP07A_MONK_00",
+          1
+        ]
+      ]
+    },
+    "26": {
+      "free": [],
+      "premium": [
+        [
+          "WP_MS_HP07A_MONK_00",
+          1
+        ]
+      ]
+    },
+    "27": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_WEAPON",
+          200
+        ]
+      ]
+    },
+    "28": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP07A_MONK_CHEST_ULTRA",
+          1
+        ]
+      ]
+    },
+    "29": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          10000
+        ]
+      ]
+    },
+    "30": {
+      "free": [],
+      "premium": [
+        [
+          "EM_INTRO_HP07A_STONEBURST_00",
+          1
+        ]
+      ]
+    }
+  },
+  "unavailable_rewards": [],
+  "source": {
+    "game": "1.6.2 layout; 1.14.7 item catalog",
+    "file": "season07a_vault.json",
+    "sha256": "bf80bf0482ee792726ce2d1d2e03e2d3d7896a8f1c4b7b5de4f2a3385dab5073"
+  }
+}

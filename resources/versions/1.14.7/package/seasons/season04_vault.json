@@ -1,0 +1,523 @@
+{
+  "revision": "season1147-season04_vault-v1",
+  "pass_id": "season27",
+  "key": "season04_vault",
+  "title": "Burndown",
+  "kind": "vault",
+  "levels": 30,
+  "xp_per_level": 100,
+  "start_date": "2020-01-01T00:00:00+00:00",
+  "end_date": "2099-01-01T00:00:00+00:00",
+  "items": {
+    "EM_PLAYER_HP04_FIREBREATH_00": {
+      "kind": "stack",
+      "name": "Dragon Breath",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP04_ARID_HELM_01": {
+      "kind": "stack",
+      "name": "Helm of Conquest",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_NOTES": {
+      "kind": "stack",
+      "name": "Rams",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "WP_GA_HP04_ARID": {
+      "kind": "stack",
+      "name": "Axe of the Nomad",
+      "source": "Gear_Catalogs/weapon_gaxe_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "LT_HP04_ARID_00": {
+      "kind": "stack",
+      "name": "Savage Light",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_PJM_PRESTIGE_EMPTY": {
+      "kind": "stack",
+      "name": "CURRENCY_PJM_PRESTIGE_EMPTY",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "WP_DP_HP04_ARID": {
+      "kind": "stack",
+      "name": "Guns of the Tyrant",
+      "source": "Gear_Catalogs/weapon_dp_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_PJM_WEAPON": {
+      "kind": "stack",
+      "name": "CURRENCY_PJM_WEAPON",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_ANIMATION_HP04_FIRE_00": {
+      "kind": "stack",
+      "name": "Burning Banner",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_IH_HP04_ARID": {
+      "kind": "stack",
+      "name": "Maul of the Brute",
+      "source": "Gear_Catalogs/weapon_ihammer_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP04_ARID_LEGS": {
+      "kind": "stack",
+      "name": "Barbaric Tread",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "TOKEN_DAILY_PATROL_BONUS_PURCHASED": {
+      "kind": "stack",
+      "name": "Patrol Key",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "AR_HP04_ARID_CHEST": {
+      "kind": "stack",
+      "name": "Barbaric Courage",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_MS_HP04_ARID": {
+      "kind": "stack",
+      "name": "Spear of the Gladiator",
+      "source": "Gear_Catalogs/weapon_mspear_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "TOKEN_BOUNTY_DRAFT_PREMIUM": {
+      "kind": "stack",
+      "name": "TOKEN_BOUNTY_DRAFT_PREMIUM",
+      "source": "Token_Catalogs/tokens_general_catalog.uasset",
+      "cosmetic": false
+    },
+    "EM_PLAYER_HP04_NECKCRACK_00": {
+      "kind": "stack",
+      "name": "Crackle and Pop",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_FABRIC_EVENT_HP04_01": {
+      "kind": "stack",
+      "name": "Aegis of the Restless King",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_CB_HP04_ARID": {
+      "kind": "stack",
+      "name": "Blades of the Warlord",
+      "source": "Gear_Catalogs/weapon_cblades_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_HP04_SHOUT_00": {
+      "kind": "stack",
+      "name": "Barbarian's Roar",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "WP_EB_HP04_ARID": {
+      "kind": "stack",
+      "name": "Sword of the Destroyer",
+      "source": "Gear_Catalogs/weapon_eblade_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_INTRO_HP04_BLAZE_00": {
+      "kind": "stack",
+      "name": "Firewalker",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP04_ARID_ARMS": {
+      "kind": "stack",
+      "name": "Barbaric Strength",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_HP04_ARID_HELM_00": {
+      "kind": "stack",
+      "name": "Barbaric Crown",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    }
+  },
+  "bundles": {},
+  "bundle_names": {},
+  "rewards": {
+    "1": [
+      "EM_PLAYER_HP04_FIREBREATH_00"
+    ],
+    "2": [
+      "AR_HP04_ARID_HELM_01"
+    ],
+    "3": [
+      "CURRENCY_NOTES"
+    ],
+    "4": [
+      "WP_GA_HP04_ARID"
+    ],
+    "5": [
+      "LT_HP04_ARID_00"
+    ],
+    "6": [
+      "CURRENCY_PJM_PRESTIGE_EMPTY"
+    ],
+    "7": [
+      "WP_DP_HP04_ARID"
+    ],
+    "8": [
+      "CURRENCY_PJM_WEAPON"
+    ],
+    "9": [
+      "BNC_ANIMATION_HP04_FIRE_00"
+    ],
+    "10": [
+      "WP_IH_HP04_ARID"
+    ],
+    "11": [
+      "CURRENCY_NOTES"
+    ],
+    "12": [
+      "AR_HP04_ARID_LEGS"
+    ],
+    "13": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "14": [
+      "AR_HP04_ARID_CHEST"
+    ],
+    "15": [
+      "WP_MS_HP04_ARID"
+    ],
+    "16": [
+      "TOKEN_BOUNTY_DRAFT_PREMIUM"
+    ],
+    "17": [
+      "EM_PLAYER_HP04_NECKCRACK_00"
+    ],
+    "18": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "19": [
+      "BNC_FABRIC_EVENT_HP04_01"
+    ],
+    "20": [
+      "WP_CB_HP04_ARID"
+    ],
+    "21": [
+      "TOKEN_BOUNTY_DRAFT_PREMIUM"
+    ],
+    "22": [
+      "EM_PLAYER_HP04_SHOUT_00"
+    ],
+    "23": [
+      "CURRENCY_PJM_PRESTIGE_EMPTY"
+    ],
+    "24": [
+      "CURRENCY_PJM_WEAPON"
+    ],
+    "25": [
+      "WP_EB_HP04_ARID"
+    ],
+    "26": [
+      "EM_INTRO_HP04_BLAZE_00"
+    ],
+    "27": [
+      "CURRENCY_NOTES"
+    ],
+    "28": [
+      "AR_HP04_ARID_ARMS"
+    ],
+    "29": [
+      "TOKEN_DAILY_PATROL_BONUS_PURCHASED"
+    ],
+    "30": [
+      "AR_HP04_ARID_HELM_00"
+    ]
+  },
+  "grants": {
+    "1": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_HP04_FIREBREATH_00",
+          1
+        ]
+      ]
+    },
+    "2": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP04_ARID_HELM_01",
+          1
+        ]
+      ]
+    },
+    "3": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          10000
+        ]
+      ]
+    },
+    "4": {
+      "free": [],
+      "premium": [
+        [
+          "WP_GA_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "5": {
+      "free": [],
+      "premium": [
+        [
+          "LT_HP04_ARID_00",
+          1
+        ]
+      ]
+    },
+    "6": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_PRESTIGE_EMPTY",
+          50
+        ]
+      ]
+    },
+    "7": {
+      "free": [],
+      "premium": [
+        [
+          "WP_DP_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "8": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_WEAPON",
+          200
+        ]
+      ]
+    },
+    "9": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_ANIMATION_HP04_FIRE_00",
+          1
+        ]
+      ]
+    },
+    "10": {
+      "free": [],
+      "premium": [
+        [
+          "WP_IH_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "11": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          10000
+        ]
+      ]
+    },
+    "12": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP04_ARID_LEGS",
+          1
+        ]
+      ]
+    },
+    "13": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          5
+        ]
+      ]
+    },
+    "14": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP04_ARID_CHEST",
+          1
+        ]
+      ]
+    },
+    "15": {
+      "free": [],
+      "premium": [
+        [
+          "WP_MS_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "16": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT_PREMIUM",
+          5
+        ]
+      ]
+    },
+    "17": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_HP04_NECKCRACK_00",
+          1
+        ]
+      ]
+    },
+    "18": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          5
+        ]
+      ]
+    },
+    "19": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_FABRIC_EVENT_HP04_01",
+          1
+        ]
+      ]
+    },
+    "20": {
+      "free": [],
+      "premium": [
+        [
+          "WP_CB_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "21": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_BOUNTY_DRAFT_PREMIUM",
+          5
+        ]
+      ]
+    },
+    "22": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_HP04_SHOUT_00",
+          1
+        ]
+      ]
+    },
+    "23": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_PRESTIGE_EMPTY",
+          50
+        ]
+      ]
+    },
+    "24": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_PJM_WEAPON",
+          200
+        ]
+      ]
+    },
+    "25": {
+      "free": [],
+      "premium": [
+        [
+          "WP_EB_HP04_ARID",
+          1
+        ]
+      ]
+    },
+    "26": {
+      "free": [],
+      "premium": [
+        [
+          "EM_INTRO_HP04_BLAZE_00",
+          1
+        ]
+      ]
+    },
+    "27": {
+      "free": [],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          10000
+        ]
+      ]
+    },
+    "28": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP04_ARID_ARMS",
+          1
+        ]
+      ]
+    },
+    "29": {
+      "free": [],
+      "premium": [
+        [
+          "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+          5
+        ]
+      ]
+    },
+    "30": {
+      "free": [],
+      "premium": [
+        [
+          "AR_HP04_ARID_HELM_00",
+          1
+        ]
+      ]
+    }
+  },
+  "unavailable_rewards": [],
+  "source": {
+    "game": "1.6.2 layout; 1.14.7 item catalog",
+    "file": "season04_vault.json",
+    "sha256": "abf0b11176cc3eb9cbd38bf38fb13a558a90961a6852e20e696db10f91bbf2ec"
+  }
+}

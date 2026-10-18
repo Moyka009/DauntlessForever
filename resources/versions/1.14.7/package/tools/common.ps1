@@ -21,7 +21,11 @@ $QuestPakRel  = "Archon\Content\Paks\$QuestPakName"
 $GamePaks = @(
     [pscustomobject]@{ Name = $QuestPakName; Hash = $QuestPakHash; Old = $QuestPakOld; What = 'Quest text fix (KombatKing)' },
     # Equipment fix by KombatKing (AGPL-3.0, source\Equipment1147-R1-source.zip): Recruit's Repeaters in the repeater category.
-    [pscustomobject]@{ Name = 'zzzzzzzz_Equipment1147_P.pak'; Hash = '9A2B3AF97304AE8CDD49BFC605A2E2C34657B0707A02076A0EFB6F62C7C80E65'; Old = @(); What = 'Equipment fix (KombatKing)' }
+    [pscustomobject]@{ Name = 'zzzzzzzz_Equipment1147_P.pak'; Hash = '9A2B3AF97304AE8CDD49BFC605A2E2C34657B0707A02076A0EFB6F62C7C80E65'; Old = @(); What = 'Equipment fix (KombatKing)' },
+    # KombatKing's 1.14.7 All-in-One R1 (AGPL-3.0, source\KombatKing-1147-AllInOne-R1-source.zip)
+    [pscustomobject]@{ Name = 'zzzz_Mega1147_Middleman_P.pak'; Hash = '60966CBC3BC8CCCD4922D0515DF631F12C93E993F51B30665B6224E944404E8A'; Old = @(); What = 'Middleman fusion timer (KombatKing)' },
+    [pscustomobject]@{ Name = 'zzzz_Mega1147_HuntPass_P.pak'; Hash = '7D64B5DCFB133FD19FBB54142D1C0F2713C954721A9D01B981BF9A4B3C91B7B1'; Old = @(); What = 'Hunt Pass seasons (KombatKing)' },
+    [pscustomobject]@{ Name = 'zzzzzzzzzzzzzzzz_HammerReload1147_P.pak'; Hash = 'F8A1449FD2C70FE915B455BEAF4428AE128D0C163AAF9A2E66554C62B2451E34'; Old = @(); What = 'War Hammer reload fix (KombatKing)' }
 )
 $ExeRel       = 'Archon\Binaries\Win64\Dauntless-Win64-Shipping.exe'
 $CapturesUrl  = 'https://github.com/EisigesEis/DauntlessEndpointDocumentation/archive/refs/heads/main.zip'

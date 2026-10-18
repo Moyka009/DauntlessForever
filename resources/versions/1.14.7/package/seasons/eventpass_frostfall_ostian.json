@@ -1,0 +1,212 @@
+{
+  "revision": "season1147-eventpass_frostfall_ostian-v1",
+  "pass_id": "season27",
+  "key": "eventpass_frostfall_ostian",
+  "title": "Ostian Winter",
+  "kind": "event",
+  "levels": 10,
+  "xp_per_level": 100,
+  "start_date": "2020-01-01T00:00:00+00:00",
+  "end_date": "2099-01-01T00:00:00+00:00",
+  "items": {
+    "EM_PLAYER_SEATED_01": {
+      "kind": "stack",
+      "name": "Sit Back",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_FABRIC_EVENT_FROST18_02": {
+      "kind": "stack",
+      "name": "Frostfall Icicles",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_FROST18_06": {
+      "kind": "stack",
+      "name": "Frostfall Snowman",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "LT_FROSTFALL_SNOWFLAKE": {
+      "kind": "stack",
+      "name": "Frostfall Crystal Lantern",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_FROST18_06": {
+      "kind": "stack",
+      "name": "Frostfall Snowman",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_STANDARD_OSTIA_01": {
+      "kind": "stack",
+      "name": "Ironclad Flagstaff",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_FROST18_00": {
+      "kind": "stack",
+      "name": "The Frostslayer",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_OSTIAN_STREETWEAR_CHEST": {
+      "kind": "stack",
+      "name": "Flight Jacket",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_OSTIAN_STREETWEAR_ARMS": {
+      "kind": "stack",
+      "name": "Insulated Gauntlets",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_OSTIAN_STREETWEAR_HELM": {
+      "kind": "stack",
+      "name": "Watch Cap",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_OSTIAN_STREETWEAR_LEGS": {
+      "kind": "stack",
+      "name": "Thermal Trousers",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    }
+  },
+  "bundles": {},
+  "bundle_names": {},
+  "rewards": {
+    "1": [
+      "EM_PLAYER_SEATED_01"
+    ],
+    "2": [
+      "BNC_FABRIC_EVENT_FROST18_02"
+    ],
+    "3": [
+      "QI_FLARE_FROST18_06"
+    ],
+    "4": [],
+    "5": [
+      "LT_FROSTFALL_SNOWFLAKE"
+    ],
+    "6": [
+      "BNC_SIGIL_EVENT_FROST18_06"
+    ],
+    "7": [],
+    "8": [
+      "BNC_STANDARD_OSTIA_01"
+    ],
+    "9": [
+      "TITLE_FROST18_00"
+    ],
+    "10": [
+      "AR_OSTIAN_STREETWEAR_CHEST",
+      "AR_OSTIAN_STREETWEAR_ARMS",
+      "AR_OSTIAN_STREETWEAR_HELM",
+      "AR_OSTIAN_STREETWEAR_LEGS"
+    ]
+  },
+  "grants": {
+    "1": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_SEATED_01",
+          1
+        ]
+      ]
+    },
+    "2": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_FABRIC_EVENT_FROST18_02",
+          1
+        ]
+      ]
+    },
+    "3": {
+      "free": [],
+      "premium": [
+        [
+          "QI_FLARE_FROST18_06",
+          1
+        ]
+      ]
+    },
+    "4": {
+      "free": [],
+      "premium": []
+    },
+    "5": {
+      "free": [],
+      "premium": [
+        [
+          "LT_FROSTFALL_SNOWFLAKE",
+          1
+        ]
+      ]
+    },
+    "6": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_SIGIL_EVENT_FROST18_06",
+          1
+        ]
+      ]
+    },
+    "7": {
+      "free": [],
+      "premium": []
+    },
+    "8": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_STANDARD_OSTIA_01",
+          1
+        ]
+      ]
+    },
+    "9": {
+      "free": [],
+      "premium": [
+        [
+          "TITLE_FROST18_00",
+          1
+        ]
+      ]
+    },
+    "10": {
+      "free": [],
+      "premium": [
+        [
+          "AR_OSTIAN_STREETWEAR_CHEST",
+          1
+        ],
+        [
+          "AR_OSTIAN_STREETWEAR_ARMS",
+          1
+        ],
+        [
+          "AR_OSTIAN_STREETWEAR_HELM",
+          1
+        ],
+        [
+          "AR_OSTIAN_STREETWEAR_LEGS",
+          1
+        ]
+      ]
+    }
+  },
+  "unavailable_rewards": [],
+  "source": {
+    "game": "1.6.2 layout; 1.14.7 item catalog",
+    "file": "eventpass_frostfall_ostian.json",
+    "sha256": "68f48f0c212292db7f443a9416b3c0a289200b4ff9bb100e33312617d2f30963"
+  }
+}

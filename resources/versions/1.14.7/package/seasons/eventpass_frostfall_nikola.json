@@ -1,0 +1,225 @@
+{
+  "revision": "season1147-eventpass_frostfall_nikola-v1",
+  "pass_id": "season27",
+  "key": "eventpass_frostfall_nikola",
+  "title": "The Legend of Silver Nikola",
+  "kind": "event",
+  "levels": 10,
+  "xp_per_level": 100,
+  "start_date": "2020-01-01T00:00:00+00:00",
+  "end_date": "2099-01-01T00:00:00+00:00",
+  "items": {
+    "EM_PLAYER_EVENT_FROST18_000": {
+      "kind": "stack",
+      "name": "For The Queen",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_FABRIC_EVENT_FROST18_00": {
+      "kind": "stack",
+      "name": "Frostfall Firs",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_FROST18_10": {
+      "kind": "stack",
+      "name": "Spirit of Frostfall",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_GOLDENBELLS_HELM": {
+      "kind": "stack",
+      "name": "Frostfall Bells",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "LT_FROSTFALL_MISTLETOE": {
+      "kind": "stack",
+      "name": "Frostfall Mistletoe Lantern",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_FROST18_09": {
+      "kind": "stack",
+      "name": "Frostfall Crown",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "EM_PLAYER_LAYDOWN_00": {
+      "kind": "stack",
+      "name": "Lie Down",
+      "source": "emotes_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_FROST18_02": {
+      "kind": "stack",
+      "name": "Gift of Nikola",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_SILVER_NIKOLA_CHEST": {
+      "kind": "stack",
+      "name": "Nikola's Vestments",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_SILVER_NIKOLA_ARMS": {
+      "kind": "stack",
+      "name": "Nikola's Gloves",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_SILVER_NIKOLA_HELM": {
+      "kind": "stack",
+      "name": "Nikola's Hood",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_SILVER_NIKOLA_LEGS": {
+      "kind": "stack",
+      "name": "Nikola's Snowboots",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    }
+  },
+  "bundles": {},
+  "bundle_names": {},
+  "rewards": {
+    "1": [
+      "EM_PLAYER_EVENT_FROST18_000"
+    ],
+    "2": [
+      "BNC_FABRIC_EVENT_FROST18_00"
+    ],
+    "3": [],
+    "4": [
+      "QI_FLARE_FROST18_10"
+    ],
+    "5": [
+      "AR_GOLDENBELLS_HELM"
+    ],
+    "6": [
+      "LT_FROSTFALL_MISTLETOE"
+    ],
+    "7": [
+      "QI_FLARE_FROST18_09"
+    ],
+    "8": [
+      "EM_PLAYER_LAYDOWN_00"
+    ],
+    "9": [
+      "TITLE_FROST18_02"
+    ],
+    "10": [
+      "AR_SILVER_NIKOLA_CHEST",
+      "AR_SILVER_NIKOLA_ARMS",
+      "AR_SILVER_NIKOLA_HELM",
+      "AR_SILVER_NIKOLA_LEGS"
+    ]
+  },
+  "grants": {
+    "1": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_EVENT_FROST18_000",
+          1
+        ]
+      ]
+    },
+    "2": {
+      "free": [],
+      "premium": [
+        [
+          "BNC_FABRIC_EVENT_FROST18_00",
+          1
+        ]
+      ]
+    },
+    "3": {
+      "free": [],
+      "premium": []
+    },
+    "4": {
+      "free": [],
+      "premium": [
+        [
+          "QI_FLARE_FROST18_10",
+          1
+        ]
+      ]
+    },
+    "5": {
+      "free": [],
+      "premium": [
+        [
+          "AR_GOLDENBELLS_HELM",
+          1
+        ]
+      ]
+    },
+    "6": {
+      "free": [],
+      "premium": [
+        [
+          "LT_FROSTFALL_MISTLETOE",
+          1
+        ]
+      ]
+    },
+    "7": {
+      "free": [],
+      "premium": [
+        [
+          "QI_FLARE_FROST18_09",
+          1
+        ]
+      ]
+    },
+    "8": {
+      "free": [],
+      "premium": [
+        [
+          "EM_PLAYER_LAYDOWN_00",
+          1
+        ]
+      ]
+    },
+    "9": {
+      "free": [],
+      "premium": [
+        [
+          "TITLE_FROST18_02",
+          1
+        ]
+      ]
+    },
+    "10": {
+      "free": [],
+      "premium": [
+        [
+          "AR_SILVER_NIKOLA_CHEST",
+          1
+        ],
+        [
+          "AR_SILVER_NIKOLA_ARMS",
+          1
+        ],
+        [
+          "AR_SILVER_NIKOLA_HELM",
+          1
+        ],
+        [
+          "AR_SILVER_NIKOLA_LEGS",
+          1
+        ]
+      ]
+    }
+  },
+  "unavailable_rewards": [],
+  "source": {
+    "game": "1.6.2 layout; 1.14.7 item catalog",
+    "file": "eventpass_frostfall_nikola.json",
+    "sha256": "1d5c0f0e768552a3e8e4d6ae2cbd11bf84143dd9ee3fe865fa7ba567ce479e29"
+  }
+}

@@ -1,0 +1,1487 @@
+{
+  "revision": "season1147-reimagined_saints19-v1",
+  "pass_id": "season27",
+  "key": "reimagined_saints19",
+  "title": "Saint's Bond (2019)",
+  "kind": "reimagined",
+  "levels": 50,
+  "xp_per_level": 100,
+  "start_date": "2020-01-01T00:00:00+00:00",
+  "end_date": "2099-01-01T00:00:00+00:00",
+  "items": {
+    "BNC_FABRIC_EVENT_SAINTS19_00": {
+      "kind": "stack",
+      "name": "Thorned Rose",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_FABRIC_EVENT_SAINTS19_01": {
+      "kind": "stack",
+      "name": "Lover's Window",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "CURRENCY_NOTES": {
+      "kind": "stack",
+      "name": "Rams",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "LT_SAINTS19_ROMANTIC_00": {
+      "kind": "stack",
+      "name": "Heart's Light",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CONTAINER_CORE_BRONZE_CELLCORE": {
+      "kind": "stack",
+      "name": "Common Cell Core",
+      "source": "containers_core_cellcores.uasset",
+      "cosmetic": false
+    },
+    "BNC_FABRIC_EVENT_SAINTS19_02": {
+      "kind": "stack",
+      "name": "Heart's Gate",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_FABRIC_EVENT_SAINTS19_03": {
+      "kind": "stack",
+      "name": "Saint's Gift",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_SAINTS19_00": {
+      "kind": "stack",
+      "name": "Shattered Heart",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_SAINTS19_01": {
+      "kind": "stack",
+      "name": "Love Guns",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_SAINTS19_02": {
+      "kind": "stack",
+      "name": "Emberheart",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_SAINTS19_03": {
+      "kind": "stack",
+      "name": "Tie the Knot",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "LT_SAINTS19_ROMANTIC_01": {
+      "kind": "stack",
+      "name": "Soul's Brilliance",
+      "source": "Gear_Catalogs/lantern_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "CONTAINER_CORE_SILVER_CELLCORE": {
+      "kind": "stack",
+      "name": "Uncommon Cell Core",
+      "source": "containers_core_cellcores.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_TOKEN_TRANSMOG": {
+      "kind": "stack",
+      "name": "Transmog Stone",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "CURRENCY_MARKS_STEEL": {
+      "kind": "stack",
+      "name": "Steel Marks",
+      "source": "currency_tokens_catalog.uasset",
+      "cosmetic": false
+    },
+    "BNC_SIGIL_EVENT_SAINTS19_04": {
+      "kind": "stack",
+      "name": "Rose of Avellaine",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_SAINTS19_05": {
+      "kind": "stack",
+      "name": "Hearts United",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_SAINTS19_06": {
+      "kind": "stack",
+      "name": "Heart of Avellaine",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_SIGIL_EVENT_SAINTS19_07": {
+      "kind": "stack",
+      "name": "Wings of Avellaine",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_SAINTS19_ROMANTIC_HELM_01": {
+      "kind": "stack",
+      "name": "Savant's Hood",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_STANDARD_SAINTS19_00": {
+      "kind": "stack",
+      "name": "Standard of the Savant",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "BNC_STANDARD_SAINTS19_01": {
+      "kind": "stack",
+      "name": "Standard of the Artisan",
+      "source": "banner_customization_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_SAINTS19_00": {
+      "kind": "stack",
+      "name": "Shattered Heart",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_SAINTS19_01": {
+      "kind": "stack",
+      "name": "Love Guns",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_SAINTS19_02": {
+      "kind": "stack",
+      "name": "Emberheart",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_SAINTS19_03": {
+      "kind": "stack",
+      "name": "Tie the Knot",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "CONTAINER_CORE_GOLD_CELLCORE": {
+      "kind": "stack",
+      "name": "Rare Cell Core",
+      "source": "containers_core_cellcores.uasset",
+      "cosmetic": false
+    },
+    "AR_SAINTS19_ROMANTIC_HELM_02": {
+      "kind": "stack",
+      "name": "Artisan's Circlet",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_SAINTS19_04": {
+      "kind": "stack",
+      "name": "Rose of Avellaine",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_SAINTS19_05": {
+      "kind": "stack",
+      "name": "Hearts United",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_SAINTS19_06": {
+      "kind": "stack",
+      "name": "Heart of Avellaine",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_SAINTS19_07": {
+      "kind": "stack",
+      "name": "Wings of Avellaine",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "QI_FLARE_SAINTS19_08": {
+      "kind": "stack",
+      "name": "True Love",
+      "source": "flare_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_SAINTS19_00": {
+      "kind": "stack",
+      "name": "The Undivided",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_SAINTS19_ROMANTIC_ARMS": {
+      "kind": "stack",
+      "name": "The Rapturous Embrace",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_SAINTS19_ROMANTIC_LEGS": {
+      "kind": "stack",
+      "name": "The Star-Crossed Walk",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_SAINTS19_01": {
+      "kind": "stack",
+      "name": "Saint's Bound",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_SAINTS19_02": {
+      "kind": "stack",
+      "name": "The Starry-Eyed",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_SAINTS19_03": {
+      "kind": "stack",
+      "name": "Eternal Beloved",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_SAINTS19_04": {
+      "kind": "stack",
+      "name": "Scion of St. Avellaine",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_SAINTS19_05": {
+      "kind": "stack",
+      "name": "Soul of the Artisan",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_SAINTS19_06": {
+      "kind": "stack",
+      "name": "Heart of the Savant",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_SAINTS19_ROMANTIC_CHEST": {
+      "kind": "stack",
+      "name": "The Steadfast Heart",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "AR_SAINTS19_ROMANTIC_HELM_00": {
+      "kind": "stack",
+      "name": "The Adoration Plume",
+      "source": "Gear_Catalogs/armour_cosmetic_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_SAINTS19_07": {
+      "kind": "stack",
+      "name": "The Lovelorn",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_SAINTS19_08": {
+      "kind": "stack",
+      "name": "Hopeless Romantic",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    },
+    "TITLE_SAINTS19_09": {
+      "kind": "stack",
+      "name": "The Ardent Flame",
+      "source": "title_catalog.uasset",
+      "cosmetic": true
+    }
+  },
+  "bundles": {},
+  "bundle_names": {},
+  "rewards": {
+    "1": [
+      "BNC_FABRIC_EVENT_SAINTS19_00",
+      "BNC_FABRIC_EVENT_SAINTS19_01",
+      "CURRENCY_NOTES",
+      "LT_SAINTS19_ROMANTIC_00"
+    ],
+    "2": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "3": [
+      "BNC_FABRIC_EVENT_SAINTS19_02",
+      "BNC_FABRIC_EVENT_SAINTS19_03",
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "4": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "5": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_NOTES"
+    ],
+    "6": [
+      "BNC_SIGIL_EVENT_SAINTS19_00",
+      "BNC_SIGIL_EVENT_SAINTS19_01",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "7": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "8": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "9": [
+      "BNC_SIGIL_EVENT_SAINTS19_02",
+      "BNC_SIGIL_EVENT_SAINTS19_03",
+      "CURRENCY_NOTES",
+      "LT_SAINTS19_ROMANTIC_01"
+    ],
+    "10": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_SILVER_CELLCORE",
+      "CURRENCY_TOKEN_TRANSMOG",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "11": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "12": [
+      "BNC_SIGIL_EVENT_SAINTS19_04",
+      "BNC_SIGIL_EVENT_SAINTS19_05",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "13": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "14": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "15": [
+      "BNC_SIGIL_EVENT_SAINTS19_06",
+      "BNC_SIGIL_EVENT_SAINTS19_07",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_NOTES"
+    ],
+    "16": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "17": [
+      "CURRENCY_NOTES",
+      "AR_SAINTS19_ROMANTIC_HELM_01"
+    ],
+    "18": [
+      "BNC_STANDARD_SAINTS19_00",
+      "BNC_STANDARD_SAINTS19_01",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "19": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "20": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_SILVER_CELLCORE",
+      "CURRENCY_TOKEN_TRANSMOG",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "21": [
+      "QI_FLARE_SAINTS19_00",
+      "QI_FLARE_SAINTS19_01",
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "22": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "23": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "24": [
+      "QI_FLARE_SAINTS19_02",
+      "QI_FLARE_SAINTS19_03",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "25": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_GOLD_CELLCORE",
+      "CURRENCY_NOTES"
+    ],
+    "26": [
+      "CURRENCY_NOTES",
+      "AR_SAINTS19_ROMANTIC_HELM_02"
+    ],
+    "27": [
+      "QI_FLARE_SAINTS19_04",
+      "QI_FLARE_SAINTS19_05",
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "28": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "29": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "30": [
+      "QI_FLARE_SAINTS19_06",
+      "QI_FLARE_SAINTS19_07",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_SILVER_CELLCORE",
+      "CURRENCY_TOKEN_TRANSMOG",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "31": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "32": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "33": [
+      "QI_FLARE_SAINTS19_08",
+      "TITLE_SAINTS19_00",
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "34": [
+      "CURRENCY_NOTES",
+      "AR_SAINTS19_ROMANTIC_ARMS",
+      "AR_SAINTS19_ROMANTIC_LEGS"
+    ],
+    "35": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_NOTES"
+    ],
+    "36": [
+      "TITLE_SAINTS19_01",
+      "TITLE_SAINTS19_02",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "37": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "38": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "39": [
+      "TITLE_SAINTS19_03",
+      "TITLE_SAINTS19_04",
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "40": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_SILVER_CELLCORE",
+      "CURRENCY_TOKEN_TRANSMOG",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_MARKS_STEEL"
+    ],
+    "41": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "42": [
+      "TITLE_SAINTS19_05",
+      "TITLE_SAINTS19_06",
+      "CURRENCY_NOTES",
+      "AR_SAINTS19_ROMANTIC_CHEST",
+      "AR_SAINTS19_ROMANTIC_HELM_00"
+    ],
+    "43": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "44": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "45": [
+      "TITLE_SAINTS19_07",
+      "TITLE_SAINTS19_08",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_NOTES"
+    ],
+    "46": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "47": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "48": [
+      "TITLE_SAINTS19_09",
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_BRONZE_CELLCORE"
+    ],
+    "49": [
+      "CURRENCY_NOTES",
+      "CURRENCY_NOTES"
+    ],
+    "50": [
+      "CURRENCY_NOTES",
+      "CONTAINER_CORE_GOLD_CELLCORE",
+      "CURRENCY_TOKEN_TRANSMOG",
+      "CONTAINER_CORE_BRONZE_CELLCORE",
+      "CURRENCY_MARKS_STEEL",
+      "CONTAINER_CORE_SILVER_CELLCORE"
+    ]
+  },
+  "grants": {
+    "1": {
+      "free": [
+        [
+          "BNC_FABRIC_EVENT_SAINTS19_00",
+          1
+        ],
+        [
+          "BNC_FABRIC_EVENT_SAINTS19_01",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "LT_SAINTS19_ROMANTIC_00",
+          1
+        ]
+      ]
+    },
+    "2": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "3": {
+      "free": [
+        [
+          "BNC_FABRIC_EVENT_SAINTS19_02",
+          1
+        ],
+        [
+          "BNC_FABRIC_EVENT_SAINTS19_03",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "4": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "5": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "6": {
+      "free": [
+        [
+          "BNC_SIGIL_EVENT_SAINTS19_00",
+          1
+        ],
+        [
+          "BNC_SIGIL_EVENT_SAINTS19_01",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "7": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "8": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "9": {
+      "free": [
+        [
+          "BNC_SIGIL_EVENT_SAINTS19_02",
+          1
+        ],
+        [
+          "BNC_SIGIL_EVENT_SAINTS19_03",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "LT_SAINTS19_ROMANTIC_01",
+          1
+        ]
+      ]
+    },
+    "10": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_SILVER_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ]
+      ]
+    },
+    "11": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "12": {
+      "free": [
+        [
+          "BNC_SIGIL_EVENT_SAINTS19_04",
+          1
+        ],
+        [
+          "BNC_SIGIL_EVENT_SAINTS19_05",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "13": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "14": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "15": {
+      "free": [
+        [
+          "BNC_SIGIL_EVENT_SAINTS19_06",
+          1
+        ],
+        [
+          "BNC_SIGIL_EVENT_SAINTS19_07",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "16": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "17": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "AR_SAINTS19_ROMANTIC_HELM_01",
+          1
+        ]
+      ]
+    },
+    "18": {
+      "free": [
+        [
+          "BNC_STANDARD_SAINTS19_00",
+          1
+        ],
+        [
+          "BNC_STANDARD_SAINTS19_01",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "19": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "20": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_SILVER_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ]
+      ]
+    },
+    "21": {
+      "free": [
+        [
+          "QI_FLARE_SAINTS19_00",
+          1
+        ],
+        [
+          "QI_FLARE_SAINTS19_01",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "22": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "23": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "24": {
+      "free": [
+        [
+          "QI_FLARE_SAINTS19_02",
+          1
+        ],
+        [
+          "QI_FLARE_SAINTS19_03",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "25": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_GOLD_CELLCORE",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "26": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "AR_SAINTS19_ROMANTIC_HELM_02",
+          1
+        ]
+      ]
+    },
+    "27": {
+      "free": [
+        [
+          "QI_FLARE_SAINTS19_04",
+          1
+        ],
+        [
+          "QI_FLARE_SAINTS19_05",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "28": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "29": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "30": {
+      "free": [
+        [
+          "QI_FLARE_SAINTS19_06",
+          1
+        ],
+        [
+          "QI_FLARE_SAINTS19_07",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_SILVER_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ]
+      ]
+    },
+    "31": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "32": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "33": {
+      "free": [
+        [
+          "QI_FLARE_SAINTS19_08",
+          1
+        ],
+        [
+          "TITLE_SAINTS19_00",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "34": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "AR_SAINTS19_ROMANTIC_ARMS",
+          1
+        ],
+        [
+          "AR_SAINTS19_ROMANTIC_LEGS",
+          1
+        ]
+      ]
+    },
+    "35": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "36": {
+      "free": [
+        [
+          "TITLE_SAINTS19_01",
+          1
+        ],
+        [
+          "TITLE_SAINTS19_02",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "37": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "38": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "39": {
+      "free": [
+        [
+          "TITLE_SAINTS19_03",
+          1
+        ],
+        [
+          "TITLE_SAINTS19_04",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "40": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_SILVER_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ]
+      ]
+    },
+    "41": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "42": {
+      "free": [
+        [
+          "TITLE_SAINTS19_05",
+          1
+        ],
+        [
+          "TITLE_SAINTS19_06",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "AR_SAINTS19_ROMANTIC_CHEST",
+          1
+        ],
+        [
+          "AR_SAINTS19_ROMANTIC_HELM_00",
+          1
+        ]
+      ]
+    },
+    "43": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "44": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "45": {
+      "free": [
+        [
+          "TITLE_SAINTS19_07",
+          1
+        ],
+        [
+          "TITLE_SAINTS19_08",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "46": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "47": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "48": {
+      "free": [
+        [
+          "TITLE_SAINTS19_09",
+          1
+        ],
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ]
+      ]
+    },
+    "49": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ]
+      ],
+      "premium": [
+        [
+          "CURRENCY_NOTES",
+          250
+        ]
+      ]
+    },
+    "50": {
+      "free": [
+        [
+          "CURRENCY_NOTES",
+          100
+        ],
+        [
+          "CONTAINER_CORE_GOLD_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_TOKEN_TRANSMOG",
+          1
+        ]
+      ],
+      "premium": [
+        [
+          "CONTAINER_CORE_BRONZE_CELLCORE",
+          1
+        ],
+        [
+          "CURRENCY_MARKS_STEEL",
+          50
+        ],
+        [
+          "CONTAINER_CORE_SILVER_CELLCORE",
+          1
+        ]
+      ]
+    }
+  },
+  "unavailable_rewards": [],
+  "source": {
+    "game": "1.6.2 layout; 1.14.7 item catalog",
+    "file": "reimagined_saints19.json",
+    "sha256": "221ccc441e2c0e66850070c8d76473dd92d650f4ad5ec1dbbd2de27776172ecd"
+  }
+}

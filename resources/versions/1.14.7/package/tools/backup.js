@@ -10,7 +10,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const OUT = path.join(ROOT, 'backup', 'hostmode');
-const FILES = ['data/state.json', 'data/travel_pending.json'];
+const FILES = ['data/state.json', 'data/travel_pending.json', 'data/season.txt', 'data/rules.txt'];
 
 try {
   const keep = Math.max(1, Math.min(60, parseInt(process.argv[2], 10) || 7));
