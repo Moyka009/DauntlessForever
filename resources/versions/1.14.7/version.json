@@ -16,6 +16,7 @@
                   "Online with friends: the launcher\u0027s Friends page, Play online and Host Mode (and ONLINE - HOST / LAN - JOIN by hand)",
                   "Parties: invite a player in Ramsgate (Q on them); the party follows the leader into the training grounds and hunts (test)",
                   "KombatKing\u0027s All-in-One R1: Fountain gift and free supplies pack, Middleman slots and 7-minute fusion, Trials store, Hunt Pass seasons and a 400-tier Mega pass, bounties, power surge saving, War Hammer reload",
+                  "Sparkforge reforge: weapon back to level 1, reforge badge, Aetherheart right away",
                   "Test (KombatKing): Game Rules up to 5x, one free All Dyes pack, Gauntlet access and extra Trials destinations (no Gauntlet rewards yet)"
               ],
     "notWorking":  [
@@ -33,7 +34,7 @@
                  },
     "package":  {
                     "dir":  "package",
-                    "packageVersion":  "2026-10-18.2",
+                    "packageVersion":  "2026-10-18.3",
                     "setup":  "tools/setup.ps1",
                     "uninstallArgs":  [
                                           "-Uninstall"

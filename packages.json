@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-18.2",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-18.2.zip",
-                         "sha256":  "47b2654efbf48af98030c9513c643b1d886d8a894d6627563e7adf6fc67ebe50",
+                         "packageVersion":  "2026-10-18.3",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-18.3.zip",
+                         "sha256":  "8cb3e3b3285f6a0ac940aea6fafa7b964eb772ae09ad64ec9f8d04032fbc0c34",
                          "date":  "2026-10-18",
-                         "note":  "KombatKing\u0027s All-in-One R1: fountain, Middleman, Trials store, Hunt Pass seasons, bounties, power surge, hammer reload, Game Rules, All Dyes, Gauntlet (test); safer saves"
+                         "note":  "Sparkforge reforge works: weapon back to level 1, reforge badge, Aetherheart right away"
                      }
                  ],
     "launcher":  {

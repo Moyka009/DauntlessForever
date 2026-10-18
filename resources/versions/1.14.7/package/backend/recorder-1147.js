@@ -518,8 +518,29 @@ function savePjm(c) {
 // Shapes read from the game's reply parsers; a new player has none. What the game server grants is added up here.
 const isoNow = () => new Date().toISOString().slice(0, 19);                    // 2024-10-06T12:58:38, as the live servers wrote dates
 function progressOf(p) { if (!p.progress) p.progress = { tracks: {}, objectives: {} }; return p.progress; }
-const trackOut = (p, id, t) => ({ phx_account_id: p.accountId, progression_id: id, progress: t.progress || 0, confirmed_fremium_rank: t.confirmed_fremium_rank || 0,
-  confirmed_premium_rank: t.confirmed_premium_rank || 0, confirmed_date: t.confirmed_date || null });
+const isPrestige = (id) => /^PrestigeTrack_Weapon_[A-Za-z]+$/.test(String(id));
+const trackOut = (p, id, t) => ({ phx_account_id: p.accountId, progression_id: id, progress: t.progress || 0,
+  confirmed_fremium_rank: isPrestige(id) ? (t.progress || 0) : (t.confirmed_fremium_rank || 0),
+  confirmed_premium_rank: isPrestige(id) ? (t.progress || 0) : (t.confirmed_premium_rank || 0), confirmed_date: t.confirmed_date || null });
+// DF-REFORGE-1147: Sparkforge "Reforge Weapon Skill" (same calls as 1.6.2, see the 1.6.2 Sparkforge notes):
+//   1. POST /inventory that only removes 100 CURRENCY_PJM_PRESTIGE_EMPTY (Aethersparks)  -> the Aetherheart is added
+//      in the same transaction, so the game shows it at once;
+//   2. POST /progression/<acc>/PrestigeTrack_Weapon_<W>/1  -> one more reforge (pays the heart here instead if step 1
+//      did not, within 60 s);
+//   3. DELETE /progression/<acc>/ExperienceTrack_Weapon_<W>  -> the weapon back to level 1 (old XP kept in reforgedXp);
+//   4. GET /progression/<acc>/ExperienceTrack_Weapon_<W>.
+const REFORGE_SPARK = 'CURRENCY_PJM_PRESTIGE_EMPTY', REFORGE_HEART = 'CURRENCY_PJM_PRESTIGE_FILLED';
+function isReforgeSpend(b) {
+  if (!b || typeof b !== 'object') return false;
+  const rem = Array.isArray(b.removeStackedItems) ? b.removeStackedItems : [];
+  const empty = (k) => !b[k] || (Array.isArray(b[k]) && b[k].length === 0);
+  return rem.length > 0 && rem.every((x) => x && x.catalogId === REFORGE_SPARK && Number(x.quantity) > 0)
+    && empty('addStackedItems') && empty('addInstancedItems') && empty('removeInstancedItems') && empty('saveInstancedItems');
+}
+function giveStacked(inv, id, n) {
+  const row = inv.stackedItems.find((x) => x.catalogId === id);
+  if (row) row.quantity = (Number(row.quantity) || 0) + n; else inv.stackedItems.push({ catalogId: id, quantity: n });
+}
 const objectiveOut = (p, id, o) => ({ completed_count: o.completed_count || 0, created_date: o.created_date || isoNow(), last_modified_date: o.last_modified_date || isoNow(),
   objective_id: id, phx_account_id: p.accountId, progress: o.progress || 0 });
 function grantProgressNative(c) {
@@ -543,6 +564,17 @@ function grantProgressNative(c) {
 function grantTrackNative(c) {
   const p = playerFor(c.req); const pr = progressOf(p); const id = decodeURIComponent(c.match[1]);
   huntpass1147.assertDelta(id, Number(c.match[2]));
+  if (isPrestige(id)) {   // DF-REFORGE-1147
+    const n = Math.max(0, Math.min(10, Number(c.match[2]) || 0));
+    const cur = pr.tracks[id] || (pr.tracks[id] = { progress: 0 });
+    cur.progress = (Number(cur.progress) || 0) + n; cur.confirmed_date = isoNow();
+    if (n > 0 && !(p.reforgePaidAt && Date.now() - p.reforgePaidAt < 60000)) {
+      giveStacked(inventoryOf(p, (p.characters[0] || {}).id), REFORGE_HEART, n);
+      reforgeLog(`${p.accountId}: ${id} +${n}, Aetherheart paid with the reforge count`);
+    } else reforgeLog(`${p.accountId}: ${id} +${n} (reforge ${cur.progress}), heart already paid with the spark transaction`);
+    delete p.reforgePaidAt; saveState();
+    return J(wrapped(trackOut(p, id, cur)), `reforge ${id} now ${cur.progress}`);
+  }
   const cur = pr.tracks[id] || (pr.tracks[id] = { progress: 0 });
   cur.progress = gameRules.sumTrack(id, cur.progress, gameRules.track(id, Number(c.match[2]) || 0)); huntpass1147.settle(p); saveState();
   return J(wrapped(trackOut(p, id, cur)), `${id} +${c.match[2]}, guess`);
@@ -875,7 +907,10 @@ const routes = [
     }
     // Work on a copy: a rejected batch must never leave half its changes in memory.
     const inv=JSON.parse(JSON.stringify(inventoryOf(p,b.characterId)));
-    const result = applyInventory(inv,b);
+    const reforge = isReforgeSpend(b);   // DF-REFORGE-1147
+    const tx = reforge ? Object.assign({}, b, { addStackedItems: [{ catalogId: REFORGE_HEART, quantity: 1 }] }) : b;
+    const result = applyInventory(inv,tx);
+    if (reforge) { p.reforgePaidAt = Date.now(); reforgeLog(`${p.accountId}: reforge spark spend, Aetherheart paid in the same transaction`); }
     p.inventory[b.characterId||p.characters[0]?.id||'none']=inv;
     if(transaction){history.push({id:transaction,character:b.characterId,digest,result});p.inventoryTransactions=history.slice(-128);}
     saveState();return J(result);
@@ -1054,6 +1089,14 @@ const routes = [
   ['progression', 'GET', /^\/progression\/(?!objectives\/|tracked_objectives\/)[^/]+\/([^/]+)\/?$/, (c) => { const p = playerFor(c.req); const id = decodeURIComponent(c.match[1]);
     return J(wrapped(trackOut(p, id, progressOf(p).tracks[id] || {})), 'guess'); }],
   ['progression', 'POST', /^\/progression\/(?!objectives\/|tracked_objectives\/)[^/]+\/([^/]+)\/(-?\d+)\/?$/, (c) => grantTrack(c)],
+  // DF-REFORGE-1147: reforge resets the weapon to level 1. The old XP is kept in reforgedXp (nothing reads it yet).
+  ['progression', 'DELETE', /^\/progression\/(?!objectives\/|tracked_objectives\/)[^/]+\/(ExperienceTrack_Weapon_[A-Za-z]+)\/?$/, (c) => {
+    const p = playerFor(c.req); const pr = progressOf(p); const id = decodeURIComponent(c.match[1]);
+    const cur = pr.tracks[id] || (pr.tracks[id] = { progress: 0 });
+    cur.reforgedXp = (Number(cur.reforgedXp) || 0) + (Number(cur.progress) || 0); cur.progress = 0; cur.confirmed_fremium_rank = 0; cur.confirmed_premium_rank = 0;
+    saveState(); reforgeLog(`${p.accountId}: ${id} reset to level 1 (reforged XP ${cur.reforgedXp})`);
+    return J(wrapped(trackOut(p, id, cur)), `${id} reset to level 1`);
+  }],
   ['progression', 'PUT', /^\/progression\/(?!objectives\/|tracked_objectives\/)[^/]+\/([^/]+)\/(-?\d+)\/?$/, (c) => grantTrack(c)],
   ['progression', 'POST', /^\/progression\/[^/]+\/([^/]+)\/(\d+)\/confirm\/([^/]+)\/?$/, (c) => { const p = playerFor(c.req); const pr = progressOf(p); const id = decodeURIComponent(c.match[1]);
     const cur = pr.tracks[id] || (pr.tracks[id] = { progress: 0 }); const rank = Number(c.match[2]) || 0;
@@ -1186,6 +1229,7 @@ function handle(svc, port, req, res, bodyBuf) {
     }
   }
   if (!reply) reply = NOT_FOUND;
+  if (svc.service === 'progression' && req.method === 'GET' && /^\/progression\/config\/?$/.test(pathName) && reply.json) prestigeRanks(reply.json);   // DF-REFORGE-1147
 
   let payload = '';
   const headers = { 'Connection': 'keep-alive' };
@@ -1324,3 +1368,16 @@ function status() {
 }
 // Hunt Pass seasons (KombatKing) keep each season's progress apart; they wrap the save.
 function saveState() { return huntpassSeasons1147 ? huntpassSeasons1147.save(state, saveStateNative) : saveStateNative(); }
+
+// DF-REFORGE-1147: the shipped config gives every PrestigeTrack_Weapon_* only rank 0, so the reforge badge under the
+// weapon level can never show. Ranks 1..100 at 1 progress each (one per reforge).
+function prestigeRanks(j) {
+  const paths = (j && j.payload && Array.isArray(j.payload.paths)) ? j.payload.paths : (j && Array.isArray(j.paths) ? j.paths : null);
+  if (!paths) return;
+  for (const x of paths) {
+    if (!x || !isPrestige(x.progression_id) || !Array.isArray(x.requirements) || x.requirements.length > 1) continue;
+    x.requirements = [{ rank_id: 0, xp_required: 0 }];
+    for (let r = 1; r <= 100; r++) x.requirements.push({ rank_id: r, xp_required: 1 });
+  }
+}
+function reforgeLog(msg) { try { fs.appendFileSync(path.join(LOG_DIR, 'reforge.log'), `${new Date().toISOString()} ${msg}\n`); } catch (e) { /* logs are optional */ } }
