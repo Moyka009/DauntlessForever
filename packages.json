@@ -18,14 +18,14 @@
                      }
                  ],
     "launcher":  {
-                     "version":  "0.2.9",
-                     "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.4",
-                     "notes":  "1.14.7 online from the launcher: Host with friends, Play online, Friends Join, and Host Mode with a version picker",
-                     "date":  "2026-10-17",
+                     "version":  "0.2.10",
+                     "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
+                     "notes":  "Launcher 0.2.10: cleaned-up images",
+                     "date":  "2026-10-18",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.9.asar",
-                                 "sha256":  "24157dbdca243fb9bb0ce44bf32ce6b017e5c684d1f2e61260942155af907577",
-                                 "size":  681685,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/v0.2.10/app-0.2.10.asar",
+                                 "sha256":  "814570bf9c697ed5ae5eaa1534f4a66de3a124ceafec0189e8e1156c49169109",
+                                 "size":  672355,
                                  "minShell":  "0.2.4"
                              }
                  }
