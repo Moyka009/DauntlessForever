@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-19.11",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.11.zip",
-                         "sha256":  "936a947466aa87fd77c6c2587bc7ba5a7b5d3b58d65a03390b3fcd2839347c4f",
+                         "packageVersion":  "2026-10-19.12",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.12.zip",
+                         "sha256":  "3fbf8335d38176903eb8023d22c419334d33beb94700754f02ad03a7caf1f81a",
                          "date":  "2026-10-19",
-                         "note":  "Modded mode (test): UE4SS mods and a Boss Health Bar from the launcher\u0027s Mods page"
+                         "note":  "Boss Health Bar can be moved: Ctrl+Alt+arrow keys, Ctrl+Alt+Home resets"
                      }
                  ],
     "launcher":  {
