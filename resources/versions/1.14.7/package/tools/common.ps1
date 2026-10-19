@@ -10,7 +10,7 @@ $ConfigFile = Join-Path $Root 'config.json'
 $ExeHash      = 'F3F95FBF22709EF077A11632ED95D675B7209B7E0172D9ECB9BA7D02A1FBB66B'   # Dauntless 1.14.7, CL 647472
 $EpicEosHash  = 'CBC0E5C922CEB88A9FA99121008AE9CD76244B17753701D9D25C6B596EA2FBFC'   # Epic's EOSSDK-Win64-Shipping.dll
 $StandInHash  = '4113C9EEBFBAC08532B6566A48F69E4F64A6B8E18A18AAFBA43F62F8F7DFDF70'   # bin\EOSSDK-Win64-Shipping.dll (offline sign-in)
-$LoaderHash   = 'A495AEACDB69365B1B140AA30B33ADE73493C868AB5D9CBDA9C41F4EF1666D25'    # bin\dxgi.dll (server loader: fix5 + KombatKing's equipment fix R1 + owner-only replication)
+$LoaderHash   = 'BAA606152802B1AEDAC17A45C8C613511383B2C87DDC2D927A9D2C185FBE3222'    # bin\dxgi.dll (server loader: fix5 + KombatKing's equipment fix R1 + owner-only replication; client: significance guard)
 # Quest text fix by KombatKing (AGPL-3.0, source\QuestDialogue1147-R2-source.zip): adds the missing "Unspecified"
 # addressee lines to the game's own text, so quests and dialogue show real sentences. Copied into Archon\Content\Paks.
 $QuestPakName = 'zzzzzzzzzzzzzzzz_QuestDialogueFallback1147_P.pak'
@@ -25,7 +25,9 @@ $GamePaks = @(
     # KombatKing's 1.14.7 All-in-One R1 (AGPL-3.0, source\KombatKing-1147-AllInOne-R1-source.zip)
     [pscustomobject]@{ Name = 'zzzz_Mega1147_Middleman_P.pak'; Hash = '60966CBC3BC8CCCD4922D0515DF631F12C93E993F51B30665B6224E944404E8A'; Old = @(); What = 'Middleman fusion timer (KombatKing)' },
     [pscustomobject]@{ Name = 'zzzz_Mega1147_HuntPass_P.pak'; Hash = '7D64B5DCFB133FD19FBB54142D1C0F2713C954721A9D01B981BF9A4B3C91B7B1'; Old = @(); What = 'Hunt Pass seasons (KombatKing)' },
-    [pscustomobject]@{ Name = 'zzzzzzzzzzzzzzzz_HammerReload1147_P.pak'; Hash = 'F8A1449FD2C70FE915B455BEAF4428AE128D0C163AAF9A2E66554C62B2451E34'; Old = @(); What = 'War Hammer reload fix (KombatKing)' }
+    [pscustomobject]@{ Name = 'zzzzzzzzzzzzzzzz_HammerReload1147_P.pak'; Hash = 'F8A1449FD2C70FE915B455BEAF4428AE128D0C163AAF9A2E66554C62B2451E34'; Old = @(); What = 'War Hammer reload fix (KombatKing)' },
+    # KombatKing's Item Expiry R1 (AGPL-3.0, source\KombatKing-1147-Oct18-source.zip): Season 11A potions and the Springtide egg token do not expire
+    [pscustomobject]@{ Name = 'zzzzzzzzzzzzzzzz_ItemExpiry1147_P.pak'; Hash = 'C71F64758B7B70DC523DA66FCEC47319B330CC8D72E425AC94265FF4C15C029D'; Old = @(); What = 'Item expiry fix (KombatKing)' }
 )
 $ExeRel       = 'Archon\Binaries\Win64\Dauntless-Win64-Shipping.exe'
 $CapturesUrl  = 'https://github.com/EisigesEis/DauntlessEndpointDocumentation/archive/refs/heads/main.zip'
@@ -64,4 +66,22 @@ function Get-ServerCopies {
 function Get-PlayerGame {
     @(Get-CimInstance Win32_Process -Filter "Name='Dauntless-Win64-Shipping.exe'" -ErrorAction SilentlyContinue |
         Where-Object { $_.CommandLine -notmatch '(^|\s)-server(\s|$)' })
+}
+
+# KK-AUTO-LOG-CLEANUP-1147-R1 (KombatKing, AGPL-3.0-only): old run logs and log zips are removed when a tool
+# starts and the local backend is not running. Keeps the newest five of each kind and everything from the last 24 hours.
+& {
+    $cleanupPriorExit1147 = $global:LASTEXITCODE
+    try {
+        $cleanupConfig1147 = Get-Config
+        if ($cleanupConfig1147) {
+            $cleanupNode1147 = $cleanupConfig1147.Node
+            if (-not $cleanupNode1147 -or -not (Test-Path -LiteralPath $cleanupNode1147)) { $cleanupNode1147 = Find-Node }
+            $cleanupFile1147 = Join-Path $PSScriptRoot 'auto-cleanup-logs1147.cjs'
+            if ($cleanupNode1147 -and (Test-Path -LiteralPath $cleanupFile1147)) {
+                & $cleanupNode1147 $cleanupFile1147 $Root --auto | Out-Host
+            }
+        }
+    } catch { Say ("Automatic log cleanup skipped: " + $_.Exception.Message) 'Yellow' }
+    finally { $global:LASTEXITCODE = $cleanupPriorExit1147 }
 }

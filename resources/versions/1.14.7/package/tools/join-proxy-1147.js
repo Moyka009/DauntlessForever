@@ -9,7 +9,7 @@
 const net = require('net'), fs = require('fs');
 const [, , HOST, PORT, READY] = process.argv;
 const LO = 63000, HI = 63027;
-if (!/^\d{1,3}(\.\d{1,3}){3}$/.test(HOST || '') || !(Number(PORT) > 0)) { console.log('usage: node join-proxy-1147.js <relay address> <relay port> [ready file]'); process.exit(2); }
+if (!/^\d{1,3}(\.\d{1,3}){3}$/.test(HOST || '') || !(/^[0-9]+$/.test(PORT||'') && Number.isInteger(Number(PORT)) && Number(PORT)>=1 && Number(PORT)<=65535)) { console.log('usage: node join-proxy-1147.js <relay address> <relay port> [ready file]'); process.exit(2); }
 const log = (...a) => console.log(new Date().toTimeString().slice(0, 8), ...a);
 let open = 0, failed = false;
 for (let p = LO; p <= HI; p++) {

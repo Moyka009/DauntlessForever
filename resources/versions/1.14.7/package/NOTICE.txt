@@ -17,6 +17,12 @@ equipment1147.js, dyes1147.js, modes1147.js (and their -data.json files), season
 bin\zzzz_Mega1147_Middleman_P.pak, bin\zzzz_Mega1147_HuntPass_P.pak and bin\zzzzzzzzzzzzzzzz_HammerReload1147_P.pak.
 Their hooks were merged into backend\recorder-1147.js by Addison2k (Oct 18, 2026), keeping parties and online play.
 Full source, patch notes and build tools: source\KombatKing-1147-AllInOne-R1-source.zip.
+KombatKing's Oct 18 fixes, AGPL-3.0-only: Trials shop expansion R3 (backend\trials1147-data.json), Item Expiry
+(bin\zzzzzzzzzzzzzzzz_ItemExpiry1147_P.pak), automatic log cleanup (tools\auto-cleanup-logs1147.cjs), Loadouts fix and
+Free platinum R2 (backend\loadouts-fix1147.js, backend\free-platinum1147.js; free platinum is a Game Rule here),
+Multiplayer R1 (backend\multiplayer1147.js, tools\multiplayer-join-check1147.js and edits to the recorder and
+network tools) and Startup Messages R1 (moved into the dxgi.dll loader). Merged by Addison2k (Oct 18, 2026).
+Full source: source\KombatKing-1147-Oct18-source.zip.
 
 WHAT THE LICENCE ASKS OF ANYONE WHO REUSES THIS
   You may copy, change and share this work under the GNU Affero General Public License v3.0 (AGPL-3.0-only).

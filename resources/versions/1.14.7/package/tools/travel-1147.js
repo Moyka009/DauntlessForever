@@ -22,7 +22,7 @@ function request(method, body) {
     const data = body ? Buffer.from(JSON.stringify(body)) : null;
     const req = http.request({ host, port: 63000, path: '/_travel/' + key, method, timeout: 30000,
       headers: data ? { 'Content-Type': 'application/json', 'Content-Length': data.length } : {} }, (res) => {
-      const chunks = []; res.on('data', (c) => chunks.push(c));
+      const chunks = [];let total=0;res.on('error',reject);res.on('data', (c) => {total+=c.length;if(total>8*1024*1024){req.destroy(new Error('Host character response exceeded 8 MiB'));return;}chunks.push(c);});
       res.on('end', () => { let j = null; try { j = JSON.parse(Buffer.concat(chunks).toString('utf8')); } catch (e) {} resolve({ status: res.statusCode, json: j }); });
     });
     req.on('timeout', () => req.destroy(new Error('the host did not answer in time')));
@@ -37,8 +37,8 @@ function backup(tag) {
   const dir = path.join(root, 'backup', 'travel');
   fs.mkdirSync(dir, { recursive: true });
   const stamp = new Date().toISOString().replace(/[-:]/g, '').replace('T', '_').slice(0, 15);
-  const to = path.join(dir, `state_${stamp}_${tag}.json`);
-  fs.copyFileSync(stateFile, to);
+  const to = path.join(dir, `state_${stamp}_${String(Date.now()).slice(-6)}_${crypto.randomBytes(5).toString('hex')}_${tag}.json`);
+  fs.copyFileSync(stateFile, to, fs.constants.COPYFILE_EXCL);
   // keep the newest 20
   const all = fs.readdirSync(dir).filter((f) => /^state_.*\.json$/.test(f)).sort();
   for (const f of all.slice(0, Math.max(0, all.length - 20))) { try { fs.unlinkSync(path.join(dir, f)); } catch (e) {} }
@@ -83,9 +83,9 @@ function itemCount(p) {
     // home (save: the same copy home, but the character stays at the host: the host is closing soon, or a check-in
     // while playing; the final home at the end still happens. Oct 17)
     const keep = what === 'save';
-    if (!keep && process.env.TRAVEL_PENDING === '1' && hk && changedSinceSent(st.players[hk])) {
+    if (hk && changedSinceSent(st.players[hk])) {
       console.log('Your character on this PC changed since that game (solo play or the Inventory page), so this copy is kept.');
-      try { fs.unlinkSync(pendingFile); } catch (e) {}
+      if (!keep && process.env.TRAVEL_PENDING === '1') { try { fs.unlinkSync(pendingFile); } catch (e) {} }
       process.exit(4);
     }
     const r = await request('GET');
@@ -107,10 +107,12 @@ function itemCount(p) {
     // save (every 3 minutes while playing, as 1.6.2 does): nothing written when nothing changed, and no backup each
     // time (the backup from before the join stays; 20 autosave backups would push it out)
     if (keep && JSON.stringify(home) === JSON.stringify(mine)) { console.log('Nothing new to save home.'); process.exit(0); }
+    const latest=readState();const latestKey=homeKey(latest);
+    if(latestKey!==hk||fingerprint(latest.players[latestKey])!==fingerprint(mine)){console.log('Your local character changed during download. Both copies were kept; automatic saving is paused.');process.exit(4);}
     const saved = keep ? '' : backup('before-home');
     st.players[hk] = home;
-    const tmp = stateFile + '.tmp';
-    fs.writeFileSync(tmp, JSON.stringify(st, null, 2)); fs.renameSync(tmp, stateFile);
+    const tmp = stateFile + '.tmp-'+crypto.randomUUID();
+    try{fs.writeFileSync(tmp, JSON.stringify(st, null, 2),{flag:'wx'});fs.renameSync(tmp,stateFile);}finally{try{fs.unlinkSync(tmp);}catch{}}
     if (keep) { try { notePending({ local: fingerprint(JSON.parse(JSON.stringify(home))) }); } catch (e) {} console.log('Saved your character home (it stays at the host until you leave).'); process.exit(0); }
     try { fs.unlinkSync(pendingFile); } catch (e) {}
     console.log(`Your character is home again (backup of the save before: ${path.relative(root, saved)}).`);

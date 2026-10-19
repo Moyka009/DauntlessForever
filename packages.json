@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-18.5",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-18.5.zip",
-                         "sha256":  "102984f98d2cbb221aa973ee574def35e446eec8f29ce58b83e910a1adfcf542",
-                         "date":  "2026-10-18",
-                         "note":  "Items you add or earn on your own PC are no longer lost when you next join a friend"
+                         "packageVersion":  "2026-10-19",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.zip",
+                         "sha256":  "10cb36a39a94652896c5d1b732d8e2b4f9cb3d09f187056650f3ab0abb28675e",
+                         "date":  "2026-10-19",
+                         "note":  "Parties: whole party goes to hunts and back to Ramsgate with the leader, training grounds for 4, no more airship loop. Bigger Trials shop, item expiry, loadouts fix, Free platinum rule, startup messages, crash guard (KombatKing fixes)"
                      }
                  ],
     "launcher":  {

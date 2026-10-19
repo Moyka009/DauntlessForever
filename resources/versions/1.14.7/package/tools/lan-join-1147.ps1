@@ -23,6 +23,12 @@ foreach ($gp in $GamePaks) {
     if ((Hash256 (Join-Path $cfg.GameDir "Archon\Content\Paks\$($gp.Name)")) -ne $gp.Hash) { Fail "the $($gp.What) is not in the game folder yet. Run `"1 - SETUP.bat`" again." }
 }
 if (@(Get-PlayerGame).Count -gt 0) { Fail 'the game is already running. Close it first.' }
+# KK-MULTIPLAYER-R4-R1: unsupported fresh-character travel is refused before any host connection.
+$joinCheck=Join-Path $PSScriptRoot 'multiplayer-join-check1147.js'
+$joinNode=$cfg.Node;if(-not $joinNode -or -not(Test-Path -LiteralPath $joinNode)){$joinNode=Find-Node}
+if(-not $joinNode){Fail 'Node is missing. Run Set up first.'}
+$joinResult=& $joinNode $joinCheck $Root 2>&1
+if($LASTEXITCODE -ne 0){Fail (($joinResult -join ' ')+ ' Start solo Play, finish character creation and the tutorial, then join again.')}
 foreach ($c in Get-ServerCopies) { Stop-Process -Id $c.ProcessId -Force -ErrorAction SilentlyContinue }   # this PC's own servers are not used
 
 # --- the host's address, remembered for next time
@@ -134,7 +140,7 @@ if ($node -and (Test-Path -LiteralPath $travelJs)) {
         $env:TRAVEL_PENDING = '1'   # travel-1147.js keeps this PC's copy when it changed since that game (exit 4)
         $c = Invoke-Travel 'home'
         Remove-Item Env:\TRAVEL_PENDING -ErrorAction SilentlyContinue
-        if ($c -eq 1) { Stop-Proxy; Fail 'could not bring your character home from the host. Try again in a moment (your home save was not changed).' }
+        if ($c -eq 1 -or $c -eq 3) { Stop-Proxy; Fail 'could not bring your character home from the host. Try again in a moment (your home save was not changed).' }
     } elseif ($pending) {
         # another host has a copy from a game that ended without coming home. Your home save was kept up to date
         # while you played there (every 3 minutes), so it travels from here, as 1.6.2 does. The old copy stays on
@@ -146,8 +152,8 @@ if ($node -and (Test-Path -LiteralPath $travelJs)) {
         Say 'Sending your character to the host...'
         $c = Invoke-Travel 'send'
         if ($c -eq 0) { $travelling = $true }
-        elseif ($c -eq 2) { Say '  (You play with a new character on the host.)' }
-        else { Say '  You play with the host''s copy of your character this time.' 'Yellow' }
+        elseif ($c -eq 2) { Stop-Proxy; Fail 'Create and finish your character in solo Play before joining a friend.' }
+        else { Stop-Proxy; Fail 'Character upload failed or was refused. Your local save is preserved; retry before joining.' }
     }
 } else { Say 'Node.js or tools\travel-1147.js not found: you play with a character kept on the host.' 'Yellow' }
 
@@ -171,7 +177,7 @@ if ($travelling) {
                 Remove-Item -LiteralPath $flag -Force -ErrorAction SilentlyContinue
                 $last = Get-Date
                 & $node $js 'save' $gh $id $root 2>&1 | Out-Null
-                if ($LASTEXITCODE -eq 3) { break }
+                if ($LASTEXITCODE -eq 3 -or $LASTEXITCODE -eq 4) { break }
             }
             Start-Sleep -Seconds 2
         }

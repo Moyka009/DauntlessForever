@@ -17,7 +17,7 @@ function readSettings(root,hosting){
   if(!def||!def.choices.some(c=>String(c[0])===m[2]))throw error('Invalid Game Rules setting: '+(m?m[1]:'line'));
   settings[m[1]]=Number(m[2]);
  }
- if(hosting)for(const key of Object.keys(settings))settings[key]=['free_crafting','rare_core_kill'].includes(key)?0:1;
+ if(hosting)for(const key of Object.keys(settings))settings[key]=['free_crafting','rare_core_kill','free_platinum'].includes(key)?0:1;
  return Object.freeze(settings);
 }
 function create(root,options={}){

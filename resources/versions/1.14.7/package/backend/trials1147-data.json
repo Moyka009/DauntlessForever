@@ -212,7 +212,8 @@
     "tags": [
       "ladyluckstore",
       "live",
-      "one_time"
+      "one_time",
+      "store_trials_tab_mods"
     ],
     "scheduledTags": null,
     "items": [
@@ -1252,7 +1253,8 @@
     "tags": [
       "ladyluckstore",
       "live",
-      "one_time"
+      "one_time",
+      "store_trials_tab_equipment"
     ],
     "scheduledTags": null,
     "items": [
@@ -1480,6 +1482,1371 @@
         "quantity": 1,
         "kind": "stack",
         "source": "dyes_item_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_cell_epic_01",
+    "displayName": "+3 Berserker Cell",
+    "displayDescription": "Repeatable purchase.",
+    "displayPriority": 38,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 150,
+        "salesPrice": 150,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_cells"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "CELL_TRIALS_01_E",
+        "quantity": 1,
+        "kind": "stack",
+        "source": "generated_cell_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": true,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_cell_epic_02",
+    "displayName": "+3 Strategist Cell",
+    "displayDescription": "Repeatable purchase.",
+    "displayPriority": 39,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 150,
+        "salesPrice": 150,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_cells"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "CELL_TRIALS_02_E",
+        "quantity": 1,
+        "kind": "stack",
+        "source": "generated_cell_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": true,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_cell_epic_03",
+    "displayName": "+3 Engineer Cell",
+    "displayDescription": "Repeatable purchase.",
+    "displayPriority": 40,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 150,
+        "salesPrice": 150,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_cells"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "CELL_TRIALS_03_E",
+        "quantity": 1,
+        "kind": "stack",
+        "source": "generated_cell_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": true,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_cell_epic_05",
+    "displayName": "+3 Sprinter Cell",
+    "displayDescription": "Repeatable purchase.",
+    "displayPriority": 41,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 150,
+        "salesPrice": 150,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_cells"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "CELL_TRIALS_04_E",
+        "quantity": 1,
+        "kind": "stack",
+        "source": "generated_cell_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": true,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_cell_epic_06",
+    "displayName": "+3 Mender Cell",
+    "displayDescription": "Repeatable purchase.",
+    "displayPriority": 42,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 150,
+        "salesPrice": 150,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_cells"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "CELL_TRIALS_06_E",
+        "quantity": 1,
+        "kind": "stack",
+        "source": "generated_cell_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": true,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_mod_axe",
+    "displayName": "Furious Axecore",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 43,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 250,
+        "salesPrice": 250,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_mods"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_GA_PASSIVE_TRIALS_02",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_mod_axe_1_fixed",
+    "displayName": "Railsplitter's Canteen",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 44,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 250,
+        "salesPrice": 250,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_mods"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_GA_PASSIVE_TRIALS_01",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_mod_chainblade",
+    "displayName": "Momentum Blades",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 45,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 250,
+        "salesPrice": 250,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_mods"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_CB_PASSIVE_TRIALS_01",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_mod_hammer",
+    "displayName": "Turbine Trigger",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 46,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 250,
+        "salesPrice": 250,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_mods"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_IH_PASSIVE_TRIALS_02",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_mod_hammer_1_fixed",
+    "displayName": "Antique Clip",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 47,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 250,
+        "salesPrice": 250,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_mods"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_IH_PASSIVE_TRIALS_01",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_mod_repeater",
+    "displayName": "Tactician's Magazine",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 48,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 250,
+        "salesPrice": 250,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_mods"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_DP_PASSIVE_TRIALS_01",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_mod_repeaters",
+    "displayName": "Demolition Sights",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 49,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 250,
+        "salesPrice": 250,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_mods"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_DP_PASSIVE_TRIALS_02",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_mod_spear",
+    "displayName": "Barbed Spearhead",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 50,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 250,
+        "salesPrice": 250,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_mods"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_MS_PASSIVE_TRIALS_01",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_mod_spear_2",
+    "displayName": "Executioner's Spearhead",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 51,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 250,
+        "salesPrice": 250,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_mods"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_MS_PASSIVE_TRIALS_02",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_mod_sword_1",
+    "displayName": "Keen Edge",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 52,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 250,
+        "salesPrice": 250,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_mods"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_EB_PASSIVE_TRIALS_01",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_mod_sword_3",
+    "displayName": "Dynamic Bladecore",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 53,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 250,
+        "salesPrice": 250,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_mods"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_EB_PASSIVE_TRIALS_02",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_special_axe",
+    "displayName": "Relentless Onslaught",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 54,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 500,
+        "salesPrice": 500,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_specials"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_GA_SPECIAL_SKILLSHOT_RESET",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_special_cb",
+    "displayName": "Insatiable Dance",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 55,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 500,
+        "salesPrice": 500,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_specials"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_CB_SPECIAL_INSATIABLE_DANCE",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog_override.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_special_hammer",
+    "displayName": "Ironheart Landbreaker",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 56,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 500,
+        "salesPrice": 500,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_specials"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_IH_SPECIAL_ISLANDCRACKER_DEFENSIVE",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_special_sword",
+    "displayName": "Avenging Overdrive",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 57,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 500,
+        "salesPrice": 500,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_specials"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_EB_SPECIAL_PARRY",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_weapon_pike_special",
+    "displayName": "Reckless Leap",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 58,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 500,
+        "salesPrice": 500,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_specials"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_MS_SPECIAL_ROCKETLUNGE",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_exotic_repeaters",
+    "displayName": "The Twin Suns",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 59,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 1000,
+        "salesPrice": 1000,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_exotics"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "WP_DP_EXOTIC_BOMBS",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_dp_gameplay_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_core_gold_slayer",
+    "displayName": "Rare Cell Core",
+    "displayDescription": "Repeatable purchase.",
+    "displayPriority": 60,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_gilded",
+        "price": 150,
+        "salesPrice": 150,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_cells"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "CONTAINER_CORE_GOLD_CELLCORE",
+        "quantity": 1,
+        "kind": "stack",
+        "source": "containers_core_cellcores.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": true,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_omnicell_discipline_1147",
+    "displayName": "Discipline",
+    "displayDescription": "Discipline Omnicell. Permanent unlock for this character.",
+    "displayPriority": 61,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 500,
+        "salesPrice": 500,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_equipment"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PR_DISCIPLINE",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/player_role_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_back_normal_1147",
+    "displayName": "Mantle of the Victor",
+    "displayDescription": "A stylish back accessory for those who have earned gilded marks on the Island of Trials.",
+    "displayPriority": 62,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_gilded",
+        "price": 500,
+        "salesPrice": 500,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_cosmetics"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "AC_BACK_TRIALS_00",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/accessory_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_back_prestige_1147",
+    "displayName": "Mantle of the Champion",
+    "displayDescription": "A quite stylish back accessory for those who have earned gilded marks on the Island of Trials and won the title \"Trials Champion.\"",
+    "displayPriority": 63,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_gilded",
+        "price": 1000,
+        "salesPrice": 1000,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_champion"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "AC_BACK_TRIALS_01",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/accessory_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": true
+  },
+  {
+    "id": "ladyluck_expanded_part_dp_passive_low_ammo_movespeed",
+    "displayName": "Lightweight Frame",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 64,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 250,
+        "salesPrice": 250,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_mods"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_DP_PASSIVE_LOW_AMMO_MOVESPEED",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog_composite.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_expanded_part_dp_passive_marksman_damage",
+    "displayName": "Precision Sights",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 65,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 250,
+        "salesPrice": 250,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_mods"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_DP_PASSIVE_MARKSMAN_DAMAGE",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog_composite.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_expanded_part_dp_passive_pdodge_cooldowns",
+    "displayName": "Extraction Catalyst",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 66,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 250,
+        "salesPrice": 250,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_mods"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_DP_PASSIVE_PDODGE_COOLDOWNS",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog_composite.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_expanded_part_dp_grip_mine",
+    "displayName": "Saboteur's Grip",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 67,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 500,
+        "salesPrice": 500,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_specials"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PART_DP_GRIP_MINE",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/weapon_part_catalog_composite.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_expanded_pr_bastion",
+    "displayName": "Bastion Omnicell",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 68,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 500,
+        "salesPrice": 500,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_equipment"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PR_BASTION",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/player_role_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_expanded_pr_iceborne",
+    "displayName": "Iceborne Omnicell",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 69,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 500,
+        "salesPrice": 500,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_equipment"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PR_ICEBORNE",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/player_role_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_expanded_pr_tempest",
+    "displayName": "Tempest Omnicell",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 70,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 500,
+        "salesPrice": 500,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_equipment"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PR_TEMPEST",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/player_role_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_expanded_pr_darkness",
+    "displayName": "Revenant Omnicell",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 71,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 500,
+        "salesPrice": 500,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_equipment"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PR_DARKNESS",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/player_role_catalog.uasset"
+      }
+    ],
+    "entitlements": [],
+    "skuProgression": [],
+    "loadoutSlots": null,
+    "availableFrom": null,
+    "availableTo": null,
+    "timeAvailabilityReason": null,
+    "platformOfferId": null,
+    "missingEntitlementNames": null,
+    "repeatable": false,
+    "championOnly": false
+  },
+  {
+    "id": "ladyluck_expanded_pr_frank",
+    "displayName": "Artificer Omnicell",
+    "displayDescription": "Permanent unlock; already owned items cannot be purchased again.",
+    "displayPriority": 72,
+    "prices": [
+      {
+        "currencyId": "id_currency_marks_steel",
+        "price": 500,
+        "salesPrice": 500,
+        "multiPrice": null
+      }
+    ],
+    "maxAllowed": 1,
+    "images": [],
+    "tags": [
+      "ladyluckstore",
+      "store_trials_tab_equipment"
+    ],
+    "scheduledTags": null,
+    "items": [
+      {
+        "catalogId": "PR_FRANK",
+        "quantity": 1,
+        "kind": "instance",
+        "source": "Gear_Catalogs/player_role_catalog.uasset"
       }
     ],
     "entitlements": [],

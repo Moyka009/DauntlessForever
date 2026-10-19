@@ -108,6 +108,7 @@ try {
         Say 'Host Mode is running. Players join from their launcher (Friends, or Play online when it is open to everyone).' 'Green'
         $relayLost = $false
         while (-not $play.HasExited) {
+            if ($gateway.HasExited) { Say 'The backend gateway stopped: restarting Host Mode.' 'Yellow'; $relayLost = $true; break }
             if ($relay.HasExited) { Say 'The relay connection was lost: stopping, so the launcher can start Host Mode again.' 'Yellow'; $relayLost = $true; break }
             Start-Sleep -Seconds 2
         }
@@ -130,6 +131,7 @@ try {
     Say ''
     Say 'Keep this window open. When you close your game, PLAY shuts everything down and this window disconnects.'
     while (-not $play.HasExited) {
+        if ($gateway.HasExited) { Say 'The backend gateway stopped. Close this game and start hosting again.' 'Yellow'; break }
         if ($relay.HasExited) { Say 'The relay connection program stopped. Friends cannot reach you until you start ONLINE - HOST again.' 'Yellow'; break }
         Start-Sleep -Seconds 2
     }

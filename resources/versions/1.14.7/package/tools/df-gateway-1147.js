@@ -23,7 +23,8 @@ const server = net.createServer((client) => {
     // that moment was dropped (seen Oct 17: travel uploads and some login requests never arrived).
     client.pause();
     client.removeListener('data', onData);
-    const up = net.connect(port + SHIFT, '127.0.0.1');
+    if(!Number.isInteger(port)||port<LO||port>HI||!Number.isInteger(port+SHIFT)||port+SHIFT<1||port+SHIFT>65535){client.destroy();return;}
+    let up;try{up=net.connect(port + SHIFT, '127.0.0.1');}catch{client.destroy();return;}
     up.setNoDelay(true);
     const kill = () => { client.destroy(); up.destroy(); };
     up.on('error', kill); client.on('error', kill); up.on('close', kill); client.on('close', kill);
@@ -35,8 +36,9 @@ const server = net.createServer((client) => {
     if (head.length >= 7 && head.subarray(0, 7).toString('latin1') !== 'DFPORT ') { route(LO, head); return; }
     const nl = head.indexOf(10);
     if (nl < 0) { if (head.length > 32) route(LO, head); return; }
-    const port = Number(head.subarray(7, nl).toString('latin1').trim());
-    if (!(port >= LO && port <= HI)) { done = true; clearTimeout(timer); client.destroy(); return; }
+    const field=head.subarray(7,nl).toString('latin1').trim();
+    const port=/^[0-9]+$/.test(field)?Number(field):NaN;
+    if (!(Number.isInteger(port) && port >= LO && port <= HI)) { done = true; clearTimeout(timer); client.destroy(); return; }
     route(port, head.subarray(nl + 1));
   }
   client.on('data', onData);

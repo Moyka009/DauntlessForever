@@ -17,7 +17,9 @@
                   "Parties: invite a player in Ramsgate (Q on them); the party follows the leader into the training grounds and hunts (test)",
                   "KombatKing\u0027s All-in-One R1: Fountain gift and free supplies pack, Middleman slots and 7-minute fusion, Trials store, Hunt Pass seasons and a 400-tier Mega pass, bounties, power surge saving, War Hammer reload",
                   "Sparkforge reforge: weapon back to level 1, reforge badge, Aetherheart right away",
-                  "Test (KombatKing): Game Rules up to 5x, one free All Dyes pack, Gauntlet access and extra Trials destinations (no Gauntlet rewards yet)"
+                  "Test (KombatKing): Game Rules up to 5x, one free All Dyes pack, Gauntlet access and extra Trials destinations (no Gauntlet rewards yet)",
+                  "KombatKing\u0027s Oct 18 fixes (test): bigger Trials shop (72 items: mods, specials, Omnicells), potions and the Springtide egg no longer expire, loadout saving and switching fixed, old logs cleaned up, Free platinum game rule",
+                  "Party and multiplayer fixes (test): the training grounds take 4 players, a player who left a hunt no longer keeps others stuck in Ramsgate (the airship loop), parties survive a server restart, party members can follow a running hunt after 15 minutes, a new hunt from the dojo takes the whole party, and the party goes back to Ramsgate with the leader"
               ],
     "notWorking":  [
                        "New characters joining a friend get stuck loading the tutorial: do the tutorial in solo play first. Hunting together as a party is new and only lightly tested. Much else may not work yet."
@@ -34,7 +36,7 @@
                  },
     "package":  {
                     "dir":  "package",
-                    "packageVersion":  "2026-10-18.5",
+                    "packageVersion":  "2026-10-19",
                     "setup":  "tools/setup.ps1",
                     "uninstallArgs":  [
                                           "-Uninstall"
@@ -58,7 +60,7 @@
                                            },
                                            {
                                                "rel":  "Archon/Binaries/Win64/dxgi.dll",
-                                               "sha256":  "A495AEACDB69365B1B140AA30B33ADE73493C868AB5D9CBDA9C41F4EF1666D25"
+                                               "sha256":  "BAA606152802B1AEDAC17A45C8C613511383B2C87DDC2D927A9D2C185FBE3222"
                                            },
                                            {
                                                "rel":  "Archon/Content/Paks/zzzzzzzzzzzzzzzz_QuestDialogueFallback1147_P.pak",
@@ -79,6 +81,10 @@
                                            {
                                                "rel":  "Archon/Content/Paks/zzzzzzzzzzzzzzzz_HammerReload1147_P.pak",
                                                "sha256":  "F8A1449FD2C70FE915B455BEAF4428AE128D0C163AAF9A2E66554C62B2451E34"
+                                           },
+                                           {
+                                               "rel":  "Archon/Content/Paks/zzzzzzzzzzzzzzzz_ItemExpiry1147_P.pak",
+                                               "sha256":  "C71F64758B7B70DC523DA66FCEC47319B330CC8D72E425AC94265FF4C15C029D"
                                            }
                                        ],
                     "setupDoneFiles":  [

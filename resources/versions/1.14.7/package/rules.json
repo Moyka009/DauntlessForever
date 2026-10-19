@@ -342,6 +342,24 @@
           "On"
         ]
       ]
+    },
+    {
+      "key": "free_platinum",
+      "env": "RULE_FREE_PLATINUM",
+      "title": "Free platinum",
+      "blurb": "Platinum prices become 0: store offers, Hunt Pass rank skips and extra loadout slots. Platinum you own is kept. Off when hosting friends. By KombatKing.",
+      "default": "0",
+      "tested": false,
+      "choices": [
+        [
+          "0",
+          "Off"
+        ],
+        [
+          "1",
+          "On"
+        ]
+      ]
     }
   ]
 }
