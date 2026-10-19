@@ -23,6 +23,7 @@ Free platinum R2 (backend\loadouts-fix1147.js, backend\free-platinum1147.js; fre
 Multiplayer R1 (backend\multiplayer1147.js, tools\multiplayer-join-check1147.js and edits to the recorder and
 network tools) and Startup Messages R1 (moved into the dxgi.dll loader). Merged by Addison2k (Oct 18, 2026).
 Full source: source\KombatKing-1147-Oct18-source.zip.
+tools\catalog-1147.json (the 1.14.7 item catalog used by tools\slayer-copy.js) is from KombatKing's Inventory Search, AGPL-3.0-only.
 
 WHAT THE LICENCE ASKS OF ANYONE WHO REUSES THIS
   You may copy, change and share this work under the GNU Affero General Public License v3.0 (AGPL-3.0-only).

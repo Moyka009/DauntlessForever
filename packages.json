@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-19.3",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.3.zip",
-                         "sha256":  "87c857ecef114519f59815586d1e6b9609265a65534c9310bfa8f71a33f30597",
+                         "packageVersion":  "2026-10-19.5",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.5.zip",
+                         "sha256":  "173213bcbf96204d49d2b97c154f988afcccb267343a1658f4dcb6c6afc6294a",
                          "date":  "2026-10-19",
-                         "note":  "A player who closed the game no longer blocks hunts for 30 minutes"
+                         "note":  "Copy your Slayer between 1.6.2 and 1.14.7"
                      }
                  ],
     "launcher":  {
