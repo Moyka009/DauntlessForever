@@ -18,14 +18,14 @@
                      }
                  ],
     "launcher":  {
-                     "version":  "0.2.11",
+                     "version":  "0.2.12",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "New Slayer copy page: see both Slayers side by side and copy between 1.6.2 and 1.14.7. Credits updated.",
+                     "notes":  "Slayer copy: copy into 1.14.7 before you have played it; it makes your Slayer with the tutorial done.",
                      "date":  "2026-10-19",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.11.asar",
-                                 "sha256":  "0073c85f4b7ac32b05f38439bc06500557dd628c5d2c3cbc87cb9aa3b3c2a100",
-                                 "size":  688736,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.12.asar",
+                                 "sha256":  "0ea60db279bab53b20237eecf907d0d04dc0a58a6100433216ca593f2058ae90",
+                                 "size":  689434,
                                  "minShell":  "0.2.4"
                              }
                  }

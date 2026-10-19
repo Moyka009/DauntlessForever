@@ -902,13 +902,15 @@ let scBusy = false;
 async function renderSlayer() {
   let s = {}; try { s = await L.slayerStatus(); } catch {}
   $('sc-162').textContent = s.v162 ? 'Installed, character found' : 'Install and play 1.6.2 once';
-  $('sc-1147').textContent = s.v1147 ? (s.tool ? 'Installed, character found' : 'Server files update when the launcher opens') : 'Install and play 1.14.7 once';
-  $('sc-162').dataset.ok = s.v162 ? '1' : '0'; $('sc-1147').dataset.ok = (s.v1147 && s.tool) ? '1' : '0';
+  $('sc-1147').textContent = !s.v1147 ? 'Install 1.14.7 first' : s.c1147 ? 'Installed, character found'
+    : s.tool ? 'Installed, no Slayer yet: copying 1.6.2 makes one' : 'Server files update when the launcher opens';
+  const fromOk = !!(s.v162 && s.v1147 && (s.tool || s.c1147)), toOk = !!(s.v162 && s.v1147 && s.c1147);
+  $('sc-162').dataset.ok = s.v162 ? '1' : '0'; $('sc-1147').dataset.ok = (s.v1147 && (s.c1147 || s.tool)) ? '1' : '0';
   if (!scBusy) fillSlayerSummary();
-  const ready = !!(s.v162 && s.v1147 && s.tool);
-  $('sc-from').disabled = $('sc-to').disabled = !ready || scBusy;
+  $('sc-from').disabled = !fromOk || scBusy; $('sc-to').disabled = !toOk || scBusy;
   const n = $('sc-note');
-  if (!scBusy) { n.className = 'action-note'; n.textContent = !ready ? 'Both versions need to be installed and played once before copying.' : s.running ? 'Close the game and stop hosting before copying.' : ''; }
+  if (!scBusy) { n.className = 'action-note'; n.textContent = !s.v162 ? 'Play 1.6.2 once before copying.' : !s.v1147 ? 'Install 1.14.7 (Download and Set up) before copying.'
+    : s.running ? 'Close the game and stop hosting before copying.' : !s.c1147 && s.tool ? 'Copying into 1.14.7 makes your 1.14.7 Slayer: level 1, tutorial done, then everything from 1.6.2.' : ''; }
 }
 // The same facts for both Slayers, side by side; the better value in each row is lit (tools\slayer-summary.js).
 async function fillSlayerSummary() {

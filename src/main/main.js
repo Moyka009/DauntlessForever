@@ -764,15 +764,18 @@ const SLAYER_PAIR = ['1.6.2', '1.14.7'];
 function slayerState() {
   const a = byId('1.6.2'), b = byId('1.14.7');
   const has = (v, f) => !!(v && v.package && v.dataDir && fs.existsSync(path.join(v.dataDir, f)));
-  return { v162: has(a, 'data/undaunted.db'), v1147: has(b, 'data/state.json'), tool: has(b, 'tools/slayer-copy.js'),
+  // v1147: the 1.14.7 server files are installed (a Slayer is made there by the first copy); c1147: a 1.14.7 save exists;
+  // tool: server files new enough to make that Slayer (2026-10-19.7+)
+  return { v162: has(a, 'data/undaunted.db'), v1147: has(b, 'tools/slayer-copy.js'), c1147: has(b, 'data/state.json'), tool: has(b, 'tools/slayer-copy-data.json'),
     running: R.anyRunning().some(r => SLAYER_PAIR.includes(String(r.id).split(':')[0]) && r.kind !== 'stop') };
 }
 ipcMain.handle('slayer:status', async () => slayerState());
 ipcMain.handle('slayer:copy', async (_e, dir, dry) => {
   if (!['from-162', 'to-162'].includes(dir)) return { ok: false, text: 'Unknown direction.' };
   const s = slayerState();
-  if (!s.v162 || !s.v1147) return { ok: false, text: 'Install and play both 1.6.2 and 1.14.7 once first.' };
-  if (!s.tool) return { ok: false, text: 'The 1.14.7 server files are too old for this. They update when the launcher opens.' };
+  if (!s.v162 || !s.v1147) return { ok: false, text: 'Play 1.6.2 once and install 1.14.7 first.' };
+  if (!s.tool && !s.c1147) return { ok: false, text: 'The 1.14.7 server files are too old for this. They update when the launcher opens.' };
+  if (dir === 'to-162' && !s.c1147) return { ok: false, text: 'There is no 1.14.7 Slayer yet. Copy 1.6.2 into 1.14.7 first: that makes one.' };
   if (s.running) return { ok: false, text: 'Close the game and stop hosting first (1.6.2 and 1.14.7).' };
   const v = byId('1.14.7');
   let node = null;
