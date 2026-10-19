@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-19.6",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.6.zip",
-                         "sha256":  "9b12484da439de5a8077cd317ef581b685f2ba54f905d923cbdc835c58184896",
+                         "packageVersion":  "2026-10-19.7",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.7.zip",
+                         "sha256":  "1bbc8328649befc3089637ce533327c7d5eab6177b647f42434d0609fd0c70d4",
                          "date":  "2026-10-19",
-                         "note":  "Slayer copy now also brings weapon levels, reforges, quests and the Slayer\u0027s Path"
+                         "note":  "Slayer copy: makes your 1.14.7 Slayer if you have none, brings loadouts with cells and dyes, fixes quests"
                      }
                  ],
     "launcher":  {
