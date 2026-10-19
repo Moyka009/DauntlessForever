@@ -2,11 +2,11 @@
     "packages":  [
                      {
                          "id":  "1.6.2",
-                         "packageVersion":  "2026-10-18",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-18.zip",
-                         "sha256":  "f8d53fe2bf3f351704581245863aedfe5934d7c6cf800c596192b0d9dcf93efb",
+                         "packageVersion":  "2026-10-18.2",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-18.2.zip",
+                         "sha256":  "ebac89b6e2d5612cb962ada9c179f49da07c925d4ed9d974a22decc35aa4efbb",
                          "date":  "2026-10-18",
-                         "note":  "Items you add or earn on your own PC are no longer lost when you next join a friend"
+                         "note":  "Every hairstyle, beard, hair colour and face paint is unlocked in the appearance menu"
                      },
                      {
                          "id":  "1.14.7",
