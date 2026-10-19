@@ -31,6 +31,7 @@ $Stamp    = Get-Date -Format 'yyyyMMdd_HHmmss'
 $RunDir   = Join-Path $Root "logs\run_$Stamp"
 $Upload   = Join-Path $Root 'upload'
 $GameArgs = '-EpicPortal -AUTH_TYPE=accountportal -AUTH_LOGIN=unused -AUTH_PASSWORD=unused'
+$GameArgs = Add-GameLanguage $GameArgs   # launcher Settings > Game language (the Windows language otherwise)
 
 # --- checks before start
 if (@(Get-PlayerGame).Count -gt 0) { Fail 'the game is already running. Close it first.' }

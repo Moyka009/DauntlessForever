@@ -146,3 +146,29 @@ function Clear-Ports1147([string]$KeepFrom = '', [switch]$NoFail) {
     } catch { Say ("Automatic log cleanup skipped: " + $_.Exception.Message) 'Yellow' }
     finally { $global:LASTEXITCODE = $cleanupPriorExit1147 }
 }
+
+# Game language (launcher Settings > Game language): data\game_language.txt, same file and codes as 1.6.2.
+# No file here yet: the choice made for 1.6.2 counts (the launcher only writes it when the setting changes).
+$GameLanguages = @('en', 'de', 'es', 'fr', 'it', 'pt-BR', 'ru', 'pl', 'tr', 'ja', 'ko', 'zh-Hans')
+function Get-GameLanguage {
+    foreach ($f in @((Join-Path $Root 'data\game_language.txt'), (Join-Path (Split-Path -Parent $Root) '1.6.2\data\game_language.txt'))) {
+        try {
+            if (-not (Test-Path -LiteralPath $f)) { continue }
+            foreach ($l in @(Get-Content -LiteralPath $f)) {
+                $t = $l.Trim(); if (-not $t -or $t.StartsWith('#')) { continue }
+                $hit = $GameLanguages | Where-Object { $_ -ieq $t } | Select-Object -First 1
+                if ($hit) { return $hit }
+                return ''   # a code this version does not have (e.g. 1.6.2's community Chinese): the game default
+            }
+            return ''       # the file is there but says "game default"
+        } catch {}
+    }
+    return ''
+}
+# The game's arguments with the language added: without it the game follows the Windows display language
+function Add-GameLanguage([string]$GameArgs) {
+    $lang = Get-GameLanguage
+    if (-not $lang) { return $GameArgs }
+    Say "Game language: $lang" 'Gray'
+    return ($GameArgs -replace '\s*-epiclocale=\S+', '') + " -epiclocale=$lang -CULTURE=$lang"
+}
