@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 'use strict';
 const fs=require('fs'),path=require('path');
-const LEASE_MS=30*60*1000,DEAD_MS=Number(process.env.DF_PLACE_DEAD_MS)||6*60*1000;
+// DF-PLACE-1147: games send a heartbeat every 20 s; a player silent for 3 minutes has left (closed the game, crashed)
+const LEASE_MS=Number(process.env.DF_PLACE_LEASE_MS)||3*60*1000,DEAD_MS=Number(process.env.DF_PLACE_DEAD_MS)||6*60*1000;
 function create({root,getState,liveServer}){
  const seen=new Map(),retired=new Set(),unknown='@unidentified-live-hunt';
  const touch=key=>{if(key&&key!==unknown){seen.set(key,Date.now());const cd=getState().players?.[key]?.candidate;if(cd?.city===false)retired.delete(cd.id);}};
