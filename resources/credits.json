@@ -8,6 +8,11 @@
           "name": "Addison2k",
           "role": "Maintainer",
           "what": "Ported the server code and backends to 1.6.2, 1.12 and 1.14.7, wrote the offline sign-in stand-in, the two-click packages and this launcher, and keeps the manifest archive. Also built online play (relay servers, hosting, friends, voice chat) and the 1.6.2 extras: Hunt Pass, bounties, events, Game Rules, the Inventory editor and the Revived import."
+        },
+        {
+          "name": "Dauntless Forever",
+          "role": "Translations",
+          "what": "Launcher translations: Spanish, French and German."
         }
       ]
     },

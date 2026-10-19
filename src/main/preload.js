@@ -49,6 +49,8 @@ contextBridge.exposeInMainWorld('launcher', {
   lightHost: invoke('settings:lightHost'),
   setLightHost: invoke('settings:setLightHost'),
   setKeepFiles: invoke('settings:setKeepFiles'),
+  uiLanguage: invoke('settings:uiLanguage'),         // Settings -> Launcher language: 'en', 'es', ... or null (never picked)
+  setUiLanguage: invoke('settings:setUiLanguage'),
   communityInfo: invoke('community:info'),
   seasons: invoke('seasons:list'),
   setSeason: invoke('seasons:set'),

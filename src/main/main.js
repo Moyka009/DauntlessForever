@@ -15,6 +15,7 @@ const R = require('./runner');
 const D = require('./downloader');
 const U = require('./updates');
 const AU = require('./appupdate');
+const I18N = require('./i18n');   // the launcher language, for the Windows dialogs below
 
 let win = null;
 let registry = [];
@@ -40,6 +41,7 @@ const send = (ch, payload) => { if (win && !win.isDestroyed()) win.webContents.s
 // nor by the copy that comes with a new launcher. A version that is not installed yet is still copied in.
 const keepFiles = () => { try { return !!settings.load().keepServerFiles; } catch { return false; } };
 const kept = (v) => keepFiles() && !!v.package && fs.existsSync(path.join(v.dataDir, v.package.play));
+const htmlText = (s) => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 async function syncWithPleaseWait() {
   const todo = registry.filter(v => { try { return V.needsSync(v) && !kept(v); } catch { return false; } });
   if (!todo.length) return null;
@@ -50,8 +52,8 @@ async function syncWithPleaseWait() {
       webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true } });
     const page = '<!doctype html><meta charset="utf-8"><body style="margin:0;background:#0f1419;color:#e6edf3;font:14px Segoe UI,sans-serif;display:flex;' +
       'flex-direction:column;justify-content:center;height:100vh;padding:0 26px;box-sizing:border-box;border:1px solid #27333f">' +
-      '<div style="font-size:16px;font-weight:600;margin-bottom:6px">Dauntless Forever is updating</div>' +
-      '<div style="color:#9fb0c2">Copying the new server files. This can take a minute, please wait.</div>' +
+      '<div style="font-size:16px;font-weight:600;margin-bottom:6px">' + htmlText(I18N.t('Dauntless Forever is updating')) + '</div>' +
+      '<div style="color:#9fb0c2">' + htmlText(I18N.t('Copying the new server files. This can take a minute, please wait.')) + '</div>' +
       '<div id="n" style="color:#66788c;margin-top:10px;font-size:12px">&nbsp;</div></body>';
     await wait.loadURL('data:text/html;charset=utf-8,' + encodeURIComponent(page));
     wait.show();
@@ -62,13 +64,13 @@ async function syncWithPleaseWait() {
       await V.syncPackageAsync(v, (n) => {
         if (!wait || wait.isDestroyed() || n - shown < 150) return;
         shown = n;
-        wait.webContents.executeJavaScript(`document.getElementById('n').textContent = ${JSON.stringify(`${v.name || v.id}: ${n} files copied`)}`).catch(() => {});
+        wait.webContents.executeJavaScript(`document.getElementById('n').textContent = ${JSON.stringify(I18N.t('{version}: {n} files copied', { version: v.name || v.id, n }))}`).catch(() => {});
       });
     } catch (e) { log('syncPackage', v.id, e.message); try { V.syncPackage(v); } catch (e2) { log('syncPackage', v.id, e2.message); } }
     shown = 0;
   }
   if (wait && !wait.isDestroyed()) {
-    wait.webContents.executeJavaScript(`document.getElementById('n').textContent = 'Done. Opening the launcher...'`).catch(() => {});
+    wait.webContents.executeJavaScript(`document.getElementById('n').textContent = ${JSON.stringify(I18N.t('Done. Opening the launcher...'))}`).catch(() => {});
     return wait;
   }
   return null;
@@ -92,15 +94,15 @@ function createWindow() {
     const HM = require('./hostmode');
     if (!closeOk && HM.isWanted()) {
       e.preventDefault();
-      const r = dialog.showMessageBoxSync(win, { type: 'question', buttons: ['Keep it running', 'Minimize the launcher', 'Stop Host Mode and close'], defaultId: 1, cancelId: 0,
-        message: 'Host Mode is running.', detail: 'Players can be in your server right now. Minimize keeps it running; closing the launcher stops the server (players in it get a minute and their characters are saved home).' });
+      const r = dialog.showMessageBoxSync(win, { type: 'question', buttons: [I18N.t('Keep it running'), I18N.t('Minimize the launcher'), I18N.t('Stop Host Mode and close')], defaultId: 1, cancelId: 0,
+        message: I18N.t('Host Mode is running.'), detail: I18N.t('Players can be in your server right now. Minimize keeps it running; closing the launcher stops the server (players in it get a minute and their characters are saved home).') });
       if (r === 1) win.minimize();
       if (r === 2) { HM.shutdown().finally(() => { closeOk = true; setTimeout(() => { try { win.close(); } catch {} }, 1500); }); }
       return;
     }
     if (!R.anyRunning().some(r => r.kind === 'play')) return;
-    const r = dialog.showMessageBoxSync(win, { type: 'question', buttons: ['Keep playing', 'Close the launcher anyway'], defaultId: 0, cancelId: 0,
-      message: 'The game is still running.', detail: 'The servers it started keep running until the game closes by itself. If something is stuck, use "Stop everything" in the launcher first.' });
+    const r = dialog.showMessageBoxSync(win, { type: 'question', buttons: [I18N.t('Keep playing'), I18N.t('Close the launcher anyway')], defaultId: 0, cancelId: 0,
+      message: I18N.t('The game is still running.'), detail: I18N.t('The servers it started keep running until the game closes by itself. If something is stuck, use "Stop everything" in the launcher first.') });
     if (r === 0) e.preventDefault();
   });
   win.webContents.setWindowOpenHandler(({ url }) => { if (/^https:/.test(url)) shell.openExternal(url); return { action: 'deny' }; });
@@ -172,6 +174,9 @@ ipcMain.handle('settings:keepFiles', () => keepFiles());
 // instead of starting this PC's server first (Host Mode, private) and then the game.
 ipcMain.handle('settings:lightHost', () => { try { return !!settings.load().lightHost; } catch { return false; } });
 ipcMain.handle('settings:setLightHost', (_e, on) => { settings.update(s => { s.lightHost = !!on; }); return !!on; });
+// Launcher language (Settings): the launcher's own text only; the game keeps its own (Game language). null = never picked.
+ipcMain.handle('settings:uiLanguage', () => I18N.saved());
+ipcMain.handle('settings:setUiLanguage', (_e, code) => { const c = I18N.save(code); log('settings', 'launcher language: ' + c); return c; });
 // Turning it off fetches what was held back straight away (the window hears about it like any update)
 ipcMain.handle('settings:setKeepFiles', async (_e, on) => {
   settings.update(s => { s.keepServerFiles = !!on; });
@@ -285,7 +290,7 @@ ipcMain.handle('launcher:freeSpace', (_e, dir) => freeSpaceGB(dir));
 // ---------------------------------------------------------------- IPC: folders
 ipcMain.handle('game:pickFolder', async (_e, id) => {
   const v = byId(id);
-  const r = await dialog.showOpenDialog(win, { title: `Pick the ${v.name} game folder (the one with "Archon" inside it)`, properties: ['openDirectory'] });
+  const r = await dialog.showOpenDialog(win, { title: I18N.t('Pick the {version} game folder (the one with "Archon" inside it)', { version: v.name }), properties: ['openDirectory'] });
   if (r.canceled || !r.filePaths[0]) return { picked: false };
   const g = V.resolveGameDir(r.filePaths[0], v.exeRel);
   if (!g) return { picked: true, ok: false, reason: `No Dauntless game (Archon\\Binaries\\Win64\\Dauntless-Win64-Shipping.exe) found in ${r.filePaths[0]}.` };
@@ -295,7 +300,7 @@ ipcMain.handle('game:pickFolder', async (_e, id) => {
 });
 ipcMain.handle('game:forget', (_e, id) => { settings.setVersionEntry(id, { gameDir: '' }); return true; });
 ipcMain.handle('launcher:pickGamesRoot', async () => {
-  const r = await dialog.showOpenDialog(win, { title: 'Where should downloaded games go?', properties: ['openDirectory', 'createDirectory'] });
+  const r = await dialog.showOpenDialog(win, { title: I18N.t('Where should downloaded games go?'), properties: ['openDirectory', 'createDirectory'] });
   if (r.canceled || !r.filePaths[0]) return null;
   settings.update(s => { s.gamesRoot = r.filePaths[0]; });
   return r.filePaths[0];
@@ -480,8 +485,8 @@ ipcMain.handle('menu:pickCustom', async (_e, id) => {
   if (menuBusy(v)) return { ok: false, error: 'Close the game (and Host Mode) first, then choose the picture.' };
   const gameDir = menuGameDir(v);
   if (!gameDir || !fs.existsSync(path.join(gameDir, 'Archon', 'Content', 'Paks'))) return { ok: false, error: 'The game folder was not found. Download or set up the game first.' };
-  const r = await dialog.showOpenDialog(win, { title: 'Choose a picture for the main menu (it is cropped to a wide 2:1 shape)', properties: ['openFile'],
-    filters: [{ name: 'Pictures', extensions: ['png', 'jpg', 'jpeg', 'bmp'] }] });
+  const r = await dialog.showOpenDialog(win, { title: I18N.t('Choose a picture for the main menu (it is cropped to a wide 2:1 shape)'), properties: ['openFile'],
+    filters: [{ name: I18N.t('Pictures'), extensions: ['png', 'jpg', 'jpeg', 'bmp'] }] });
   if (r.canceled || !r.filePaths[0]) return { ok: false, canceled: true };
   try {
     const pic = MenuArt.loadPicture(require('electron').nativeImage, r.filePaths[0]);
@@ -704,9 +709,9 @@ ipcMain.handle('game:deletePartial', async (_e, id) => {
   if (!info.exists) return { ok: false, error: 'There is no unfinished download for this version.' };
   if (info.complete) return { ok: false, error: 'That folder holds the complete game, so it was left alone.' };
   if (path.basename(info.dir) !== v.download.folderName) return { ok: false, error: 'Unexpected folder; nothing was deleted.' };
-  const r = await dialog.showMessageBox(win, { type: 'warning', buttons: ['Delete it', 'Keep it'], defaultId: 1, cancelId: 1,
-    message: `Delete the unfinished ${v.name} download?`,
-    detail: `${info.dir}\n${info.gb} GB\n\nThis frees the space. You can press Download again later (it starts from the beginning).` });
+  const r = await dialog.showMessageBox(win, { type: 'warning', buttons: [I18N.t('Delete it'), I18N.t('Keep it')], defaultId: 1, cancelId: 1,
+    message: I18N.t('Delete the unfinished {version} download?', { version: v.name }),
+    detail: `${info.dir}\n${info.gb} GB\n\n` + I18N.t('This frees the space. You can press Download again later (it starts from the beginning).') });
   if (r.response !== 0) return { ok: false, cancelled: true };
   try { await fs.promises.rm(info.dir, { recursive: true, force: true }); }
   catch (e) { return { ok: false, error: 'Could not delete everything: ' + e.message }; }

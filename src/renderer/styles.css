@@ -319,7 +319,7 @@ dialog form { margin-top: 18px; display: flex; justify-content: flex-end; }
 /* Inventory */
 .item-bar { position: sticky; top: 8px; z-index: 2; display: flex; align-items: center; gap: 16px; padding: 10px 14px; background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px; }
 .item-bar .action-note { margin: 0; flex: 1; min-height: 0; }
-.item-bar .action-note:empty::before { content: 'Change a number, then save.'; color: var(--ink-3); }
+.item-bar .action-note:empty::before { content: attr(data-empty); color: var(--ink-3); }   /* the text is in index.html (translated there) */
 .item-char { display: flex; align-items: center; gap: 8px; color: var(--ink-2); font-size: 13px; }
 .item-char select { background: var(--bg-2); color: var(--ink); border: 1px solid var(--line-2); border-radius: 6px; padding: 5px 8px; }
 .item-acts { display: flex; gap: 8px; }
@@ -419,3 +419,24 @@ dialog form { margin-top: 18px; display: flex; justify-content: flex-end; }
 .sc-out { margin-top: 16px; max-width: 760px; max-height: 320px; overflow: auto; white-space: pre-wrap; font-family: Consolas, monospace; font-size: 12px; color: var(--ink-2); background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
 @media (max-width: 720px) { .sc-pair { grid-template-columns: 1fr; } .sc-arrows, .sc-go-l, .sc-go-r { grid-column: 1; grid-row: auto; } .sc-arrows { transform: rotate(90deg); } .sc-grid { grid-template-columns: 1fr; } }
 
+
+/* ================================================================ other launcher languages (Settings > Launcher language)
+   i18n.js sets <html lang>. Spanish, French and German labels run longer, so tight spots wrap instead of cutting the
+   text off. English (lang="en") keeps the layout above exactly as it is. */
+html:not([lang="en"]) .action-main .primary, html:not([lang="en"]) .action-main .host-btn { white-space: normal; line-height: 1.1; text-align: center; }
+html:not([lang="en"]) .online-btn .lbl { min-width: 0; text-align: center; }
+html:not([lang="en"]) .host-opt { width: auto; }
+html:not([lang="en"]) .path .step { height: auto; min-height: 76px; }
+html:not([lang="en"]) .step-sub { -webkit-line-clamp: 3; }
+html:not([lang="en"]) .setting-sub:not(#set-games):not(#set-data):not(#set-node) { word-break: normal; overflow-wrap: anywhere; }
+html:not([lang="en"]) .season-acts { flex-wrap: wrap; }
+html:not([lang="en"]) .item-bar { flex-wrap: wrap; }
+html:not([lang="en"]) .item-acts { flex-wrap: wrap; }
+html:not([lang="en"]) .sc-pair .sc-go { height: auto; min-height: 46px; line-height: 1.2; }
+html:not([lang="en"]) .hm-tile-k, html:not([lang="en"]) .hm-tile-s { white-space: normal; }
+html:not([lang="en"]) .hm-check-l, html:not([lang="en"]) .hm-cols .setting-sub { overflow-wrap: anywhere; }
+html:not([lang="en"]) .vc-radio { min-width: 0; }
+html:not([lang="en"]) .fp-row .fp-who .fp-sub { white-space: normal; }
+html:not([lang="en"]) .menu { max-width: 100%; }
+html:not([lang="en"]) .menu button { white-space: normal; }
+html:not([lang="en"]) .nav-new { padding: 1px 5px; font-size: 10px; }

@@ -12,6 +12,8 @@
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
   let S = null;
   let noteTimer = null;
+  const t = window.t || ((s, p) => (p ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in p ? String(p[k]) : m)) : String(s)));   // i18n.js
+  const tm = window.tm || ((s) => (s == null ? '' : String(s)));
 
   function note(text, isErr) {
     const n = $('hm-note'); if (!n) return;
@@ -21,15 +23,16 @@
   }
   function dur(ms) {
     const m = Math.floor(ms / 60000), h = Math.floor(m / 60), d = Math.floor(h / 24);
-    if (d) return `${d} d ${h % 24} h`;
-    if (h) return `${h} h ${m % 60} min`;
-    return `${m} min`;
+    if (d) return t('{d} d {h} h', { d, h: h % 24 });
+    if (h) return t('{h} h {m} min', { h, m: m % 60 });
+    return t('{m} min', { m });
   }
   function ago(iso) {
-    const t = Date.parse(iso || ''); if (!t) return 'never';
-    const ms = Date.now() - t; if (ms < 90000) return 'just now';
-    return dur(ms) + ' ago';
+    const at = Date.parse(iso || ''); if (!at) return t('never');
+    const ms = Date.now() - at; if (ms < 90000) return t('just now');
+    return t('{time} ago', { time: dur(ms) });
   }
+  // [label (through t() where it is shown), dot class]
   const PHASE = {
     off: ['Off', ''], starting: ['Starting', 'starting'], running: ['Running', 'running'],
     restarting: ['Restarting', 'restarting'], stopping: ['Stopping', 'stopping'], failed: ['Stopped', 'failed'],
@@ -50,15 +53,16 @@
 
     // status line
     const [label, cls] = PHASE[S.phase] || PHASE.off;
-    $('hm-state').textContent = label + (S.phase === 'running' ? `: ${c.nameShown}` : '');
+    $('hm-state').textContent = t(label) + (S.phase === 'running' ? `: ${c.nameShown}` : '');
     $('hm-dot').className = 'hm-dot ' + cls;
     let sub = '';
-    if (S.phase === 'off') sub = `Dauntless ${S.version || ''}, ${c.mode === 'public' ? 'Public (anyone using Play online)' : 'Private (your friends)'}. Press Start: no game window opens.`;
-    else if (S.phase === 'starting') sub = 'Starting the backend and Ramsgate. This takes a minute or two.';
-    else if (S.phase === 'running') sub = `Dauntless ${S.version}, ${c.mode === 'public' ? 'open to everyone using Play online' : 'friends only'}${S.closingIn ? `, closing in ${S.closingIn} s` : ''}. Press Play on the Play page to join it from this PC.`;
-    else if (S.phase === 'restarting') sub = `${S.lastError ? 'It stopped: ' + S.lastError + '. ' : ''}Starting again${S.restartIn ? ` in ${S.restartIn} s` : ''}...`;
-    else if (S.phase === 'stopping') sub = S.closingIn ? `Players have ${S.closingIn} seconds; their characters are being saved home.` : 'Closing the server...';
-    else if (S.phase === 'failed') sub = `It stopped: ${S.lastError || 'see the log below'}. "Restart by itself" is off.`;
+    if (S.phase === 'off') sub = c.mode === 'public' ? t('Dauntless {version}, Public (anyone using Play online). Press Start: no game window opens.', { version: S.version || '' })
+      : t('Dauntless {version}, Private (your friends). Press Start: no game window opens.', { version: S.version || '' });
+    else if (S.phase === 'starting') sub = t('Starting the backend and Ramsgate. This takes a minute or two.');
+    else if (S.phase === 'running') sub = `Dauntless ${S.version}, ${c.mode === 'public' ? t('open to everyone using Play online') : t('friends only')}${S.closingIn ? ', ' + t('closing in {n} s', { n: S.closingIn }) : ''}. ` + t('Press Play on the Play page to join it from this PC.');
+    else if (S.phase === 'restarting') sub = (S.lastError ? t('It stopped: {error}.', { error: tm(S.lastError) }) + ' ' : '') + (S.restartIn ? t('Starting again in {n} s...', { n: S.restartIn }) : t('Starting again...'));
+    else if (S.phase === 'stopping') sub = S.closingIn ? t('Players have {n} seconds; their characters are being saved home.', { n: S.closingIn }) : t('Closing the server...');
+    else if (S.phase === 'failed') sub = t('It stopped: {error}. "Restart by itself" is off.', { error: S.lastError ? tm(S.lastError) : t('see the log below') });
     $('hm-sub').textContent = sub; $('hm-sub').title = sub;
 
     // version picker: always shown, so it is clear which game this server runs (1.6.2, 1.14.7...)
@@ -75,31 +79,31 @@
     // dashboard tiles
     const running = S.phase === 'running';
     const tile = (k, v, s, title) => { $('hm-t-' + k).textContent = v; $('hm-t-' + k + '-s').textContent = s || ''; $('hm-t-' + k).parentNode.title = title || ''; };
-    tile('players', running ? `${S.players.length} / ${c.limit}` : '-', running ? (c.mode === 'public' ? 'public' : 'friends only') : '');
-    tile('hunts', running && S.hunts !== null && S.hunts !== undefined ? String(S.hunts) : '-', running ? 'up to 6 at a time' : '');
-    tile('up', running && S.since ? dur(Date.now() - S.since) : '-', S.restarts ? `${S.restarts} restart${S.restarts > 1 ? 's' : ''}` : '');
-    tile('relay', S.relay ? S.relay.name : (S.ping ? S.ping.name : '-'), S.ping ? `${S.ping.ms} ms from here` : '',
-      S.relay ? `Players reach this PC at ${S.relay.address}` : (S.ping ? 'The relay this PC reaches fastest' : ''));
+    tile('players', running ? `${S.players.length} / ${c.limit}` : '-', running ? (c.mode === 'public' ? t('public') : t('friends only')) : '');
+    tile('hunts', running && S.hunts !== null && S.hunts !== undefined ? String(S.hunts) : '-', running ? t('up to 6 at a time') : '');
+    tile('up', running && S.since ? dur(Date.now() - S.since) : '-', S.restarts ? (S.restarts > 1 ? t('{n} restarts', { n: S.restarts }) : t('{n} restart', { n: S.restarts })) : '');
+    tile('relay', S.relay ? S.relay.name : (S.ping ? S.ping.name : '-'), S.ping ? t('{ms} ms from here', { ms: S.ping.ms }) : '',
+      S.relay ? t('Players reach this PC at {address}', { address: S.relay.address }) : (S.ping ? t('The relay this PC reaches fastest') : ''));
     tile('pc', `CPU ${S.pc.cpu === null || S.pc.cpu === undefined ? '-' : S.pc.cpu + '%'}`, `RAM ${S.pc.ramUsedGB} / ${S.pc.ramTotalGB} GB`);
-    tile('backup', S.backupBusy ? 'Backing up' : ago(S.lastBackup), c.dailyBackup ? 'daily, ' + c.backupKeep + ' kept' : 'daily backup off');
+    tile('backup', S.backupBusy ? t('Backing up') : ago(S.lastBackup), c.dailyBackup ? t('daily, {n} kept', { n: c.backupKeep }) : t('daily backup off'));
 
     // players and bans
     const pl = $('hm-players'); pl.innerHTML = '';
-    if (!S.players.length) pl.appendChild(el('div', 'empty', running ? 'Nobody in your server right now.' : 'Players show up here while Host Mode runs.'));
+    if (!S.players.length) pl.appendChild(el('div', 'empty', running ? t('Nobody in your server right now.') : t('Players show up here while Host Mode runs.')));
     for (const p of S.players) {
       const r = el('div', 'season-row');
       const n = el('div', 'season-name', p.name); if (p.tag) n.appendChild(el('span', 'hm-tag', '#' + p.tag));
       const a = el('div', 'hm-row-acts');
-      if (p.banned) a.appendChild(el('span', 'tag', 'Banned'));
-      else { const b = el('button', 'ghost danger', 'Ban'); b.title = 'They cannot join again (they stay until they leave)'; b.onclick = () => ban(p); a.appendChild(b); }
+      if (p.banned) a.appendChild(el('span', 'tag', t('Banned')));
+      else { const b = el('button', 'ghost danger', t('Ban')); b.title = t('They cannot join again (they stay until they leave)'); b.onclick = () => ban(p); a.appendChild(b); }
       r.append(n, a); pl.appendChild(r);
     }
     const bl = $('hm-bans'); bl.innerHTML = '';
-    if (!c.bans.length) bl.appendChild(el('div', 'empty', 'Nobody is banned.'));
+    if (!c.bans.length) bl.appendChild(el('div', 'empty', t('Nobody is banned.')));
     for (const b of c.bans.slice().reverse()) {
       const r = el('div', 'season-row');
-      const n = el('div'); n.appendChild(el('div', 'season-name', b.name || b.id)); n.appendChild(el('div', 'season-kind', 'Banned ' + ago(b.at)));
-      const a = el('div', 'hm-row-acts'); const u = el('button', 'ghost', 'Unban'); u.onclick = () => act(L.hostUnban(b.id), `${b.name} can join again.`); a.appendChild(u);
+      const n = el('div'); n.appendChild(el('div', 'season-name', b.name || b.id)); n.appendChild(el('div', 'season-kind', t('Banned {when}', { when: ago(b.at) })));
+      const a = el('div', 'hm-row-acts'); const u = el('button', 'ghost', t('Unban')); u.onclick = () => act(L.hostUnban(b.id), t('{name} can join again.', { name: b.name })); a.appendChild(u);
       r.append(n, a); bl.appendChild(r);
     }
 
@@ -108,9 +112,9 @@
     $('hm-mode-public').classList.toggle('on', c.mode === 'public'); $('hm-mode-public').setAttribute('aria-checked', String(c.mode === 'public'));
     $('hm-mode-private').disabled = on; $('hm-mode-public').disabled = on;
     $('hm-mode-sub').textContent = c.mode === 'public'
-      ? 'Public: anyone using Play online can join, and your friends too. Banned players cannot.'
-      : `Private: only people on your Friends list (${S.friends}). Accepting a friend request lets them in; removing a friend takes them off.`;
-    if (on) $('hm-mode-sub').textContent += ' Stop Host Mode to change this.';
+      ? t('Public: anyone using Play online can join, and your friends too. Banned players cannot.')
+      : t('Private: only people on your Friends list ({n}). Accepting a friend request lets them in; removing a friend takes them off.', { n: S.friends });
+    if (on) $('hm-mode-sub').textContent += ' ' + t('Stop Host Mode to change this.');
     if (document.activeElement !== $('hm-name')) { $('hm-name').value = c.name; $('hm-name').placeholder = c.nameShown; }
     if (document.activeElement !== $('hm-welcome')) $('hm-welcome').value = c.welcome;
     const lim = $('hm-limit');
@@ -123,7 +127,7 @@
     // this PC
     $('hm-autostart').checked = c.autoStart;
     $('hm-windows').checked = c.startWithWindows; $('hm-windows').disabled = !S.canStartWithWindows;
-    $('hm-windows-sub').textContent = S.canStartWithWindows ? 'The launcher opens minimized when you sign in to Windows and starts Host Mode' : 'Only in the installed launcher on Windows';
+    $('hm-windows-sub').textContent = S.canStartWithWindows ? t('The launcher opens minimized when you sign in to Windows and starts Host Mode') : t('Only in the installed launcher on Windows');
     $('hm-autorestart').checked = c.autoRestart;
     $('hm-awake').checked = c.keepAwake;
     $('hm-daily').checked = c.dailyRestart;
@@ -141,44 +145,46 @@
   async function act(p, okText) {
     const r = await p;
     if (r && r.state) S = r.state;
-    if (r && r.ok === false) note(r.error || 'That did not work.', true);
+    if (r && r.ok === false) note(tm(r.error) || t('That did not work.'), true);
     else if (okText) note(okText);
     render();
     return r;
   }
   const set = (patch, okText) => act(L.hostSet(patch), okText);
-  function ban(p) { act(L.hostBan(p.id, p.name), `${p.name} is banned: they cannot join again.`); }
+  function ban(p) { act(L.hostBan(p.id, p.name), t('{name} is banned: they cannot join again.', { name: p.name })); }
 
   function wire() {
     $('hm-start').onclick = async () => {
       $('hm-start').disabled = true;
       const pub = ((S && S.settings) || {}).mode === 'public', n = (S && S.friends) || 0;
-      note(pub ? 'Starting Host Mode (Public: anyone using Play online can join, plus your friends). No game window opens; this page shows when it is up.'
-        : n ? `Starting Host Mode (Private: only the ${n} ${n === 1 ? 'person' : 'people'} on your Friends list can join). Switch to Public to let anyone join. No game window opens.`
-        : 'Starting Host Mode (Private), but your Friends list is empty, so nobody can join yet. Add friends on the Friends page, or switch to Public.', !pub && !n);
+      note(pub ? t('Starting Host Mode (Public: anyone using Play online can join, plus your friends). No game window opens; this page shows when it is up.')
+        : n ? (n === 1 ? t('Starting Host Mode (Private: only the {n} person on your Friends list can join). Switch to Public to let anyone join. No game window opens.', { n })
+          : t('Starting Host Mode (Private: only the {n} people on your Friends list can join). Switch to Public to let anyone join. No game window opens.', { n }))
+        : t('Starting Host Mode (Private), but your Friends list is empty, so nobody can join yet. Add friends on the Friends page, or switch to Public.'), !pub && !n);
       await act(L.hostStart($('hm-version').value || undefined));
     };
-    $('hm-stop').onclick = () => act(L.hostStop(false), 'Host Mode stopped.');
-    $('hm-stop-later').onclick = () => act(L.hostStop(true), 'Players were told in chat. Host Mode stops in 60 seconds.');
+    $('hm-stop').onclick = () => act(L.hostStop(false), t('Host Mode stopped.'));
+    $('hm-stop-later').onclick = () => act(L.hostStop(true), t('Players were told in chat. Host Mode stops in 60 seconds.'));
     $('hm-version').onchange = (e) => set({ version: e.target.value });
     $('hm-mode-private').onclick = () => set({ mode: 'private' });
     $('hm-mode-public').onclick = () => set({ mode: 'public' });
-    $('hm-name').onchange = (e) => set({ name: e.target.value }, 'Server name saved.');
-    $('hm-welcome').onchange = (e) => set({ welcome: e.target.value }, 'Welcome line saved.');
-    $('hm-limit').onchange = (e) => set({ limit: Number(e.target.value) }, 'Player limit saved.');
+    $('hm-name').onchange = (e) => set({ name: e.target.value }, t('Server name saved.'));
+    $('hm-welcome').onchange = (e) => set({ welcome: e.target.value }, t('Welcome line saved.'));
+    $('hm-limit').onchange = (e) => set({ limit: Number(e.target.value) }, t('Player limit saved.'));
     $('hm-keep').onchange = (e) => set({ backupKeep: Number(e.target.value) });
     $('hm-autostart').onchange = (e) => set({ autoStart: e.target.checked });
-    $('hm-windows').onchange = (e) => set({ startWithWindows: e.target.checked }, e.target.checked ? 'The launcher now starts with Windows and starts Host Mode.' : 'The launcher no longer starts with Windows.');
+    $('hm-windows').onchange = (e) => set({ startWithWindows: e.target.checked }, e.target.checked ? t('The launcher now starts with Windows and starts Host Mode.') : t('The launcher no longer starts with Windows.'));
     $('hm-autorestart').onchange = (e) => set({ autoRestart: e.target.checked });
     $('hm-awake').onchange = (e) => set({ keepAwake: e.target.checked });
     $('hm-daily').onchange = (e) => set({ dailyRestart: e.target.checked });
-    $('hm-daily-at').onchange = (e) => set({ restartAt: e.target.value }, 'Restart time saved.');
+    $('hm-daily-at').onchange = (e) => set({ restartAt: e.target.value }, t('Restart time saved.'));
     $('hm-backup').onchange = (e) => set({ dailyBackup: e.target.checked });
-    $('hm-backup-now').onclick = () => { note('Making a backup...'); act(L.hostBackup(), 'Backup made.'); };
+    $('hm-backup-now').onclick = () => { note(t('Making a backup...')); act(L.hostBackup(), t('Backup made.')); };
     $('hm-backup-open').onclick = () => L.hostOpenBackups();
     // the page is drawn when it is opened (app.js showPage) and on every update
     document.querySelector('.nav-item[data-page="host"]').addEventListener('click', () => setTimeout(render, 0));
     L.onHostUpdate((s) => { S = s; render(); });
+    window.addEventListener('df-lang', () => render());   // Settings > Launcher language
     setInterval(() => { if (S && S.phase === 'running' && !$('page-host').hidden) render(); }, 30000);   // "Up for" moves on
   }
   async function init() {

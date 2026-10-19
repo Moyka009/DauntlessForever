@@ -25,6 +25,8 @@
   let ptt = false, pttTail = null, vadOpen = false, vadUntil = 0, talking = false;
   let audioCtx = null;
   const speaking = new Map();   // peer id -> bool
+  const t = window.t || ((s, p) => (p ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in p ? String(p[k]) : m)) : String(s)));   // i18n.js
+  const tm = window.tm || ((s) => (s == null ? '' : String(s)));
 
   const ac = () => audioCtx || (audioCtx = new AudioContext());
 
@@ -32,7 +34,7 @@
   // Windows can sit on a microphone request (privacy settings): never wait more than 10 s
   function askMic(audio) {
     return Promise.race([navigator.mediaDevices.getUserMedia({ audio }),
-      new Promise((_, no) => setTimeout(() => no(new Error('Windows did not hand over the microphone in time')), 10000))]);
+      new Promise((_, no) => setTimeout(() => no(new Error(t('Windows did not hand over the microphone in time'))), 10000))]);
   }
   let micPending = null;
   function ensureMic() {
@@ -159,7 +161,7 @@
       for (const id of [...pcs.keys()]) closePc(id);
       stopMic(); return;
     }
-    try { await ensureMic(); } catch (e) { setNote('Voice: no microphone (' + (e.message || e.name) + '). Check Windows Settings > Privacy > Microphone.', true); }
+    try { await ensureMic(); } catch (e) { setNote(t('Voice: no microphone ({error}). Check Windows Settings > Privacy > Microphone.', { error: e.message || e.name }), true); }
     const ids = new Set(S.peers.map(p => p.id));
     for (const id of [...pcs.keys()]) if (!ids.has(id)) closePc(id);
     for (const p of S.peers) {
@@ -219,9 +221,9 @@
     try { list = (await navigator.mediaDevices.enumerateDevices()).filter(d => d.kind === 'audioinput'); } catch {}
     const cur = (S && S.settings.inputId) || '';
     sel.textContent = '';
-    sel.append(new Option('Windows default', ''));
+    sel.append(new Option(t('Windows default'), ''));
     list.filter(d => d.deviceId && d.deviceId !== 'default' && d.deviceId !== 'communications')
-      .forEach((d, i) => sel.append(new Option(d.label || ('Microphone ' + (i + 1)), d.deviceId)));
+      .forEach((d, i) => sel.append(new Option(d.label || t('Microphone {n}', { n: i + 1 }), d.deviceId)));
     sel.value = [...sel.options].some(o => o.value === cur) ? cur : '';
   }
 
@@ -231,22 +233,22 @@
     card.hidden = !!S.offline;
     const c = S.settings;
     const status = $('vc-status');
-    const how = c.mode === 'ptt' ? (c.pttKeyName ? `hold ${c.pttKeyName}` : 'set a push-to-talk key (gear)') : 'talks when you speak';
+    const how = c.mode === 'ptt' ? (c.pttKeyName ? t('hold {key}', { key: c.pttKeyName }) : t('set a push-to-talk key (gear)')) : t('talks when you speak');
     const others = S.room ? S.peers.map(p => p.name) : [];
     const title = $('vc-title');
-    if (title) title.textContent = S.room ? (others.length ? `Voice with ${others.join(', ')}` : 'Voice: just you so far') : 'Voice';
-    if (S.room) status.textContent = c.muted ? 'Muted' : (c.mode === 'ptt' && c.pttKeyName ? `Hold ${c.pttKeyName} to talk` : how);
-    else if (S.available) status.textContent = (c.auto && !S.available.public) ? 'Joining voice...' : 'Ready: open the gear to join';
-    else status.textContent = 'Starts when you host or join';
-    status.title = S.room ? `In voice: ${S.room.name}` : '';
-    if (S.error) setNote(S.error, true);
+    if (title) title.textContent = S.room ? (others.length ? t('Voice with {names}', { names: others.join(', ') }) : t('Voice: just you so far')) : t('Voice');
+    if (S.room) status.textContent = c.muted ? t('Muted') : (c.mode === 'ptt' && c.pttKeyName ? t('Hold {key} to talk', { key: c.pttKeyName }) : how);
+    else if (S.available) status.textContent = (c.auto && !S.available.public) ? t('Joining voice...') : t('Ready: open the gear to join');
+    else status.textContent = t('Starts when you host or join');
+    status.title = S.room ? t('In voice: {name}', { name: S.room.name }) : '';
+    if (S.error) setNote(tm(S.error), true);
     const micEl = $('vc-mic');
     if (micEl) { micEl.className = 'vc-mic' + (S.room ? (c.muted ? ' muted' : (talking ? ' talk' : ' live')) : ''); }
     const railV = $('fp-rail-voice'); if (railV) { railV.hidden = !S.room; railV.style.color = S.room && c.muted ? 'var(--ember)' : ''; }
 
     const jb = $('vc-join'); jb.hidden = !!S.room || !S.available;
     const lb = $('vc-leave'); lb.hidden = !S.room;
-    const mb = $('vc-mute'); mb.hidden = !S.room; mb.textContent = c.muted ? 'Unmute' : 'Mute';
+    const mb = $('vc-mute'); mb.hidden = !S.room; mb.textContent = c.muted ? t('Unmute') : t('Mute');
     mb.classList.toggle('on', !!c.muted);
 
     const list = $('vc-people');
@@ -256,8 +258,8 @@
     list.hidden = !S.room;
     if (S.room && !dragging) {
       const me = el('div', 'vc-row');
-      const who = el('div', 'fr-who'); who.append(el('span', 'vc-dot' + (talking ? ' talk' : '')), el('span', 'fr-name', 'You'));
-      if (!mic) who.append(el('span', 'fr-status', 'no microphone'));
+      const who = el('div', 'fr-who'); who.append(el('span', 'vc-dot' + (talking ? ' talk' : '')), el('span', 'fr-name', t('You')));
+      if (!mic) who.append(el('span', 'fr-status', t('no microphone')));
       me.append(who); list.append(me);
       for (const p of S.peers) {
         const e = pcs.get(p.id);
@@ -265,22 +267,22 @@
         const row = el('div', 'vc-row');
         const who2 = el('div', 'fr-who');
         who2.append(el('span', 'vc-dot' + (speaking.get(p.id) ? ' talk' : '')), el('span', 'fr-name', p.name));
-        if (st !== 'connected') who2.append(el('span', 'fr-status', st === 'failed' || st === 'disconnected' ? 'reconnecting...' : 'connecting...'));
+        if (st !== 'connected') who2.append(el('span', 'fr-status', st === 'failed' || st === 'disconnected' ? t('reconnecting...') : t('connecting...')));
         const vol = el('input', 'vc-vol'); vol.type = 'range'; vol.min = '0'; vol.max = '100';
-        vol.value = String(Math.round(volumeOf(p.id) * 100)); vol.title = `${p.name}'s volume`;
+        vol.value = String(Math.round(volumeOf(p.id) * 100)); vol.title = t('{name}\'s volume', { name: p.name });
         vol.oninput = () => { const ent = pcs.get(p.id); if (ent && ent.audio) ent.audio.volume = vol.value / 100; };
         vol.onchange = () => { const v = Object.assign({}, S.settings.volumes || {}); v[p.id] = Number(vol.value); L.voiceSettings({ volumes: v }); };
         row.append(who2, vol); list.append(row);
       }
-      if (!S.peers.length) list.append(el('div', 'fr-empty', 'Nobody else is in voice yet.'));
+      if (!S.peers.length) list.append(el('div', 'fr-empty', t('Nobody else is in voice yet.')));
     }
 
     // settings
     $('vc-mode-ptt').checked = c.mode === 'ptt';
     $('vc-mode-vad').checked = c.mode === 'vad';
-    $('vc-key').textContent = capturing ? 'Press a key or mouse button... (Esc cancels)' : (c.pttKeyName || 'not set');
+    $('vc-key').textContent = capturing ? t('Press a key or mouse button... (Esc cancels)') : (c.pttKeyName || t('not set'));
     $('vc-key').classList.toggle('waiting', capturing);
-    $('vc-setkey').textContent = capturing ? 'Cancel' : (c.pttKeyName ? 'Change' : 'Set key');
+    $('vc-setkey').textContent = capturing ? t('Cancel') : (c.pttKeyName ? t('Change') : t('Set key'));
     $('vc-ptt-row').classList.toggle('dim', c.mode !== 'ptt');
     $('vc-vad-row').classList.toggle('dim', c.mode !== 'vad');
     $('vc-sens').value = String(c.vadLevel);
@@ -295,14 +297,14 @@
     if (roomChanged) { for (const id of [...pcs.keys()]) closePc(id); }
     if (inputChanged && mic) { stopMic(); }
     render();                               // the bar shows the state at once; the microphone can take a moment
-    try { await syncPeers(); } catch (e) { setNote('Voice: ' + (e.message || e), true); }
+    try { await syncPeers(); } catch (e) { setNote(t('Voice: {error}', { error: tm(e.message || e) }), true); }
     for (const [id, e] of pcs) if (e.audio) e.audio.volume = volumeOf(id);
     render();
   }
 
   async function init() {
-    $('vc-join').onclick = async () => { const r = await L.voiceJoin(); if (r && r.ok === false) setNote(r.error, true); else setNote(''); };
-    $('vc-leave').onclick = async () => { await L.voiceLeave(); setNote('You left voice. Join again any time.'); };
+    $('vc-join').onclick = async () => { const r = await L.voiceJoin(); if (r && r.ok === false) setNote(tm(r.error), true); else setNote(''); };
+    $('vc-leave').onclick = async () => { await L.voiceLeave(); setNote(t('You left voice. Join again any time.')); };
     $('vc-mute').onclick = () => L.voiceSettings({ muted: !(S && S.settings.muted) });
     $('vc-mode-ptt').onchange = () => L.voiceSettings({ mode: 'ptt' });
     $('vc-mode-vad').onchange = () => L.voiceSettings({ mode: 'vad' });
@@ -315,8 +317,8 @@
       capturing = true; render(); setNote('');
       const r = await L.voiceCaptureKey();
       capturing = false;
-      if (r && r.ok) setNote(`Push to talk: ${r.key}. The game still sees this key, so pick one it does not use.`);
-      else if (r && r.error) setNote(r.error, true);
+      if (r && r.ok) setNote(t('Push to talk: {key}. The game still sees this key, so pick one it does not use.', { key: r.key }));
+      else if (r && r.error) setNote(tm(r.error), true);
       render();
     };
     $('vc-clearkey').onclick = () => L.voiceSettings({ clearKey: true });
@@ -333,6 +335,7 @@
       if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) setPop(false);
     });
     L.onVoiceUpdate((s) => { onState(s); });
+    window.addEventListener('df-lang', () => { render(); refreshDevices(); });   // Settings > Launcher language
     L.onVoiceSignals((list) => { for (const m of list) { try { onSignal(m.from, JSON.parse(m.data)); } catch {} } });
     L.onVoicePtt((p) => {
       if (p.down) { ptt = true; clearTimeout(pttTail); pttTail = null; }

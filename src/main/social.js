@@ -499,7 +499,7 @@ function guestSideClosing() {
   if (v) { try { fs.writeFileSync(path.join(v.dataDir, 'data', 'travel_save_now'), new Date().toISOString()); } catch {} }
   const secs = Math.max(0, Math.ceil(hc.inMs / 1000));
   ctx.log(`Friends: ${hc.name} is closing their game in ${secs} seconds. Saving your character home.`);
-  try { if (Notification.isSupported()) new Notification({ title: `${hc.name} is closing their game`, body: `In about ${secs} seconds. Your character is being saved home now.` }).show(); } catch {}
+  try { if (Notification.isSupported()) new Notification({ title: require('./i18n').t('{name} is closing their game', { name: hc.name }), body: require('./i18n').t('In about {secs} seconds. Your character is being saved home now.', { secs }) }).show(); } catch {}
 }
 
 // ------------------------------------------------------------------ IPC

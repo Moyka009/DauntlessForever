@@ -112,7 +112,7 @@
 
     <div class="log" id="log" hidden>
       <div class="log-head"><span id="log-title">What's happening</span><button class="link" id="btn-log-clear">Clear</button></div>
-      <pre class="log-body" id="log-body"></pre>
+      <pre class="log-body" id="log-body" data-i18n-skip></pre>
     </div>
 
     <div class="notes" id="notes">
@@ -180,7 +180,7 @@
       <div class="setting hm-check"><label class="hm-check-l" for="hm-daily"><div class="setting-name">Daily restart</div><div class="setting-sub">A fresh start once a day: players get a line in chat and 60 seconds first, and their characters are saved home</div></label><span class="hm-inline"><input type="time" class="hm-time" id="hm-daily-at" step="60"><input type="checkbox" id="hm-daily"></span></div>
       <div class="setting hm-check"><label class="hm-check-l" for="hm-backup"><div class="setting-name">Daily save backup</div><div class="setting-sub">A copy of the server's save once a day, newest <select class="hm-select hm-keep" id="hm-keep"></select> kept</div></label><span class="hm-inline"><button class="ghost hm-small" id="hm-backup-now">Back up now</button><button class="ghost hm-small" id="hm-backup-open">Open</button><input type="checkbox" id="hm-backup"></span></div>
     </div>
-    <details class="hm-log-box" id="hm-log-box"><summary>Host Mode log</summary><pre class="hm-log" id="hm-log"></pre></details>
+    <details class="hm-log-box" id="hm-log-box"><summary>Host Mode log</summary><pre class="hm-log" id="hm-log" data-i18n-skip></pre></details>
   </div>
 </section>
 
@@ -260,7 +260,7 @@
   <div id="item-body" hidden>
     <div class="item-bar">
       <label class="item-char" id="item-char-wrap" hidden>Character <select id="item-char"></select></label>
-      <p class="action-note" id="item-note" aria-live="polite"></p>
+      <p class="action-note" id="item-note" aria-live="polite" data-empty="Change a number, then save."></p>
       <div class="item-acts"><button class="ghost" id="item-undo" disabled>Undo</button><button class="primary-sm" id="item-save" disabled>Save changes</button></div>
     </div>
     <div id="item-groups"></div>
@@ -288,7 +288,7 @@
 <section class="page" id="page-patches" hidden>
   <h1 class="page-title">Patch notes</h1>
   <p class="lead">What changed in the launcher and the server files. Server-file updates arrive by themselves when you start the launcher.</p>
-  <div id="patch-list" class="patch-list"></div>
+  <div id="patch-list" class="patch-list" data-i18n-skip></div>
 </section>
 
 <!-- ============================================================ Mods -->
@@ -337,7 +337,8 @@
     <div class="setting"><div><div class="setting-name">Keep my server files</div><div class="setting-sub" id="set-keep-sub" style="word-break: normal">For modders: the launcher stops updating or replacing the installed server files (backend, tools, paks), so your own changes stay. Turn it off to get the latest server files again.</div></div><button class="ghost" id="set-keep">Turn on</button></div>
     <div class="setting"><div><div class="setting-name">Offline Forever mode</div><div class="setting-sub" id="set-offline-sub">Play only on this PC: no Friends page, nobody sees you online, no hosting or joining. Server-file updates still come in.</div></div><button class="ghost" id="set-offline">Turn on</button></div>
     <div class="setting"><div><div class="setting-name">Background</div><div class="setting-sub">Aurora and snow behind the pages. Paused while a game is running.</div></div><button class="ghost" id="set-sky">Turn off</button></div>
-    <div class="setting" id="set-lang-row" hidden><div><div class="setting-name">Game language</div><div class="setting-sub" id="set-lang-sub" style="word-break: normal">The language of the game's text and voices. Windows and the launcher stay as they are. Changes at the next game start.</div></div><select class="hm-select" id="set-lang" style="max-width: 260px"></select></div>
+    <div class="setting" id="set-ui-lang-row"><div><div class="setting-name">Launcher language</div><div class="setting-sub" id="set-ui-lang-sub" style="word-break: normal">The language of the launcher's own pages and messages. The game's text has its own setting (Game language).</div></div><select class="hm-select" id="set-ui-lang" data-i18n-skip style="max-width: 260px"></select></div>
+    <div class="setting" id="set-lang-row" hidden><div><div class="setting-name">Game language</div><div class="setting-sub" id="set-lang-sub" style="word-break: normal">The language of the game's text and voices. Windows and the launcher stay as they are. Changes at the next game start.</div></div><select class="hm-select" id="set-lang" data-i18n-skip style="max-width: 260px"></select></div>
     <div class="setting" id="set-menu-row" hidden><div><div class="setting-name">Main menu background in the game (<span id="set-menu-ver">1.6.2</span>)</div><div class="setting-sub" id="set-menu-sub" style="word-break: normal">The art behind the game's start and login screen, from any Hunt Pass season. Changes at the next game start.</div><img id="set-menu-preview" alt="Your main menu picture" hidden style="display: block; width: 256px; height: 128px; object-fit: cover; margin-top: 8px; border-radius: 6px; border: 1px solid var(--line-2)"></div><span style="display: flex; flex-direction: column; gap: 8px; align-items: flex-end; flex-shrink: 0"><select class="hm-select" id="set-menu" style="max-width: 260px"></select><button class="ghost" id="set-menu-pick" hidden>Choose picture</button></span></div>
     <div class="setting"><div style="min-width: 0"><div class="setting-name">What you are running</div><div class="setting-sub" id="set-files" style="word-break: normal; white-space: pre-line; font-family: Consolas, monospace; font-size: 12px">Checking...</div></div><button class="ghost" id="set-files-copy">Copy</button></div>
     <div class="setting"><div><div class="setting-name">Launcher</div><div class="setting-sub"><span id="set-ver"></span> <span id="set-launcher"></span></div></div></div>
@@ -378,7 +379,7 @@
     </ul></div>
   </div>
   <p class="sc-info">Anything the other version does not have yet is parked in its save and listed after the copy. It is never lost: it also stays in the version it came from.</p>
-  <pre class="sc-out" id="sc-out" hidden></pre>
+  <pre class="sc-out" id="sc-out" hidden data-i18n-skip></pre>
 </section>
 <!-- ============================================================ Credits -->
 <section class="page" id="page-credits" hidden>
@@ -388,7 +389,7 @@
   <div class="credits-section" id="supporters-section" hidden>
     <h2>Supporters</h2>
     <p class="small" id="supporters-intro"></p>
-    <div class="supporters" id="supporters-list"></div>
+    <div class="supporters" id="supporters-list" data-i18n-skip></div>
     <p class="small" id="supporters-anon" hidden></p>
     <p class="small"><a href="#" id="lnk-patreon-2" data-url="" hidden>Support on Patreon</a></p>
   </div>
@@ -467,13 +468,13 @@
 
 <dialog id="dlg-readme" class="wide">
   <h2 id="readme-title">README</h2>
-  <pre class="readme" id="readme-body"></pre>
+  <pre class="readme" id="readme-body" data-i18n-skip></pre>
   <form method="dialog"><button class="ghost">Close</button></form>
 </dialog>
 
 <dialog id="dlg-season" class="wide">
   <h2 id="season-doc-title">Rewards</h2>
-  <div class="season-doc" id="season-doc-body"></div>
+  <div class="season-doc" id="season-doc-body" data-i18n-skip></div>
   <form method="dialog"><button class="ghost">Close</button></form>
 </dialog>
 
@@ -497,6 +498,10 @@
   </div>
 </dialog>
 
+<script src="i18n-es.js"></script>
+<script src="i18n-fr.js"></script>
+<script src="i18n-de.js"></script>
+<script src="i18n.js"></script>
 <script src="sky.js"></script>
 <script src="app.js"></script>
 <script src="friends.js"></script>

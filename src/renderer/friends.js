@@ -14,6 +14,8 @@
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
   const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
   const DOCK_MIN = 1240;   // narrower than this: the panel opens over the page
+  const t = window.t || ((s, p) => (p ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in p ? String(p[k]) : m)) : String(s)));   // i18n.js
+  const tm = window.tm || ((s) => (s == null ? '' : String(s)));
 
   let S = null;
   let versions = [];
@@ -34,7 +36,7 @@
   }
   async function act(p, okText) {
     const r = await p;
-    if (r && r.ok === false) note(r.error || 'That did not work.', true); else if (okText) note(okText, false, 6000);
+    if (r && r.ok === false) note(tm(r.error) || t('That did not work.'), true); else if (okText) note(okText, false, 6000);
     return r;
   }
 
@@ -52,10 +54,10 @@
 
   // ---------------------------------------------------------------- rows
   function sub(f) {
-    if (f.status === 'hosting') return f.hostMode && f.server ? `Server: ${f.server} (${f.version || ''})` : `Hosting ${f.version || ''}`.trim();
-    if (f.status === 'playing') return `Playing ${f.version || ''}`.trim();
-    if (f.status === 'online') return 'In the launcher';
-    return 'Offline';
+    if (f.status === 'hosting') return f.hostMode && f.server ? t('Server: {name} ({version})', { name: f.server, version: f.version || '' }) : t('Hosting {version}', { version: f.version || '' }).trim();
+    if (f.status === 'playing') return t('Playing {version}', { version: f.version || '' }).trim();
+    if (f.status === 'online') return t('In the launcher');
+    return t('Offline');
   }
   function friendRow(f) {
     const row = el('div', 'fp-row' + (f.status === 'offline' ? ' offline' : ''));
@@ -63,33 +65,33 @@
     who.append(el('span', 'fr-name', f.name), el('span', 'fp-sub', sub(f)));
     row.append(el('span', 'fr-dot ' + f.status), who);
     if (manage) {
-      const rm = el('button', 'ghost fr-small', 'Remove');
+      const rm = el('button', 'ghost fr-small', t('Remove'));
       rm.onclick = async () => {
-        if (rm.dataset.sure !== '1') { rm.dataset.sure = '1'; rm.textContent = 'Sure?'; setTimeout(() => { rm.dataset.sure = ''; rm.textContent = 'Remove'; }, 3000); return; }
-        await act(L.socialRemove(f.id), `${f.name} removed.`);
+        if (rm.dataset.sure !== '1') { rm.dataset.sure = '1'; rm.textContent = t('Sure?'); setTimeout(() => { rm.dataset.sure = ''; rm.textContent = t('Remove'); }, 3000); return; }
+        await act(L.socialRemove(f.id), t('{name} removed.', { name: f.name }));
       };
       row.append(rm);
     } else if (f.status === 'hosting') {
-      const b = el('button', 'fp-join', 'Join');
+      const b = el('button', 'fp-join', t('Join'));
       const have = versions.some(v => v.id === f.version && v.hasPackage);
       const busy = !!(S && (S.waiting || S.hosting));
       b.disabled = busy || !have;
-      b.title = !have ? `You need Dauntless ${f.version} to join` : (S && S.hosting ? 'You are hosting your own game' : `Join ${f.name}'s ${f.version} game`);
-      b.onclick = async () => { b.disabled = true; note(`Asking ${f.name} to let you in...`); await act(L.socialJoin(f.id)); };
+      b.title = !have ? t('You need Dauntless {version} to join', { version: f.version }) : (S && S.hosting ? t('You are hosting your own game') : t('Join {name}\'s {version} game', { name: f.name, version: f.version }));
+      b.onclick = async () => { b.disabled = true; note(t('Asking {name} to let you in...', { name: f.name })); await act(L.socialJoin(f.id)); };
       row.append(b);
     }
     return row;
   }
   function requestRow(p, incoming) {
     const row = el('div', 'fp-row');
-    const who = el('div', 'fp-who'); who.append(el('span', 'fr-name', p.name), el('span', 'fp-sub', incoming ? 'wants to add you' : 'request sent'));
+    const who = el('div', 'fp-who'); who.append(el('span', 'fr-name', p.name), el('span', 'fp-sub', incoming ? t('wants to add you') : t('request sent')));
     row.append(el('span', 'fr-dot'), who);
     if (incoming) {
-      const a = el('button', 'primary-sm', 'Accept'); a.onclick = () => act(L.socialAccept(p.id), `You and ${p.name} are friends now.`);
-      const d = el('button', 'ghost fr-small', 'Decline'); d.onclick = () => act(L.socialRemove(p.id));
+      const a = el('button', 'primary-sm', t('Accept')); a.onclick = () => act(L.socialAccept(p.id), t('You and {name} are friends now.', { name: p.name }));
+      const d = el('button', 'ghost fr-small', t('Decline')); d.onclick = () => act(L.socialRemove(p.id));
       row.append(a, d);
     } else {
-      const c = el('button', 'ghost fr-small', 'Cancel'); c.onclick = () => act(L.socialRemove(p.id));
+      const c = el('button', 'ghost fr-small', t('Cancel')); c.onclick = () => act(L.socialRemove(p.id));
       row.append(c);
     }
     return row;
@@ -110,8 +112,8 @@
   function renderMode() {
     const off = !!(S && S.offlineMode);
     $('fp').hidden = off;
-    const subEl = $('brand-sub'); if (subEl) subEl.textContent = off ? 'every build, offline' : 'solo or with friends';
-    const btn = $('set-offline'); if (btn) btn.textContent = off ? 'Turn off' : 'Turn on';
+    const subEl = $('brand-sub'); if (subEl) subEl.textContent = off ? t('every build, offline') : t('solo or with friends');
+    const btn = $('set-offline'); if (btn) btn.textContent = off ? t('Turn off') : t('Turn on');
   }
   function render() {
     if (!S) return;
@@ -120,62 +122,62 @@
     renderMode();
     if (S.offlineMode) return;
     const online = S.friends.filter(f => f.status !== 'offline');
-    $('fp-online').textContent = S.signedIn && S.friends.length ? `${online.length} online` : '';
+    $('fp-online').textContent = S.signedIn && S.friends.length ? t('{n} online', { n: online.length }) : '';
     $('fp-rail-count').textContent = online.length ? String(online.length) : '';
     $('fp-rail-req').hidden = !(S.incoming && S.incoming.length);
     // switched off for everyone in network.json (server down or being fixed): say so, nothing else to do here
     if (S.onlineOff) {
       $('fr-signup').hidden = false; $('fr-main').hidden = true;
-      $('fr-signup-text').textContent = `${S.onlineOff} Solo play works as always.`;
+      $('fr-signup-text').textContent = t('{message} Solo play works as always.', { message: tm(S.onlineOff) });
       return;
     }
     $('fr-signup').hidden = S.signedIn;
     $('fr-main').hidden = !S.signedIn;
     if (!S.signedIn) {
       $('fr-signup-text').textContent = S.playerName
-        ? (S.error ? `Could not sign in as ${S.playerName} yet: ${S.error} It tries again by itself.` : `Signing you in as ${S.playerName}...`)
-        : 'Pick your player name first (Settings > Player name).';
+        ? (S.error ? t('Could not sign in as {name} yet: {error} It tries again by itself.', { name: S.playerName, error: tm(S.error) }) : t('Signing you in as {name}...', { name: S.playerName }))
+        : t('Pick your player name first (Settings > Player name).');
       return;
     }
-    if (S.error) { if (S.error !== shownError) note(S.error, true); }
+    if (S.error) { if (tm(S.error) !== shownError) note(tm(S.error), true); }
     else if (shownError) note('');
     $('fr-me').textContent = S.name;
     $('fr-code').textContent = S.tag ? `#${S.tag}` : '';
-    if (S.waiting) note(`Asking ${S.waiting.host} to let you in... their launcher answers within a few seconds.`);
+    if (S.waiting) note(t('Asking {name} to let you in... their launcher answers within a few seconds.', { name: S.waiting.host }));
     const h = $('fp-hosting');
     h.hidden = !S.hosting;
     h.textContent = '';
     h.classList.remove('warn');
     if (!S.hosting && S.relay && S.relay.ms > 150) {
       h.hidden = false;
-      h.append(el('div', '', `The online server (${S.relay.name}) is far from you: ${S.relay.ms} ms. Hosting works, but friends may notice lag.`));
+      h.append(el('div', '', t('The online server ({name}) is far from you: {ms} ms. Hosting works, but friends may notice lag.', { name: S.relay.name, ms: S.relay.ms })));
     }
     if (S.hosting) {
-      h.append(el('div', '', S.hostPublic ? `You are hosting ${S.hosting}, open to everyone: friends and Play online players can join.`
-        : `You are hosting ${S.hosting}. Friends see it here and press Join.`));
+      h.append(el('div', '', S.hostPublic ? t('You are hosting {version}, open to everyone: friends and Play online players can join.', { version: S.hosting })
+        : t('You are hosting {version}. Friends see it here and press Join.', { version: S.hosting })));
       const guests = S.guests || [];
-      h.append(el('div', 'fp-guests', guests.length ? `In your game: ${guests.map(g => g.name).join(', ')}` : 'Nobody has joined yet.'));
+      h.append(el('div', 'fp-guests', guests.length ? t('In your game: {names}', { names: guests.map(g => g.name).join(', ') }) : t('Nobody has joined yet.')));
       const btn = (cls, text, fn) => { const b = el('button', cls, text); b.onclick = async () => { b.disabled = true; await fn(); }; return b; };
       const choice = el('div', 'fp-choice');
       if (S.closingIn > 0) {
         h.classList.add('warn');
-        h.append(el('div', 'fp-closing', `Closing in ${S.closingIn} s. The players were told in chat, and their characters are being saved home.`));
-        choice.append(btn('ghost fr-small', 'Keep playing', () => act(L.socialStopHost({ cancel: true }), 'Your game stays open.')),
-          btn('ghost fr-small', 'Close now', () => act(L.socialStopHost(), 'Stopped hosting.')));
+        h.append(el('div', 'fp-closing', t('Closing in {n} s. The players were told in chat, and their characters are being saved home.', { n: S.closingIn })));
+        choice.append(btn('ghost fr-small', t('Keep playing'), () => act(L.socialStopHost({ cancel: true }), t('Your game stays open.'))),
+          btn('ghost fr-small', t('Close now'), () => act(L.socialStopHost(), t('Stopped hosting.'))));
         h.append(choice);
       } else if (askStop && guests.length) {
         h.classList.add('warn');
-        h.append(el('div', 'fp-closing', `${guests.length === 1 ? '1 player is' : guests.length + ' players are'} in your game. Give them a minute to finish up?`));
-        choice.append(btn('primary-sm', 'Close in 60 s', async () => { askStop = false; await act(L.socialStopHost({ later: 60 })); }),
-          btn('ghost fr-small', 'Close now', async () => { askStop = false; await act(L.socialStopHost(), 'Stopped hosting.'); }),
-          btn('ghost fr-small', 'Cancel', async () => { askStop = false; render(); }));
+        h.append(el('div', 'fp-closing', guests.length === 1 ? t('1 player is in your game. Give them a minute to finish up?') : t('{n} players are in your game. Give them a minute to finish up?', { n: guests.length })));
+        choice.append(btn('primary-sm', t('Close in 60 s'), async () => { askStop = false; await act(L.socialStopHost({ later: 60 })); }),
+          btn('ghost fr-small', t('Close now'), async () => { askStop = false; await act(L.socialStopHost(), t('Stopped hosting.')); }),
+          btn('ghost fr-small', t('Cancel'), async () => { askStop = false; render(); }));
         h.append(choice);
       } else {
         askStop = false;
-        const stop = el('button', 'ghost fr-small fp-stop', 'Stop hosting');
+        const stop = el('button', 'ghost fr-small fp-stop', t('Stop hosting'));
         stop.onclick = async () => {
           if ((S.guests || []).length) { askStop = true; render(); return; }
-          stop.disabled = true; stop.textContent = 'Stopping...'; await act(L.socialStopHost(), 'Stopped hosting.');
+          stop.disabled = true; stop.textContent = t('Stopping...'); await act(L.socialStopHost(), t('Stopped hosting.'));
         };
         h.append(stop);
       }
@@ -185,30 +187,31 @@
       h.hidden = false;
       if (S.hostClosing) {
         h.classList.add('warn');
-        h.append(el('div', 'fp-closing', `${S.hostClosing.name} is closing their game in about ${S.hostClosing.inSec} s. Your character is being saved home now.`));
-      } else h.append(el('div', '', `You are in ${S.inGameWith.name}'s ${S.inGameWith.version} game${S.inGameWith.public ? ' (open to everyone)' : ''}. Your character is saved home every few minutes.`));
+        h.append(el('div', 'fp-closing', t('{name} is closing their game in about {n} s. Your character is being saved home now.', { name: S.hostClosing.name, n: S.hostClosing.inSec })));
+      } else h.append(el('div', '', S.inGameWith.public ? t('You are in {name}\'s {version} game (open to everyone). Your character is saved home every few minutes.', { name: S.inGameWith.name, version: S.inGameWith.version })
+        : t('You are in {name}\'s {version} game. Your character is saved home every few minutes.', { name: S.inGameWith.name, version: S.inGameWith.version })));
     }
 
     const box = $('fp-scroll'); box.textContent = '';
     if (manage) {
-      box.append(section(`Friends (${S.friends.length})`, S.friends.map(friendRow), { empty: 'No friends yet.' }));
-      if (S.outgoing.length) box.append(section('Requests you sent', S.outgoing.map(p => requestRow(p, false))));
+      box.append(section(t('Friends ({n})', { n: S.friends.length }), S.friends.map(friendRow), { empty: t('No friends yet.') }));
+      if (S.outgoing.length) box.append(section(t('Requests you sent'), S.outgoing.map(p => requestRow(p, false))));
     } else {
-      if (S.incoming.length) box.append(section(`Friend requests (${S.incoming.length})`, S.incoming.map(p => requestRow(p, true))));
+      if (S.incoming.length) box.append(section(t('Friend requests ({n})', { n: S.incoming.length }), S.incoming.map(p => requestRow(p, true))));
       const off = S.friends.filter(f => f.status === 'offline');
-      box.append(section(`Online (${online.length})`, online.map(friendRow),
-        { empty: S.friends.length ? 'Nobody is online right now.' : 'Add a friend by their name above. They see your request when their launcher is open.' }));
-      if (off.length) box.append(section(`Offline (${off.length})`, off.map(friendRow),
+      box.append(section(t('Online ({n})', { n: online.length }), online.map(friendRow),
+        { empty: S.friends.length ? t('Nobody is online right now.') : t('Add a friend by their name above. They see your request when their launcher is open.') }));
+      if (off.length) box.append(section(t('Offline ({n})', { n: off.length }), off.map(friendRow),
         { closed: !offlineOpen, toggle: () => { offlineOpen = !offlineOpen; store.set('df-fp-offline', offlineOpen ? '1' : '0'); render(); } }));
     }
-    $('fp-manage').textContent = manage ? 'Back' : 'Manage friends';
+    $('fp-manage').textContent = manage ? t('Back') : t('Manage friends');
   }
 
   async function init() {
     try { versions = await L.listVersions(); } catch { versions = []; }
     $('fr-add').onclick = async () => {
       const name = $('fr-addname').value.trim(); if (!name) { $('fr-addname').focus(); return; }
-      const r = await act(L.socialAdd(name), `Friend request sent to ${name}.`);
+      const r = await act(L.socialAdd(name), t('Friend request sent to {name}.', { name }));
       if (r && r.ok !== false) $('fr-addname').value = '';
     };
     $('fr-addname').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('fr-add').click(); });
@@ -223,6 +226,7 @@
     const offBtn = $('set-offline');
     if (offBtn) offBtn.onclick = async () => { offBtn.disabled = true; S = await L.socialSetOffline(!(S && S.offlineMode)); render(); offBtn.disabled = false; };
     L.onSocialUpdate((s) => { S = s; render(); });
+    window.addEventListener('df-lang', () => { if (shownError && S && S.error) note(tm(S.error), true); render(); });   // Settings > Launcher language
     layout();
     S = await L.socialState(); render();
     // installed versions change (download, set-up): Join buttons follow
