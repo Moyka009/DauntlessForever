@@ -36,6 +36,7 @@ function showPage(name) {
   if (name === 'rules') renderRules();
   if (name === 'items') renderItems(true);
   if (name === 'mods') renderMods();
+  if (name === 'slayer') renderSlayer();
   if (name === 'patches') renderPatches();
   document.querySelector('.content').scrollTop = 0;
 }
@@ -61,7 +62,7 @@ function renderCredits(cr, sup) {
   $('credits-intro').textContent = cr.intro || '';
   const host = $('credits-sections'); host.innerHTML = '';
   for (const sec of (cr.sections || [])) {
-    const d = document.createElement('div'); d.className = 'credits-section';
+    const d = document.createElement('div'); d.className = 'credits-section' + (sec.compact ? ' compact' : '');
     d.innerHTML = `<h2>${esc(sec.title)}</h2>` + (sec.people || []).map(p => `
       <div class="person"><div class="avatar">${esc((p.name || '?')[0].toUpperCase())}</div><div>
         <div class="person-name">${p.url ? `<a href="#" data-url="${esc(p.url)}">${esc(p.name)}</a>` : esc(p.name)}${p.role ? `<span class="person-role">${esc(p.role)}</span>` : ''}</div>
@@ -896,6 +897,64 @@ async function play(v) {
   await refresh(v.id);
   if (!r.ok && r.error) { const n = $('action-note'); n.textContent = r.error; n.className = 'action-note err'; }
 }
+// ---------------------------------------------------------------- Slayer copy (1.14.7 tools\slayer-copy.js)
+let scBusy = false;
+async function renderSlayer() {
+  let s = {}; try { s = await L.slayerStatus(); } catch {}
+  $('sc-162').textContent = s.v162 ? 'Installed, character found' : 'Install and play 1.6.2 once';
+  $('sc-1147').textContent = s.v1147 ? (s.tool ? 'Installed, character found' : 'Server files update when the launcher opens') : 'Install and play 1.14.7 once';
+  $('sc-162').dataset.ok = s.v162 ? '1' : '0'; $('sc-1147').dataset.ok = (s.v1147 && s.tool) ? '1' : '0';
+  if (!scBusy) fillSlayerSummary();
+  const ready = !!(s.v162 && s.v1147 && s.tool);
+  $('sc-from').disabled = $('sc-to').disabled = !ready || scBusy;
+  const n = $('sc-note');
+  if (!scBusy) { n.className = 'action-note'; n.textContent = !ready ? 'Both versions need to be installed and played once before copying.' : s.running ? 'Close the game and stop hosting before copying.' : ''; }
+}
+// The same facts for both Slayers, side by side; the better value in each row is lit (tools\slayer-summary.js).
+async function fillSlayerSummary() {
+  let r = null; try { r = await L.slayerSummary(); } catch {}
+  const a = r && r.v162, b = r && r.v1147;
+  $('sc-name-162').textContent = (a && a.name) || ''; $('sc-name-1147').textContent = (b && b.name) || '';
+  const day = (t) => { if (!t) return '-'; const d = new Date(t); return d.toDateString() === new Date().toDateString() ? 'Today' : d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); };
+  const num = (n) => Number(n || 0).toLocaleString();
+  const rows = [
+    ['Last played', (x) => day(x.lastPlayed), (x) => Date.parse(x.lastPlayed) || 0],
+    ['Weapons and armour', (x) => num(x.gear), (x) => x.gear],
+    ['Cosmetics', (x) => num(x.cosmetics), (x) => x.cosmetics],
+    ['Rams', (x) => num(x.rams), (x) => x.rams],
+    ['Weapons at level 20', (x) => `${x.maxed} / 7`, (x) => x.maxed],
+    ['Reforges', (x) => num(x.reforges), (x) => x.reforges],
+    ["Slayer's Path", (x) => `${x.path} / ${x.pathOf}`, (x) => x.path],
+  ];
+  for (const [id, me, other] of [['sc-stats-162', a, b], ['sc-stats-1147', b, a]]) {
+    const dl = $(id); dl.textContent = ''; dl.hidden = !me; if (!me) continue;
+    for (const [label, show, val] of rows) {
+      const dt = document.createElement('dt'); dt.textContent = label;
+      const dd = document.createElement('dd'); dd.textContent = show(me);
+      if (other && val(me) > val(other)) dd.className = 'sc-win';
+      dl.append(dt, dd);
+    }
+  }
+}
+async function slayerCopy(dir) {
+  if (scBusy) return; scBusy = true; renderSlayer();
+  const n = $('sc-note'), out = $('sc-out');
+  const from = dir === 'from-162' ? '1.6.2' : '1.14.7', to = dir === 'from-162' ? '1.14.7' : '1.6.2';
+  try {
+    n.className = 'action-note'; n.textContent = 'Reading both saves...';
+    const pre = await L.slayerCopy(dir, true);
+    out.hidden = false; out.textContent = pre.text || '';
+    if (!pre.ok) { n.className = 'action-note err'; n.textContent = (pre.text || 'Could not read the saves.').split('\n')[0].replace(/^STOPPED: /, ''); return; }
+    const ok = await confirm(`Copy your Slayer from ${from} into ${to}?`, 'The preview below shows what changes. Your ' + from + ' save is only read. A backup of your ' + to + ' save is made first.');
+    if (!ok) { n.textContent = 'Nothing was changed.'; return; }
+    n.textContent = 'Copying...';
+    const r = await L.slayerCopy(dir, false);
+    out.textContent = r.text || '';
+    n.className = r.ok ? 'action-note' : 'action-note err';
+    n.textContent = r.ok ? `Done. Your Slayer in ${to} has it the next time you play.` : (r.text || 'The copy failed.').split('\n')[0].replace(/^STOPPED: /, '');
+  } finally { scBusy = false; renderSlayer(); }
+}
+
 function confirm(title, text) {
   return new Promise((res) => {
     const d = $('dlg-confirm'); $('confirm-title').textContent = title; $('confirm-text').textContent = text;
@@ -909,6 +968,8 @@ function confirm(title, text) {
 // ---------------------------------------------------------------- wiring
 function wire() {
   $('btn-primary').addEventListener('click', primary);
+  $('sc-from').addEventListener('click', () => slayerCopy('from-162'));
+  $('sc-to').addEventListener('click', () => slayerCopy('to-162'));
   $('btn-host').addEventListener('click', async () => {
     const v = versions.find(x => x.id === selected); if (!v) return;
     const hb = $('btn-host'), n = $('action-note');

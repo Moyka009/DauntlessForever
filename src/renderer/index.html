@@ -28,6 +28,7 @@
     <button class="nav-item" data-page="events"><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 2.5 13.5 8 8 13.5 2.5 8z" fill="currentColor"/></svg></span>Events</button>
     <button class="nav-item" data-page="rules"><span class="nav-ico ic-rules" aria-hidden="true"></span>Game Rules</button>
     <button class="nav-item" data-page="items"><span class="nav-ico ic-items" aria-hidden="true"></span>Inventory</button>
+    <button class="nav-item" data-page="slayer"><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2.5 5.5h9M9 3l2.5 2.5L9 8M13.5 10.5h-9M7 8l-2.5 2.5L7 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>Slayer copy<span class="nav-new">New</span></button>
     <button class="nav-item" data-page="mods"><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 1.8 13.4 4.9v6.2L8 14.2 2.6 11.1V4.9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>Mods</button>
     <button class="nav-item" data-page="patches"><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 4.5h10M3 8h10M3 11.5h10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>Patch notes</button>
     <button class="nav-item" data-page="settings"><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M6.7 1.5h2.6l.4 1.8 1.2.7 1.8-.6 1.3 2.2-1.4 1.3v1.4l1.4 1.3-1.3 2.2-1.8-.6-1.2.7-.4 1.8H6.7l-.4-1.8-1.2-.7-1.8.6-1.3-2.2 1.4-1.3V7.6L2 6.3l1.3-2.2 1.8.6 1.2-.7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="8" cy="8" r="2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span>Settings</button>
@@ -344,6 +345,41 @@
   <p class="small">Each version keeps its own save, settings and logs in the launcher data folder. Nothing is written into your Windows Dauntless settings. Uninstalling the launcher does not delete that folder.</p>
 </section>
 
+<!-- ============================================================ Slayer copy -->
+<section class="page" id="page-slayer" hidden>
+  <h1 class="page-title">Slayer copy</h1>
+  <p class="lead">Take your Slayer from one version of Dauntless to another. It is a copy, never a move: the version you copy from is only read, and nothing you already have in the other one is lowered. Run it again any time to bring the other version up to date.</p>
+  <div class="sc-panel">
+    <div class="sc-pair">
+      <div class="sc-ver"><div class="sc-ver-head"><span class="sc-ver-id">1.6.2</span><span class="sc-ver-name" id="sc-name-162"></span></div><div class="sc-ver-sub" id="sc-162">Checking...</div><dl class="sc-stats" id="sc-stats-162" hidden></dl></div>
+      <div class="sc-arrows" aria-hidden="true"><svg viewBox="0 0 48 32" width="44" height="30"><path d="M6 11h34M33 5l7 6-7 6M42 21H8M15 15l-7 6 7 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+      <div class="sc-ver"><div class="sc-ver-head"><span class="sc-ver-id">1.14.7</span><span class="sc-ver-name" id="sc-name-1147"></span></div><div class="sc-ver-sub" id="sc-1147">Checking...</div><dl class="sc-stats" id="sc-stats-1147" hidden></dl></div>
+      <button class="primary sc-go sc-go-l" id="sc-from">Copy 1.6.2 into 1.14.7</button>
+      <button class="ghost sc-go sc-go-r" id="sc-to">Copy 1.14.7 into 1.6.2</button>
+    </div>
+    <p class="sc-hint">You see a preview of every change first. Nothing is copied until you confirm.</p>
+    <p class="action-note" id="sc-note" aria-live="polite"></p>
+  </div>
+  <div class="sc-grid">
+    <div class="sc-col"><h2>Comes along</h2><ul class="sc-list sc-yes">
+      <li>Weapons, armour, lanterns and cosmetics</li>
+      <li>Dyes, transmogs, emotes, banners and titles</li>
+      <li>Currencies, materials, potions and cells (the higher count wins)</li>
+      <li>Weapon levels, converted between the versions</li>
+      <li>Reforges (Sparkforge)</li>
+      <li>Quests and story progress, merged step by step</li>
+      <li>Slayer's Path nodes</li>
+    </ul></div>
+    <div class="sc-col"><h2>Stays per version</h2><ul class="sc-list sc-no">
+      <li>Hunt Pass</li>
+      <li>Loadouts and gear levels</li>
+      <li>Cells slotted in gear</li>
+      <li>Appearance</li>
+    </ul></div>
+  </div>
+  <p class="sc-info">Anything the other version does not have yet is parked in its save and listed after the copy. It is never lost: it also stays in the version it came from.</p>
+  <pre class="sc-out" id="sc-out" hidden></pre>
+</section>
 <!-- ============================================================ Credits -->
 <section class="page" id="page-credits" hidden>
   <h1 class="page-title">Credits</h1>

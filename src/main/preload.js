@@ -23,6 +23,9 @@ contextBridge.exposeInMainWorld('launcher', {
   deletePartial: invoke('game:deletePartial'),
   setup: invoke('game:setup'),
   play: invoke('game:play'),
+  slayerStatus: invoke('slayer:status'),                   // () {v162, v1147, tool, running}
+  slayerCopy: invoke('slayer:copy'),                       // (dir 'from-162'|'to-162', dry) {ok, text}
+  slayerSummary: invoke('slayer:summary'),                 // () {ok, v162, v1147} or null (tools\slayer-summary.js)
   importRevived: invoke('game:importRevived'),          // (id, tutorialOnly) the Revived 1.4.4 import, in a window
   stop: invoke('game:stop'),
   openPath: invoke('open:path'),

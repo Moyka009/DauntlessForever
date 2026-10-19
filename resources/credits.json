@@ -17,7 +17,7 @@
         {
           "name": "KombatKing",
           "role": "Contributor",
-          "what": "1.6.2: the Lady Luck / Trials shop, the holiday calendar with event mail and the Ozz holiday shop, the daily Ramsgate gift, the All Dyes store offer, Unlimited Resupply Beacons, the hunt XP captures behind the Slayer's Path fix, the Mega Hunt Pass (Expanded), the goat petting fix, holiday quests and art, daily shard pickups, the weekly Trials rotation and the safer port check."
+          "what": "1.6.2: the Lady Luck / Trials shop, the holiday calendar with event mail and the Ozz holiday shop, the daily Ramsgate gift, the All Dyes store offer, Unlimited Resupply Beacons, the hunt XP captures behind the Slayer's Path fix, the Mega Hunt Pass (Expanded), the goat petting fix, holiday quests and art, daily shard pickups, the weekly Trials rotation and the safer port check. 1.14.7: the All-in-One fixes (fountain gift, Middleman, Trials store and its bigger shop, Hunt Pass seasons, bounties, power surge, War Hammer reload, Game Rules), the quest text and equipment fixes, item expiry, the loadouts fix and Free platinum, the startup message fix and the multiplayer fixes."
         },
         {
           "name": "zgh95",
@@ -43,6 +43,11 @@
           "name": "Moyka009",
           "role": "Contributor",
           "what": "Saved the 1.14.7 manifest and tested the first 1.14.7 package."
+        },
+        {
+          "name": "Navjit Singh",
+          "role": "Contributor",
+          "what": "Saved the 1.5.4 manifest."
         }
       ]
     },
@@ -51,7 +56,7 @@
       "people": [
         {
           "name": "Undaunted",
-          "role": "gwog (Gregory Morford) and contributors",
+          "role": "gwog (Gregory Morford) / SyST3MDeV, EisigesEis and contributors",
           "what": "The private-server approach, the loader and the original backend. AGPL-3.0. The server DLLs and backends in each version are modified versions of it, with full source in every package.",
           "url": "https://github.com/SyST3MDeV/Undaunted"
         },
@@ -75,11 +80,12 @@
         },
         {
           "name": "Dauntless Revived",
-          "role": "mixutin and contributors",
-          "what": "The other living fork of Undaunted (1.4.4). Where a fix came from there, its author is named next to it.",
-          "url": ""
+          "role": "mixutin, Void (Vvoidddd), ridjan xhika, ZFXSTATIC, Harmonic, JusMH, anxo and contributors",
+          "what": "The other living fork of Undaunted (1.4.4). Dauntless Forever uses its in-game chat server, parts of its party code and the idea behind the 1.6.2 Trials schedule fix (AGPL-3.0); the files that use them name it.",
+          "url": "https://github.com/mixutin/dauntless-revived"
         }
-      ]
+      ],
+      "compact": true
     }
   ],
   "supportersIntro": "People supporting the project on Patreon. Support is optional, changes nothing in the game, and pays for the time and the test machines. Thank you.",

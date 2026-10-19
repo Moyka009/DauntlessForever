@@ -758,6 +758,44 @@ ipcMain.handle('game:importRevived', async (_e, id, tutorialOnly) => {
   return { ok: code === 0, code };
 });
 
+// Slayer copy (page "Slayer copy"): 1.14.7's tools\slayer-copy.js copies your Slayer between 1.6.2 and 1.14.7.
+// A copy, never a move: the other save is only read. The launcher runs it with --dry first and shows the preview.
+const SLAYER_PAIR = ['1.6.2', '1.14.7'];
+function slayerState() {
+  const a = byId('1.6.2'), b = byId('1.14.7');
+  const has = (v, f) => !!(v && v.package && v.dataDir && fs.existsSync(path.join(v.dataDir, f)));
+  return { v162: has(a, 'data/undaunted.db'), v1147: has(b, 'data/state.json'), tool: has(b, 'tools/slayer-copy.js'),
+    running: R.anyRunning().some(r => SLAYER_PAIR.includes(String(r.id).split(':')[0]) && r.kind !== 'stop') };
+}
+ipcMain.handle('slayer:status', async () => slayerState());
+ipcMain.handle('slayer:copy', async (_e, dir, dry) => {
+  if (!['from-162', 'to-162'].includes(dir)) return { ok: false, text: 'Unknown direction.' };
+  const s = slayerState();
+  if (!s.v162 || !s.v1147) return { ok: false, text: 'Install and play both 1.6.2 and 1.14.7 once first.' };
+  if (!s.tool) return { ok: false, text: 'The 1.14.7 server files are too old for this. They update when the launcher opens.' };
+  if (s.running) return { ok: false, text: 'Close the game and stop hosting first (1.6.2 and 1.14.7).' };
+  const v = byId('1.14.7');
+  let node = null;
+  try { node = JSON.parse(fs.readFileSync(path.join(v.dataDir, 'config.json'), 'utf8').replace(/^﻿/, '')).Node; } catch {}
+  if (!node || !fs.existsSync(node)) node = (await findNode() || {}).path;
+  if (!node) return { ok: false, text: 'Node.js was not found. Run Set up first.' };
+  const args = [path.join(v.dataDir, 'tools', 'slayer-copy.js'), dir]; if (dry) args.push('--dry');
+  return new Promise((resolve) => execFile(node, args, { cwd: v.dataDir, timeout: 120000, windowsHide: true, maxBuffer: 16 * 1024 * 1024 },
+    (e, out, err) => resolve({ ok: !e, text: String(out || '').trim() || String(err || (e && e.message) || '').trim() })));
+});
+
+// The same few facts for your Slayer in both versions, side by side on the page (tools\slayer-summary.js, read only).
+ipcMain.handle('slayer:summary', async () => {
+  const s = slayerState(); const v = byId('1.14.7');
+  if (!v || !s.v1147 || !fs.existsSync(path.join(v.dataDir, 'tools', 'slayer-summary.js'))) return null;
+  let node = null;
+  try { node = JSON.parse(fs.readFileSync(path.join(v.dataDir, 'config.json'), 'utf8').replace(/^\uFEFF/, '')).Node; } catch {}
+  if (!node || !fs.existsSync(node)) node = (await findNode() || {}).path;
+  if (!node) return null;
+  return new Promise((resolve) => execFile(node, [path.join(v.dataDir, 'tools', 'slayer-summary.js')], { cwd: v.dataDir, timeout: 30000, windowsHide: true, maxBuffer: 4 * 1024 * 1024 },
+    (e, out) => { try { resolve(JSON.parse(String(out || '').trim().split(/\r?\n/).pop())); } catch { resolve(null); } }));
+});
+
 ipcMain.handle('game:play', async (_e, id) => {
   const v = byId(id); if (!v || !v.package) return { ok: false };
   if (R.anyRunning().some(r => r.kind === 'play')) return { ok: false, error: 'A game is already running. Close it first.' };
