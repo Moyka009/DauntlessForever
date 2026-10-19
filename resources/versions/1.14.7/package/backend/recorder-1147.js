@@ -937,6 +937,10 @@ const routes = [
   ['dauntless', 'POST', /^\/inventory\/?$/, (c) => {
     const p = playerFor(c.req);
     const b = c.body || {};
+    // DF-LOADOUT-SLOT: the game pays for a Slayer's Path loadout node here and asks for the new slot right after,
+    // but saves the node itself only with its next full path save (up to 30 s later). Record the node now.
+    { const ls = /^PJM Unlock: (LoadoutSlot_0[1-5])$/.exec(String(b.source || ''));
+      if (ls) { const m = pjmOf(p); const n = m.nodes[ls[1]]; if (!n || n.node_status !== 2) m.nodes[ls[1]] = Object.assign({ node_id: ls[1], objectives: [] }, n || {}, { node_status: 2 }); } }
     const transaction=typeof b.transactionId==='string'&&b.transactionId.length<=128?b.transactionId:null;
     const digest=crypto.createHash('sha256').update(JSON.stringify(b)).digest('hex');
     const history=p.inventoryTransactions||[];

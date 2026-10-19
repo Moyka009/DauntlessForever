@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-19",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.zip",
-                         "sha256":  "10cb36a39a94652896c5d1b732d8e2b4f9cb3d09f187056650f3ab0abb28675e",
+                         "packageVersion":  "2026-10-19.2",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.2.zip",
+                         "sha256":  "cb4b6758705ab211a57be5900eec17c68b4d3939db1b6e074acbf399c72d7ec5",
                          "date":  "2026-10-19",
-                         "note":  "Parties: whole party goes to hunts and back to Ramsgate with the leader, training grounds for 4, no more airship loop. Bigger Trials shop, item expiry, loadouts fix, Free platinum rule, startup messages, crash guard (KombatKing fixes)"
+                         "note":  "Loadout slots appear right after unlocking them on the Slayer\u0027s Path"
                      }
                  ],
     "launcher":  {

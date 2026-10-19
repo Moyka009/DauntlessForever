@@ -109,8 +109,9 @@ function create(ctx){
   }
   if(!['POST','PUT'].includes(c.method))return null;
   if(parts.length===4&&parts[2]==='unlock'){
-   const n=/^(0|[1-9]\d*)$/.test(parts[3])?Number(parts[3]):-1;
-   if(!integer(n,PATH_SLOTS)||n>Math.max(earned(p),rec.c.num_character_slots))fail(409,'Character slots have not been unlocked on the Slayer Path');
+   // DF-LOADOUT-SLOT: the game sends the total slot count it now expects (account slots + Path slots).
+   const n=/^(0|[1-9]\d*)$/.test(parts[3])?Number(parts[3]):-1,want=n-rec.c.num_account_slots;
+   if(!integer(n,MAX)||want>Math.max(earned(p),rec.c.num_character_slots))fail(409,'Character slots have not been unlocked on the Slayer Path');
    if(rec.changed)persist(p,character,rec,true);return ok(rec.c);
   }
   if(parts.length===4&&parts[2]==='active'){
