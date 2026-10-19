@@ -180,6 +180,8 @@ async function answerJoin(r) {
     const refused = hostModeHooks ? hostModeHooks.refuse(r.from, isFriend) : '';
     if (refused) { await call('POST', '/v1/join/answer', { reqId: r.reqId, error: refused }); ctx.log(`Host Mode: did not let ${r.name} in (${refused})`); return; }
     if (closing) { await call('POST', '/v1/join/answer', { reqId: r.reqId, error: 'That game is closing.' }); return; }
+    const filesBad = filesProblem(h.v.id, filesState(h.v), r);
+    if (filesBad) { await call('POST', '/v1/join/answer', { reqId: r.reqId, error: filesBad }); ctx.log(`Friends: did not let ${r.name} in: ${filesBad}`); return; }
     // one account on this PC's backend per friend, kept in data\friend_accounts.json (never shared with anyone else)
     const file = path.join(h.v.dataDir, 'data', 'friend_accounts.json');
     // a friend who presses Join while this game is still starting: wait for the backend (up to 2 minutes)
@@ -306,6 +308,8 @@ async function poll() {
       public: !!h && hostPublicVersion === h.v.id, region: h ? regionOf(h.relay.ip) : '', inGame,
       closingIn: h && closing ? Math.max(1, Math.ceil((closing.until - Date.now()) / 1000)) : 0,
       ...(h && hostModeHooks ? hostModeHooks.heartbeat(h.v.id) : {}),   // Host Mode: {hostMode, server, max}
+      ...filesFields(filesState(h ? h.v : (playing ? ctx.byId(playing) : null))),   // DF-FILES: server files number and game folder check
+      launcher: launcherVersion(),
     });
     lastError = '';
     guestSideClosing();
@@ -337,6 +341,47 @@ async function poll() {
 const SEARCH_MS = 40000;
 const allowRandoms = () => { try { return settings.load().allowRandoms !== false; } catch { return true; } };   // on unless the player unticked it
 const sleep = (ms) => new Promise(res => setTimeout(res, ms));
+
+// ------------------------------------------------------------------ server files check (DF-FILES, Oct 19)
+// What this PC runs for a version: the server files number, and whether every file Set up put in the game folder
+// (loader dxgi.dll, server DLL, EOSSDK, paks) is the one those server files expect (same check as Settings ->
+// "What you are running"). Sent in the heartbeat (dashboard) and with join requests: the host refuses a player whose
+// number differs or whose game folder has swapped files, and the other way round. "Keep my server files" (modders)
+// is reported, not refused. Hashes are cached per file (size + time), so the 20 s poll stays cheap.
+const hashCache = new Map();
+function fileHash(file) {
+  let st; try { st = fs.statSync(file); } catch { return ''; }
+  const k = file + '|' + st.size + '|' + st.mtimeMs, c = hashCache.get(file);
+  if (c && c.k === k) return c.h;
+  const h = V.sha256(file) || ''; hashCache.set(file, { k, h }); return h;
+}
+function filesState(v) {
+  if (!v || !v.package) return null;
+  const out = { pkg: V.installedPackageVersion(v) || '', kept: false, changed: [] };
+  try { out.kept = !!settings.load().keepServerFiles; } catch {}
+  const gameDir = V.knownGameDir(v);
+  if (gameDir) for (const f of v.package.installedFiles || []) {
+    const have = fileHash(path.join(gameDir, f.rel));
+    if (!have || have.toUpperCase() !== String(f.sha256).toUpperCase()) out.changed.push(path.basename(f.rel));
+  }
+  out.ok = !out.changed.length;
+  return out;
+}
+const filesFields = (f) => (f ? { pkg: f.pkg, pkgOk: f.ok, pkgChanged: f.changed.slice(0, 8), pkgKept: f.kept } : {});
+const launcherVersion = () => { try { return require('electron').app.getVersion(); } catch { return ''; } };
+const pkgNum = (x) => { const m = /^(\d{4})-(\d{2})-(\d{2})\.(\d+)$/.exec(String(x || '')); return m ? Number(m[1] + m[2] + m[3]) * 1000 + Number(m[4]) : 0; };
+// why this host and that player cannot play together, or '' (who: 'you' = the player asking, from the host's side)
+function filesProblem(version, host, guest) {
+  if (!host || !guest || !guest.pkg) return '';   // an older launcher reports nothing: let it in
+  if (host.kept || guest.pkgKept) return '';      // "Keep my server files": the players chose that themselves
+  if (guest.pkgOk === false) return `Your ${version} game folder has changed files (${(guest.pkgChanged || []).join(', ') || 'unknown'}). In the launcher, press Set up for ${version} to put the right ones back, then join again.`;
+  if (!host.ok) return `The host's ${version} game folder has changed files (${host.changed.join(', ')}). The host needs to press Set up for ${version} in their launcher.`;
+  if (host.pkg && guest.pkg !== host.pkg) {
+    const older = pkgNum(guest.pkg) < pkgNum(host.pkg) ? 'You have the older ones: restart your launcher to update' : 'The host has the older ones: they need to restart their launcher to update';
+    return `Your ${version} server files (${guest.pkg}) are not the host's (${host.pkg}). ${older}, then join again.`;
+  }
+  return '';
+}
 // Host a version: friends only, or open to everyone (pub: Play online, or "Allow randoms" ticked)
 function startHost(versionId, pub) {
   if (!onlineOn()) throw new Error(onlineOffMessage() + ' Solo play still works.');
@@ -393,7 +438,7 @@ async function playOnline(versionId) {
       if (!g) { push(); await sleep(4000); continue; }
       me.tried.add(g.id); me.phase = 'asking'; me.host = g.hostMode && g.server ? g.server : g.name; push();
       let r;
-      try { r = await call('POST', '/v1/join', { host: g.id }); } catch (e) { me.phase = 'searching'; ctx.log(`Play online: ${g.name}: ${e.message}`); continue; }
+      try { r = await call('POST', '/v1/join', { host: g.id, ...filesFields(filesState(ctx.byId(versionId))) }); } catch (e) { me.phase = 'searching'; ctx.log(`Play online: ${g.name}: ${e.message}`); continue; }
       const w = waitingJoin = { reqId: r.reqId, host: g.id, hostName: g.name, version: versionId, since: Date.now(), fromSearch: true, public: true };
       setTimeout(poll, 500);
       while (search === me && waitingJoin === w) await sleep(500);
@@ -486,7 +531,11 @@ function init(c) {
     if (!f || f.status !== 'hosting') throw new Error('That friend is not hosting right now.');
     const v = ctx.byId(f.version);
     if (!v) throw new Error(`You need Dauntless ${f.version} installed to join them.`);
-    const r = await call('POST', '/v1/join', { host: hostId });
+    // DF-FILES: say it now when this PC and the host cannot play together (the host checks again)
+    const mineF = filesState(v);
+    const bad = f.pkg ? filesProblem(f.version, { pkg: f.pkg, ok: f.pkgOk !== false, changed: [], kept: !!f.pkgKept }, filesFields(mineF)) : '';
+    if (bad && !/host's .* game folder/.test(bad)) throw new Error(bad);
+    const r = await call('POST', '/v1/join', { host: hostId, ...filesFields(mineF) });
     waitingJoin = { reqId: r.reqId, host: hostId, hostName: f.name, version: f.version, since: Date.now() };
     setTimeout(poll, 500);
   }));
