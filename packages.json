@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-19.9",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.9.zip",
-                         "sha256":  "f9e69223849cdf4b03ceb5af7256dbbfc4ca371301bdc2905c754c501ece01b1",
+                         "packageVersion":  "2026-10-19.10",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.10.zip",
+                         "sha256":  "e3fa87b17372035572c3b63a52c2c8becb2284cf83da5ac062a1ba1c986e6e83",
                          "date":  "2026-10-19",
-                         "note":  "Game language setting works for 1.14.7 too"
+                         "note":  "Slayer copy now brings behemoth part materials"
                      }
                  ],
     "launcher":  {

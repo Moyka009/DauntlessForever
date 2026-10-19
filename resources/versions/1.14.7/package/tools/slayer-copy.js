@@ -32,7 +32,7 @@ const DATAFILE = path.join(__dirname, 'slayer-copy-data.json'); // what a new Sl
 const DB162 = path.join(R162, 'data', 'undaunted.db');
 const ITEMS162 = path.join(R162, 'tools', 'items.js');
 const DEFAULT_EPIC = 'd211000000000000000000000000e91c';            // the offline sign-in's built-in id
-const SKIP = [/^CURRENCY_PJM_PRESTIGE_/, /^TOKEN_.*PROGRESSION/, /^BREAK_/, /^PJM_/];   // per-version progress, never copied as items
+const SKIP = [/^CURRENCY_PJM_PRESTIGE_/, /^TOKEN_.*PROGRESSION/, /^PJM_/];   // per-version progress, never copied as items (BREAK_ part materials are copied: Moyka009, Oct 19)
 const MAXQ = 99999999;
 // 1.6.2 quest lines (from its game data and saves); a 1.14.7 line not in this list (or in any 1.6.2 save on this PC) is parked
 const KNOWN162 = /^SERIE_(archon_tutorial_test|cr19_[a-z0-9_]+|cr20_pjm_quests|exotic|faction_[a-z0-9_]+|season_(0[0-9]|1[0-3])[a-z]?)$/;
