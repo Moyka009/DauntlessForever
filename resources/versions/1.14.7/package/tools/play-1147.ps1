@@ -68,6 +68,7 @@ $psi.EnvironmentVariables['USERPROFILE']     = $HomeDir
 $psi.EnvironmentVariables['LOCALAPPDATA']    = "$HomeDir\AppData\Local"
 $psi.EnvironmentVariables['APPDATA']         = "$HomeDir\AppData\Roaming"
 $psi.EnvironmentVariables['EOS_OFFLINE_DIR'] = $EosDir
+Add-GameMods $psi   # launcher Mods page: UE4SS (-dfmods) and the Boss Health Bar
 $startTime = Get-Date
 $p = [Diagnostics.Process]::Start($psi)
 Say ''

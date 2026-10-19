@@ -72,7 +72,9 @@ else {
 Say '2/3 Starting the game server. This takes about a minute, please wait...'
 $serverPs1 = Join-Path $PSScriptRoot 'server-1147.ps1'
 $srvStyle = if ($NoGame) { 'Hidden' } else { 'Minimized' }   # Host Mode: nothing to close by accident
+Set-ServerMods   # launcher Mods page: "Also run mods on my servers"
 $srvWin = Start-Process -FilePath 'powershell.exe' -ArgumentList @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', ('"' + $serverPs1 + '"'), '-Run') -WindowStyle $srvStyle -PassThru
+$env:D1147_SERVER_MODS = $null
 $marker = Join-Path $dataDir 'server.json'
 $t0 = Get-Date; $dots = 0
 while (-not (Test-Path -LiteralPath $marker)) {

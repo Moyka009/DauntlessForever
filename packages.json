@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-19.10",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.10.zip",
-                         "sha256":  "e3fa87b17372035572c3b63a52c2c8becb2284cf83da5ac062a1ba1c986e6e83",
+                         "packageVersion":  "2026-10-19.11",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.11.zip",
+                         "sha256":  "936a947466aa87fd77c6c2587bc7ba5a7b5d3b58d65a03390b3fcd2839347c4f",
                          "date":  "2026-10-19",
-                         "note":  "Slayer copy now brings behemoth part materials"
+                         "note":  "Modded mode (test): UE4SS mods and a Boss Health Bar from the launcher\u0027s Mods page"
                      }
                  ],
     "launcher":  {

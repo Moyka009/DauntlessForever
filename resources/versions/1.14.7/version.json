@@ -8,6 +8,7 @@
     "warning":  "Experimental. 1.14.7 is much less complete than 1.6.2: expect missing features, odd behaviour and the occasional crash. Play 1.6.2 for the full experience.",
     "works":  [
                   "Sign in offline, Ramsgate, NPCs and quests (quest progress is saved)",
+                  "Modded mode (test): UE4SS mods and a Boss Health Bar (behemoth and part health) from the launcher\u0027s Mods page: Get UE4SS, then Modded mode On",
                   "Quest and dialogue text (fix by KombatKing)",
                   "Hunt quests (kills on the right island count)",
                   "Potions, lanterns, Omnicells and weapon specials (equipment fix by KombatKing, test build)",
@@ -36,7 +37,7 @@
                  },
     "package":  {
                     "dir":  "package",
-                    "packageVersion":  "2026-10-19.10",
+                    "packageVersion":  "2026-10-19.11",
                     "setup":  "tools/setup.ps1",
                     "uninstallArgs":  [
                                           "-Uninstall"
@@ -60,7 +61,7 @@
                                            },
                                            {
                                                "rel":  "Archon/Binaries/Win64/dxgi.dll",
-                                               "sha256":  "BAA606152802B1AEDAC17A45C8C613511383B2C87DDC2D927A9D2C185FBE3222"
+                                               "sha256":  "A881F5EBEDE88C14CE05D30E162ACAA9B6DA68DE40584B49841CAC32A2E43897"
                                            },
                                            {
                                                "rel":  "Archon/Content/Paks/zzzzzzzzzzzzzzzz_QuestDialogueFallback1147_P.pak",

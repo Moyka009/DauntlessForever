@@ -25,6 +25,10 @@ network tools) and Startup Messages R1 (moved into the dxgi.dll loader). Merged 
 Full source: source\KombatKing-1147-Oct18-source.zip.
 tools\catalog-1147.json (the 1.14.7 item catalog used by tools\slayer-copy.js) is from KombatKing's Inventory Search, AGPL-3.0-only.
 
+Modded mode (Oct 19, 2026, Addison2k): tools\ue4ss.cjs and the Boss Health Bar plus UE4SS loading in bin\dxgi.dll.
+Full source: source\Loader1147-Mods-source.zip. UE4SS itself (RE-UE4SS, MIT licence, https://github.com/UE4SS-RE/RE-UE4SS)
+is not included: the Mods page downloads the official v3.0.1 release when you press Get UE4SS.
+
 WHAT THE LICENCE ASKS OF ANYONE WHO REUSES THIS
   You may copy, change and share this work under the GNU Affero General Public License v3.0 (AGPL-3.0-only).
   If you pass it on, changed or not, or run a changed version for other people over a network, you must:

@@ -10,7 +10,7 @@ $ConfigFile = Join-Path $Root 'config.json'
 $ExeHash      = 'F3F95FBF22709EF077A11632ED95D675B7209B7E0172D9ECB9BA7D02A1FBB66B'   # Dauntless 1.14.7, CL 647472
 $EpicEosHash  = 'CBC0E5C922CEB88A9FA99121008AE9CD76244B17753701D9D25C6B596EA2FBFC'   # Epic's EOSSDK-Win64-Shipping.dll
 $StandInHash  = '4113C9EEBFBAC08532B6566A48F69E4F64A6B8E18A18AAFBA43F62F8F7DFDF70'   # bin\EOSSDK-Win64-Shipping.dll (offline sign-in)
-$LoaderHash   = 'BAA606152802B1AEDAC17A45C8C613511383B2C87DDC2D927A9D2C185FBE3222'    # bin\dxgi.dll (server loader: fix5 + KombatKing's equipment fix R1 + owner-only replication; client: significance guard)
+$LoaderHash   = 'A881F5EBEDE88C14CE05D30E162ACAA9B6DA68DE40584B49841CAC32A2E43897'    # bin\dxgi.dll (server loader: fix5 + KombatKing's equipment fix R1 + owner-only replication; client: significance guard)
 # Quest text fix by KombatKing (AGPL-3.0, source\QuestDialogue1147-R2-source.zip): adds the missing "Unspecified"
 # addressee lines to the game's own text, so quests and dialogue show real sentences. Copied into Archon\Content\Paks.
 $QuestPakName = 'zzzzzzzzzzzzzzzz_QuestDialogueFallback1147_P.pak'
@@ -171,4 +171,49 @@ function Add-GameLanguage([string]$GameArgs) {
     if (-not $lang) { return $GameArgs }
     Say "Game language: $lang" 'Gray'
     return ($GameArgs -replace '\s*-epiclocale=\S+', '') + " -epiclocale=$lang -CULTURE=$lang"
+}
+
+# --- Modded mode (launcher Mods page; tools\ue4ss.cjs writes data\mods.txt)
+# mods=on: the game gets -dfmods (the loader then loads ue4ss\UE4SS.dll) and the Boss Health Bar (bossbar=on, the default);
+# servers=on: the server copies load UE4SS too (D1147_SERVER_MODS=1).
+function Get-ModsMode {
+    $m = @{ On = $false; Servers = $false; BossBar = $true }
+    try {
+        foreach ($l in @(Get-Content -LiteralPath (Join-Path $Root 'data\mods.txt') -ErrorAction Stop)) {
+            $t = $l.Trim().ToLower()
+            if ($t -eq 'mods=on') { $m.On = $true }
+            if ($t -eq 'servers=on') { $m.Servers = $true }
+            if ($t -eq 'bossbar=off') { $m.BossBar = $false }
+        }
+    } catch {}
+    if (-not $m.On) { $m.Servers = $false; $m.BossBar = $false }
+    return $m
+}
+# Runs "ue4ss.cjs prepare" (consoles hidden, an old dwmapi.dll proxy moved aside). True when UE4SS is ready to load.
+function Invoke-ModsPrepare {
+    $nd = $null
+    try { $nd = (Get-Config).Node } catch {}
+    if (-not $nd -or -not (Test-Path -LiteralPath $nd)) { $nd = Find-Node }
+    if (-not $nd) { return $false }
+    try {
+        $r = (& $nd (Join-Path $PSScriptRoot 'ue4ss.cjs') prepare | Out-String) | ConvertFrom-Json
+        if ($r.ok -and $r.on) { return $true }
+        if ($r.error) { Say "Mods: $($r.error) UE4SS mods are off this time." 'Yellow' }
+    } catch { Say 'Mods: could not get UE4SS ready. UE4SS mods are off this time.' 'Yellow' }
+    return $false
+}
+# For the game process: -dfmods when UE4SS is ready, the Boss Health Bar switch, and the loader's log folder (logs\client.log)
+function Add-GameMods($psi) {
+    $m = Get-ModsMode
+    if (-not $m.On) { return }
+    $psi.EnvironmentVariables['D1147_DIR'] = $Root
+    if ($m.BossBar) { $psi.EnvironmentVariables['D1147_CLIENT_BOSSBAR'] = '1'; Say 'Modded mode: Boss Health Bar on (windowed or borderless window mode).' 'Gray' }
+    if (Invoke-ModsPrepare) { $psi.Arguments = "$($psi.Arguments) -dfmods"; Say 'Modded mode: UE4SS mods on (their windows stay hidden; Ctrl+O shows UE4SS).' 'Gray' }
+}
+# For the server copies (set before the server window starts; it passes its environment on)
+function Set-ServerMods {
+    $m = Get-ModsMode
+    $on = $m.On -and $m.Servers -and (Invoke-ModsPrepare)
+    $env:D1147_SERVER_MODS = if ($on) { '1' } else { $null }
+    if ($on) { Say 'Modded mode: your servers load UE4SS mods too.' 'Gray' }
 }
