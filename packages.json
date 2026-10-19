@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-19.7",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.7.zip",
-                         "sha256":  "1bbc8328649befc3089637ce533327c7d5eab6177b647f42434d0609fd0c70d4",
+                         "packageVersion":  "2026-10-19.8",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.8.zip",
+                         "sha256":  "48799e3c0b294db08a3bb0dc1d4ce8c88646b05d673a4b3d0faf000dd0f45265",
                          "date":  "2026-10-19",
-                         "note":  "Slayer copy: makes your 1.14.7 Slayer if you have none, brings loadouts with cells and dyes, fixes quests"
+                         "note":  "Leftover 1.14.7 programs on its ports are closed by themselves: no more PC restarts"
                      }
                  ],
     "launcher":  {

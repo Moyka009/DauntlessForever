@@ -53,7 +53,12 @@ $hostIp = $Matches[1]; $relayPort = if ($Matches[2]) { [int]$Matches[2] } else {
 $proxy = $null
 $gameHost = $hostIp
 if ($relayPort) {
-    if (Test-Recorder) { Fail 'Dauntless 1.14.7 is still running on THIS PC (its backend answers). Close PLAY here first, then join again.' }
+    # a backend that answers while no game or server copy runs here is a leftover: close it (DF-PORTS-1147, Oct 19)
+    if (Test-Recorder) {
+        if (@(Get-PlayerGame).Count -gt 0 -or @(Get-ServerCopies).Count -gt 0) { Fail 'Dauntless 1.14.7 is still running on THIS PC (its backend answers). Close PLAY here first, then join again.' }
+        Say 'Closing a 1.14.7 backend left over from an earlier run...'
+    }
+    [void](Clear-Ports1147)
     $node0 = $cfg.Node; if (-not $node0 -or -not (Test-Path -LiteralPath $node0)) { $node0 = Find-Node }
     if (-not $node0) { Fail 'Node.js from set-up is missing. Run "1 - SETUP.bat" again.' }
     $ready = Join-Path $DataDir 'join-proxy.json'

@@ -40,6 +40,11 @@ $left = Get-ServerCopies
 if ($left.Count -gt 0) { Say "Closing $($left.Count) leftover server copy(ies) from last time..."; foreach ($c in $left) { Stop-Process -Id $c.ProcessId -Force -ErrorAction SilentlyContinue }; Start-Sleep -Seconds 2 }
 foreach ($f in @('server.json', 'server_hunt.json', 'wanted.json')) { $fp = Join-Path $dataDir $f; if (Test-Path -LiteralPath $fp) { Remove-Item -LiteralPath $fp -Force } }
 
+# --- leftovers on this package's ports (a backend from an earlier run or another copy, a join helper): close them
+#     instead of asking for a PC restart. This copy's own running backend is kept. (DF-PORTS-1147, Oct 19)
+$keepOwn = if (Test-Recorder) { $Root } else { '' }
+[void](Clear-Ports1147 -KeepFrom $keepOwn)
+
 # --- 1. backend
 $recorder = Join-Path $Root 'backend\recorder-1147.js'
 $recProc = $null
@@ -56,7 +61,7 @@ else {
     }
     $t0 = Get-Date
     while (-not (Test-Recorder)) {
-        if ($recProc.HasExited) { Fail "the local backend stopped right away. Another program may be using ports 63000-63027. Restart the PC and try again." }
+        if ($recProc.HasExited) { Fail "the local backend stopped right away. If this keeps happening, run STOP (if something got stuck).bat in the 1.14.7 folder, then try again." }
         if (((Get-Date) - $t0).TotalSeconds -gt 30) { Fail 'the local backend did not start within 30 seconds.' }
         Start-Sleep -Milliseconds 500
     }

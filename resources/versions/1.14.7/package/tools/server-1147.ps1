@@ -55,6 +55,8 @@ if ($Stop) {
         $fp = Join-Path $dataDir $f
         if (Test-Path -LiteralPath $fp) { Remove-Item -LiteralPath $fp -Force; Write-Host "Cleared data\$f" }
     }
+    # DF-PORTS-1147: also anything of 1.14.7 left on its ports (a backend or join helper, from any copy of the package)
+    if (-not $Run) { $n = Clear-Ports1147 -NoFail; if ($n) { Write-Host "Closed $n leftover 1.14.7 program(s) on its ports." } }
     $left = @(Get-Process Dauntless-Win64-Shipping -ErrorAction SilentlyContinue)
     Write-Host ("Dauntless processes still running: " + $left.Count + $(if ($left.Count) { " (your own game window)" } else { "" })) -ForegroundColor Green
     if (-not $Run) { exit 0 }

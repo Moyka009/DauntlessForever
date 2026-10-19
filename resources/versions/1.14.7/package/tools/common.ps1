@@ -68,6 +68,67 @@ function Get-PlayerGame {
         Where-Object { $_.CommandLine -notmatch '(^|\s)-server(\s|$)' })
 }
 
+# DF-PORTS-1147 (Oct 19): the ports this package uses are the backend's TCP 63000-63027 and the game servers' UDP
+# 8780-8787. Something left on them from an earlier run (a backend or join helper that did not close, a server copy,
+# or the same from another copy of this package, e.g. the old DauntlessOffline folder) used to need a PC restart.
+# Clear-Ports1147 closes those (only 1.14.7 programs: node.exe running one of this package's scripts, or the game
+# started with -server), names any other program, and says how to fix a port Windows has reserved.
+#   -KeepFrom <folder>: leave this package's own programs from that folder running (its backend is in use).
+#   -NoFail: only close our leftovers, never stop the script (STOP and the launcher's Stop everything).
+$Ports1147Tcp = 63000..63027
+$Ports1147Udp = 8780..8787
+function Test-PortReserved1147([int[]]$Ports) {
+    try { $out = & netsh int ipv4 show excludedportrange protocol=tcp 2>$null } catch { return $null }
+    foreach ($line in @($out)) {
+        if ($line -match '^\s*(\d+)\s+(\d+)') { $a = [int]$Matches[1]; $b = [int]$Matches[2]; foreach ($p in $Ports) { if ($p -ge $a -and $p -le $b) { return "$a-$b" } } }
+    }
+    return $null
+}
+function Get-PortOwners1147 {
+    $owners = @{}
+    try { foreach ($c in @(Get-NetTCPConnection -State Listen -ErrorAction Stop | Where-Object { $_.LocalPort -ge 63000 -and $_.LocalPort -le 63027 })) { if ($c.OwningProcess -gt 4) { $owners[[int]$c.OwningProcess] = "TCP $($c.LocalPort)" } } } catch {}
+    try { foreach ($c in @(Get-NetUDPEndpoint -ErrorAction Stop | Where-Object { $_.LocalPort -ge 8780 -and $_.LocalPort -le 8787 })) { if ($c.OwningProcess -gt 4) { $owners[[int]$c.OwningProcess] = "UDP $($c.LocalPort)" } } } catch {}
+    return $owners
+}
+function Clear-Ports1147([string]$KeepFrom = '', [switch]$NoFail) {
+    $owners = Get-PortOwners1147
+    $closed = 0
+    foreach ($id in @($owners.Keys)) {
+        $w = Get-CimInstance Win32_Process -Filter "ProcessId=$id" -ErrorAction SilentlyContinue
+        $pname = if ($w) { $w.Name } else { "process $id" }
+        $cmd = if ($w -and $w.CommandLine) { $w.CommandLine } else { '' }
+        $ours = ($pname -eq 'node.exe' -and $cmd -match '(recorder-1147|join-proxy-1147|df-gateway-1147)\.js') -or
+                ($pname -eq 'Dauntless-Win64-Shipping.exe' -and $cmd -match '(^|\s)-server(\s|$)')
+        if ($ours) {
+            if ($KeepFrom -and $cmd.ToLower().Contains($KeepFrom.ToLower())) { continue }
+            $what = if ($pname -eq 'node.exe') { 'a 1.14.7 backend or join helper' } else { 'a 1.14.7 game server copy' }
+            Say "    Closing $what left over from an earlier run (port $($owners[$id]), process $id)." 'Yellow'
+            Stop-Process -Id $id -Force -ErrorAction SilentlyContinue
+            $closed++
+        } elseif (-not $NoFail) {
+            $where = if ($w -and $w.ExecutablePath) { $w.ExecutablePath } else { $pname }
+            Fail "port $($owners[$id]) is used by another program: $where`n         Close that program (also from the system tray next to the clock), then try again."
+        }
+    }
+    if ($closed) {
+        Start-Sleep -Seconds 2
+        if (-not $NoFail) {
+            $still = Get-PortOwners1147
+            foreach ($id in @($still.Keys)) {
+                $w = Get-CimInstance Win32_Process -Filter "ProcessId=$id" -ErrorAction SilentlyContinue
+                if (-not ($KeepFrom -and $w -and $w.CommandLine -and $w.CommandLine.ToLower().Contains($KeepFrom.ToLower()))) {
+                    Fail "port $($still[$id]) is still in use after closing the leftovers. Wait a minute and try again; if it stays, restart the PC."
+                }
+            }
+        }
+    }
+    if (-not $NoFail) {
+        $r = Test-PortReserved1147 $Ports1147Tcp
+        if ($r) { Fail "Windows has reserved the ports $r (this happens with Hyper-V, WSL or Docker), so the 1.14.7 backend cannot use them.`n         Fix: right-click Start > Terminal (Admin) or Windows PowerShell (Admin), run:  net stop winnat; net start winnat`n         then try again." }
+    }
+    return $closed
+}
+
 # KK-AUTO-LOG-CLEANUP-1147-R1 (KombatKing, AGPL-3.0-only): old run logs and log zips are removed when a tool
 # starts and the local backend is not running. Keeps the newest five of each kind and everything from the last 24 hours.
 & {
