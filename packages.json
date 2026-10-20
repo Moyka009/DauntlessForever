@@ -2,11 +2,11 @@
     "packages":  [
                      {
                          "id":  "1.6.2",
-                         "packageVersion":  "2026-10-18.2",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-18.2.zip",
-                         "sha256":  "ebac89b6e2d5612cb962ada9c179f49da07c925d4ed9d974a22decc35aa4efbb",
-                         "date":  "2026-10-18",
-                         "note":  "Every hairstyle, beard, hair colour and face paint is unlocked in the appearance menu"
+                         "packageVersion":  "2026-10-19",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-19.zip",
+                         "sha256":  "7d0bf1c1717e99059076113d008cfa6264e7200f696b372a2baae70c5b194c6c",
+                         "date":  "2026-10-19",
+                         "note":  "Reserved UDP game ports detected before play"
                      },
                      {
                          "id":  "1.14.7",

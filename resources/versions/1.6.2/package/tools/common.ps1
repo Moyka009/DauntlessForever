@@ -62,8 +62,8 @@ function Get-ListenerPid([int]$Port) {
 function Test-UdpPort([int]$Port) { [bool](Get-NetUDPEndpoint -LocalPort $Port -ErrorAction SilentlyContinue) }
 
 # True when Windows has reserved this TCP port (Hyper-V, WSL, Docker): nothing owns it, but no program may open it.
-function Test-PortReserved([int]$Port) {
-    try { $out = & netsh int ipv4 show excludedportrange protocol=tcp 2>$null } catch { return $false }
+function Test-PortReserved([int]$Port, [string]$Protocol = 'tcp') {
+    try { $out = & netsh int ipv4 show excludedportrange protocol=$Protocol 2>$null } catch { return $false }
     foreach ($l in @($out)) { if ("$l" -match '^\s*(\d+)\s+(\d+)') { if ($Port -ge [int]$Matches[1] -and $Port -le [int]$Matches[2]) { return $true } } }
     return $false
 }
@@ -108,6 +108,12 @@ function Clear-DauntlessPorts([int[]]$TcpPorts = @(), [int[]]$UdpPorts = @()) {
     foreach ($port in $TcpPorts) {
         if (Test-PortReserved $port) {
             Fail "Windows has reserved port $port (this happens with Hyper-V, WSL or Docker), so the backend cannot use it.`n         Fix: right-click Start > Terminal (Admin) or Windows PowerShell (Admin), run:  net stop winnat; net start winnat`n         then try again."
+        }
+    }
+    # DF-FIX4: the game servers' UDP ports can be reserved too; Ramsgate may work while every hunt searches forever
+    foreach ($port in $UdpPorts) {
+        if (Test-PortReserved $port 'udp') {
+            Fail "Windows has reserved the UDP game port $port (Hyper-V, WSL or Docker), so hunts would search forever: the hunt server cannot open its port.`n         Fix: right-click Start > Terminal (Admin) or Windows PowerShell (Admin), run:  net stop winnat; net start winnat`n         If it comes back after a restart, also run:  netsh int ipv4 add excludedportrange protocol=udp startport=8770 numberofports=8 store=persistent`n         then try again."
         }
     }
 }
