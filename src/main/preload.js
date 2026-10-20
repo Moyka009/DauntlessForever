@@ -33,6 +33,7 @@ contextBridge.exposeInMainWorld('launcher', {
   openVersionFolder: invoke('open:versionFolder'),
   openGameFolder: invoke('open:gameFolder'),
   openLogs: invoke('open:logs'),
+  fixFirewall: invoke('fix:firewall'),
   readme: invoke('read:readme'),
   onLog: on('log:line'),
   onDownloadProgress: on('download:progress'),

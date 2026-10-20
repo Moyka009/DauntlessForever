@@ -33,7 +33,7 @@ function download(v, outDir, onProgress, onLine) {
     const args = ['download', v.download.manifestUrl, '--base-url', BASE_URL, '--output', outDir, '--concurrency', '16'];
     const child = spawn(toolPath(), args, { windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'] });
     active.set(v.id, child);
-    let summary = '', failed = null, lastErrLine = '', errorLine = '';
+    let summary = '', failed = null, total = null, lastErrLine = '', errorLine = '';
     // e.g. "Downloading  45% |████    | (994 MB/12 GB, 272 MB/s) [3s:40s]"  or  "(12/12 GB, 260 MB/s)" (unit once)
     const re = /(\d{1,3})%.*?\(([\d.]+(?:\s*[KMGT]?i?B)?)\s*\/\s*([\d.]+\s*[KMGT]?i?B)(?:,\s*([^)\]]+))?\)(?:\s*\[([^\]]*)\])?/;
     child.stderr.on('data', (d) => {
@@ -61,9 +61,10 @@ function download(v, outDir, onProgress, onLine) {
         if (!l.trim()) continue;
         onLine(l.trim(), false);
         const f = /failed:\s*(\d+)/.exec(l); if (f) failed = +f[1];
+        const c = /Chunks:\s*(\d+)/.exec(l); if (c) total = +c[1];
       }
     });
-    child.on('exit', (code) => { active.delete(v.id); resolve({ code: code == null ? 1 : code, failed, summary, lastErrLine, errorLine }); });
+    child.on('exit', (code) => { active.delete(v.id); resolve({ code: code == null ? 1 : code, failed, total, summary, lastErrLine, errorLine }); });
     child.on('error', (e) => { active.delete(v.id); resolve({ code: 1, error: 'Could not start the download tool: ' + e.message }); });
   });
 }

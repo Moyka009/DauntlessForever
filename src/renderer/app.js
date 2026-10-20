@@ -877,7 +877,16 @@ function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<':
 function addLog(id, line, isErr) {
   (logs[id] = logs[id] || []).push({ line, isErr });
   if (logs[id].length > 400) logs[id].splice(0, logs[id].length - 400);
+  if (busy[id] === 'play') noteHuntFailure(id, line);
   if (id === selected) { $('log').hidden = false; renderLog(id); if (busy[id] === 'setup' && setupAuto[id] && kindOf(line)) $('p-foot').textContent = kindOf(line); }
+}
+// DF-FIX4: a hunt server that could not start (ports, antivirus, timeout) is explained under the Play button
+const huntFailed = {};   // id -> reason
+function noteHuntFailure(id, line) {
+  const m = /^HUNT SERVER FAILED:\s*(.+)$/.exec(String(line || '').trim());
+  if (!m) return;
+  huntFailed[id] = m[1];
+  if (id === selected) { const n = $('action-note'); n.textContent = t('A hunt could not start: {reason}', { reason: m[1] }); n.className = 'action-note err'; }
 }
 function kindOf(line) { const ln = String(line || '').trim(); return ln && !/^=+/.test(ln) ? ln.slice(0, 120) : ''; }
 function renderLog(id) {
@@ -935,10 +944,12 @@ async function runSetup(v, uninstall, auto) {
 }
 async function play(v) {
   busy[v.id] = 'play'; logs[v.id] = []; renderShelf(); renderDetail();
+  delete huntFailed[v.id];
   const r = await L.play(v.id);
   busy[v.id] = null;
   await refresh(v.id);
   if (!r.ok && r.error) { const n = $('action-note'); n.textContent = tm(r.error); n.className = 'action-note err'; }
+  else if (huntFailed[v.id]) { const n = $('action-note'); n.textContent = t('A hunt could not start: {reason}', { reason: huntFailed[v.id] }); n.className = 'action-note err'; }
 }
 // ---------------------------------------------------------------- Slayer copy (1.14.7 tools\slayer-copy.js)
 let scBusy = false;
@@ -1104,6 +1115,13 @@ function wire() {
     }
     if (act === 'opengame') L.openGameFolder(v.id);
     if (act === 'openver') L.openVersionFolder(v.id);
+    if (act === 'firewall') {
+      const n = $('action-note'); n.textContent = t('Adding Windows Firewall rules (Windows asks for permission once)...'); n.className = 'action-note';
+      const r = await L.fixFirewall();
+      n.textContent = r && r.ok ? t('Windows Firewall now allows the launcher, Node and the game ({count} programs). If you use another firewall or antivirus, allow "Dauntless Forever" and node.exe there too.', { count: r.count })
+        : t('Could not add the firewall rules: {error}', { error: tm(r && r.error) });
+      n.className = r && r.ok ? 'action-note' : 'action-note err';
+    }
     if (act === 'logs') { L.openLogs(v.id); const n = $('action-note'); n.textContent = t('Send the two zips in the upload folder (client_logs.zip, server_logs.zip). Your PC name and user name are blanked out in them.'); n.className = 'action-note'; }
     if (act === 'delpartial') {
       const n = $('action-note');

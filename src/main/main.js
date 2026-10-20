@@ -310,6 +310,34 @@ ipcMain.handle('open:path', (_e, p) => { if (p && fs.existsSync(p)) shell.openPa
 ipcMain.handle('open:url', (_e, u) => { if (/^https:\/\//.test(u)) shell.openExternal(u); return true; });
 ipcMain.handle('open:versionFolder', (_e, id) => { const v = byId(id); if (v) shell.openPath(v.dataDir); return true; });
 ipcMain.handle('open:gameFolder', (_e, id) => { const v = byId(id); const g = v && V.knownGameDir(v); if (g && fs.existsSync(g)) shell.openPath(g); return true; });
+// DF-FIX4: Windows Firewall allow rules for the launcher, the bundled Node and every known game exe (one admin prompt).
+// Third-party firewalls are not touched; the message tells the player what to allow there.
+ipcMain.handle('fix:firewall', async () => {
+  if (!P.IS_WIN) return { ok: false, error: 'Windows only.' };
+  const progs = [];
+  try { progs.push(['launcher', process.execPath]); } catch {}
+  const node = P.bundledNode(); if (node) progs.push(['node', node]);
+  for (const v of registry) { const g = V.knownGameDir(v); if (g && v.exeRel) { const exe = path.join(g, v.exeRel); if (fs.existsSync(exe)) progs.push([v.id + ' game', exe]); } }
+  if (!progs.length) return { ok: false, error: 'Nothing to allow yet.' };
+  const lines = [];
+  for (const [what, exe] of progs) {
+    const name = `Dauntless Forever - ${what}`;
+    const q = exe.replace(/"/g, '');
+    lines.push(`netsh advfirewall firewall delete rule name="${name}" | Out-Null`);
+    lines.push(`netsh advfirewall firewall add rule name="${name}" dir=in action=allow program="${q}" enable=yes profile=any | Out-Null`);
+    lines.push(`netsh advfirewall firewall add rule name="${name}" dir=out action=allow program="${q}" enable=yes profile=any | Out-Null`);
+  }
+  const script = lines.join('; ');
+  const inner = `-NoProfile -ExecutionPolicy Bypass -Command "${script.replace(/"/g, '\\"')}"`;
+  const outer = `Start-Process powershell.exe -Verb RunAs -Wait -WindowStyle Hidden -ArgumentList '${inner.replace(/'/g, "''")}'`;
+  log('fix:firewall', progs.map(p => p[1]).join(' | '));
+  return new Promise((resolve) => {
+    const child = require('child_process').spawn('powershell.exe', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command', outer], { windowsHide: true });
+    let err = ''; child.stderr.on('data', d => err += d);
+    child.on('exit', (code) => resolve(code === 0 ? { ok: true, count: progs.length } : { ok: false, error: /canceled|cancelled|denied/i.test(err) ? 'Windows did not get permission (the admin prompt was closed).' : (err.trim().split('\n')[0] || 'Could not add the rules.') }));
+    child.on('error', (e) => resolve({ ok: false, error: e.message }));
+  });
+});
 ipcMain.handle('open:logs', (_e, id) => { const v = byId(id); const u = v && path.join(v.dataDir, 'upload'); if (u && fs.existsSync(u)) shell.openPath(u); else if (v) shell.openPath(v.dataDir); return true; });
 // ---------------------------------------------------------------- Hunt Pass seasons (package folder "seasons")
 // index.json lists them; the choice goes to data/season.txt (start.ps1 hands it to the metagame);
@@ -641,8 +669,12 @@ function folderGB(dir) {
   return bytes / 1e9;
 }
 // The download tool's message, in words a player can act on.
+const FIREWALL_HINT = 'A firewall or antivirus is blocking the launcher from the internet (nothing reached the download servers). Allow "Dauntless Forever" and node.exe in it, or use More > "Fix the firewall", then press Download again; it carries on where it stopped.';
 function downloadError(res) {
   const raw = (res.errorLine || res.lastErrLine || '').replace(/^\s*Error:\s*/i, '');
+  // DF-FIX4: every chunk failing, or no connection at all, is a firewall, not "check your connection"
+  if (res.failed && res.total && res.failed >= Math.max(1, res.total - 1)) return FIREWALL_HINT;
+  if (/ECONNREFUSED|ECONNRESET|ETIMEDOUT|ENOTFOUND|EAI_AGAIN|fetch failed|socket hang up|network/i.test(raw)) return FIREWALL_HINT;
   if (/not enough space|no space left|disk full|ENOSPC/i.test(raw))
     return 'Your drive is full. Free some space and press Download again (it carries on where it stopped), or pick another drive: Settings, "Downloaded games go to", Change folder. More, "Delete the unfinished download" gives the space back.';
   if (/access is denied|permission denied|EPERM|EACCES/i.test(raw))
@@ -692,7 +724,7 @@ ipcMain.handle('game:download', async (_e, id, targetRoot) => {
       if (v.exeSha256 && h !== v.exeSha256.toUpperCase()) { ok = false; error = 'The downloaded game is not the expected build (the exe hash is different). Run the download again; already-complete files are skipped.'; }
     }
   } else if (!error) {
-    error = res.failed ? `${res.failed} chunks failed. Check your connection and press Download again; it carries on where it stopped.`
+    error = res.failed && !(res.total && res.failed >= Math.max(1, res.total - 1)) ? `${res.failed} chunks failed. Check your connection and press Download again; it carries on where it stopped.`
       : downloadError(res);
   }
   send('download:state', { id, state: ok ? 'done' : 'failed', error, outDir });
