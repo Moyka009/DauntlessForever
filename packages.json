@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-19.14",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.14.zip",
-                         "sha256":  "2a70a0d7074ccc043302fb6239a680cbd87fb818b5bda3a610d049371945ad06",
+                         "packageVersion":  "2026-10-19.15",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.15.zip",
+                         "sha256":  "f63b0efc1b85467a2d69d7bcd90e3f43550e74767fb49c06ce717639456aad7f",
                          "date":  "2026-10-19",
-                         "note":  "Trials Quick Retry: retry really switches to the spare server, TR badge"
+                         "note":  "dxgi_chain.dll support (DXVK for Intel Arc, issue 4)"
                      }
                  ],
     "launcher":  {
