@@ -9,7 +9,7 @@
 #   Error 3  the Ramsgate server closed
 #   Error 4  the Ramsgate server is running but not reachable (its game port is not open)
 #   Error 5  the PC is out of memory
-#   Error 6  Training Grounds is off on this PC (less than 32 GB of memory; data\dojo.txt = on turns it back on)
+#   Error 6  Training Grounds is off on this PC (8 GB of memory or less; data\dojo.txt = on turns it back on)
 #   Error 7  the program that starts the game servers closed (1.6.2)
 # Every error is also written to logs\watch.log; start.ps1 repeats them when the game closes.
 # It never takes focus and clicks go through it to the game. It closes by itself when the game closes.
@@ -40,7 +40,7 @@ $Texts = @{
     3 = 'The Ramsgate server closed (often: not enough memory). Close the game and press Play again.'
     4 = 'The Ramsgate server is running but not reachable (its game port is not open: firewall or antivirus).'
     5 = 'Your PC is out of memory'
-    6 = 'Training Grounds is off on this PC (less than 32 GB of memory). You stay in Ramsgate.'
+    6 = 'Training Grounds is off on this PC (8 GB of memory or less). You stay in Ramsgate.'
     7 = 'The program that starts the game servers closed. Close the game and press Play again.'
 }
 function Log([string]$t) { try { [IO.File]::AppendAllText($LogFile, ("{0:yyyy-MM-dd HH:mm:ss} {1}`r`n" -f (Get-Date), $t)) } catch {} }

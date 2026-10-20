@@ -49,14 +49,14 @@ function Show-DfWatchErrors {
     $e = @(Get-Content -LiteralPath $f -ErrorAction SilentlyContinue | Where-Object { $_ -match ' Error \d+: ' })
     if ($e.Count) { Say ''; Say 'During play:' 'Yellow'; foreach ($l in $e) { Say "    $l" 'Yellow' } }
 }
-# DF-DOJO (Oct 20): PCs with less than 32 GB of memory; data\dojo.txt = on / off overrides it
+# DF-DOJO (Oct 20): PCs with 8 GB of memory or less; data\dojo.txt = on / off overrides it
 function Say-DojoMode {
     try {
         $pick = ''; $df = Join-Path $Root 'data\dojo.txt'
         if (Test-Path -LiteralPath $df) { $pick = (Get-Content -LiteralPath $df -Raw).Trim().ToLower() }
         $gb = [math]::Round((Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1GB, 1)
-        $off = if ($pick -eq 'on') { $false } elseif ($pick -eq 'off') { $true } else { $gb -lt 30 }
-        if ($off) { Say "    Training Grounds stays off on this PC ($gb GB of memory; under 32 GB it is off to save memory). A file data\dojo.txt with the word on turns it on." }
+        $off = if ($pick -eq 'on') { $false } elseif ($pick -eq 'off') { $true } else { $gb -lt 10 }
+        if ($off) { Say "    Training Grounds stays off on this PC ($gb GB of memory; with 8 GB or less it is off to save memory). A file data\dojo.txt with the word on turns it on." }
     } catch {}
 }
 

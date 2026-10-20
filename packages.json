@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-20.2",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-20.2.zip",
-                         "sha256":  "c46fce2c5d29bf29d951fd128da8eceaf823c5e4bb168712570dc1740aadd098",
+                         "packageVersion":  "2026-10-20.3",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-20.3.zip",
+                         "sha256":  "b2f9447d3569d720d0f62753741c4c244a61bad6fd8d3019166f2be34e4a0e4e",
                          "date":  "2026-10-20",
-                         "note":  "Numbered error box on top of the game when something breaks (Error 1-6); Training Grounds off on PCs with less than 32 GB of memory (data\\dojo.txt = on turns it on)"
+                         "note":  "Training Grounds back on: only PCs with 8 GB of memory or less keep it off (2026-10-20.2 used 32 GB as the line and kept almost everyone out). data\\dojo.txt = on / off overrides it"
                      }
                  ],
     "launcher":  {
