@@ -216,6 +216,9 @@ function maintainPlace(key) {
   if(place&&!place.owners.size){multiplayer1147.retire(place.id);place=null;setWanted(null);}
 }
 const placeBase = (u) => String(u || '').replace(/\?PlayerHuntIds=[^?]*/g, '');
+function trialsRetryOn() {   // DF-WARM-1147: data\mods.txt trialsretry=on (launcher Mods page)
+  try { return fs.readFileSync(path.join(DATA_DIR, 'mods.txt'), 'utf8').split(/\r?\n/).some((l) => l.trim().toLowerCase() === 'trialsretry=on'); } catch (e) { return false; }
+}
 function leavePlace(key) {
   place=multiplayer1147.recover(place);
   if (!place) return;
@@ -1027,6 +1030,13 @@ const routes = [
     let joinId = null;
     if (!dest.city) {
       const base = placeBase(dest.url);
+      // DF-WARM-1147: with Trials Quick Retry on, a retry of the trial the player (and only their party) is already
+      // in asks for a FRESH server under a new id, so tools\server-1147.ps1 hands over the spare it kept warm.
+      if (place && place.base === base && b.gameType === 'TRIALS' && trialsRetryOn() && [...place.owners].every((k) => k === me || mates.has(k))) {
+        for (const k of [...place.owners]) if (k !== me) leavePlace(k);
+        leavePlace(me); place = null;
+        console.log('Trials Quick Retry: a retry: asking for a fresh trial server (the spare takes over)');
+      }
       if (place && place.base === base) { place.owners.add(me); joinId = place.id; dest.url = place.url; }
       else if (follow && (!place || place.id !== follow.id) && !(place && [...place.owners].some(k=>k!==me&&!mates.has(k)))) {
         // the leader's place is not (or no longer) the one being served: ask for it again under the same id

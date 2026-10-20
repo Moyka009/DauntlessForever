@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-19.13",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.13.zip",
-                         "sha256":  "c7a1eb9bbc34809da939add55fc15da6b46e22e5432a2ec534c2c60ba3d8016a",
+                         "packageVersion":  "2026-10-19.14",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.14.zip",
+                         "sha256":  "2a70a0d7074ccc043302fb6239a680cbd87fb818b5bda3a610d049371945ad06",
                          "date":  "2026-10-19",
-                         "note":  "Host guard, crash guard 2, Trials Quick Retry mod"
+                         "note":  "Trials Quick Retry: retry really switches to the spare server, TR badge"
                      }
                  ],
     "launcher":  {

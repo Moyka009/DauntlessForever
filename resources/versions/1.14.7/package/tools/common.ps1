@@ -10,7 +10,7 @@ $ConfigFile = Join-Path $Root 'config.json'
 $ExeHash      = 'F3F95FBF22709EF077A11632ED95D675B7209B7E0172D9ECB9BA7D02A1FBB66B'   # Dauntless 1.14.7, CL 647472
 $EpicEosHash  = 'CBC0E5C922CEB88A9FA99121008AE9CD76244B17753701D9D25C6B596EA2FBFC'   # Epic's EOSSDK-Win64-Shipping.dll
 $StandInHash  = '4113C9EEBFBAC08532B6566A48F69E4F64A6B8E18A18AAFBA43F62F8F7DFDF70'   # bin\EOSSDK-Win64-Shipping.dll (offline sign-in)
-$LoaderHash   = '7170711CE4BDDDB4E4824E078045D6CAA2FCD18FD7D7F7C2A4353B28C77816D5'    # bin\dxgi.dll (server loader: fix5 + KombatKing's equipment fix R1 + owner-only replication; client: significance guard)
+$LoaderHash   = '7CD5B1DBD5386F9F3005403DD88CADEB30D9BAE99FF36B3C6C31F5DAAFD61EC4'    # bin\dxgi.dll (server loader: fix5 + KombatKing's equipment fix R1 + owner-only replication; client: significance guard)
 # Quest text fix by KombatKing (AGPL-3.0, source\QuestDialogue1147-R2-source.zip): adds the missing "Unspecified"
 # addressee lines to the game's own text, so quests and dialogue show real sentences. Copied into Archon\Content\Paks.
 $QuestPakName = 'zzzzzzzzzzzzzzzz_QuestDialogueFallback1147_P.pak'
@@ -177,13 +177,14 @@ function Add-GameLanguage([string]$GameArgs) {
 # mods=on: the game gets -dfmods (the loader then loads ue4ss\UE4SS.dll) and the Boss Health Bar (bossbar=on, the default);
 # servers=on: the server copies load UE4SS too (D1147_SERVER_MODS=1).
 function Get-ModsMode {
-    $m = @{ On = $false; Servers = $false; BossBar = $true }
+    $m = @{ On = $false; Servers = $false; BossBar = $true; TrialsRetry = $false }
     try {
         foreach ($l in @(Get-Content -LiteralPath (Join-Path $Root 'data\mods.txt') -ErrorAction Stop)) {
             $t = $l.Trim().ToLower()
             if ($t -eq 'mods=on') { $m.On = $true }
             if ($t -eq 'servers=on') { $m.Servers = $true }
             if ($t -eq 'bossbar=off') { $m.BossBar = $false }
+            if ($t -eq 'trialsretry=on') { $m.TrialsRetry = $true }   # DF-WARM-1147: works without UE4SS / Modded mode
         }
     } catch {}
     if (-not $m.On) { $m.Servers = $false; $m.BossBar = $false }
@@ -205,6 +206,8 @@ function Invoke-ModsPrepare {
 # For the game process: -dfmods when UE4SS is ready, the Boss Health Bar switch, and the loader's log folder (logs\client.log)
 function Add-GameMods($psi) {
     $m = Get-ModsMode
+    # DF-WARM-1147: "TR" badge in the bottom-right corner of the game while Trials Quick Retry is on
+    if ($m.TrialsRetry) { $psi.EnvironmentVariables['D1147_CLIENT_BADGE'] = 'TR'; Say 'Trials Quick Retry on: a spare trial server warms up while you play (TR shows in the corner).' 'Gray' }
     if (-not $m.On) { return }
     $psi.EnvironmentVariables['D1147_DIR'] = $Root
     if ($m.BossBar) { $psi.EnvironmentVariables['D1147_CLIENT_BOSSBAR'] = '1'; Say 'Modded mode: Boss Health Bar on (windowed or borderless window mode).' 'Gray' }
