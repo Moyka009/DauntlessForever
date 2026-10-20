@@ -41,11 +41,46 @@ function fetch(url, toFile, redirects = 0) {
   });
 }
 function sha256File(f) { return crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex').toLowerCase(); }
+// A small zip reader in plain Node (stored and deflate entries, the only kinds our packages use). Used when tar is
+// not there: Wine / Proton / CrossOver on Linux and Mac report themselves as Windows but have no tar.exe.
+function unzipJs(zip, dir) {
+  const zlib = require('zlib');
+  const buf = fs.readFileSync(zip);
+  let eocd = -1;
+  for (let i = buf.length - 22; i >= Math.max(0, buf.length - 22 - 65557); i--) if (buf.readUInt32LE(i) === 0x06054b50) { eocd = i; break; }
+  if (eocd < 0) throw new Error('not a zip file');
+  const count = buf.readUInt16LE(eocd + 10);
+  let p = buf.readUInt32LE(eocd + 16);
+  const root = path.resolve(dir);
+  for (let n = 0; n < count; n++) {
+    if (buf.readUInt32LE(p) !== 0x02014b50) throw new Error('broken zip directory');
+    const method = buf.readUInt16LE(p + 10), csize = buf.readUInt32LE(p + 20), nlen = buf.readUInt16LE(p + 28);
+    const xlen = buf.readUInt16LE(p + 30), clen = buf.readUInt16LE(p + 32), local = buf.readUInt32LE(p + 42);
+    const name = buf.toString('utf8', p + 46, p + 46 + nlen).replace(/\\/g, '/');
+    p += 46 + nlen + xlen + clen;
+    const out = path.resolve(root, name);
+    if (out !== root && !out.startsWith(root + path.sep)) throw new Error('unsafe path in zip: ' + name);
+    if (name.endsWith('/')) { ensureDir(out); continue; }
+    if (buf.readUInt32LE(local) !== 0x04034b50) throw new Error('broken zip entry: ' + name);
+    const start = local + 30 + buf.readUInt16LE(local + 26) + buf.readUInt16LE(local + 28);
+    const data = buf.subarray(start, start + csize);
+    let body;
+    if (method === 0) body = data;
+    else if (method === 8) body = zlib.inflateRawSync(data);
+    else throw new Error('unsupported zip compression (' + method + ') in ' + name);
+    ensureDir(path.dirname(out));
+    fs.writeFileSync(out, body);
+  }
+}
 function unzip(zip, dir) {
   return new Promise((resolve, reject) => {
     ensureDir(dir);
-    // tar.exe ships with Windows 10 1803+ and reads zip files; no extra dependency
-    execFile(IS_WIN ? 'tar.exe' : 'tar', ['-xf', zip, '-C', dir], (e, _o, err) => e ? reject(new Error('unzip failed: ' + (err || e.message))) : resolve());
+    const fallback = (why) => { try { unzipJs(zip, dir); resolve(); } catch (e2) { reject(new Error('unzip failed: ' + why + '; ' + e2.message)); } };
+    // tar.exe ships with Windows 10 1803+ and reads zip files; no extra dependency. Wine and old Windows have none:
+    // then the built-in reader above does it.
+    try {
+      execFile(IS_WIN ? 'tar.exe' : 'tar', ['-xf', zip, '-C', dir], (e, _o, err) => e ? fallback(String(err || e.message).trim()) : resolve());
+    } catch (e) { fallback(e.message); }
   });
 }
 
