@@ -568,13 +568,15 @@ async function renderMods() {
   $('mods-folder').onclick = () => act('folder', null, null, modsNote || '');
   const list = $('mods-list'); list.innerHTML = '';
   const mods = d.mods || [];
+  // built-in Dauntless Forever mods that need no UE4SS (noUe4ss) are listed even before UE4SS is installed
+  const shown = d.installed ? mods : mods.filter(m => m.noUe4ss);
   if (!d.installed) list.innerHTML = `<div class="season-row"><div class="season-kind">${esc(t('Get UE4SS first. Your mods are listed here after that.'))}</div></div>`;
   else if (!mods.some(m => !m.builtin)) list.insertAdjacentHTML('beforeend', `<div class="season-row"><div class="season-kind">${esc(t('No mods of your own yet. Press "Open the mods folder" and put a mod\'s folder in it, then come back here.'))}</div></div>`);
   let toolsHead = false;
-  for (const m of mods) {
+  for (const m of shown) {
     if (m.builtin && !toolsHead) { toolsHead = true; list.insertAdjacentHTML('beforeend', `<div class="season-row"><div class="season-kind"><b>${esc(t('Comes with UE4SS'))}</b> ${esc(t('(tools for mod makers; leave them as they are if you are not sure)'))}</div></div>`); }
     const row = document.createElement('div'); row.className = 'season-row rule-row' + (m.on ? ' active' : '');
-    row.innerHTML = `<div><div class="season-name">${esc(m.name)}</div><div class="season-kind">${esc(m.scripts ? (m.builtin ? t('UE4SS tool') : t('Mod')) : t('This folder has no Scripts or dlls folder, so UE4SS may not load it.'))}</div></div>
+    row.innerHTML = `<div><div class="season-name">${esc(m.name)}</div><div class="season-kind">${esc(m.about ? m.about : m.scripts ? (m.builtin ? t('UE4SS tool') : t('Mod')) : t('This folder has no Scripts or dlls folder, so UE4SS may not load it.'))}</div></div>
       <div class="rule-choices" role="group" aria-label="${esc(m.name)}"></div>`;
     const host = row.querySelector('.rule-choices');
     for (const [val, label] of [[false, 'Off'], [true, 'On']]) {

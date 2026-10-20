@@ -18,14 +18,14 @@
                      }
                  ],
     "launcher":  {
-                     "version":  "0.2.14",
+                     "version":  "0.2.15",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "Launcher language setting: English, Spanish, French and German (Settings \u003e Launcher language).",
+                     "notes":  "",
                      "date":  "2026-10-19",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.14.asar",
-                                 "sha256":  "cea171b29edb7c19e46efcb69fe8e4c596e7ff13199bb8f0cc7e3d949eeb1ad9",
-                                 "size":  1003426,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.15.asar",
+                                 "sha256":  "3e1e080ee256282e6bcfc3788be2fe43d54630870003a08dea618dc71e8def37",
+                                 "size":  1002433,
                                  "minShell":  "0.2.4"
                              }
                  }
