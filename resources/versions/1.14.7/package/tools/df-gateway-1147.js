@@ -24,7 +24,8 @@ const server = net.createServer((client) => {
     client.pause();
     client.removeListener('data', onData);
     if(!Number.isInteger(port)||port<LO||port>HI||!Number.isInteger(port+SHIFT)||port+SHIFT<1||port+SHIFT>65535){client.destroy();return;}
-    let up;try{up=net.connect(port + SHIFT, '127.0.0.1');}catch{client.destroy();return;}
+    // DF-HOSTGUARD-1147: connect from 127.0.0.2 so the backend can tell a joiner (through this gateway) from the host's own game (127.0.0.1)
+    let up;try{up=net.connect({port:port + SHIFT, host:'127.0.0.1', localAddress:'127.0.0.2'});}catch{client.destroy();return;}
     up.setNoDelay(true);
     const kill = () => { client.destroy(); up.destroy(); };
     up.on('error', kill); client.on('error', kill); up.on('close', kill); client.on('close', kill);

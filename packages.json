@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-19.12",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.12.zip",
-                         "sha256":  "3fbf8335d38176903eb8023d22c419334d33beb94700754f02ad03a7caf1f81a",
+                         "packageVersion":  "2026-10-19.13",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.13.zip",
+                         "sha256":  "c7a1eb9bbc34809da939add55fc15da6b46e22e5432a2ec534c2c60ba3d8016a",
                          "date":  "2026-10-19",
-                         "note":  "Boss Health Bar can be moved: Ctrl+Alt+arrow keys, Ctrl+Alt+Home resets"
+                         "note":  "Host guard, crash guard 2, Trials Quick Retry mod"
                      }
                  ],
     "launcher":  {

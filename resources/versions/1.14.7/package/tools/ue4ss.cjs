@@ -44,13 +44,14 @@ function places() {
   return { win64, dir, dll: path.join(dir, 'UE4SS.dll'), ini: path.join(dir, 'UE4SS-settings.ini'), mods: path.join(dir, 'Mods'), list: path.join(dir, 'Mods', 'mods.txt') };
 }
 function mode() {
-  const m = { on: false, servers: false, bossbar: true };
+  const m = { on: false, servers: false, bossbar: true, trialsretry: false };
   try {
     for (const l of fs.readFileSync(MODE_FILE, 'utf8').split(/\r?\n/)) {
       const t = l.trim().toLowerCase();
       if (t === 'mods=on') m.on = true;
       if (t === 'servers=on') m.servers = true;
       if (t === 'bossbar=off') m.bossbar = false;
+      if (t === 'trialsretry=on') m.trialsretry = true;   // DF-WARM-1147: spare trial server (tools\server-1147.ps1)
     }
   } catch {}
   return m;
@@ -59,7 +60,8 @@ function writeMode(m) {
   fs.mkdirSync(DATA, { recursive: true });
   fs.writeFileSync(MODE_FILE, '# Modded mode (launcher, 1.14.7 page). mods=on loads UE4SS in your game; servers=on also in your servers;\r\n' +
     '# bossbar=on shows the Boss Health Bar (part of Modded mode).\r\n' +
-    `mods=${m.on ? 'on' : 'off'}\r\nservers=${m.servers ? 'on' : 'off'}\r\nbossbar=${m.bossbar ? 'on' : 'off'}\r\n`);
+    '# trialsretry=on keeps a spare trial server warm so Retry is instant (works without UE4SS; needs 4 GB of free RAM).\r\n' +
+    `mods=${m.on ? 'on' : 'off'}\r\nservers=${m.servers ? 'on' : 'off'}\r\nbossbar=${m.bossbar ? 'on' : 'off'}\r\ntrialsretry=${m.trialsretry ? 'on' : 'off'}\r\n`);
 }
 // ue4ss\Mods\mods.txt: "Name : 1" lines. Keybinds must stay last (UE4SS's own rule), so new lines go above it.
 function readList(p) {
@@ -82,9 +84,12 @@ function setListEntry(p, name, value) {
   fs.writeFileSync(p.list, lines.join('\r\n') + '\r\n');
 }
 const BOSSBAR = 'Boss Health Bar';   // built into this package's loader, not a UE4SS mod
+const TRIALS = 'Trials Quick Retry';   // DF-WARM-1147: a spare trial server, in tools\server-1147.ps1; no UE4SS needed
 function mods(p) {
-  const boss = { name: BOSSBAR, on: mode().bossbar, builtin: false, scripts: true, df: true };
-  return [boss, ...ue4ssMods(p)];
+  const m = mode();
+  const boss = { name: BOSSBAR, on: m.bossbar, builtin: false, scripts: true, df: true };
+  const trials = { name: TRIALS, on: m.trialsretry, builtin: false, scripts: true, df: true, noUe4ss: true, about: 'Retry in a trial is instant: a spare copy of the trial warms up while you play (host PC, about 4 GB of free RAM).' };
+  return [boss, trials, ...ue4ssMods(p)];
 }
 function ue4ssMods(p) {
   if (!fs.existsSync(p.mods)) return [];
@@ -197,6 +202,11 @@ async function install() {
     writeMode(m);
     // Off does NOT put an old dwmapi.dll proxy back: that would load UE4SS into the game and every server copy again
     return out({ ok: true, on: m.on, servers: m.servers });
+  }
+  if (cmd === 'mod' && a === TRIALS) {
+    if (b !== 'on' && b !== 'off') fail('Use mod <name> on|off');
+    const m = mode(); m.trialsretry = b === 'on'; writeMode(m);
+    return out({ ok: true, mods: mods(places()) });
   }
   if (cmd === 'mod' && a === BOSSBAR) {
     if (b !== 'on' && b !== 'off') fail('Use mod <name> on|off');

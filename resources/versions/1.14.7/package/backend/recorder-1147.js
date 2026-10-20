@@ -306,6 +306,26 @@ function keyFor(req) {
   const b = bearerOf(req);
   return (b ? sessions.get(b) : null) || (req && req._pkey) || state.lastPlayer || 'local';
 }
+// DF-HOSTGUARD-1147 (Oct 19): a joiner must never land on the host's save. The host's own game talks to the backend
+// from 127.0.0.1; joiners come from the LAN address or, through the online gateway, from 127.0.0.2. A joiner whose
+// game signs in with no id / the default id / the host's id is refused, a joiner's sign-in never becomes
+// "the last player" (the stand-in for server requests that name nobody), and a joiner request that names nobody
+// is refused instead of guessed.
+const DEFAULT_EPIC_ID = 'd211000000000000000000000000e91c';
+function guestRequest(req) {
+  const a = String((req && req.socket && req.socket.remoteAddress) || '').replace(/^::ffff:/, '');
+  return !(a === '' || a === '127.0.0.1' || a === '::1');
+}
+function hostEpicId() {
+  try {
+    const t = fs.readFileSync(path.join(ROOT, 'eos', 'eos_offline.ini'), 'utf8');
+    const m = /^\s*EpicAccountId\s*=\s*([0-9a-fA-F]{32})\s*$/m.exec(t);
+    if (m) return m[1].toLowerCase();
+  } catch (e) { /* no file: the default id */ }
+  return DEFAULT_EPIC_ID;
+}
+const HOST_KEY = crypto.createHash('sha256').update('epic:' + hostEpicId()).digest('hex').slice(0, 32);
+const PRE_SESSION_RE = /^\/(dauntless-status|maintenance\/status|features\/platform|patchnotes|account\/link|login|gamesession|heartbeat|progression\/config|_recorder|_travel)(\/|$)/;
 function playerFor(req) { return getPlayer(keyFor(req)); }
 
 // ---------------------------------------------------------------- captures
@@ -843,13 +863,21 @@ const routes = [
   ['gamesession', 'GET', /^\/account\/link\/[^/]+\/[^/]*\/?$/, () => J(wrapped({ isLinked: true }))],
   ['gamesession', 'PUT', /^\/gamesession\/[^/]+\/?$/, (c) => {
     const key = playerKeyFromEpicToken(bearerOf(c.req));
+    if (guestRequest(c.req)) {   // DF-HOSTGUARD-1147
+      const sub = String(epicSubOf(bearerOf(c.req)) || '').toLowerCase();
+      if (!sub || sub === DEFAULT_EPIC_ID || key === HOST_KEY) {
+        console.log(`HOSTGUARD: refused a joiner (${c.req.socket.remoteAddress}) signing in as the host's account (${sub ? 'id ' + sub.slice(0, 8) : 'no id'}). Their game is not using its join sign-in: update their 1.14.7 server files and join again.`);
+        return { status: 403, json: { error_code: 'DF_HOSTGUARD', message: 'This game tried to sign in as the host. Update your 1.14.7 server files and join again.' }, note: 'hostguard: joiner signed in as the host' };
+      }
+    }
     const player = getPlayer(key);
     player.epicId = epicSubOf(bearerOf(c.req)) || player.epicId || '';
     const dn = epicNameOf(bearerOf(c.req));
     if (dn) player.username = dn;   // DF-NAME-1147
     leavePlace(key);
     delete player.candidate;   // a fresh sign-in releases its previous hunt lease
-    state.lastPlayer = key; saveState();
+    if (!guestRequest(c.req)) state.lastPlayer = key;   // DF-HOSTGUARD-1147: a joiner is never "the last player"
+    saveState();
     const token = crypto.randomBytes(24).toString('hex');
     sessions.set(token, key);
     return J(wrapped({ error_code: null, sessionid: crypto.randomBytes(16).toString('hex'), sessiontoken: token }), `player ${player.accountId.slice(0, 8)}`);
@@ -1271,6 +1299,10 @@ function handle(svc, port, req, res, bodyBuf) {
   let body;
   if (bodyBuf.length) { try { body = JSON.parse(bodyBuf.toString('utf8')); } catch (e) { body = undefined; } }
   req._pkey = keyFromIds(pathName, body);   // DF-LAN-1147: which player a server request is about
+  if (guestRequest(req) && !(bearerOf(req) && sessions.get(bearerOf(req))) && !req._pkey && !PRE_SESSION_RE.test(pathName)) {   // DF-HOSTGUARD-1147
+    console.log(`HOSTGUARD: refused ${req.method} ${pathName} from ${req.socket.remoteAddress}: a joiner request that names no player`);
+    res.writeHead(401, { 'Content-Length': 0 }); res.end(); return;
+  }
   { const token=bearerOf(req); const identified=(token&&sessions.get(token))||req._pkey; if(identified) multiplayer1147.touch(identified); }
 
   let reply = null, known = false;
