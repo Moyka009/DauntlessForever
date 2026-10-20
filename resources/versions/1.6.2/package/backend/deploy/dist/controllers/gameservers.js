@@ -121,13 +121,30 @@ async function CleanupServer(ServerToShutdown) {
         await StartServer(RamsgateMapPath(), undefined, undefined, undefined, true, false);
     }
     else if (ServerToShutdown.isTrainingDojo) {
+        if (DojoOnDemand()) {   // DF-DOJO-162: started again the next time someone goes there
+            logger_1.logger.warn("Training Dojo closed. It starts again when someone goes there.");
+            if (TrainingDojoServer === ServerToShutdown) { TrainingDojoServer = undefined; }
+            return;
+        }
         logger_1.logger.warn("Training Dojo Crashed! Restarting!");
-        await StartServer(TRAINING_DOJO_MAP_PATH, undefined, undefined, undefined, false, true);
+        TrainingDojoServer = await StartServer(TRAINING_DOJO_MAP_PATH, undefined, undefined, undefined, false, true);
     }
     else {
         FreePorts.push(ServerToShutdown.port);
     }
 }
+// DF-DOJO-162 (Oct 20): on PCs with less than 32 GB of memory the Training Dojo is not started with Ramsgate; it starts
+// when someone goes there. Weak PCs ran out of memory with the game plus two server copies and never got past the menu.
+// data\dojo.txt: "on" = always start it with Ramsgate, "off" = only when someone goes there (any PC).
+const DOJO_RAM_LIMIT = 30 * 1024 * 1024 * 1024;   // 32 GB sticks show about 31.8 GB to Windows
+function DojoOnDemand() {
+    let Pick = "";
+    try { Pick = require("node:fs").readFileSync(require("node:path").resolve(__dirname, "../../../../data/dojo.txt"), "utf8").trim().toLowerCase(); } catch { }
+    if (Pick === "on") { return false; }
+    if (Pick === "off") { return true; }
+    return require("node:os").totalmem() < DOJO_RAM_LIMIT;
+}
+let DojoStarting = null;
 let ServerLaunchQueue = Promise.resolve();
 async function StartServer(Map, Behemoth, MatchmakerHuntId, ExpectedPlayers, IsRamsgate, IsTrainingDojo) {
     const LaunchProc = ServerLaunchQueue;
@@ -188,10 +205,20 @@ function GetRamsgateConnectionDetails() {
         port: PublicPort(RamsgateServer.port)
     };
 }
-function GetTrainingDojoConnectionDetails() {
+async function GetTrainingDojoConnectionDetails() {
+    // DF-DOJO-162: not running (on-demand PCs, or it closed): start it now; the game waits for it like for a hunt
+    if (!TrainingDojoServer || !exports.Gameservers.includes(TrainingDojoServer)) {
+        if (!DojoStarting) {
+            logger_1.logger.info("Training Dojo: starting it now (someone is going there).");
+            DojoStarting = StartServer(TRAINING_DOJO_MAP_PATH, undefined, undefined, undefined, false, true)
+                .then((S) => { TrainingDojoServer = S; return S; })
+                .finally(() => { DojoStarting = null; });
+        }
+        await DojoStarting;
+    }
     return {
         host: MY_IP,
-        port: PublicPort(TrainingDojoServer.port)
+        port: PublicPort(TRAINING_DOJO_PORT)
     };
 }
 async function StartupGameserverWithArgs(GameArgs) {
@@ -291,5 +318,9 @@ async function Startup() {
         FreePorts.push(i);
     }
     RamsgateServer = await StartServer(RamsgateMapPath(), undefined, undefined, undefined, true, false);
+    if (DojoOnDemand()) {
+        logger_1.logger.info(`Training Dojo: starts when someone goes there (this PC has ${(require("node:os").totalmem() / 1073741824).toFixed(1)} GB of memory: under 32 GB, or data\\dojo.txt = off. data\\dojo.txt = on starts it with Ramsgate).`);
+        return;
+    }
     TrainingDojoServer = await StartServer(TRAINING_DOJO_MAP_PATH, undefined, undefined, undefined, false, true);
 }

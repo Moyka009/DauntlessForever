@@ -15,7 +15,7 @@ async function HandleMatchmakingRequest(GameMode, GameArgs, HuntId, ExpectedPlay
     else if (GameMode === "SHARED") {
         if (HuntId != undefined && HuntId.trim().length > 0) {
             if (HuntId == "ShatteredIsles_TrainingDojo") {
-                return (0, gameservers_1.GetTrainingDojoConnectionDetails)();
+                return await (0, gameservers_1.GetTrainingDojoConnectionDetails)();
             }
         }
     }

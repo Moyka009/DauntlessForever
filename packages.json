@@ -2,19 +2,19 @@
     "packages":  [
                      {
                          "id":  "1.6.2",
-                         "packageVersion":  "2026-10-19.2",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-19.2.zip",
-                         "sha256":  "ed6344b8401245fe4a50cc39807d4155f2731dc7707fcb0c75f4ec4b38eeb678",
-                         "date":  "2026-10-19",
-                         "note":  "Reserved UDP game ports detected before play"
+                         "packageVersion":  "2026-10-20",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-20.zip",
+                         "sha256":  "aef643bd27dfea0575c79c30a1af7fe92bbef2dd540afb0603a0ca7500b79453",
+                         "date":  "2026-10-20",
+                         "note":  "Numbered error box on top of the game when something breaks (Error 1-7); Training Dojo only starts when someone goes there on PCs with less than 32 GB of memory"
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-20",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-20.zip",
-                         "sha256":  "0160991d65028f3ad8b4ce384360fc2764467588daa69f2a3535e03746fb7340",
-                         "date":  "2026-10-19",
-                         "note":  "Slayer copy no longer brings the Middleman token that sent 1.14.7 back to the menu; affected saves repaired on Play"
+                         "packageVersion":  "2026-10-20.2",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-20.2.zip",
+                         "sha256":  "c46fce2c5d29bf29d951fd128da8eceaf823c5e4bb168712570dc1740aadd098",
+                         "date":  "2026-10-20",
+                         "note":  "Numbered error box on top of the game when something breaks (Error 1-6); Training Grounds off on PCs with less than 32 GB of memory (data\\dojo.txt = on turns it on)"
                      }
                  ],
     "launcher":  {

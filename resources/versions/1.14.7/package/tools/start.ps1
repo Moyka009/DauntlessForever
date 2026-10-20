@@ -32,6 +32,34 @@ $missing = @('vcruntime140.dll', 'vcruntime140_1.dll', 'msvcp140.dll', 'xinput1_
 if (@($missing).Count -gt 0) { Fail "Windows is missing parts the game needs ($(@($missing) -join ', ')). Run set-up again: it installs them." }
 if (-not $NoGame -and @(Get-PlayerGame).Count -gt 0) { Fail 'the game is already running. Close it first (or end Dauntless-Win64-Shipping in Task Manager).' }
 
+# DF-WATCH (Oct 20): tools\df-watch.ps1 runs next to the player's game and shows a numbered error on top of the game
+# when the backend, the Ramsgate server or the PC's memory goes wrong; the errors are repeated here afterwards.
+function Start-DfWatch([int]$BackendPid, [int]$DeployPid = 0) {
+    $w = Join-Path $PSScriptRoot 'df-watch.ps1'
+    if (-not (Test-Path -LiteralPath $w)) { return }
+    try {
+        $a = @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-WindowStyle', 'Hidden', '-File', ('"' + $w + '"'), '-Version', '1.14.7', '-Root', ('"' + $Root + '"'), '-BackendPid', "$BackendPid")
+        if ($DeployPid) { $a += @('-DeployPid', "$DeployPid") }
+        Start-Process -FilePath 'powershell.exe' -ArgumentList $a -WindowStyle Hidden | Out-Null
+    } catch { Say "    (the error box could not start: $($_.Exception.Message))" 'Yellow' }
+}
+function Show-DfWatchErrors {
+    $f = Join-Path $Root 'logs\watch.log'
+    if (-not (Test-Path -LiteralPath $f)) { return }
+    $e = @(Get-Content -LiteralPath $f -ErrorAction SilentlyContinue | Where-Object { $_ -match ' Error \d+: ' })
+    if ($e.Count) { Say ''; Say 'During play:' 'Yellow'; foreach ($l in $e) { Say "    $l" 'Yellow' } }
+}
+# DF-DOJO (Oct 20): PCs with less than 32 GB of memory; data\dojo.txt = on / off overrides it
+function Say-DojoMode {
+    try {
+        $pick = ''; $df = Join-Path $Root 'data\dojo.txt'
+        if (Test-Path -LiteralPath $df) { $pick = (Get-Content -LiteralPath $df -Raw).Trim().ToLower() }
+        $gb = [math]::Round((Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1GB, 1)
+        $off = if ($pick -eq 'on') { $false } elseif ($pick -eq 'off') { $true } else { $gb -lt 30 }
+        if ($off) { Say "    Training Grounds stays off on this PC ($gb GB of memory; under 32 GB it is off to save memory). A file data\dojo.txt with the word on turns it on." }
+    } catch {}
+}
+
 $dataDir = Join-Path $Root 'data'
 New-Item -ItemType Directory -Force $dataDir, (Join-Path $Root 'logs') | Out-Null
 
@@ -107,8 +135,12 @@ if ($NoGame) {
 } else {
     # --- 3. the game (this window waits until it is closed)
     Say '3/3 Starting the game...'
+    Say-DojoMode
+    $watchPid = if ($recProc) { $recProc.Id } else { $pf = Join-Path $dataDir 'recorder.pid'; if (Test-Path -LiteralPath $pf) { [int]((Get-Content -LiteralPath $pf -Raw).Trim()) } else { 0 } }
+    Start-DfWatch -BackendPid $watchPid
     try { & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot 'play-1147.ps1'); if ($LASTEXITCODE -ne 0) { $playOk = $false } }
     catch { $playOk = $false; Say $_.Exception.Message 'Yellow' }
+    Show-DfWatchErrors
 }
 
 # --- shut down

@@ -162,7 +162,29 @@ function huntUrl(id) {
   if (h.game) url += `?game=${h.game}`;
   return url;
 }
+// DF-DOJO-1147 (Oct 20): on PCs with less than 32 GB of memory the Training Grounds stay off: the second server copy
+// it needs is what weak PCs run out of memory on. The player stays in Ramsgate and df-watch.ps1 shows "Error 6".
+// data\dojo.txt: "on" = Training Grounds on (any PC), "off" = off (any PC).
+const DOJO_RAM_LIMIT = 30 * 1024 * 1024 * 1024;   // 32 GB sticks show about 31.8 GB to Windows
+function dojoOff1147() {
+  let pick = '';
+  try { pick = fs.readFileSync(path.join(DATA_DIR, 'dojo.txt'), 'utf8').trim().toLowerCase(); } catch (e) {}
+  if (pick === 'on') return false;
+  if (pick === 'off') return true;
+  return require('os').totalmem() < DOJO_RAM_LIMIT;
+}
+let lastWatchNotice = 0;
+function watchNotice(code) {   // read by tools\df-watch.ps1 (the box on top of the game)
+  const now = Date.now();
+  if (now - lastWatchNotice < 20000) return;
+  lastWatchNotice = now;
+  try { fs.writeFileSync(path.join(DATA_DIR, 'watch_notice.json'), JSON.stringify({ code, at: new Date(now).toISOString() })); } catch (e) {}
+}
 function destinationFor(b) {
+  if (String(b.gameType || '') === 'TRAINING_GROUND' && dojoOff1147()) {   // DF-DOJO-1147
+    watchNotice(6);
+    return { city: true, label: `${b.gameMode || '-'}/TRAINING_GROUND`, note: 'Training Grounds is off on this PC (less than 32 GB of memory; data\\dojo.txt = on turns it on): staying in Ramsgate' };
+  }
   const modesDestination = require('./modes1147').destination(b);
   if (modesDestination) return modesDestination;
   const mode = b.gameMode || 'CITY', type = b.gameType || '';

@@ -56,6 +56,34 @@ foreach ($port in 8770..8777) {
 }
 Get-ChildItem -LiteralPath $DeployDir -Filter 'UndauntedServer_*.log' -ErrorAction SilentlyContinue | Remove-Item -Force -ErrorAction SilentlyContinue
 
+# DF-WATCH (Oct 20): tools\df-watch.ps1 runs next to the player's game and shows a numbered error on top of the game
+# when the backend, the Ramsgate server or the PC's memory goes wrong; the errors are repeated here afterwards.
+function Start-DfWatch([int]$BackendPid, [int]$DeployPid = 0) {
+    $w = Join-Path $PSScriptRoot 'df-watch.ps1'
+    if (-not (Test-Path -LiteralPath $w)) { return }
+    try {
+        $a = @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-WindowStyle', 'Hidden', '-File', ('"' + $w + '"'), '-Version', '1.6.2', '-Root', ('"' + $Root + '"'), '-BackendPid', "$BackendPid")
+        if ($DeployPid) { $a += @('-DeployPid', "$DeployPid") }
+        Start-Process -FilePath 'powershell.exe' -ArgumentList $a -WindowStyle Hidden | Out-Null
+    } catch { Say "    (the error box could not start: $($_.Exception.Message))" 'Yellow' }
+}
+function Show-DfWatchErrors {
+    $f = Join-Path $Root 'logs\watch.log'
+    if (-not (Test-Path -LiteralPath $f)) { return }
+    $e = @(Get-Content -LiteralPath $f -ErrorAction SilentlyContinue | Where-Object { $_ -match ' Error \d+: ' })
+    if ($e.Count) { Say ''; Say 'During play:' 'Yellow'; foreach ($l in $e) { Say "    $l" 'Yellow' } }
+}
+# DF-DOJO (Oct 20): PCs with less than 32 GB of memory; data\dojo.txt = on / off overrides it
+function Say-DojoMode {
+    try {
+        $pick = ''; $df = Join-Path $Root 'data\dojo.txt'
+        if (Test-Path -LiteralPath $df) { $pick = (Get-Content -LiteralPath $df -Raw).Trim().ToLower() }
+        $gb = [math]::Round((Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1GB, 1)
+        $off = if ($pick -eq 'on') { $false } elseif ($pick -eq 'off') { $true } else { $gb -lt 30 }
+        if ($off) { Say "    Training Dojo starts only when someone goes there ($gb GB of memory; under 32 GB it is off to save memory). A file data\dojo.txt with the word on turns it on." }
+    } catch {}
+}
+
 $metaLog = Join-Path $LogDir 'metagame.log';  $metaErr = Join-Path $LogDir 'metagame.err'
 $depLog  = Join-Path $LogDir 'deploy.log';    $depErr  = Join-Path $LogDir 'deploy.err'
 
@@ -149,7 +177,7 @@ while (-not (Test-Meta)) {
 Say '    Local backend: running.' 'Green'
 
 # --- 2. game servers. The deploy server starts Ramsgate (8777) and the Training Dojo (8776) now,
-#        and a new server copy for each hunt. They all use the package's private settings folder.
+#        and a new server copy for each hunt. Under 32 GB of memory the Dojo starts only when someone goes there. They all use the package's private settings folder.
 Say '2/3 Starting the game servers (hidden). This takes a minute or two, please wait...'
 $saved = @{ USERPROFILE = $env:USERPROFILE; LOCALAPPDATA = $env:LOCALAPPDATA; APPDATA = $env:APPDATA; DF_SERVER_MODS = $env:DF_SERVER_MODS }
 # Server mods (launcher: 1.6.2 > Mods > Also run mods on my servers): every server copy loads UE4SS too (hidden)
@@ -211,8 +239,11 @@ if ($NoGame) {
 } else {
     # --- 3. the game (this window waits until it is closed)
     Say '3/3 Starting the game...'
+    Say-DojoMode
+    Start-DfWatch -BackendPid $meta.Id -DeployPid $deploy.Id
     try { & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot 'play-162.ps1'); if ($LASTEXITCODE -ne 0) { $playOk = $false } }
     catch { $playOk = $false; Say $_.Exception.Message 'Yellow' }
+    Show-DfWatchErrors
 }
 
 # --- shut down
