@@ -74,7 +74,17 @@ $p = [Diagnostics.Process]::Start($psi)
 Say ''
 Say "THE GAME IS STARTING (it can take a minute to show up). Have fun!" 'Green'
 Say 'This window waits until you close the game, then shuts everything down for you.'
-$p.WaitForExit()
+# DF-FIX4: while the game runs, pass on why a hunt server failed (tools\server-1147.ps1 writes data\server_hunt_failed.json),
+# so the launcher can show it under the Play button instead of the game searching with no explanation
+$huntFailedFile = Join-Path $Root 'data\server_hunt_failed.json'; $lastFailed = ''
+while (-not $p.WaitForExit(2000)) {
+    try {
+        if (Test-Path -LiteralPath $huntFailedFile) {
+            $t = [IO.File]::ReadAllText($huntFailedFile)
+            if ($t -ne $lastFailed) { $lastFailed = $t; if ($t -match '"reason":"([^"]*)"') { Write-Host ("HUNT SERVER FAILED: {0}" -f $Matches[1]) -ForegroundColor Red } }
+        }
+    } catch { }
+}
 Say "Game closed at $(Get-Date -Format HH:mm:ss)."
 Start-Sleep -Seconds 2
 

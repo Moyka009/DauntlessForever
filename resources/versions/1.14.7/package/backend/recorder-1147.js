@@ -1100,8 +1100,12 @@ const routes = [
     const out = { candidateId: cd.id, candidateStatusPeriodMillis: srv ? 10000 : 3000, gameMode: cd.gameMode, huntId: cd.huntId, playerStates: { [p.accountId]: {} } };
     if (srv) out.serverInfo = { buildId: cd.buildId, gameSessionId: cd.gameSessionId, host: (PUBLIC_HOST && (!srv.host || srv.host === '127.0.0.1')) ? PUBLIC_HOST : (srv.host || '127.0.0.1'), port: srv.port + (PUBLIC_HOST ? PUBLIC_PORT_OFFSET : 0) };
     const waited = Math.round((Date.now() - (cd.asked || Date.now())) / 1000);
-    const failed = !srv && !city && waited > 300;
-    out.status = srv ? 'IN_PROGRESS' : failed ? 'FAILED' : 'MATCHING'; out.statusDuration = 0.0; out.statusReason = failed ? 'no server started for this destination' : null;
+    // DF-FIX4: tools\server-1147.ps1 says why the hunt server failed; the game then stops searching right away
+    let why = '';
+    if (!srv && !city) { try { const f = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'server_hunt_failed.json'), 'utf8')); if (f && f.id === cd.id && f.reason) why = String(f.reason); } catch (e) { /* none */ } }
+    const failed = !srv && !city && (!!why || waited > 300);
+    out.status = srv ? 'IN_PROGRESS' : failed ? 'FAILED' : 'MATCHING'; out.statusDuration = 0.0; out.statusReason = failed ? (why || 'no server started for this destination') : null;
+    if (why && !cd.failedSaid) { cd.failedSaid = true; console.log('HUNT SERVER FAILED: ' + why); }
     if(failed&&place&&place.id===cd.id){place.owners.delete(keyFor(c.req));if(!place.owners.size){multiplayer1147.retire(place.id);setWanted(null);place=null;}}
     return J(out, srv ? `game server on port ${srv.port}` : failed ? 'gave up after 5 minutes: no server came up for this destination'
       : city ? 'waiting: the game server is not running' : `waiting ${waited}s for the second server (${liveServer(SERVER_FILE) ? 'starting' : 'server-211.ps1 -Run is not running'})`);

@@ -131,6 +131,22 @@ function Read-Shared([string]$Path) {
 $wantedFile = Join-Path $dataDir "wanted.json"
 $huntMarker = Join-Path $dataDir "server_hunt.json"
 $warmFile = Join-Path $dataDir "warm.txt"
+# DF-FIX4: why the last hunt server failed, for the backend (the game stops searching and says so) and the launcher
+$huntFailedFile = Join-Path $dataDir "server_hunt_failed.json"
+if (Test-Path -LiteralPath $huntFailedFile) { Remove-Item -LiteralPath $huntFailedFile -Force -ErrorAction SilentlyContinue }
+function Write-HuntFailed([string]$Id, [string]$Reason) {
+    $r = $Reason -replace '[\\"]', ' ' -replace '[\r\n]+', ' '
+    try { [System.IO.File]::WriteAllText($huntFailedFile, ('{{"id":"{0}","reason":"{1}","at":"{2}"}}' -f $Id, $r, (Get-Date).ToString('o')), [System.Text.Encoding]::ASCII) } catch { }
+    Write-Host ("HUNT SERVER FAILED: {0}" -f $Reason) -ForegroundColor Red
+}
+# A server copy that ends within 20 seconds with (almost) no engine output was not closed by the game: an antivirus
+# most likely did it (the hidden -server -nullrhi copy looks suspicious to some). Say so instead of "ended by itself".
+function Describe-Exit($proc, [datetime]$started, [string]$engineLog) {
+    $secs = [int]((Get-Date) - $started).TotalSeconds
+    $size = 0; try { if (Test-Path -LiteralPath $engineLog) { $size = (Get-Item -LiteralPath $engineLog).Length } } catch { }
+    if ($secs -le 20 -and $size -lt 4096) { return ("it was closed after {0} s before the game produced any output (exit code {1}): most likely your antivirus closed the hidden server copy. Add the game folder and this launcher folder to its exclusions, then try again" -f $secs, $proc.ExitCode) }
+    return ("its process ended by itself after {0} s (exit code {1})" -f $secs, $proc.ExitCode)
+}
 $modsFile = Join-Path $dataDir "mods.txt"
 foreach ($f in @($wantedFile, $huntMarker)) { if (Test-Path -LiteralPath $f) { Remove-Item -LiteralPath $f -Force -ErrorAction SilentlyContinue } }
 $script:hunt = $null; $script:spare = $null; $script:huntCount = 0; $script:huntFailedId = ""
@@ -165,7 +181,8 @@ function Start-Hunt($w, [int]$port, [bool]$isSpare) {
     $hEng = Join-Path $logDir ("place{0}_engine.log" -f $n); $hErr = Join-Path $logDir ("place{0}_engine_err.log" -f $n)
     $env:USERPROFILE = $hHome; $env:LOCALAPPDATA = $hLocal; $env:APPDATA = $hRoaming; $env:EOS_OFFLINE_DIR = $hEos; $env:D1147_PORT = "$port"
     $hp = Start-Process -FilePath $exe -ArgumentList $gameArgs -WorkingDirectory $exeDir -RedirectStandardOutput $hEng -RedirectStandardError $hErr -WindowStyle Hidden -PassThru
-    $rec = @{ Proc = $hp; Id = "$($w.id)"; Url = $u; Label = "$($w.label)"; N = $n; Shown = 0; Started = (Get-Date); Listening = $false; UnwantedSince = $null; Reuse = [bool]$w.reuse; Port = $port; Log = $log; Spare = $isSpare }
+    $rec = @{ Proc = $hp; Id = "$($w.id)"; Url = $u; Label = "$($w.label)"; N = $n; Shown = 0; Started = (Get-Date); Listening = $false; UnwantedSince = $null; Reuse = [bool]$w.reuse; Port = $port; Log = $log; Spare = $isSpare; Eng = $hEng }
+    if (-not $isSpare -and (Test-Path -LiteralPath $huntFailedFile)) { Remove-Item -LiteralPath $huntFailedFile -Force -ErrorAction SilentlyContinue }
     Write-Host ""
     if ($isSpare) {
         $script:spare = $rec
@@ -211,10 +228,10 @@ function Watch-Rec($h) {
             if ($h.Spare) { Write-Host ("SPARE SERVER READY on port {0} after {1} seconds." -f $h.Port, $waited) -ForegroundColor Cyan }
             else { Write-HuntMarker; Write-Host ("SECOND SERVER READY on port {0} after {1} seconds. The game travels there by itself." -f $h.Port, $waited) -ForegroundColor Green }
         }
-        elseif ($txt -match "stopping here|InitListen on port \d+ = 0") { if ($h.Spare) { Stop-Spare "it could not open its port" } else { $script:huntFailedId = $h.Id; Stop-Hunt "it could not open its port" }; return $false }
-        elseif ($waited -ge $WaitSeconds) { if ($h.Spare) { Stop-Spare "it did not come up within $WaitSeconds seconds" } else { $script:huntFailedId = $h.Id; Stop-Hunt "it did not come up within $WaitSeconds seconds" }; return $false }
+        elseif ($txt -match "stopping here|InitListen on port \d+ = 0") { $why = "it could not open UDP port $($h.Port) (another program or a Windows port reservation holds it; STOP bat, or net stop winnat / net start winnat as admin)"; if ($h.Spare) { Stop-Spare $why } else { $script:huntFailedId = $h.Id; Write-HuntFailed $h.Id $why; Stop-Hunt $why }; return $false }
+        elseif ($waited -ge $WaitSeconds) { $why = "it did not come up within $WaitSeconds seconds (see logs\place$($h.N)_engine.log)"; if ($h.Spare) { Stop-Spare $why } else { $script:huntFailedId = $h.Id; Write-HuntFailed $h.Id $why; Stop-Hunt $why }; return $false }
     }
-    if ($h.Proc.HasExited) { if ($h.Spare) { Stop-Spare "its process ended by itself" } else { $script:huntFailedId = $h.Id; Stop-Hunt "its process ended by itself" }; return $false }
+    if ($h.Proc.HasExited) { $why = Describe-Exit $h.Proc $h.Started $h.Eng; if ($h.Spare) { Stop-Spare $why } else { $script:huntFailedId = $h.Id; Write-HuntFailed $h.Id $why; Stop-Hunt $why }; return $false }
     return $true
 }
 function Step-Hunt {
@@ -277,7 +294,7 @@ while ($true) {
         Write-Host ""
     }
     if ($listening -and -not $NoSecondServer) { try { Step-Hunt } catch { Write-Host "  [2nd] error: $($_.Exception.Message)" -ForegroundColor Yellow } }
-    if ($p.HasExited) { $stopReason = "the server process ended by itself (exit code $($p.ExitCode))"; break }
+    if ($p.HasExited) { $stopReason = "the server process ended: " + (Describe-Exit $p $start $engLog); break }
     if (-not $listening -and ((Get-Date) - $start).TotalSeconds -gt $WaitSeconds) { $stopReason = "it did not start listening within $WaitSeconds s"; break }
     # Q stops the server by hand. On some PCs this window has no usable console (input redirected, Windows Terminal
     # as the default console, Host Mode's hidden window): asking for a key then throws, and with 'Stop' as the error

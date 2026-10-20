@@ -77,8 +77,8 @@ function Get-PlayerGame {
 #   -NoFail: only close our leftovers, never stop the script (STOP and the launcher's Stop everything).
 $Ports1147Tcp = 63000..63027
 $Ports1147Udp = 8780..8787
-function Test-PortReserved1147([int[]]$Ports) {
-    try { $out = & netsh int ipv4 show excludedportrange protocol=tcp 2>$null } catch { return $null }
+function Test-PortReserved1147([int[]]$Ports, [string]$Protocol = 'tcp') {
+    try { $out = & netsh int ipv4 show excludedportrange protocol=$Protocol 2>$null } catch { return $null }
     foreach ($line in @($out)) {
         if ($line -match '^\s*(\d+)\s+(\d+)') { $a = [int]$Matches[1]; $b = [int]$Matches[2]; foreach ($p in $Ports) { if ($p -ge $a -and $p -le $b) { return "$a-$b" } } }
     }
@@ -125,6 +125,10 @@ function Clear-Ports1147([string]$KeepFrom = '', [switch]$NoFail) {
     if (-not $NoFail) {
         $r = Test-PortReserved1147 $Ports1147Tcp
         if ($r) { Fail "Windows has reserved the ports $r (this happens with Hyper-V, WSL or Docker), so the 1.14.7 backend cannot use them.`n         Fix: right-click Start > Terminal (Admin) or Windows PowerShell (Admin), run:  net stop winnat; net start winnat`n         then try again." }
+        # DF-FIX4: the game servers' UDP ports can be reserved too. Ramsgate (8780) may still work while every hunt
+        # (8781 and up) "searches forever" because its server copy cannot open its port.
+        $r = Test-PortReserved1147 (8780..8787) 'udp'
+        if ($r) { Fail "Windows has reserved the UDP ports $r (Hyper-V, WSL or Docker), so hunts would search forever: the hunt server cannot open its port.`n         Fix: right-click Start > Terminal (Admin) or Windows PowerShell (Admin), run:  net stop winnat; net start winnat`n         If it comes back after a restart, also run:  netsh int ipv4 add excludedportrange protocol=udp startport=8780 numberofports=8 store=persistent`n         then try again." }
     }
     return $closed
 }

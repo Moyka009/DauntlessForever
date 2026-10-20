@@ -22,6 +22,7 @@
                   "KombatKing\u0027s Oct 18 fixes (test): bigger Trials shop (72 items: mods, specials, Omnicells), potions and the Springtide egg no longer expire, loadout saving and switching fixed, old logs cleaned up, Free platinum game rule",
                   "Trials Quick Retry (Mods page, off by default): a spare copy of the trial warms up while you play, so Retry is instant on the host PC (about 4 GB of free RAM)",
                   "Intel Arc and other GPUs whose D3D11 driver crashes the game at start: put DXVK\u0027s dxgi.dll next to the game exe as dxgi_chain.dll (and its d3d11.dll beside it); the loader uses it instead of Windows\u0027 DXGI (issue #4)",
+                  "Hunts that cannot start now say why (reserved UDP ports, a port in use, the server copy closed by an antivirus, timeout) in the game and under the launcher\u0027s Play button, instead of searching forever",
                   "Joiners can no longer land on the host\u0027s character (host guard), and the crash guard now covers the second crash site after a behemoth dies",
                   "Party and multiplayer fixes (test): the training grounds take 4 players, a player who left a hunt no longer keeps others stuck in Ramsgate (the airship loop), parties survive a server restart, party members can follow a running hunt after 15 minutes, a new hunt from the dojo takes the whole party, and the party goes back to Ramsgate with the leader"
               ],
@@ -40,7 +41,7 @@
                  },
     "package":  {
                     "dir":  "package",
-                    "packageVersion":  "2026-10-19.15",
+                    "packageVersion":  "2026-10-19.16",
                     "setup":  "tools/setup.ps1",
                     "uninstallArgs":  [
                                           "-Uninstall"
