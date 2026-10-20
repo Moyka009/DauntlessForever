@@ -24,6 +24,11 @@ app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 // Drawn without the graphics card: on some PCs (drivers, scaling) the GPU path leaves bits of old frames behind buttons
 // and draws text soft. The launcher is a few flat panels, so the processor draws it just as fast. DF_GPU=1 turns it back on.
 if (process.env.DF_GPU !== '1') app.disableHardwareAcceleration();
+// Wine / Proton / CrossOver (Linux, Mac): Chromium's sandbox does not start there, so the window never appears (the
+// launcher runs with no window). Without the sandbox it opens normally. Windows itself is unchanged.
+const UNDER_WINE = process.platform === 'win32' && (!!(process.env.WINEPREFIX || process.env.WINELOADER || process.env.CX_BOTTLE || process.env.WINEDLLOVERRIDES) ||
+  (() => { try { return require('fs').existsSync(require('path').join(process.env.SystemRoot || 'C:\\windows', 'system32', 'winecfg.exe')); } catch { return false; } })());
+if (UNDER_WINE) { app.commandLine.appendSwitch('no-sandbox'); app.commandLine.appendSwitch('disable-gpu'); app.commandLine.appendSwitch('disable-gpu-sandbox'); }
 // One launcher at a time: opening it again brings the open window forward (two launchers would both poll the
 // friends service, both run voice, and fight over the same files)
 if (!app.requestSingleInstanceLock()) { app.quit(); process.exit(0); }
@@ -110,6 +115,7 @@ function createWindow() {
 
 app.whenReady().then(async () => {
   P.ensureDir(P.dataRoot());
+  if (UNDER_WINE) log('launcher', 'running under Wine/Proton/CrossOver: sandbox and GPU off');
   // voice chat: the window may use the microphone (it only ever shows the launcher's own pages)
   require('electron').session.defaultSession.setPermissionRequestHandler((_wc, perm, cb) => cb(perm === 'media' || perm === 'clipboard-sanitized-write' || perm === 'fullscreen'));
   registry = V.loadRegistry();

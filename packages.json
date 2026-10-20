@@ -18,14 +18,14 @@
                      }
                  ],
     "launcher":  {
-                     "version":  "0.2.18",
+                     "version":  "0.2.19",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
                      "notes":  "",
                      "date":  "2026-10-19",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.18.asar",
-                                 "sha256":  "ae75aff3fbfb000ee423f99f425748620a25e16d5dd95944db37eda3eecd08cd",
-                                 "size":  1007827,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.19.asar",
+                                 "sha256":  "a1a1bfea6f1ba944d9fa12937d5cb066be718bf28cad20d5c6cbc6861fab66b2",
+                                 "size":  1008641,
                                  "minShell":  "0.2.4"
                              }
                  }
