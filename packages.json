@@ -2,9 +2,9 @@
     "packages":  [
                      {
                          "id":  "1.6.2",
-                         "packageVersion":  "2026-10-19",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-19.zip",
-                         "sha256":  "7d0bf1c1717e99059076113d008cfa6264e7200f696b372a2baae70c5b194c6c",
+                         "packageVersion":  "2026-10-19.2",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-19.2.zip",
+                         "sha256":  "ed6344b8401245fe4a50cc39807d4155f2731dc7707fcb0c75f4ec4b38eeb678",
                          "date":  "2026-10-19",
                          "note":  "Reserved UDP game ports detected before play"
                      },
