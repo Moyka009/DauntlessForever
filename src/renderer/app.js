@@ -290,7 +290,15 @@ function renderDetail() {
     pr.hidden = false; $('p-fill').style.width = (d.pct || 0) + '%';
     $('p-label').textContent = t('Downloading {version}', { version: v.id }); $('p-right').textContent = d.pct != null ? `${d.pct}%` : '';
     $('p-foot').textContent = d.total ? t('{done} of {total}', { done: d.done, total: d.total }) + (d.speed ? ', ' + d.speed : '') + (d.eta ? ', ' + t('about {eta} left', { eta: d.eta }) : '') : t('Reading the manifest...');
+  } else if (st.busy === 'setup' && setupAuto[v.id]) {
+    // set-up after the download: a moving bar with the step it is on, so nobody thinks the launcher froze at 100%
+    const lg = logs[v.id] || [];
+    let last = ''; for (let i = lg.length - 1; i >= 0; i--) { const ln = String(lg[i].line || '').trim(); if (ln && !/^=+/.test(ln)) { last = ln; break; } }
+    pr.hidden = false; $('p-fill').style.width = '100%'; $('p-fill').classList.add('busy');
+    $('p-label').textContent = t('Setting up {version}', { version: v.id }); $('p-right').textContent = t('a minute or two');
+    $('p-foot').textContent = last ? last.slice(0, 120) : t('Installing the server files...');
   } else pr.hidden = true;
+  if (!(st.busy === 'setup' && setupAuto[v.id])) $('p-fill').classList.remove('busy');
 
   // log
   const lg = logs[v.id] || [];
@@ -869,8 +877,9 @@ function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<':
 function addLog(id, line, isErr) {
   (logs[id] = logs[id] || []).push({ line, isErr });
   if (logs[id].length > 400) logs[id].splice(0, logs[id].length - 400);
-  if (id === selected) { $('log').hidden = false; renderLog(id); }
+  if (id === selected) { $('log').hidden = false; renderLog(id); if (busy[id] === 'setup' && setupAuto[id] && kindOf(line)) $('p-foot').textContent = kindOf(line); }
 }
+function kindOf(line) { const ln = String(line || '').trim(); return ln && !/^=+/.test(ln) ? ln.slice(0, 120) : ''; }
 function renderLog(id) {
   const body = $('log-body'); const lg = logs[id] || [];
   body.innerHTML = lg.map(l => `<span class="${l.isErr ? 'err' : (/ready|running|DONE|All closed|complete/i.test(l.line) ? 'ok' : '')}">${esc(l.line)}</span>`).join('\n');

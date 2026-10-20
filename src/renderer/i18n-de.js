@@ -7,6 +7,9 @@
 (function (d) {
   d.de = {
     "@name": "Deutsch",
+    "Setting up {version}": "{version} wird eingerichtet",
+    "a minute or two": "ein bis zwei Minuten",
+    "Installing the server files...": "Serverdateien werden installiert...",
     "Join the Discord": "Tritt dem Discord bei",
     "One supporter chose to stay anonymous. Thank you too.": "Ein Unterst\u00fctzer m\u00f6chte anonym bleiben. Auch dir vielen Dank.",
     "{n} supporters chose to stay anonymous. Thank you too.": "{n} Unterst\u00fctzer m\u00f6chten anonym bleiben. Auch euch vielen Dank.",

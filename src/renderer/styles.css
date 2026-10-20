@@ -197,7 +197,9 @@ body { padding-top: var(--tb); }
 .progress-head { display: flex; justify-content: space-between; color: var(--ink-2); font-size: 13px; margin-bottom: 6px; }
 .bar { height: 10px; border-radius: 5px; background: var(--bg-3); overflow: hidden; }
 .bar-fill { height: 100%; width: 0; background: var(--aether); transition: width 0.3s linear; }
-@media (prefers-reduced-motion: reduce) { .bar-fill { transition: none; } }
+.bar-fill.busy { background: repeating-linear-gradient(-45deg, var(--aether) 0 12px, var(--bg-3) 12px 24px); background-size: 34px 10px; animation: bar-busy 1s linear infinite; }
+@keyframes bar-busy { from { background-position: 0 0; } to { background-position: 34px 0; } }
+@media (prefers-reduced-motion: reduce) { .bar-fill { transition: none; } .bar-fill.busy { animation: none; } }
 .progress-foot { color: var(--ink-3); font-size: 12.5px; margin-top: 6px; }
 
 /* log */
