@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-19.16",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-19.16.zip",
-                         "sha256":  "6cec063f965daddaaa95009a3f8a73ccadcb2ef116d64773fe31db6d061b5637",
+                         "packageVersion":  "2026-10-20",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-20.zip",
+                         "sha256":  "0160991d65028f3ad8b4ce384360fc2764467588daa69f2a3535e03746fb7340",
                          "date":  "2026-10-19",
-                         "note":  "Hunts that cannot start say why; reserved UDP ports and antivirus kills detected"
+                         "note":  "Slayer copy no longer brings the Middleman token that sent 1.14.7 back to the menu; affected saves repaired on Play"
                      }
                  ],
     "launcher":  {

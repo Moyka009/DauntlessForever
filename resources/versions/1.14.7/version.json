@@ -7,6 +7,7 @@
     "blurb":  "The last build before Awakening: the full 2023 Ramsgate, every weapon line as it was, and the Hunting Grounds as most players remember them.",
     "warning":  "Experimental. 1.14.7 is much less complete than 1.6.2: expect missing features, odd behaviour and the occasional crash. Play 1.6.2 for the full experience.",
     "works":  [
+                  "Slayer copy no longer brings 1.6.2\u0027s Middleman token over: it made 1.14.7 refuse your inventory and send you back to the menu. Saves that already have it are repaired when you press Play",
                   "Sign in offline, Ramsgate, NPCs and quests (quest progress is saved)",
                   "Modded mode (test): UE4SS mods and a Boss Health Bar (behemoth and part health) from the launcher\u0027s Mods page: Get UE4SS, then Modded mode On",
                   "Quest and dialogue text (fix by KombatKing)",
@@ -41,7 +42,7 @@
                  },
     "package":  {
                     "dir":  "package",
-                    "packageVersion":  "2026-10-19.16",
+                    "packageVersion":  "2026-10-20",
                     "setup":  "tools/setup.ps1",
                     "uninstallArgs":  [
                                           "-Uninstall"

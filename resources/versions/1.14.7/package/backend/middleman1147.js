@@ -19,6 +19,8 @@ function data(item,strict=true){
 }
 function normalize(inv,now){
  const slots=new Set();
+ // a token without fusion data (e.g. brought over from 1.6.2 by Slayer copy) is dropped instead of refusing the whole inventory
+ inv.instancedItems=inv.instancedItems.filter(i=>i.catalogId!==TOKEN||data(i,false));
  for(const i of inv.instancedItems){if(i.catalogId!==TOKEN)continue;const d=data(i);
   if(slots.has(d.SlotID))throw error('Duplicate fusion slot requires repair');slots.add(d.SlotID);
   i.instanceId=TOKEN+':'+d.SlotID;
