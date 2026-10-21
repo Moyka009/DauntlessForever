@@ -163,6 +163,11 @@ function FindItemIndexForWrite(InstancedItems: any[], Item: any, Operation: stri
     return Direct;
 }
 
+// DF-STAFFTITLES (Oct 20): staff and test titles (Dev Team, Phoenix Labs, Moderator, Test Title) are never handed to
+// the game, whatever a save, a reward list or an inventory edit holds, so nobody can show them over their name.
+const STAFF_TITLE_RX = /^TITLE_(DEV|PHOENIX|PHX|MODERATOR|TEST|STAFF|ADMIN)(_|$)/i;
+function IsStaffTitle(Item: any) { return !!Item && typeof Item.catalogId === "string" && STAFF_TITLE_RX.test(Item.catalogId); }
+function WithoutStaffTitles(List: any) { return Array.isArray(List) ? List.filter((Item) => !IsStaffTitle(Item)) : List; }
 function MakeEmptyInventoryRow(CharacterId: string): typeof inventory.$inferInsert {
     return {
         characterId: CharacterId,
@@ -297,6 +302,7 @@ export async function RunInventoryTransaction(UserId: string, CharacterId: strin
     InstancedItemsToRemove ??= [];
     StackedItemsToRemove ??= [];
     InstancedItemsToSave ??= [];
+    InstancedItemsToAdd = WithoutStaffTitles(InstancedItemsToAdd); StackedItemsToAdd = WithoutStaffTitles(StackedItemsToAdd); InstancedItemsToSave = WithoutStaffTitles(InstancedItemsToSave);   // DF-STAFFTITLES
 
     // [cell-exchange] Cap fusion duration on anything about to be persisted.
     InstancedItemsToAdd.forEach(ClampCellExchangeItem);
@@ -474,8 +480,8 @@ export async function GetInventoryForUserIdAndCharacterId(UserId: string, Charac
             success: true,
             data: {
                 characterId: CharacterId,
-                instancedItems: JSON.parse(InventoryFromDb!.instancedItems),
-                stackedItems: JSON.parse(InventoryFromDb!.stackedItems)
+                instancedItems: WithoutStaffTitles(JSON.parse(InventoryFromDb!.instancedItems)),   // DF-STAFFTITLES
+                stackedItems: WithoutStaffTitles(JSON.parse(InventoryFromDb!.stackedItems))
             }
         };
     }

@@ -2,19 +2,19 @@
     "packages":  [
                      {
                          "id":  "1.6.2",
-                         "packageVersion":  "2026-10-20",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-20.zip",
-                         "sha256":  "aef643bd27dfea0575c79c30a1af7fe92bbef2dd540afb0603a0ca7500b79453",
+                         "packageVersion":  "2026-10-20.2",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-20.2.zip",
+                         "sha256":  "5fd665db36e806b781434e8c7bf4d3a67c5a7b9bc882fe2d4e2adc06308c67f8",
                          "date":  "2026-10-20",
-                         "note":  "Numbered error box on top of the game when something breaks (Error 1-7); Training Dojo only starts when someone goes there on PCs with less than 32 GB of memory"
+                         "note":  "Staff and test titles (Dev Team, Phoenix Labs, Moderator) removed from the Mega pass and never shown"
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-20.3",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-20.3.zip",
-                         "sha256":  "b2f9447d3569d720d0f62753741c4c244a61bad6fd8d3019166f2be34e4a0e4e",
+                         "packageVersion":  "2026-10-20.4",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-20.4.zip",
+                         "sha256":  "97b9f0b0c79cb0e6e51402c903dae3a8e10dead1af24f309e663968daeac2ac2",
                          "date":  "2026-10-20",
-                         "note":  "Training Grounds back on: only PCs with 8 GB of memory or less keep it off (2026-10-20.2 used 32 GB as the line and kept almost everyone out). data\\dojo.txt = on / off overrides it"
+                         "note":  "Staff and test titles (Dev Team, Phoenix Labs, Moderator) removed from the Mega pass and never shown"
                      }
                  ],
     "launcher":  {

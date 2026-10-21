@@ -423,6 +423,15 @@ const CAP = (rel, adjust) => (c) => {
 };
 const zeroed = (o) => { for (const k of Object.keys(o)) if (typeof o[k] === 'number') o[k] = 0; return o; };
 
+// DF-STAFFTITLES (Oct 20): staff and test titles (Dev Team, Phoenix Labs, Moderator, Test Title) are never handed to
+// the game, whatever a save, a reward list or an inventory edit holds, so nobody can show them over their name.
+const STAFF_TITLE_RX = /^TITLE_(DEV|PHOENIX|PHX|MODERATOR|TEST|STAFF|ADMIN)(_|$)/i;
+function IsStaffTitle(Item) { return !!Item && typeof Item.catalogId === "string" && STAFF_TITLE_RX.test(Item.catalogId); }
+function WithoutStaffTitles(List) { return Array.isArray(List) ? List.filter((Item) => !IsStaffTitle(Item)) : List; }
+function stripStaffTitles(inv) {
+  if (inv.stackedItems.some(IsStaffTitle)) inv.stackedItems = WithoutStaffTitles(inv.stackedItems);
+  if (inv.instancedItems.some(IsStaffTitle)) inv.instancedItems = WithoutStaffTitles(inv.instancedItems);
+}
 function ensureStarterItems(inv) {
   // The game will not spawn a player without a weapon and a lantern. Retail handed these out in the tutorial.
   for (const id of ['WP_EB_TRAINING', 'LT_BASIC']) {
@@ -433,12 +442,14 @@ function inventoryOf(player, characterId) {
   const id = characterId || (player.characters[0] && player.characters[0].id) || 'none';
   if (!player.inventory[id]) player.inventory[id] = { stackedItems: [], instancedItems: [] };
   ensureStarterItems(player.inventory[id]);
+  stripStaffTitles(player.inventory[id]);   // DF-STAFFTITLES
   return player.inventory[id];
 }
 function applyInventory(inv, body) {
   body = freePlatinum1147.inventory(body);
   body = huntpass1147.inventory(inv, body);
   body = gameRules.inventory(inv, body);
+  if (body && typeof body === 'object') for (const k of ['addInstancedItems', 'saveInstancedItems', 'addStackedItems']) if (Array.isArray(body[k])) body[k] = WithoutStaffTitles(body[k]);   // DF-STAFFTITLES
   quality.validateInventory(body);
   for(const item of body.removeInstancedItems || []) if(typeof item!=='string' && (!item || typeof item.instanceId!=='string')) throw quality.httpError(400,'Invalid equipment removal');
   const incomingIds = new Map(inv.instancedItems.map(x => [x.instanceId,x.catalogId]));

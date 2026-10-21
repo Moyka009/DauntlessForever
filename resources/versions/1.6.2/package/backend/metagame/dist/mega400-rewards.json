@@ -389,10 +389,6 @@
         [
           "CONTAINER_1P_UNSEEN_ARMOUR_7415",
           1
-        ],
-        [
-          "TITLE_DEV_ALL",
-          1
         ]
       ]
     },
@@ -10249,10 +10245,6 @@
           1
         ],
         [
-          "TITLE_PHX_LOBSTER",
-          1
-        ],
-        [
           "GD_FRAME_B_BASE",
           1
         ]
@@ -15567,7 +15559,6 @@
     "TITLE_BRAWLER",
     "TITLE_CLASSY",
     "TITLE_CRIMSONBLADE",
-    "TITLE_DEV_ALL",
     "TITLE_DUALIST",
     "TITLE_ELEMENTALIST",
     "TITLE_EXPERTARMOURER",
@@ -15645,7 +15636,6 @@
     "TITLE_OUTLAW",
     "TITLE_PARTNER",
     "TITLE_PARTNER_REWARD",
-    "TITLE_PHX_LOBSTER",
     "TITLE_RAMSGATECHAMPION",
     "TITLE_RAMSGUARD_SUPPORTER_01",
     "TITLE_RAMSGUARD_SUPPORTER_02",

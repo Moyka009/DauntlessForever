@@ -55342,16 +55342,6 @@
       "source": "title_catalog.uasset"
     },
     {
-      "id": "TITLE_PHOENIX_00",
-      "name": "TITLE_PHOENIX_00",
-      "group": "Cosmetics",
-      "storage": "stack",
-      "cosmetic": true,
-      "singleton": true,
-      "level": 0,
-      "source": "title_catalog.uasset"
-    },
-    {
       "id": "TITLE_BLANK",
       "name": "TITLE_BLANK",
       "group": "Cosmetics",
@@ -55394,16 +55384,6 @@
     {
       "id": "TITLE_CRIMSONCAVALIER",
       "name": "Crimson Cavalier",
-      "group": "Cosmetics",
-      "storage": "stack",
-      "cosmetic": true,
-      "singleton": true,
-      "level": 0,
-      "source": "title_catalog.uasset"
-    },
-    {
-      "id": "TITLE_DEV_ALL",
-      "name": "TITLE_DEV_ALL",
       "group": "Cosmetics",
       "storage": "stack",
       "cosmetic": true,
@@ -56032,16 +56012,6 @@
       "source": "title_catalog.uasset"
     },
     {
-      "id": "TITLE_PHX_LOBSTER",
-      "name": "TITLE_PHX_LOBSTER",
-      "group": "Cosmetics",
-      "storage": "stack",
-      "cosmetic": true,
-      "singleton": true,
-      "level": 0,
-      "source": "title_catalog.uasset"
-    },
-    {
       "id": "TITLE_RAMSGATECHAMPION",
       "name": "Ramsgate Champion",
       "group": "Cosmetics",
@@ -56236,26 +56206,6 @@
       "name": "Team Captain",
       "group": "Cosmetics",
       "storage": "stack",
-      "cosmetic": true,
-      "singleton": true,
-      "level": 0,
-      "source": "title_catalog.uasset"
-    },
-    {
-      "id": "TITLE_TEST_01",
-      "name": "Test Title 01",
-      "group": "Cosmetics",
-      "storage": "instance",
-      "cosmetic": true,
-      "singleton": true,
-      "level": 0,
-      "source": "title_catalog.uasset"
-    },
-    {
-      "id": "TITLE_TEST_02",
-      "name": "Test Tile 02",
-      "group": "Cosmetics",
-      "storage": "instance",
       "cosmetic": true,
       "singleton": true,
       "level": 0,
@@ -56714,26 +56664,6 @@
     {
       "id": "TITLE_UNSEEN_02",
       "name": "TITLE_UNSEEN_02",
-      "group": "Cosmetics",
-      "storage": "stack",
-      "cosmetic": true,
-      "singleton": true,
-      "level": 0,
-      "source": "title_catalog.uasset"
-    },
-    {
-      "id": "TITLE_MODERATOR_00",
-      "name": "TITLE_MODERATOR_00",
-      "group": "Cosmetics",
-      "storage": "stack",
-      "cosmetic": true,
-      "singleton": true,
-      "level": 0,
-      "source": "title_catalog.uasset"
-    },
-    {
-      "id": "TITLE_MODERATOR_01",
-      "name": "TITLE_MODERATOR_01",
       "group": "Cosmetics",
       "storage": "stack",
       "cosmetic": true,

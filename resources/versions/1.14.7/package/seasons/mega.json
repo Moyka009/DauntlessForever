@@ -136,7 +136,6 @@
       "CONTAINER_1P_UNSEEN_ARMOUR_647472028",
       "BNC_ANIMATION_TRANSLATOR_00",
       "EM_INTRO_EVENT_SPRING_00",
-      "TITLE_TEST_02",
       "CONTAINER_1P_UNSEEN_ARMOUR_647472070",
       "QI_FLARE_PROMO_126"
     ],
@@ -1149,7 +1148,6 @@
       "QI_FLARE_PROMO_168",
       "EJ_FROSTFALL_04",
       "CONTAINER_1P_UNSEEN_ARMOUR_647472093",
-      "TITLE_MODERATOR_00",
       "QI_FLARE_PROMO_130"
     ],
     "147": [
@@ -1729,7 +1727,6 @@
       "EM_PLAYER_HP07B_DROPDEAD_00",
       "AC_BACK_HP06-1_00",
       "WP_GA_HP06B_ACADEMY_01",
-      "TITLE_DEV_ALL",
       "TITLE_EVENT_SPRING_01",
       "CONTAINER_1P_UNSEEN_ARMOUR_647472041"
     ],
@@ -1769,8 +1766,7 @@
       "BNC_SIGIL_017",
       "AR_PAPER_UMBRAL_HELM",
       "QI_FLARE_AUTUMN_FOX",
-      "EJ_HP12A_FROSTWARDEN_01",
-      "TITLE_TEST_01"
+      "EJ_HP12A_FROSTWARDEN_01"
     ],
     "226": [
       "TITLE_ZAI_4",
@@ -2153,7 +2149,6 @@
       "BNC_FABRIC_001",
       "TITLE_ROOKIE",
       "QI_FLARE_HP04_08",
-      "TITLE_MODERATOR_01",
       "QI_FLARE_PROMO_090",
       "BNC_FABRIC_010"
     ],
@@ -2189,7 +2184,6 @@
       "EM_PLAYER_HP09B_COMMANDO_02"
     ],
     "279": [
-      "TITLE_PHX_LOBSTER",
       "EM_PLAYER_GENERIC_018",
       "TITLE_WARDENSLAYER",
       "WP_GA_OSTIAN",
@@ -2726,7 +2720,6 @@
       "WP_AC_HP17B_ADAMANT_00",
       "EM_INTRO_HP11B_ENGINEER_01",
       "TITLE_SAINTS19_08",
-      "TITLE_PHOENIX_00",
       "TITLE_SLAYEROFQUEEN",
       "EM_PLAYER_HP07B_XYLOPHONE_00"
     ],
@@ -16903,11 +16896,6 @@
       "name": "TITLE_DARKHARVESTER",
       "source": "title_catalog.uasset"
     },
-    "TITLE_DEV_ALL": {
-      "kind": "stack",
-      "name": "TITLE_DEV_ALL",
-      "source": "title_catalog.uasset"
-    },
     "TITLE_DUALIST": {
       "kind": "stack",
       "name": "Dualist",
@@ -17623,16 +17611,6 @@
       "name": "Master Slayer",
       "source": "title_catalog.uasset"
     },
-    "TITLE_MODERATOR_00": {
-      "kind": "stack",
-      "name": "TITLE_MODERATOR_00",
-      "source": "title_catalog.uasset"
-    },
-    "TITLE_MODERATOR_01": {
-      "kind": "stack",
-      "name": "TITLE_MODERATOR_01",
-      "source": "title_catalog.uasset"
-    },
     "TITLE_MOYRA_1": {
       "kind": "instance",
       "name": "TITLE_MOYRA_1",
@@ -17671,16 +17649,6 @@
     "TITLE_PARTNER_REWARD": {
       "kind": "stack",
       "name": "The Faithful",
-      "source": "title_catalog.uasset"
-    },
-    "TITLE_PHOENIX_00": {
-      "kind": "stack",
-      "name": "TITLE_PHOENIX_00",
-      "source": "title_catalog.uasset"
-    },
-    "TITLE_PHX_LOBSTER": {
-      "kind": "stack",
-      "name": "TITLE_PHX_LOBSTER",
       "source": "title_catalog.uasset"
     },
     "TITLE_PRIYANI_1": {
@@ -17846,16 +17814,6 @@
     "TITLE_TEAMCAPTAIN": {
       "kind": "stack",
       "name": "Team Captain",
-      "source": "title_catalog.uasset"
-    },
-    "TITLE_TEST_01": {
-      "kind": "instance",
-      "name": "Test Title 01",
-      "source": "title_catalog.uasset"
-    },
-    "TITLE_TEST_02": {
-      "kind": "instance",
-      "name": "Test Tile 02",
       "source": "title_catalog.uasset"
     },
     "TITLE_TRANSLATOR_01": {
