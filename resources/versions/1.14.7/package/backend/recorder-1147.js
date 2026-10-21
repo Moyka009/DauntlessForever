@@ -1394,7 +1394,58 @@ function handle(svc, port, req, res, bodyBuf) {
   }
 }
 
-function onUpgrade(svc, port, req, socket) {
+// DF-CHAT-1147 (Oct 20): in-game text chat (XMPP over WebSocket), the chat server of the 1.6.2 package (Dauntless
+// Revived's, AGPL-3.0) in realtime/. It takes WebSocket upgrades on port 63000, which LAN joiners reach directly and
+// online joiners through their join proxy and the host's gateway (no relay change). CHAT=0 turns it off.
+const CHAT_PORT = 63000, CHAT_GAME_PORT = 5222;
+let chatHub = null, chat = null;
+function startChat() {
+  if ((process.env.CHAT || '').trim() === '0') { require('./logger').logger.info('chat: off (CHAT=0)'); return; }
+  try {
+    const compat = require('./realtime/compat');
+    // Chat knows a player by the sign-in id (EOS EpicAccountId, lower-case): the game's rooms and nicknames use it,
+    // and the loader logs the game's chat connection in with it. The account id is accepted too.
+    const chatPlayer = (id) => { const want = String(id || '').toLowerCase(); return Object.values(state.players || {}).find((p) => p && (p.accountId === id || String(p.epicId || '').toLowerCase() === want)) || null; };
+    compat.bind({
+      playerByAccount: chatPlayer,
+      accountFromToken: (token) => {
+        let key = sessions.get(token) || null;
+        if (!key && epicSubOf(token)) key = playerKeyFromEpicToken(token);
+        const p = key && state.players[key];
+        return p ? (String(p.epicId || '').toLowerCase() || p.accountId) : null;
+      },
+      partyIdOf: (id) => { const p = chatPlayer(id); if (!p) return null; const P = groupOf(p.accountId); return P ? P.id : (p.partyId || null); },
+    });
+    chatHub = new (require('node:events').EventEmitter)();
+    // data\chat_trace.txt: log every chat frame (tokens, passwords and message text are blanked by the chat server)
+    const env = Object.assign({}, process.env, fs.existsSync(path.join(DATA_DIR, 'chat_trace.txt')) ? { CHAT_TRACE: '1' } : {});
+    chat = require('./realtime/chat').AttachChat(chatHub, env);
+    if (!chat) chatHub = null;
+    // the game itself connects to ws://<ChatEndpoint>:5222 (its XMPP port is fixed in the exe): a listener of its own
+    if (chatHub) {
+      const cs = http.createServer((req, res) => { res.writeHead(404, { 'Content-Length': 0 }); res.end(); });
+      cs.on('upgrade', (req, socket, head) => { try { if (!privateAddress(socket.remoteAddress)) { socket.destroy(); return; } chatHub.emit('upgrade', req, socket, head); } catch (e) { try { socket.destroy(); } catch (x) {} } });
+      cs.on('error', (e) => require('./logger').logger.warn(`chat: cannot listen on port ${CHAT_GAME_PORT} (${e.code || e.message}); chat only through 63000`));
+      cs.listen(CHAT_GAME_PORT, BIND_HOST, () => require('./logger').logger.info(`chat: listening on ${BIND_HOST}:${CHAT_GAME_PORT} and ${CHAT_PORT}`));
+    }
+  } catch (e) { chatHub = null; chat = null; require('./logger').logger.error('chat: not started (' + (e && e.message) + '). The backend runs without chat.'); }
+  // the launcher leaves data\announce.txt (Host Mode welcome, "closing in a minute"); it is said in chat, then deleted
+  const announceFile = path.join(DATA_DIR, 'announce.txt');
+  setInterval(() => {
+    try {
+      if (!fs.existsSync(announceFile)) return;
+      const text = fs.readFileSync(announceFile, 'utf8').trim();
+      fs.rmSync(announceFile, { force: true });
+      if (text && chat && chat.muc && typeof chat.muc.Announce === 'function') chat.muc.Announce(text);
+    } catch (e) { /* next time */ }
+  }, 2000).unref();
+}
+function onUpgrade(svc, port, req, socket, head) {
+  if (chatHub && port === CHAT_PORT) {
+    if (!privateAddress(socket.remoteAddress)) { socket.destroy(); return; }
+    chatHub.emit('upgrade', req, socket, head);
+    return;
+  }
   const key = req.headers['sec-websocket-key'];
   const url = new URL(req.url, 'http://127.0.0.1');
   if (!key || !privateAddress(socket.remoteAddress)) { socket.destroy(); return; }
@@ -1442,6 +1493,7 @@ function start() {
     console.log(capRoot ? `Captures: ${capRoot}` : `Captures: NOT FOUND in ${CAP_DIR} - game-wide data (progression tables, events, patch notes) will be missing.`);
     console.log('Lines marked ? are requests this recorder does not answer yet (empty 404). Press Ctrl+C to stop.\n');
   };
+  startChat();   // DF-CHAT-1147
   for (const svc of services) {
     const server = http.createServer((req, res) => {
       const chunks = []; let size = 0;
@@ -1449,7 +1501,7 @@ function start() {
       req.on('end', () => { try { handle(svc, svc.port, req, res, Buffer.concat(chunks)); } catch (e) { noteError('handle ' + req.url, e); try { res.writeHead(500, { 'Content-Length': 0 }); res.end(); } catch (x) {} } });
       req.on('error', () => {});
     });
-    server.on('upgrade', (req, socket) => { try { onUpgrade(svc, svc.port, req, socket); } catch (e) { noteError('upgrade ' + req.url, e); try { socket.destroy(); } catch (x) {} } });
+    server.on('upgrade', (req, socket, head) => { try { onUpgrade(svc, svc.port, req, socket, head); } catch (e) { noteError('upgrade ' + req.url, e); try { socket.destroy(); } catch (x) {} } });
     server.on('error', (e) => { failed.push({ port: svc.port, service: svc.service, error: e.code || e.message }); done(); });
     server.listen(svc.port, BIND_HOST, () => { servers.push(server); done(); });
   }

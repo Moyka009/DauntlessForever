@@ -55,6 +55,9 @@ if ($JoinHost) {
 } else {
     Copy-Item -LiteralPath (Join-Path $Root 'profile\Game.ini') -Destination (Join-Path $PrivCfg 'Game.ini') -Force
 }
+# DF-CHAT-1147: in-game text chat goes to the backend's port 63000 (this PC, or the host when joining on LAN; an online
+# joiner's join proxy also listens on 127.0.0.1:63000)
+Set-ChatConfig1147 $PrivCfg $(if ($JoinHost) { $JoinHost } else { '127.0.0.1' }) 63000
 $eosLog = Join-Path $EosDir 'eos_offline.log'
 $eosLogStart = if (Test-Path -LiteralPath $eosLog) { (Get-Item -LiteralPath $eosLog).Length } else { 0 }
 
@@ -69,6 +72,17 @@ $psi.EnvironmentVariables['LOCALAPPDATA']    = "$HomeDir\AppData\Local"
 $psi.EnvironmentVariables['APPDATA']         = "$HomeDir\AppData\Roaming"
 $psi.EnvironmentVariables['EOS_OFFLINE_DIR'] = $EosDir
 Add-GameMods $psi   # launcher Mods page: UE4SS (-dfmods) and the Boss Health Bar
+# Troubleshooting: data\client_log.txt (any content) makes the game write its own log to logs\client_engine.log (the
+# shipping game's log file stays empty otherwise). The file's text, if any, is passed as -LogCmds (log categories).
+$clientLogSwitch = Join-Path $Root 'data\client_log.txt'
+if (Test-Path -LiteralPath $clientLogSwitch) {
+    $logCmds = ([IO.File]::ReadAllText($clientLogSwitch)).Trim() -replace '"', ''
+    $clientLog = Join-Path $Root 'logs\client_engine.log'
+    $extra = ' -stdout -FullStdOutLogOutput' + $(if ($logCmds) { " -LogCmds=`"$logCmds`"" } else { '' })
+    $psi.FileName = Join-Path $env:SystemRoot 'System32\cmd.exe'
+    $psi.Arguments = '/c ""' + $Exe + '" ' + $GameArgs + $psi.Arguments.Substring($GameArgs.Length) + $extra + ' > "' + $clientLog + '" 2>&1"'
+    Say "Troubleshooting: the game's log goes to logs\client_engine.log" 'Yellow'
+}
 $startTime = Get-Date
 $p = [Diagnostics.Process]::Start($psi)
 Say ''

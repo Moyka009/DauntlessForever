@@ -25,16 +25,15 @@ function create(ctx){
   return result;
  }
  function counts(p,character,l){
+  // Native 1.14.7 counts one starter slot on the character, then the five Path slots.
+  // Keep the existing saved/store account field in its legacy starter-inclusive encoding.
   const metadata=p.loadoutSlots1147;
-  let account=integer(metadata?.account,MAX-PATH_SLOTS)&&metadata.account>=1?metadata.account:1;
-  const chars=Math.max(earned(p),integer(metadata?.characters?.[character],PATH_SLOTS)?metadata.characters[character]:0);
-  // Existing saved slots are evidence that the player has used them. Never revoke them during repair.
+  let account=integer(metadata?.account,MAX-PATH_SLOTS)&&metadata.account>=1?metadata.account-1:0;
+  const chars=1+Math.max(earned(p),integer(metadata?.characters?.[character],PATH_SLOTS)?metadata.characters[character]:0);
   const used=Array.isArray(l?.loadouts)?l.loadouts.length:0;
-  account=Math.max(account,Math.min(MAX-PATH_SLOTS,Math.max(1,used-chars)));
-  // Old broken saves can contain >11 slots with no saved Path data. Retain all of them without
-  // inventing Path node ownership; the compatibility allowance is local to the loadout counts.
+  account=Math.max(account,Math.min(MAX-PATH_SLOTS-1,Math.max(0,used-chars)));
   const retained=Math.max(chars,used-account);
-  return {num_account_slots:account,max_account_slots:MAX-PATH_SLOTS,num_character_slots:retained,max_character_slots:Math.max(PATH_SLOTS,retained)};
+  return {num_account_slots:account,max_account_slots:MAX-PATH_SLOTS-1,num_character_slots:retained,max_character_slots:PATH_SLOTS+1};
  }
  function reply(l,c){return {loadouts:l.loadouts,persistent:l.persistent,...c,active_index:l.active_index,needs_migration:false};}
  const ok=value=>({status:200,json:{code:null,message:'OK',payload:copy(value)},note:'loadouts1147: saved/normalized native loadouts'});
@@ -69,7 +68,7 @@ function create(ctx){
    l.loadouts[i].slot_index=i;l.loadouts[i].persistent=copy(l.persistent);
   }
   if(!integer(l.active_index,MAX-1)||!l.loadouts[l.active_index])l.active_index=0;
-  const slotCounts={...(object(p.loadoutSlots1147)?p.loadoutSlots1147:{}),account:c.num_account_slots,characters:{...(object(p.loadoutSlots1147?.characters)?p.loadoutSlots1147.characters:{}),[character]:Math.min(PATH_SLOTS,c.num_character_slots)}};
+  const slotCounts={...(object(p.loadoutSlots1147)?p.loadoutSlots1147:{}),account:c.num_account_slots+1,characters:{...(object(p.loadoutSlots1147?.characters)?p.loadoutSlots1147.characters:{}),[character]:Math.min(PATH_SLOTS,c.num_character_slots-1)}};
   return {l,c,slotCounts,original,changed:JSON.stringify(l)!==JSON.stringify(original)||JSON.stringify(slotCounts)!==JSON.stringify(p.loadoutSlots1147)};
  }
  function persist(p,character,record,repair){
@@ -88,8 +87,8 @@ function create(ctx){
   if(['POST','PUT'].includes(c.method)&&parts.length===3&&parts[1]==='unlock'){
    const p=player(c,account),ch=p.characters?.[0];if(!ch)fail(404,'No loadout character');const rec=prepared(p,ch.id);
    const n=/^(0|[1-9]\d*)$/.test(parts[2])?Number(parts[2]):-1;
-   if(!integer(n,MAX-PATH_SLOTS)||n<1)fail(400,'Invalid account slot count');
-   const total=Math.max(n,rec.c.num_account_slots);rec.c.num_account_slots=total;rec.slotCounts.account=total;
+   if(!integer(n,MAX-PATH_SLOTS-1)||n<1)fail(400,'Invalid account slot count');
+   const total=Math.max(n,rec.c.num_account_slots);rec.c.num_account_slots=total;rec.slotCounts.account=total+1;
    const length=Math.min(MAX,total+rec.c.num_character_slots),template=rec.l.loadouts[0];
    for(let i=rec.l.loadouts.length;i<length;i++)rec.l.loadouts.push({...copy(template),slot_index:i,persistent:copy(rec.l.persistent)});
    persist(p,ch.id,rec,rec.changed);return ok(rec.c);
@@ -109,9 +108,11 @@ function create(ctx){
   }
   if(!['POST','PUT'].includes(c.method))return null;
   if(parts.length===4&&parts[2]==='unlock'){
-   // DF-LOADOUT-SLOT: the game sends the total slot count it now expects (account slots + Path slots).
-   const n=/^(0|[1-9]\d*)$/.test(parts[3])?Number(parts[3]):-1,want=n-rec.c.num_account_slots;
-   if(!integer(n,MAX)||want>Math.max(earned(p),rec.c.num_character_slots))fail(409,'Character slots have not been unlocked on the Slayer Path');
+   // ResolveProgressionLoadoutSlotUnlocks sends a missing-character-slot count.
+   // Entitlement comes from native Path nodes (or retained saved slots), never from account purchases.
+   const n=/^(0|[1-9]\d*)$/.test(parts[3])?Number(parts[3]):-1;
+   if(!integer(n,PATH_SLOTS+1)||n<1)fail(400,'Invalid character slot request');
+   // prepared() reconciles to the authoritative 1 + Path count. Replays never add extra slots.
    if(rec.changed)persist(p,character,rec,true);return ok(rec.c);
   }
   if(parts.length===4&&parts[2]==='active'){

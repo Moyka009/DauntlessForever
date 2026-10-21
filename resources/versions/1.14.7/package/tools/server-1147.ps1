@@ -111,7 +111,23 @@ $env:D1147_SERVER = "1"; $env:D1147_PORT = "$Port"; $env:D1147_DIR = $WorkDir
 if ($NoReplication) { $env:D1147_REPLICATE = "0" }
 if ($NoProgression) { $env:D1147_PROGRESSION = "0" }
 $gameArgs = "-EpicPortal -server -unattended -nullrhi -nosound -log -stdout -FullStdOutLogOutput -RepDriverDisable -nosplash -NoLoadingScreen -nomoviestartup -NoVerifyGC"
+# DF-SERVERSPEED (Oct 21): every server copy runs at High priority with Windows power throttling (efficiency mode)
+# off. On some PCs Windows slowed the hidden server copies down while the game had the focus, so a hunt ran at a few
+# frames per second and hitched. Never stops a server: if Windows refuses, it runs at normal priority.
+# data\server_priority.txt with the word normal turns it off.
+function Set-ServerSpeed($proc) {
+    try {
+        if (-not $proc) { return }
+        $pf = Join-Path $dataDir 'server_priority.txt'
+        if ((Test-Path -LiteralPath $pf) -and ((Get-Content -LiteralPath $pf -Raw).Trim().ToLower() -eq 'normal')) { return }
+        try { $proc.PriorityClass = 'High' } catch { Write-Host "  (High priority refused: $($_.Exception.Message))" -ForegroundColor Yellow }
+        if (-not ('DFS.P' -as [type])) { Add-Type -Namespace DFS -Name P -MemberDefinition '[DllImport("kernel32.dll")] public static extern bool SetProcessInformation(IntPtr h, int c, byte[] i, int s);' }
+        # ProcessPowerThrottling (4): Version 1, ControlMask EXECUTION_SPEED, StateMask 0 = never throttle
+        [void][DFS.P]::SetProcessInformation($proc.Handle, 4, [byte[]](1,0,0,0,1,0,0,0,0,0,0,0), 12)
+    } catch { Write-Host "  (server speed: $($_.Exception.Message))" -ForegroundColor Yellow }
+}
 $p = Start-Process -FilePath $exe -ArgumentList $gameArgs -WorkingDirectory $exeDir -RedirectStandardOutput $engLog -RedirectStandardError $errLog -WindowStyle Hidden -PassThru
+Set-ServerSpeed $p
 Write-Host "Server copy started (pid $($p.Id)), map $Map, UDP port $Port."
 Write-Host "Waiting for it to listen (up to $WaitSeconds s). Press Q in this window to stop the server at any time."
 
@@ -181,6 +197,7 @@ function Start-Hunt($w, [int]$port, [bool]$isSpare) {
     $hEng = Join-Path $logDir ("place{0}_engine.log" -f $n); $hErr = Join-Path $logDir ("place{0}_engine_err.log" -f $n)
     $env:USERPROFILE = $hHome; $env:LOCALAPPDATA = $hLocal; $env:APPDATA = $hRoaming; $env:EOS_OFFLINE_DIR = $hEos; $env:D1147_PORT = "$port"
     $hp = Start-Process -FilePath $exe -ArgumentList $gameArgs -WorkingDirectory $exeDir -RedirectStandardOutput $hEng -RedirectStandardError $hErr -WindowStyle Hidden -PassThru
+    Set-ServerSpeed $hp
     $rec = @{ Proc = $hp; Id = "$($w.id)"; Url = $u; Label = "$($w.label)"; N = $n; Shown = 0; Started = (Get-Date); Listening = $false; UnwantedSince = $null; Reuse = [bool]$w.reuse; Port = $port; Log = $log; Spare = $isSpare; Eng = $hEng }
     if (-not $isSpare -and (Test-Path -LiteralPath $huntFailedFile)) { Remove-Item -LiteralPath $huntFailedFile -Force -ErrorAction SilentlyContinue }
     Write-Host ""

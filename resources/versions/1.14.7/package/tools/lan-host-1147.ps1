@@ -75,7 +75,7 @@ if ($blockers.Count) {
 }
 # Allowed: the home network and Tailscale's private range (100.64.0.0/10). The backend itself also refuses anything else.
 $allowFrom = @('LocalSubnet', '100.64.0.0/10')
-New-NetFirewallRule -DisplayName $RuleTcp -Direction Inbound -Protocol TCP -LocalPort '63000-63027' -RemoteAddress $allowFrom -Profile Any -Action Allow | Out-Null
+New-NetFirewallRule -DisplayName $RuleTcp -Direction Inbound -Protocol TCP -LocalPort @('63000-63027', '5222') -RemoteAddress $allowFrom -Profile Any -Action Allow | Out-Null
 New-NetFirewallRule -DisplayName $RuleUdp -Direction Inbound -Protocol UDP -LocalPort '8780-8787' -RemoteAddress $allowFrom -Profile Any -Action Allow | Out-Null
 Say 'Game ports opened for your home network only (not the open internet).' 'Green'
 

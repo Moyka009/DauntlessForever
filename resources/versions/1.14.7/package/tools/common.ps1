@@ -10,7 +10,7 @@ $ConfigFile = Join-Path $Root 'config.json'
 $ExeHash      = 'F3F95FBF22709EF077A11632ED95D675B7209B7E0172D9ECB9BA7D02A1FBB66B'   # Dauntless 1.14.7, CL 647472
 $EpicEosHash  = 'CBC0E5C922CEB88A9FA99121008AE9CD76244B17753701D9D25C6B596EA2FBFC'   # Epic's EOSSDK-Win64-Shipping.dll
 $StandInHash  = '4113C9EEBFBAC08532B6566A48F69E4F64A6B8E18A18AAFBA43F62F8F7DFDF70'   # bin\EOSSDK-Win64-Shipping.dll (offline sign-in)
-$LoaderHash   = 'CFE9B7B336B67676D4B071D9CC210FC375A04B2B4D3C399927828E3EA479DCF2'    # bin\dxgi.dll (server loader: fix5 + KombatKing's equipment fix R1 + owner-only replication; client: significance guard, cheap checks Oct 21)
+$LoaderHash   = 'B1F3008426352B9982997B0D5C7FB1864174913787A44B577A6A963679A495DF'    # bin\dxgi.dll (in-game text chat Oct 21; server loader: fix5 + KombatKing's equipment fix R1 + owner-only replication; client: significance guard, cheap checks Oct 21)
 # Quest text fix by KombatKing (AGPL-3.0, source\QuestDialogue1147-R2-source.zip): adds the missing "Unspecified"
 # addressee lines to the game's own text, so quests and dialogue show real sentences. Copied into Archon\Content\Paks.
 $QuestPakName = 'zzzzzzzzzzzzzzzz_QuestDialogueFallback1147_P.pak'
@@ -180,6 +180,21 @@ function Add-GameLanguage([string]$GameArgs) {
 # --- Modded mode (launcher Mods page; tools\ue4ss.cjs writes data\mods.txt)
 # mods=on: the game gets -dfmods (the loader then loads ue4ss\UE4SS.dll) and the Boss Health Bar (bossbar=on, the default);
 # servers=on: the server copies load UE4SS too (D1147_SERVER_MODS=1).
+# DF-CHAT-1147: the game's chat settings in its private Engine.ini: [OnlineSubsystemMcp.XMPP] points at our backend
+# (XMPP over WebSocket, no SSL); [WebSockets.LibWebSockets] lets it connect to an address that is not on its built-in list.
+function Set-ChatConfig1147([string]$CfgDir, [string]$ChatHost, [int]$ChatPort) {
+    $eng = Join-Path $CfgDir 'Engine.ini'
+    $lines = if (Test-Path -LiteralPath $eng) { @(Get-Content -LiteralPath $eng) } else { @() }
+    $keep = New-Object System.Collections.Generic.List[string]; $skip = $false
+    foreach ($l in $lines) {
+        if ($l -match '^\[(OnlineSubsystemMcp\.XMPP|WebSockets\.LibWebSockets)\]') { $skip = $true; continue }
+        if ($skip -and $l -match '^\[') { $skip = $false }
+        if (-not $skip) { $keep.Add($l) }
+    }
+    $add = @('[OnlineSubsystemMcp.XMPP]', "ServerAddr=`"ws://$ChatHost`"", "ServerPort=$ChatPort", 'bUseSSL=false', '',
+             '[WebSockets.LibWebSockets]', 'bDisableDomainWhitelist=true', '')
+    Set-Content -LiteralPath $eng -Encoding ASCII -Value ($add + $keep)
+}
 function Get-ModsMode {
     $m = @{ On = $false; Servers = $false; BossBar = $true; TrialsRetry = $false }
     try {

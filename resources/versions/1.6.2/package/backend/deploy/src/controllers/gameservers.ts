@@ -209,6 +209,9 @@ async function StartServer(Map: string, Behemoth: string | undefined, Matchmaker
 
     Child.unref();
 
+    // DF-SERVERSPEED: High priority, no Windows power throttling (stops hunts hitching on some PCs; serverspeed162.js)
+    require("../serverspeed162").Apply(Child, Port, logger);
+
     // Game Rule "Unlimited Resupply Beacons" (solo play, hunts only; resupply162.js). Never stops or delays the server.
     if (!IsRamsgate && !IsTrainingDojo) require("../resupply162").Apply(Child, GAMESERVER_BINARY_PATH, Port, logger);
 
