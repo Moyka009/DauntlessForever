@@ -253,13 +253,14 @@ function Get-ModsMode {
 }
 function Invoke-ModsPrepare {
     $script:ModsMeter = $false
+    $script:ModsHealthbar = $false
     $nd = $null
     try { $nd = (Get-Config).Node } catch {}
     if (-not $nd -or -not (Test-Path -LiteralPath $nd)) { $nd = Find-Node }
     if (-not $nd) { return $false }
     try {
         $r = (& $nd (Join-Path $PSScriptRoot 'ue4ss.cjs') prepare | Out-String) | ConvertFrom-Json
-        if ($r.ok -and $r.on) { $script:ModsMeter = [bool]$r.meter; return $true }
+        if ($r.ok -and $r.on) { $script:ModsMeter = [bool]$r.meter; $script:ModsHealthbar = [bool]$r.healthbar; return $true }
         if ($r.error) { Say "Mods: $($r.error) Starting without mods." 'Yellow' }
     } catch { Say 'Mods: could not get UE4SS ready. Starting without mods.' 'Yellow' }
     return $false
@@ -278,12 +279,26 @@ function Start-ModsExtras($psi) {
     $meterDir = Join-Path $DataDir 'meter'
     New-Item -ItemType Directory -Force $meterDir | Out-Null
     $psi.EnvironmentVariables['DF_METER_DIR'] = $meterDir
-    if (-not $script:ModsMeter) { return }
-    try {
-        Start-Process -FilePath 'powershell.exe' -WindowStyle Hidden -ArgumentList @('-NoProfile', '-STA', '-ExecutionPolicy', 'Bypass',
-            '-File', "`"$(Join-Path $PSScriptRoot 'meter-overlay.ps1')`"", '-Dir', "`"$meterDir`"") | Out-Null
-        Say 'Damage meter window: on (play in borderless or windowed mode to see it; Ctrl+Shift+M locks it).' 'Gray'
-    } catch {}
+    if ($script:ModsMeter) {
+        try {
+            Start-Process -FilePath 'powershell.exe' -WindowStyle Hidden -ArgumentList @('-NoProfile', '-STA', '-ExecutionPolicy', 'Bypass',
+                '-File', "`"$(Join-Path $PSScriptRoot 'meter-overlay.ps1')`"", '-Dir', "`"$meterDir`"") | Out-Null
+            Say 'Damage meter window: on (play in borderless or windowed mode to see it; Ctrl+Shift+M locks it).' 'Gray'
+        } catch {}
+    }
+    # Behemoth health bars (Provy's healthbar mod, AGPL-3.0): its overlay window reads healthbar.json from the same folder.
+    # Started here rather than by the mod itself, so the game never launches PowerShell (no flash, nothing for antivirus).
+    if ($script:ModsHealthbar) {
+        try {
+            $hbExe = Split-Path -Parent $psi.FileName
+            $hb = Join-Path $hbExe 'ue4ss\Mods\healthbar\healthbar-overlay.ps1'
+            if (Test-Path -LiteralPath $hb) {
+                Start-Process -FilePath 'powershell.exe' -WindowStyle Hidden -ArgumentList @('-NoProfile', '-STA', '-ExecutionPolicy', 'Bypass',
+                    '-File', "`"$hb`"", '-QuitWhenGameCloses', '-Dir', "`"$meterDir`"") | Out-Null
+                Say 'Behemoth health bars: on (borderless or windowed mode; F8 hides them).' 'Gray'
+            }
+        } catch {}
+    }
 }
 
 function Set-MenuBackground([string]$CfgDir) {

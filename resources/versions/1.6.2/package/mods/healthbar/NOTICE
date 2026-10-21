@@ -1,0 +1,13 @@
+healthbar
+Copyright (C) 2026 the healthbar authors
+Licensed under the GNU Affero General Public License, version 3 only (see LICENSE).
+
+This mod was written from scratch. It does not contain code copied from the projects below.
+
+It is made to run with, and reads files written by the setup of:
+  - Dauntless Forever (https://github.com/addison2k/DauntlessForever), AGPL-3.0, Copyright (C) 2026 Addison2k.
+    healthbar writes its small data file into the same meter folder (DF_METER_DIR) that the bundled
+    DamageMeter mod uses.
+  - UE4SS (https://github.com/UE4SS-RE/RE-UE4SS), MIT licence. It is the Lua mod loader this runs on.
+
+"Dauntless" and related names belong to their owners. They are used here only to say what this mod works with.

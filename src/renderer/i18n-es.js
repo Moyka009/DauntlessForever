@@ -147,6 +147,7 @@
     "Comes with UE4SS": "Viene con UE4SS",
     "(tools for mod makers; leave them as they are if you are not sure)": "(herramientas para creadores de mods; d\u00e9jalas como est\u00e1n si no est\u00e1s seguro)",
     "UE4SS tool": "Herramienta de UE4SS",
+    "Keys": "Teclas",
     "This folder has no Scripts or dlls folder, so UE4SS may not load it.": "Esta carpeta no tiene una carpeta Scripts ni dlls, as\u00ed que puede que UE4SS no la cargue.",
     "{name} on: applies the next time you press Play.": "{name} activado: se aplica la pr\u00f3xima vez que pulses Jugar.",
     "{name} off: applies the next time you press Play.": "{name} desactivado: se aplica la pr\u00f3xima vez que pulses Jugar.",

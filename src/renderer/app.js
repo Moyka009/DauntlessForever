@@ -584,13 +584,13 @@ async function renderMods() {
   for (const m of shown) {
     if (m.builtin && !toolsHead) { toolsHead = true; list.insertAdjacentHTML('beforeend', `<div class="season-row"><div class="season-kind"><b>${esc(t('Comes with UE4SS'))}</b> ${esc(t('(tools for mod makers; leave them as they are if you are not sure)'))}</div></div>`); }
     const row = document.createElement('div'); row.className = 'season-row rule-row' + (m.on ? ' active' : '');
-    row.innerHTML = `<div><div class="season-name">${esc(m.name)}</div><div class="season-kind">${esc(m.about ? m.about : m.scripts ? (m.builtin ? t('UE4SS tool') : t('Mod')) : t('This folder has no Scripts or dlls folder, so UE4SS may not load it.'))}</div></div>
+    row.innerHTML = `<div><div class="season-name">${esc(m.title || m.name)}</div><div class="season-kind">${esc(m.about ? m.about : m.scripts ? (m.builtin ? t('UE4SS tool') : t('Mod')) : t('This folder has no Scripts or dlls folder, so UE4SS may not load it.'))}</div>${Array.isArray(m.keys) && m.keys.length ? `<div class="season-kind mod-keys">${esc(t('Keys'))}: ${m.keys.map((k) => `<b>${esc(k[0])}</b> ${esc(k[1])}`).join(' &middot; ')}</div>` : ''}</div>
       <div class="rule-choices" role="group" aria-label="${esc(m.name)}"></div>`;
     const host = row.querySelector('.rule-choices');
     for (const [val, label] of [[false, 'Off'], [true, 'On']]) {
       const b = document.createElement('button'); b.className = 'season-filter rule-choice'; b.textContent = t(label);
       b.setAttribute('aria-pressed', String(!!m.on === val));
-      if (!!m.on !== val) b.onclick = () => act('mod', m.name, val ? 'on' : 'off', val ? t('{name} on: applies the next time you press Play.', { name: m.name }) : t('{name} off: applies the next time you press Play.', { name: m.name }));
+      if (!!m.on !== val) b.onclick = () => act('mod', m.name, val ? 'on' : 'off', val ? t('{name} on: applies the next time you press Play.', { name: m.title || m.name }) : t('{name} off: applies the next time you press Play.', { name: m.title || m.name }));
       host.appendChild(b);
     }
     list.appendChild(row);

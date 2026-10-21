@@ -1,0 +1,11 @@
+# healthbar overlay: behemoth names
+# SPDX-License-Identifier: AGPL-3.0-only. Copyright (C) 2026 the healthbar authors. See LICENSE.
+#
+# Format:  internal_id = name shown on screen        (lines starting with # are ignored)
+#
+# The mod tries to read each behemoth's real in-game name by itself. When it cannot, the overlay shows the code
+# name and adds the id to the bottom of this file (under "seen but not named yet"): type the real name after the
+# = sign. The id is also logged in UE4SS.log as   [healthbar] engaged: id=lerawr_beta ...
+# This file reloads by itself. A name written here always wins over the automatic one.
+
+lerawr_beta = Lesser Embermane

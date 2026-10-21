@@ -2,11 +2,11 @@
     "packages":  [
                      {
                          "id":  "1.6.2",
-                         "packageVersion":  "2026-10-20.2",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-20.2.zip",
-                         "sha256":  "5fd665db36e806b781434e8c7bf4d3a67c5a7b9bc882fe2d4e2adc06308c67f8",
-                         "date":  "2026-10-20",
-                         "note":  "Staff and test titles (Dev Team, Phoenix Labs, Moderator) removed from the Mega pass and never shown"
+                         "packageVersion":  "2026-10-21",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-21.zip",
+                         "sha256":  "dde35248b648ff3503a7bebfb708bee3d9e8954078fe047ded7c28a0b84ddcb7",
+                         "date":  "2026-10-21",
+                         "note":  "Provy Health Bars mod (off until you turn it on in Mods); mods show their keys"
                      },
                      {
                          "id":  "1.14.7",

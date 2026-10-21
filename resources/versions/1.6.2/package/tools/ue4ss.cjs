@@ -87,7 +87,7 @@ function mods(p) {
       // UE4SS also switches a mod on with an enabled.txt in its folder
       const flag = fs.existsSync(path.join(p.mods, d.name, 'enabled.txt'));
       return { name: d.name, on: on.has(d.name) ? on.get(d.name) || flag : flag, builtin: BUILTIN.has(d.name),
-        scripts: fs.existsSync(path.join(p.mods, d.name, 'Scripts')) || fs.existsSync(path.join(p.mods, d.name, 'dlls')) };
+        scripts: fs.existsSync(path.join(p.mods, d.name, 'Scripts')) || fs.existsSync(path.join(p.mods, d.name, 'dlls')), ...modInfo(path.join(p.mods, d.name)) };
     })
     .sort((a, b) => (a.builtin - b.builtin) || a.name.localeCompare(b.name));
 }
@@ -117,6 +117,18 @@ function proxyBack(p) {
   return false;
 }
 
+// df-mod.json in a mod's folder (optional): {"title": "shown name", "about": "one line for the Mods page", "keys": [["F8", "what it does"]]}
+function modInfo(dir) {
+  try {
+    const j = JSON.parse(fs.readFileSync(path.join(dir, 'df-mod.json'), 'utf8').replace(/^\uFEFF/, ''));
+    const o = {};
+    if (typeof j.title === 'string' && j.title.trim()) o.title = j.title.trim().slice(0, 60);
+    if (typeof j.about === 'string' && j.about.trim()) o.about = j.about.trim().slice(0, 300);
+    if (Array.isArray(j.keys)) o.keys = j.keys.filter((k) => Array.isArray(k) && typeof k[0] === 'string' && typeof k[1] === 'string').slice(0, 8).map((k) => [k[0].slice(0, 24), k[1].slice(0, 80)]);
+    return o;
+  } catch { return {}; }
+}
+
 // Mods that come with this package (package\mods\<name>, e.g. DamageMeter). Put into ue4ss\Mods when missing and
 // switched on the first time; kept up to date while their df-bundled.txt is there (delete it to keep your own edits).
 // Never removes anything.
@@ -127,10 +139,12 @@ function bundledMods(p) {
     if (!d.isDirectory()) continue;
     const from = path.join(src, d.name), to = path.join(p.mods, d.name), isNew = !fs.existsSync(to);
     if (!isNew && !fs.existsSync(path.join(to, 'df-bundled.txt'))) continue;   // the player's own copy: left alone
+    // df-keep.txt: file names (one per line) the player edits, e.g. a names list: copied only when missing
+    let keep = new Set(); try { keep = new Set(fs.readFileSync(path.join(from, 'df-keep.txt'), 'utf8').split(/\r?\n/).map((l) => l.trim().toLowerCase()).filter((l) => l && !l.startsWith('#'))); } catch {}
     const copy = (a, b) => { fs.mkdirSync(b, { recursive: true }); for (const e of fs.readdirSync(a, { withFileTypes: true })) {
       const x = path.join(a, e.name), y = path.join(b, e.name);
-      if (e.isDirectory()) copy(x, y); else if (sha(x) !== sha(y)) fs.copyFileSync(x, y); } };
-    try { copy(from, to); if (isNew) { fs.mkdirSync(p.mods, { recursive: true }); if (!fs.existsSync(p.list)) fs.writeFileSync(p.list, ''); setListEntry(p, d.name, true); } done.push(d.name); } catch {}
+      if (e.isDirectory()) copy(x, y); else if (keep.has(e.name.toLowerCase()) && fs.existsSync(y)) { /* the player's own edits */ } else if (sha(x) !== sha(y)) fs.copyFileSync(x, y); } };
+    try { copy(from, to); if (isNew) { fs.mkdirSync(p.mods, { recursive: true }); if (!fs.existsSync(p.list)) fs.writeFileSync(p.list, ''); setListEntry(p, d.name, !fs.existsSync(path.join(from, 'df-default-off.txt'))); } done.push(d.name); } catch {}   // df-default-off.txt: bundled but off until the player turns it on
   }
   return done;
 }
@@ -207,7 +221,8 @@ async function install() {
     const moved = proxyAside(p);
     bundledMods(p);
     const meter = !!readList(p).on.get('DamageMeter') && fs.existsSync(path.join(p.mods, 'DamageMeter'));
-    return out({ ok: true, on: true, servers: m.servers, movedProxy: moved, meter });
+    const healthbar = !!readList(p).on.get('healthbar') && fs.existsSync(path.join(p.mods, 'healthbar', 'healthbar-overlay.ps1'));
+    return out({ ok: true, on: true, servers: m.servers, movedProxy: moved, meter, healthbar });
   }
   fail('Use status | install | set | mod | prepare');
 })().catch((e) => fail(String(e && e.message || e)));

@@ -1,0 +1,5 @@
+{
+  "title": "Provy Health Bars",
+  "about": "Health and shield bars for the behemoths you are fighting, with their names. Play in borderless or windowed mode. By Provy.",
+  "keys": [["F8", "hide or show the bars"], ["F4", "look for behemoths again"]]
+}

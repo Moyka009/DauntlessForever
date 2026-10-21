@@ -1,0 +1,5 @@
+{
+  "title": "Damage Meter",
+  "about": "Your damage in a small window next to the game. Play in borderless or windowed mode.",
+  "keys": [["Ctrl+Shift+M", "lock or unlock the window"], ["F6", "reset"], ["F7", "write the totals to the UE4SS log"]]
+}

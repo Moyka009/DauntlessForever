@@ -1,0 +1,2 @@
+# copied only when missing, so your own names stay
+behemoth-names.txt

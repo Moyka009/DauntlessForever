@@ -149,6 +149,7 @@
     "Comes with UE4SS": "Kommt mit UE4SS",
     "(tools for mod makers; leave them as they are if you are not sure)": "(Tools f\u00fcr Mod-Ersteller; lass sie, wie sie sind, wenn du dir nicht sicher bist)",
     "UE4SS tool": "UE4SS-Tool",
+    "Keys": "Tasten",
     "This folder has no Scripts or dlls folder, so UE4SS may not load it.": "Dieser Ordner hat keinen Scripts- oder dlls-Ordner, daher l\u00e4dt UE4SS ihn eventuell nicht.",
     "{name} on: applies the next time you press Play.": "{name} an: gilt, wenn du das n\u00e4chste Mal auf Spielen klickst.",
     "{name} off: applies the next time you press Play.": "{name} aus: gilt, wenn du das n\u00e4chste Mal auf Spielen klickst.",

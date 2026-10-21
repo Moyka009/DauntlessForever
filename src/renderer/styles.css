@@ -442,3 +442,4 @@ html:not([lang="en"]) .fp-row .fp-who .fp-sub { white-space: normal; }
 html:not([lang="en"]) .menu { max-width: 100%; }
 html:not([lang="en"]) .menu button { white-space: normal; }
 html:not([lang="en"]) .nav-new { padding: 1px 5px; font-size: 10px; }
+.mod-keys { margin-top: 3px; } .mod-keys b { color: var(--ink); font-weight: 600; }

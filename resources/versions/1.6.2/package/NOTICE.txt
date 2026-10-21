@@ -29,6 +29,9 @@ Chinese text: zgh95's translation ("Zhongwen buding" 1.0), given to the project;
 picked as the game language (paks\paks.json).
 Source: backend\*\src and source\ in this folder.
 
+By Provy (AGPL-3.0): the healthbar mod (behemoth health and shield bars, mods\healthbar). Off until turned on
+in the launcher's Mods page; its licence, notice and full source are in that folder.
+
 WHAT THE LICENCE ASKS OF ANYONE WHO REUSES THIS
   You may copy, change and share this work under the GNU Affero General Public License v3.0 (AGPL-3.0-only).
   If you pass it on, changed or not, or run a changed version for other people over a network, you must:
