@@ -25,7 +25,8 @@
                   "Intel Arc and other GPUs whose D3D11 driver crashes the game at start: put DXVK\u0027s dxgi.dll next to the game exe as dxgi_chain.dll (and its d3d11.dll beside it); the loader uses it instead of Windows\u0027 DXGI (issue #4)",
                   "Hunts that cannot start now say why (reserved UDP ports, a port in use, the server copy closed by an antivirus, timeout) in the game and under the launcher\u0027s Play button, instead of searching forever",
                   "Joiners can no longer land on the host\u0027s character (host guard), and the crash guard now covers the second crash site after a behemoth dies",
-                  "Party and multiplayer fixes (test): the training grounds take 4 players, a player who left a hunt no longer keeps others stuck in Ramsgate (the airship loop), parties survive a server restart, party members can follow a running hunt after 15 minutes, a new hunt from the dojo takes the whole party, and the party goes back to Ramsgate with the leader"
+                  "Party and multiplayer fixes (test): the training grounds take 4 players, a player who left a hunt no longer keeps others stuck in Ramsgate (the airship loop), parties survive a server restart, party members can follow a running hunt after 15 minutes, a new hunt from the dojo takes the whole party, and the party goes back to Ramsgate with the leader",
+                  "Hunts run at the FPS they had before Oct 18: the crash guard\u0027s per-object checks no longer call into Windows (CPU 90-100% on hunts fixed, Oct 21)"
               ],
     "notWorking":  [
                        "New characters joining a friend get stuck loading the tutorial: do the tutorial in solo play first. Hunting together as a party is new and only lightly tested. Much else may not work yet."
@@ -42,7 +43,7 @@
                  },
     "package":  {
                     "dir":  "package",
-                    "packageVersion":  "2026-10-20.4",
+                    "packageVersion":  "2026-10-21",
                     "setup":  "tools/setup.ps1",
                     "uninstallArgs":  [
                                           "-Uninstall"
@@ -66,7 +67,7 @@
                                            },
                                            {
                                                "rel":  "Archon/Binaries/Win64/dxgi.dll",
-                                               "sha256":  "9E55819933A55E85FA1C68F3A62DFDD38D7695A06044945BCE98124027D021EE"
+                                               "sha256":  "CFE9B7B336B67676D4B071D9CC210FC375A04B2B4D3C399927828E3EA479DCF2"
                                            },
                                            {
                                                "rel":  "Archon/Content/Paks/zzzzzzzzzzzzzzzz_QuestDialogueFallback1147_P.pak",

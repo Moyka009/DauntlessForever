@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-20.4",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-20.4.zip",
-                         "sha256":  "97b9f0b0c79cb0e6e51402c903dae3a8e10dead1af24f309e663968daeac2ac2",
-                         "date":  "2026-10-20",
-                         "note":  "Staff and test titles (Dev Team, Phoenix Labs, Moderator) removed from the Mega pass and never shown"
+                         "packageVersion":  "2026-10-21",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-21.zip",
+                         "sha256":  "210dbef6221039781d10e1c053353837f21f04e1ff482274f0750f516c2d7f4a",
+                         "date":  "2026-10-21",
+                         "note":  "High CPU fixed (Ramsgate 50% to 15% on the same PC, hunt FPS back): the crash guard\u0027s per-object checks no longer call into Windows"
                      }
                  ],
     "launcher":  {
