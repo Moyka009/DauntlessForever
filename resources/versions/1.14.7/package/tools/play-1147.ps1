@@ -108,7 +108,8 @@ try {
         $fs = [IO.File]::Open($eosLog, 'Open', 'Read', 'ReadWrite'); $fs.Seek($eosLogStart, 'Begin') | Out-Null
         $sr = New-Object IO.StreamReader($fs); $sr.ReadToEnd() | Set-Content -LiteralPath (Join-Path $RunDir 'eos_offline_this_run.log'); $sr.Close()
     }
-    Get-ChildItem -LiteralPath $HomeDir -Recurse -File -Include *.log, *.txt, *.xml, *.runtime-xml -ErrorAction SilentlyContinue |
+    # DF-LOGFILTER (Oct 21): Windows PowerShell ignores -Include next to -LiteralPath, so every new file went into the zip (NVIDIA shader caches, ini files); filtered by extension now
+    Get-ChildItem -LiteralPath $HomeDir -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.Extension -in @('.log', '.txt', '.xml', '.runtime-xml') -and $_.FullName -notmatch '\\(NVIDIA|AMD|D3DSCache|DXCache|GLCache)\\' } |
         Where-Object { $_.LastWriteTime -ge $startTime.AddMinutes(-1) } |
         ForEach-Object {
             $rel = $_.FullName.Substring($HomeDir.Length).TrimStart('\') -replace '[\\/:]', '_'
@@ -119,7 +120,8 @@ try {
     foreach ($sub in @('Logs', 'Crashes')) {
         $dir = Join-Path $realSaved $sub
         if (-not (Test-Path -LiteralPath $dir)) { continue }
-        Get-ChildItem -LiteralPath $dir -Recurse -File -Include *.log, *.txt, *.xml, *.runtime-xml -ErrorAction SilentlyContinue |
+        # DF-LOGFILTER (Oct 21): Windows PowerShell ignores -Include next to -LiteralPath, so every new file went into the zip (NVIDIA shader caches, ini files); filtered by extension now
+        Get-ChildItem -LiteralPath $dir -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.Extension -in @('.log', '.txt', '.xml', '.runtime-xml') -and $_.FullName -notmatch '\\(NVIDIA|AMD|D3DSCache|DXCache|GLCache)\\' } |
             Where-Object { $_.LastWriteTime -ge $startTime.AddMinutes(-1) } |
             ForEach-Object {
                 $rel = 'game_' + ($_.FullName.Substring($realSaved.Length).TrimStart('\') -replace '[\\/:]', '_')

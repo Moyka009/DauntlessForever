@@ -60,7 +60,8 @@ try {
         foreach ($sub in @('Logs', 'Crashes')) {
             $dir = Join-Path $sd $sub
             if (-not (Test-Path -LiteralPath $dir)) { continue }
-            Get-ChildItem -LiteralPath $dir -Recurse -File -Include *.log, *.txt, *.xml, *.runtime-xml -ErrorAction SilentlyContinue |
+            # DF-LOGFILTER (Oct 21): Windows PowerShell ignores -Include next to -LiteralPath, so every new file went into the zip (NVIDIA shader caches, ini files); filtered by extension now
+            Get-ChildItem -LiteralPath $dir -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.Extension -in @('.log', '.txt', '.xml', '.runtime-xml') -and $_.FullName -notmatch '\\(NVIDIA|AMD|D3DSCache|DXCache|GLCache)\\' } |
                 Where-Object { $_.LastWriteTime -ge $startTime.AddMinutes(-1) } | ForEach-Object { $_.FullName }
         }
     })

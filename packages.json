@@ -2,19 +2,19 @@
     "packages":  [
                      {
                          "id":  "1.6.2",
-                         "packageVersion":  "2026-10-21.6",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-21.6.zip",
-                         "sha256":  "c37158c0a9109b280ffab117b8f816ecb1919775e609d77aa316e2f1dcc53cce",
+                         "packageVersion":  "2026-10-21.7",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-21.7.zip",
+                         "sha256":  "1d88e3c66837df6ffc40f9dbd57d941973b8aa224671acc2776c834c648c757f",
                          "date":  "2026-10-21",
-                         "note":  "Game Rule: When you host - your own Game Rules apply when hosting for friends"
+                         "note":  "Log zips no longer include graphics driver shader caches"
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-21.8",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-21.8.zip",
-                         "sha256":  "0bd0488c40d74b7158b5ba9121d67fcd07f39b902113675a1daeb8c9ad6e1d79",
+                         "packageVersion":  "2026-10-21.9",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-21.9.zip",
+                         "sha256":  "a6c21732ff5abe2bb8358519658e7c2dde92f53ccd68cdda199ee1079973b44d",
                          "date":  "2026-10-21",
-                         "note":  "Mods page: Boss Health Bar description and hotkeys"
+                         "note":  "Log zips no longer include graphics driver shader caches"
                      }
                  ],
     "launcher":  {

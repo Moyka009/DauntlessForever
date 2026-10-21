@@ -386,7 +386,8 @@ $gameLog = Join-Path $srvLocal "Archon\Saved\Logs\Archon.log"; if (Test-Path -Li
 if (Test-Path -LiteralPath $crashDir) {
     foreach ($c in Get-ChildItem -LiteralPath $crashDir -Directory) {
         if ($crashBefore -contains $c.Name) { continue }
-        Get-ChildItem -LiteralPath $c.FullName -File -Include *.log, *.xml, *.runtime-xml, *.txt -Recurse | ForEach-Object { Copy-Item -LiteralPath $_.FullName -Destination (Join-Path $runDir ("crash_" + $_.Name)) }
+        # DF-LOGFILTER (Oct 21): Windows PowerShell ignores -Include next to -LiteralPath, so every new file went into the zip (NVIDIA shader caches, ini files); filtered by extension now
+        Get-ChildItem -LiteralPath $c.FullName -File -Recurse | Where-Object { $_.Extension -in @('.log', '.txt', '.xml', '.runtime-xml') -and $_.FullName -notmatch '\\(NVIDIA|AMD|D3DSCache|DXCache|GLCache)\\' } | ForEach-Object { Copy-Item -LiteralPath $_.FullName -Destination (Join-Path $runDir ("crash_" + $_.Name)) }
     }
 }
 foreach ($f in Get-ChildItem -LiteralPath $runDir -File) {
