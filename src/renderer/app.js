@@ -2,6 +2,7 @@
 // Copyright (C) 2026 Addison2k. https://github.com/addison2k/DauntlessForever
 // Licence: AGPL-3.0-only. Keep this notice: the licence requires it.
 'use strict';
+const checkNotes = {};   // DF-CHECKFILES: versionId -> { text, err, until }
 const L = window.launcher;
 const $ = (id) => document.getElementById(id);
 
@@ -312,6 +313,9 @@ function renderDetail() {
         : t('You are in {name}\'s game. Your character is saved home every few minutes. Close the game to play here.', { name: w.name })) : t('You are in a friend\'s game. Close it to play here.');
     }
   }
+  // DF-CHECKFILES: the game-file check's progress / result stays shown through refreshes (5 minutes after it ends)
+  const cn = checkNotes[v.id];
+  if (cn && (!cn.until || Date.now() < cn.until)) { note.textContent = cn.text; note.className = cn.err ? 'action-note err' : 'action-note'; }
   // download notes only while they are still news (not after the player moved on or picked another folder)
   if (!st.busy && st.step === 'game' && d && d.state === 'failed' && d.error) { note.textContent = tm(d.error); note.className = 'action-note err'; }
   if (!st.busy && st.step === 'setup' && d && d.state === 'done' && !(s.prereqMissing && s.prereqMissing.length)) { note.textContent = t('Download finished and checked. Set up runs by itself next.'); }
@@ -366,6 +370,7 @@ function renderDetail() {
   m.querySelector('[data-act="setup"]').disabled = !gameDone || st.key === 'busy';
   m.querySelector('[data-act="uninstall"]').disabled = !gameDone || st.key === 'busy';
   m.querySelector('[data-act="opengame"]').disabled = !s.gameDir;
+  m.querySelector('[data-act="check"]').disabled = !s.gameDir || !v.download || st.key === 'busy';   // DF-CHECKFILES
   m.querySelector('[data-act="pick"]').disabled = st.key === 'busy';
   m.querySelector('[data-act="delpartial"]').disabled = st.key === 'busy' || s.game === 'ok';
   // the Revived (1.4.4) import: only for versions whose server files have it, once the game is set up
@@ -1164,6 +1169,22 @@ function wire() {
       await refresh(v.id);
       if (r && r.ok === false && r.error) { n.textContent = tm(r.error); n.className = 'action-note err'; }
       else { n.className = 'action-note'; n.textContent = act === 'import' ? t('Import window closed. If it said it imported, your character has the items the next time you play.') : t('Fix window closed. It said there whether anything was changed.'); }
+    }
+    if (act === 'check') {   // DF-CHECKFILES
+      const show = (text, err, done) => { checkNotes[v.id] = { text, err: !!err, until: done ? Date.now() + 5 * 60 * 1000 : 0 }; if (v.id === selected) renderDetail(); };
+      show(t('Checking the game files. This reads the whole game, so it takes a few minutes...'));
+      const off = L.onCheckProgress((p) => {
+        if (p.id !== v.id) return;
+        show(p.phase === 'repair' ? t('Repairing: downloading the damaged files again, {pct}% ({text})', { pct: p.pct, text: p.text })
+          : t('Checking the game files: {pct}% ({text})', { pct: p.pct, text: p.text }));
+      });
+      const r = await L.checkGame(v.id);
+      off();
+      const bad = (r && r.bad) || [];
+      if (r && r.ok && !bad.length) show(t('All {count} game files are fine. Nothing needed repairing.', { count: r.checked }), false, true);
+      else if (r && r.ok) show(t('Repaired {count} file(s) that were missing or damaged. If set-up is asked for, run it, then press Play.', { count: r.repaired }), false, true);
+      else show(bad.length ? t('Found {count} missing or damaged file(s), but the repair did not finish: {error}', { count: bad.length, error: tm(r && r.error) }) : t('Could not check the game files: {error}', { error: tm(r && r.error) }), true, true);
+      await refresh(v.id);
     }
     if (act === 'opengame') L.openGameFolder(v.id);
     if (act === 'openver') L.openVersionFolder(v.id);

@@ -18,6 +18,8 @@ contextBridge.exposeInMainWorld('launcher', {
   pickGamesRoot: invoke('launcher:pickGamesRoot'),
   setLast: invoke('launcher:setLast'),
   download: invoke('game:download'),
+  checkGame: invoke('game:check'),                      // DF-CHECKFILES: More > Check the game files
+  onCheckProgress: on('check:progress'),
   cancelDownload: invoke('game:cancelDownload'),
   partialInfo: invoke('game:partialInfo'),
   deletePartial: invoke('game:deletePartial'),

@@ -737,6 +737,22 @@ ipcMain.handle('game:download', async (_e, id, targetRoot) => {
   return { ok, error, outDir };
 });
 ipcMain.handle('game:cancelDownload', (_e, id) => D.cancel(id));
+// DF-CHECKFILES (Oct 21): More > "Check the game files": compares every game file with Epic's manifest for this build
+// and downloads again only what is missing or damaged (repair.js). The files set-up puts in on purpose are left alone.
+const RP = require('./repair');
+ipcMain.handle('game:check', async (_e, id) => {
+  const v = byId(id); if (!v || !v.download) return { ok: false, error: 'unknown version' };
+  const gameDir = V.knownGameDir(v);
+  if (!gameDir) return { ok: false, error: 'There is no game folder for this version yet. Download it first, or pick your folder with More > "Use a game folder I already have".' };
+  if (D.isDownloading(id) || RP.isChecking(id) || R.anyRunning().some(r => r.id === id || r.id.startsWith(id + ':')))
+    return { ok: false, error: 'Close the game, and stop any download, set-up or hosting of this version, then check again.' };
+  if (!P.IS_WIN || P.MOCK) return { ok: true, checked: 0, bad: [], repaired: 0 };
+  log('check', id, gameDir);
+  const res = await RP.checkAndRepair(v, gameDir, (p) => send('check:progress', { id, ...p }),
+    (line, isErr) => send('log:line', { id, line, isErr, kind: 'check' }));
+  log('check', id, JSON.stringify({ ok: res.ok, checked: res.checked, bad: (res.bad || []).length, repaired: res.repaired, error: res.error }));
+  return res;
+});
 ipcMain.handle('game:partialInfo', (_e, id) => { const v = byId(id); return v ? partialInfo(v) : null; });
 // Delete an unfinished (or broken) download to get the space back. Never touches a complete, correct game,
 // and only ever the launcher's own download folder for this version.

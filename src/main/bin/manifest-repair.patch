@@ -1,0 +1,217 @@
+diff --git a/chunks/chunks.go b/chunks/chunks.go
+index 5b76483..d23ea9f 100644
+--- a/chunks/chunks.go
++++ b/chunks/chunks.go
+@@ -41,15 +41,45 @@ type ChunkHeader struct {
+ 	HashType           uint32
+ }
+ 
+-// Decompress decompresses a raw chunk downloaded from the CDN.
+-// The data layout is: header bytes followed by zlib-compressed payload.
+-// The byte at offset 8 indicates the start of the zlib stream unless it equals 120 (0x78),
+-// in which case the zlib data starts at offset 8 itself.
++// Decompress returns the payload of a raw chunk downloaded from the CDN.
++//
++// A chunk is a binary header followed by the payload. The header's StoredAs
++// byte says whether the payload is zlib-compressed or stored as plain bytes.
++// Data that does not compress well (already-compressed paks, audio, video) is
++// stored plain, so both cases must be handled.
++//
++// Header layout (little endian): magic u32, version u32, headerSize u32,
++// dataSizeCompressed u32, GUID 16 bytes, rollingHash u64, storedAs u8 at
++// offset 40.
+ func Decompress(data []byte) ([]byte, error) {
+ 	if len(data) < 9 {
+ 		return nil, errors.New("chunk data too short: need at least 9 bytes")
+ 	}
+ 
++	const storedAsOffset = 40
++	if len(data) > storedAsOffset && binary.LittleEndian.Uint32(data[0:4]) == ChunkHeaderMagic {
++		headerSize := binary.LittleEndian.Uint32(data[8:12])
++		if headerSize <= storedAsOffset || int64(headerSize) > int64(len(data)) {
++			return nil, fmt.Errorf("chunk header size %d is invalid for data length %d", headerSize, len(data))
++		}
++		storedAs := ChunkStoredAs(data[storedAsOffset])
++		payload := data[headerSize:]
++
++		if storedAs&ChunkStoredAsEncrypted != 0 {
++			return nil, errors.New("chunk is encrypted")
++		}
++		if storedAs&ChunkStoredAsCompressed == 0 {
++			// Stored as plain bytes: the payload is the chunk data.
++			out := make([]byte, len(payload))
++			copy(out, payload)
++			return out, nil
++		}
++		return inflate(payload)
++	}
++
++	// Fallback for data without a recognisable chunk header: the byte at
++	// offset 8 gives the start of the zlib stream unless it is 0x78, in which
++	// case the stream starts at offset 8 itself.
+ 	offset := data[8]
+ 
+ 	var slicedData []byte
+@@ -62,7 +92,12 @@ func Decompress(data []byte) ([]byte, error) {
+ 		slicedData = data[offset:]
+ 	}
+ 
+-	reader, err := zlib.NewReader(bytes.NewReader(slicedData))
++	return inflate(slicedData)
++}
++
++// inflate decompresses a zlib stream.
++func inflate(compressed []byte) ([]byte, error) {
++	reader, err := zlib.NewReader(bytes.NewReader(compressed))
+ 	if err != nil {
+ 		return nil, fmt.Errorf("zlib init: %w", err)
+ 	}
+diff --git a/cmd/manifest/download.go b/cmd/manifest/download.go
+index 601e819..af28c39 100644
+--- a/cmd/manifest/download.go
++++ b/cmd/manifest/download.go
+@@ -5,6 +5,7 @@ import (
+ 	"fmt"
+ 	"os"
+ 	"os/signal"
++	"strings"
+ 	"sync"
+ 	"syscall"
+ 	"time"
+@@ -34,6 +35,22 @@ var downloadCmd = &cobra.Command{
+ 		tags, _ := cmd.Flags().GetStringSlice("tag")
+ 		excludeTags, _ := cmd.Flags().GetStringSlice("exclude-tag")
+ 		dryRun, _ := cmd.Flags().GetBool("dry-run")
++		filesList, _ := cmd.Flags().GetString("files")
++		var onlyFiles []string
++		if filesList != "" {
++			raw, err := os.ReadFile(filesList)
++			if err != nil {
++				return fmt.Errorf("reading --files list: %w", err)
++			}
++			for _, l := range strings.Split(strings.ReplaceAll(string(raw), "\r\n", "\n"), "\n") {
++				if l = strings.TrimSpace(l); l != "" {
++					onlyFiles = append(onlyFiles, l)
++				}
++			}
++			if len(onlyFiles) == 0 {
++				return fmt.Errorf("the --files list is empty")
++			}
++		}
+ 
+ 		if output == "" {
+ 			output = "."
+@@ -50,6 +67,7 @@ var downloadCmd = &cobra.Command{
+ 			Tags:           tags,
+ 			ExcludeTags:    excludeTags,
+ 			DryRun:         dryRun,
++			OnlyFiles:      onlyFiles,
+ 		}
+ 
+ 		if !dryRun {
+@@ -147,5 +165,6 @@ func init() {
+ 	downloadCmd.Flags().StringSlice("tag", nil, "include only files with these tags (repeatable)")
+ 	downloadCmd.Flags().StringSlice("exclude-tag", nil, "exclude files with these tags (repeatable)")
+ 	downloadCmd.Flags().Bool("dry-run", false, "show what would be downloaded without downloading")
++	downloadCmd.Flags().String("files", "", "text file with manifest file names, one per line: download only these (repair)")
+ 	rootCmd.AddCommand(downloadCmd)
+ }
+diff --git a/cmd/manifest/verify.go b/cmd/manifest/verify.go
+index 21931f5..fca979d 100644
+--- a/cmd/manifest/verify.go
++++ b/cmd/manifest/verify.go
+@@ -2,6 +2,7 @@ package main
+ 
+ import (
+ 	"fmt"
++	"os"
+ 
+ 	"github.com/meszmate/manifest/downloader"
+ 	"github.com/spf13/cobra"
+@@ -20,7 +21,12 @@ var verifyCmd = &cobra.Command{
+ 
+ 		path, _ := cmd.Flags().GetString("path")
+ 
+-		result, err := downloader.VerifyInstallation(m, path)
++		showProgress, _ := cmd.Flags().GetBool("progress")
++		var cb func(i, total int, name string)
++		if showProgress {
++			cb = func(i, total int, name string) { fmt.Fprintf(os.Stderr, "CHECK %d/%d %s\n", i+1, total, name) }
++		}
++		result, err := downloader.VerifyInstallationProgress(m, path, cb)
+ 		if err != nil {
+ 			return fmt.Errorf("verification failed: %w", err)
+ 		}
+@@ -65,5 +71,6 @@ var verifyCmd = &cobra.Command{
+ func init() {
+ 	verifyCmd.Flags().StringP("path", "p", "", "installation directory to verify (required)")
+ 	verifyCmd.MarkFlagRequired("path")
++	verifyCmd.Flags().Bool("progress", false, "print CHECK n/total <file> to stderr before each file")
+ 	rootCmd.AddCommand(verifyCmd)
+ }
+diff --git a/downloader/downloader.go b/downloader/downloader.go
+index d5a9115..c08628a 100644
+--- a/downloader/downloader.go
++++ b/downloader/downloader.go
+@@ -9,6 +9,7 @@ import (
+ 	"net/http"
+ 	"os"
+ 	"path/filepath"
++	"strings"
+ 	"sync"
+ 	"sync/atomic"
+ 	"time"
+@@ -45,6 +46,8 @@ type Config struct {
+ 	ExcludeTags []string
+ 	// DryRun skips actual downloading and file assembly.
+ 	DryRun bool
++	// OnlyFiles, when not empty, limits the download to these manifest file names (repair of a few files).
++	OnlyFiles []string
+ }
+ 
+ func (c *Config) defaults() {
+@@ -345,6 +348,19 @@ func (d *Downloader) fetchChunk(ctx context.Context, url string) ([]byte, error)
+ // filterFiles returns files matching the configured tag filters.
+ func (d *Downloader) filterFiles() []manifest.File {
+ 	allFiles := d.manifest.FileManifestList.FileManifestList
++	if len(d.cfg.OnlyFiles) > 0 {
++		want := make(map[string]struct{}, len(d.cfg.OnlyFiles))
++		for _, n := range d.cfg.OnlyFiles {
++			want[strings.ToLower(strings.ReplaceAll(n, "\\", "/"))] = struct{}{}
++		}
++		var only []manifest.File
++		for _, f := range allFiles {
++			if _, ok := want[strings.ToLower(strings.ReplaceAll(f.FileName, "\\", "/"))]; ok {
++				only = append(only, f)
++			}
++		}
++		allFiles = only
++	}
+ 
+ 	if len(d.cfg.Tags) == 0 && len(d.cfg.ExcludeTags) == 0 {
+ 		return allFiles
+diff --git a/downloader/verifier.go b/downloader/verifier.go
+index aeb7168..7df34f1 100644
+--- a/downloader/verifier.go
++++ b/downloader/verifier.go
+@@ -40,11 +40,19 @@ type FileVerifyStatus struct {
+ // VerifyInstallation checks all files in the manifest against the installed directory.
+ // It verifies file existence, size, and SHA1 hash.
+ func VerifyInstallation(m *manifest.BinaryManifest, installDir string) (*VerifyResult, error) {
++	return VerifyInstallationProgress(m, installDir, nil)
++}
++
++// VerifyInstallationProgress is VerifyInstallation with a callback before each file (index from 0, total, name).
++func VerifyInstallationProgress(m *manifest.BinaryManifest, installDir string, progress func(i, total int, name string)) (*VerifyResult, error) {
+ 	result := &VerifyResult{
+ 		TotalFiles: len(m.FileManifestList.FileManifestList),
+ 	}
+ 
+-	for _, f := range m.FileManifestList.FileManifestList {
++	for i, f := range m.FileManifestList.FileManifestList {
++		if progress != nil {
++			progress(i, len(m.FileManifestList.FileManifestList), f.FileName)
++		}
+ 		fpath := filepath.Join(installDir, filepath.FromSlash(f.FileName))
+ 
+ 		info, err := os.Stat(fpath)
