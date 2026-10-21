@@ -10,22 +10,22 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-21.5",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-21.5.zip",
-                         "sha256":  "09f8dee817d19b2fe5423c4f66ebdcecc84ebadf1769f1d58159c7393146d949",
+                         "packageVersion":  "2026-10-21.6",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-21.6.zip",
+                         "sha256":  "fb9ebccfc34d1f114ddf6bc93bbd7a1b106c6f87ca52b01e826098e9b507a1a2",
                          "date":  "2026-10-21",
-                         "note":  "Host mode: players who are not grouped each get their own hunt (up to 7 at once)"
+                         "note":  "Game Rule: Extra loadout slots (+10 to +40). Playing with friends: you AND the host MUST both have these server files"
                      }
                  ],
     "launcher":  {
-                     "version":  "0.2.23",
+                     "version":  "0.2.24",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "Friends work on networks that block secure connections (dorm, school, work): the launcher falls back to the plain connection by itself",
+                     "notes":  "After playing in someone else\u0027s game, the launcher goes back to normal as soon as the game closes",
                      "date":  "2026-10-21",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.23.asar",
-                                 "sha256":  "27c9dfef10fea3905250f83782a70ef13cb506136dbbeb3f591be0f52e6acee1",
-                                 "size":  1043753,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.24.asar",
+                                 "sha256":  "de726035265f55ec374af9cd5c8aed7edfd1fd4685afa2a3d5dadb0f8f4d37d7",
+                                 "size":  1044514,
                                  "minShell":  "0.2.4"
                              }
                  }

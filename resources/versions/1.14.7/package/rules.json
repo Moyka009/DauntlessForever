@@ -360,6 +360,36 @@
           "On"
         ]
       ]
+    },
+    {
+      "key": "extra_loadout_slots",
+      "env": "RULE_EXTRA_LOADOUT_SLOTS",
+      "title": "Extra loadout slots",
+      "blurb": "Free extra loadout slots on top of the starter slot and the five Slayer's Path slots, no platinum needed. Slots you get are kept, even if you turn this back to Normal. They show the next time you sign in. Playing with friends: you AND the host MUST both have server files with this rule, or your loadouts will not load on the host.",
+      "default": "0",
+      "tested": false,
+      "choices": [
+        [
+          "0",
+          "Normal"
+        ],
+        [
+          "10",
+          "+10"
+        ],
+        [
+          "20",
+          "+20"
+        ],
+        [
+          "30",
+          "+30"
+        ],
+        [
+          "40",
+          "+40"
+        ]
+      ]
     }
   ]
 }

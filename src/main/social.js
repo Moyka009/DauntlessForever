@@ -249,7 +249,7 @@ function startJoin(versionId, code, w) {
   if (!v) throw new Error('This version is not installed.');
   const script = V.online(v).joinPath;
   if (!v.package || !fs.existsSync(script)) throw new Error('This version has no join script yet. Update its server files.');
-  ctx.runner.runVisible(versionId + ':join', 'join', script, ['-Code', `'${code.replace(/'/g, "''")}'`], `Dauntless ${versionId} - joining a friend`)
+  ctx.runner.runVisible(versionId + ':join', 'join', script, ['-Code', `'${code.replace(/'/g, "''")}'`], `Dauntless ${versionId} - joining a friend`, { closeWhenDone: true })   // DF-JOINCLOSE: 'You are in X's game' clears when the game closes
     .then(() => { if (gameWith && gameWith.since === since) gameWith = null; push(); });
   const since = Date.now();
   gameWith = w ? { host: w.host, hostName: w.hostName, version: versionId, since, public: !!w.public } : null;

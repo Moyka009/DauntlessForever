@@ -17,7 +17,7 @@ function readSettings(root,hosting){
   if(!def||!def.choices.some(c=>String(c[0])===m[2]))throw error('Invalid Game Rules setting: '+(m?m[1]:'line'));
   settings[m[1]]=Number(m[2]);
  }
- if(hosting)for(const key of Object.keys(settings))settings[key]=['free_crafting','rare_core_kill','free_platinum'].includes(key)?0:1;
+ if(hosting)for(const key of Object.keys(settings))if(key!=='extra_loadout_slots')settings[key]=['free_crafting','rare_core_kill','free_platinum'].includes(key)?0:1; // DF-LOADOUT-SLOTS: kept when hosting (only adds slots)
  return Object.freeze(settings);
 }
 function create(root,options={}){
@@ -25,6 +25,7 @@ function create(root,options={}){
  const bind=options.bind??(arg('--bind')||process.env.RECORDER_BIND||'127.0.0.1');
  const hosting=options.hosting??(process.env.DF_HOSTING==='1'||!['127.0.0.1','::1','localhost'].includes(bind)||!!(arg('--public')||process.env.RECORDER_PUBLIC_HOST));
  const settings=readSettings(root,hosting);
+ process.env.DF_EXTRA_LOADOUT_SLOTS=String(settings.extra_loadout_slots||0); // DF-LOADOUT-SLOTS: read by loadouts-fix1147
  const data=JSON.parse(fs.readFileSync(path.join(__dirname,'game-rules1147-data.json'),'utf8'));
  const materials=new Set(data.materials),kills=new Set(data.killTokens);
  const factor=id=>id==='CURRENCY_NOTES'?settings.rams:id==='CURRENCY_PJM_WEAPON'?settings.weapon_merits:id==='CURRENCY_PJM_AIRSHIP'?settings.exploration_merits:id===data.rareCore?settings.rare_cores:materials.has(id)?settings.materials:1;

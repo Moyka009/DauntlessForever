@@ -56,12 +56,17 @@ function anyRunning() { return [...running.entries()].map(([id, r]) => ({ id, ki
 
 // A visible console window that stays open at the end so the player can read the last lines.
 // Resolves with the script's exit code when the window closes.
-function runVisible(id, kind, scriptPath, args, title) {
+// DF-JOINCLOSE (Oct 21): opts.closeWhenDone closes the window by itself when the script ends normally (joining a
+// friend: the game closed, the player is home again); it still waits for Enter when the script stopped with an error
+// (Fail = exit 1) so the reason can be read.
+function runVisible(id, kind, scriptPath, args, title, opts) {
   return new Promise((resolve) => {
     if (!IS_WIN) { setTimeout(() => resolve(MOCK ? 0 : 1), 1500); return; }
     // Only single quotes inside the PowerShell command, so it can sit inside cmd's double quotes untouched.
     // try/finally: even when the script stops with an error, the window waits so the player can read it
-    const psCmd = `try { & '${scriptPath.replace(/'/g, "''")}' ${args.join(' ')} } catch { Write-Host ('ERROR: ' + $_) -ForegroundColor Red } finally { Write-Host ''; Read-Host 'Finished. Press Enter to close this window' | Out-Null }`;
+    const psCmd = opts && opts.closeWhenDone
+      ? `$global:LASTEXITCODE = 0; $dfOk = $true; try { & '${scriptPath.replace(/'/g, "''")}' ${args.join(' ')}; if ($LASTEXITCODE -eq 1) { $dfOk = $false } } catch { $dfOk = $false; Write-Host ('ERROR: ' + $_) -ForegroundColor Red } finally { if (-not $dfOk) { Write-Host ''; Read-Host 'Finished. Press Enter to close this window' | Out-Null } }`
+      : `try { & '${scriptPath.replace(/'/g, "''")}' ${args.join(' ')} } catch { Write-Host ('ERROR: ' + $_) -ForegroundColor Red } finally { Write-Host ''; Read-Host 'Finished. Press Enter to close this window' | Out-Null }`;
     // cmd /c start /wait gives the script a real console (Read-Host, the folder picker) and waits for it.
     const cmdLine = `cmd.exe /d /c start "${title}" /wait ${PS} -NoProfile -ExecutionPolicy Bypass -Command "${psCmd}"`;
     const child = spawn('cmd.exe', [cmdLine.slice('cmd.exe '.length)],

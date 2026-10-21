@@ -4,7 +4,11 @@
 const fs=require('fs'),path=require('path'),crypto=require('crypto');
 const copy=x=>JSON.parse(JSON.stringify(x));
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
-const MAX=16,PATH_SLOTS=5; // Existing reviewed backend index limit; five native Path unlock conditions.
+const MAX=48,PATH_SLOTS=5; // Saved slot limit (was 16; DF-LOADOUT-SLOTS raised it so extra slots fit); five native Path unlock conditions.
+const BASE_ACCOUNT=10; // Native store/platinum account slots (1 starter + 5 Path + 10 = the old 16).
+// DF-LOADOUT-SLOTS (Game Rules "Extra loadout slots"): this many account slots come free, no platinum.
+// Slots once given are kept in the save (loadoutSlots1147.account), so turning the rule off never loses a loadout.
+const extraSlots=()=>{const n=Number(process.env.DF_EXTRA_LOADOUT_SLOTS);return Number.isInteger(n)&&n>0?Math.min(n,MAX-PATH_SLOTS-1):0;};
 function fail(status,message){const e=Error(message);e.status=status;throw e;}
 function integer(v,max=MAX){return Number.isSafeInteger(v)&&v>=0&&v<=max;}
 function create(ctx){
@@ -29,11 +33,12 @@ function create(ctx){
   // Keep the existing saved/store account field in its legacy starter-inclusive encoding.
   const metadata=p.loadoutSlots1147;
   let account=integer(metadata?.account,MAX-PATH_SLOTS)&&metadata.account>=1?metadata.account-1:0;
+  account=Math.max(account,extraSlots());
   const chars=1+Math.max(earned(p),integer(metadata?.characters?.[character],PATH_SLOTS)?metadata.characters[character]:0);
   const used=Array.isArray(l?.loadouts)?l.loadouts.length:0;
   account=Math.max(account,Math.min(MAX-PATH_SLOTS-1,Math.max(0,used-chars)));
   const retained=Math.max(chars,used-account);
-  return {num_account_slots:account,max_account_slots:MAX-PATH_SLOTS-1,num_character_slots:retained,max_character_slots:PATH_SLOTS+1};
+  return {num_account_slots:account,max_account_slots:Math.max(BASE_ACCOUNT,extraSlots(),account),num_character_slots:retained,max_character_slots:PATH_SLOTS+1};
  }
  function reply(l,c){return {loadouts:l.loadouts,persistent:l.persistent,...c,active_index:l.active_index,needs_migration:false};}
  const ok=value=>({status:200,json:{code:null,message:'OK',payload:copy(value)},note:'loadouts1147: saved/normalized native loadouts'});
