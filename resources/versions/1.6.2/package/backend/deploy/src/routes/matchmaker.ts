@@ -5,7 +5,7 @@
 import { Router } from "express";
 import { logger } from "../logger";
 import { HandleMatchmakingRequest } from "../controllers/matchmaker";
-import { IsServerUp } from "../controllers/gameservers";
+import { IsServerUp, ServerListenState } from "../controllers/gameservers";
 import express from "express";
 
 export const matchmakingRouter = Router();
@@ -25,4 +25,10 @@ matchmakingRouter.post("/handle-matchmaking-for-player", express.json(), async (
 // DF-ONLINE-1: is this game server still running? (the metagame asks before sending a player into an open hunt)
 matchmakingRouter.get("/alive/:id", (req, res) => {
     res.json({ alive: IsServerUp(String(req.params.id)) });
+});
+
+// DF-LISTEN-162: has this game server started listening yet? (the metagame waits for this before sending players)
+matchmakingRouter.get("/ready/:id", (req, res) => {
+    const Id = String(req.params.id);
+    res.json({ state: ServerListenState(Id) ?? "unknown", alive: IsServerUp(Id) });
 });

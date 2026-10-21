@@ -2,7 +2,7 @@
 // Copyright (C) 2026 Addison2k (port to this Dauntless build and all changes). https://github.com/addison2k/DauntlessForever
 // Based on Undaunted, Copyright (C) gwog and contributors, https://github.com/SyST3MDeV/Undaunted
 // Licence: AGPL-3.0-only (LICENSE-AGPL-3.0.txt). Keep this notice: the licence requires it.
-import { spawn } from "node:child_process"
+import { spawn, execFile } from "node:child_process"
 import { setTimeout } from "node:timers/promises";
 
 import crypto from "node:crypto";
@@ -60,7 +60,8 @@ export type Gameserver = {
     isRamsgate: boolean,
     isTrainingDojo: boolean,
     processId: number,
-    startTime: Date
+    startTime: Date,
+    listen?: string     // DF-LISTEN-162: starting / listening / failed / timeout
 };
 
 type ExpectedPlayer = {
@@ -182,6 +183,12 @@ async function StartServer(Map: string, Behemoth: string | undefined, Matchmaker
         throw new Error("No free ports left!");
     }
 
+    // DF-LISTEN-162: the server copy writes UndauntedServer_<port>.log in this folder (our working folder) and prints
+    // "Listen Status: 1" once players can connect. An old log from an earlier server on this port is removed first,
+    // so the watch below only sees this server's line.
+    const ListenLog = require("node:path").resolve(process.cwd(), `UndauntedServer_${Port}.log`);
+    try { require("node:fs").unlinkSync(ListenLog); } catch { }
+
     const Child = spawn(GAMESERVER_BINARY_PATH, [
         METAGAME_API_KEY,
         Port.toString(),
@@ -215,12 +222,83 @@ async function StartServer(Map: string, Behemoth: string | undefined, Matchmaker
         isRamsgate: IsRamsgate,
         isTrainingDojo: IsTrainingDojo,
         processId: Child.pid ?? 0,
-        startTime: new Date()
+        startTime: new Date(),
+        listen: "starting"
     };
 
     Gameservers.push(NewGameserver);
+    WatchListen(NewGameserver, ListenLog);
 
     return NewGameserver;
+}
+
+// DF-LISTEN-162 (Oct 21): on slow PCs a new server copy needs 20-60 s before it listens, and the game gives up after
+// 20 s ("server network connection timed out"). The metagame asks GET /ready/<id> and sends the player only once
+// the server listens. States: starting, listening, failed (it said Listen Status: 0, or its process ended),
+// timeout (no answer within LISTEN_WATCH_SECONDS, default 180: the player is sent anyway, as before).
+// How: on Windows, netstat shows the UDP port open by this server's own process id (the server's log file is locked
+// while it runs, so it can't be read). Elsewhere, or if netstat can't run, the "Listen Status" line in its log.
+const LISTEN_WATCH_MS = Math.max(30, Number(process.env.LISTEN_WATCH_SECONDS) || 180) * 1000;
+function UdpOpenByProcess(Port: number, Pid: number): Promise<boolean | undefined> {
+    return new Promise((Resolve) => {
+        execFile("netstat", ["-a", "-n", "-o", "-p", "UDP"], { windowsHide: true, timeout: 10000 }, (Err: any, Out: any) => {
+            if (Err) { Resolve(undefined); return; }
+            const Re = new RegExp(`^\\s*UDP\\s+\\S+:${Port}\\s+\\S+\\s+${Pid}\\s*$`, "m");
+            Resolve(Re.test(String(Out)));
+        });
+    });
+}
+function ListenLineInLog(LogFile: string): string | undefined {
+    try {
+        const Fs = require("node:fs");
+        const Fd = Fs.openSync(LogFile, "r");
+        try {
+            const Buf = Buffer.alloc(262144);
+            const N = Fs.readSync(Fd, Buf, 0, Buf.length, 0);
+            const M = /Listen Status: (\d)/.exec(Buf.toString("latin1", 0, N));
+            return M ? M[1] : undefined;
+        }
+        finally { Fs.closeSync(Fd); }
+    }
+    catch { return undefined; }
+}
+function WatchListen(Server: Gameserver, LogFile: string){
+    const Started = Date.now();
+    const UseNetstat = process.platform === "win32";
+    let Busy = false;
+    const Finish = (State: string) => {
+        clearInterval(Timer);
+        Server.listen = State;
+        const Secs = Math.round((Date.now() - Started) / 1000);
+        if (State === "listening") {
+            logger.info(`Game server on port ${Server.port} is ready for players (${Secs} s after it started).`);
+        }
+        else {
+            logger.warn(`Game server on port ${Server.port}: ${State === "timeout" ? "could not tell when it was ready" : "it did not start"} after ${Secs} s.`);
+        }
+    };
+    const Timer = setInterval(async () => {
+        if (Busy || Server.listen !== "starting") return;
+        Busy = true;
+        try {
+            const Line = ListenLineInLog(LogFile);
+            if (Line === "1") { Finish("listening"); return; }
+            if (Line === "0") { Finish("failed"); return; }
+            if (UseNetstat && Server.processId) {
+                const Open = await UdpOpenByProcess(Server.port, Server.processId);
+                if (Open === undefined) { Finish("timeout"); return; }   // netstat not available: send players as before
+                if (Open) { Finish("listening"); return; }
+            }
+            if (!IsServerUp(Server.id)) { Finish("failed"); return; }
+            if (Date.now() - Started > LISTEN_WATCH_MS) { Finish("timeout"); return; }
+        }
+        finally { Busy = false; }
+    }, 1000);
+    Timer.unref();
+}
+export function ServerListenState(Id: string){
+    const Server = Gameservers.find((S) => S.id === Id);
+    return Server ? Server.listen : undefined;
 }
 
 export function GetRamsgateConnectionDetails(){
@@ -243,7 +321,8 @@ export async function GetTrainingDojoConnectionDetails(){
     }
     return {
         host: MY_IP,
-        port: TRAINING_DOJO_PORT
+        port: TRAINING_DOJO_PORT,
+        id: TrainingDojoServer ? TrainingDojoServer.id : undefined
     };
 }
 
@@ -255,7 +334,8 @@ export async function StartupGameserverWithArgs(GameArgs: string){
 
     return {
         host: MY_IP,
-        port: GameServerToReturn.port
+        port: GameServerToReturn.port,
+        id: GameServerToReturn.id
     };
 }
 

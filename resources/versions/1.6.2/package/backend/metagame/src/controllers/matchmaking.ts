@@ -60,6 +60,53 @@ async function ServerStillUp(ServerId: string){
     } catch { return false; }
 }
 
+// ------------------------------------------------------------------ wait until the server listens (DF-LISTEN-162)
+// A new server copy can need 20-60 s on a slow PC before players can connect, and the game gives up after 20 s
+// ("The server network connection timed out"). So a player is only told to travel once the deploy server says the
+// server listens (GET /ready/<id>). Meanwhile their status poll answers MATCHING, the same as a hunt queue.
+// LISTEN_WAIT_SECONDS (default 120, 0 = off) caps the wait; after it, or with an older deploy server that has no
+// /ready, the player is sent as before.
+const LISTEN_WAIT_MS = Math.max(0, Number(process.env.LISTEN_WAIT_SECONDS ?? 120) || 0) * 1000;
+const Sleep = (Ms: number) => new Promise((R) => setTimeout(R, Ms));
+async function WaitForListening(ServerId: string | undefined, What: string): Promise<boolean>{
+    if(!ServerId || LISTEN_WAIT_MS === 0) return true;
+    const Started = Date.now();
+    let Said = false;
+    while(Date.now() - Started < LISTEN_WAIT_MS){
+        let Data: any;
+        try {
+            const Answer = await fetch("http://" + DEPLOYSERVER_URL + "/api/matchmaker/ready/" + encodeURIComponent(ServerId), { signal: AbortSignal.timeout(5000) });
+            if(Answer.status !== 200) return true; // older deploy server: no /ready, send as before
+            Data = await Answer.json();
+        } catch { return true; }
+        if(Data.state === "listening" || Data.state === "timeout") return true;
+        if(Data.state === "failed" || Data.alive === false){
+            logger.error(`mm: the game server for ${What} did not start (${Data.state}); the player can try again`);
+            return false;
+        }
+        if(Data.state === "unknown") return true;
+        if(!Said && Date.now() - Started > 3000){
+            logger.info(`mm: waiting for the game server for ${What} to be ready before sending the player`);
+            Said = true;
+        }
+        await Sleep(500);
+    }
+    logger.warn(`mm: the game server for ${What} said nothing within ${LISTEN_WAIT_MS / 1000} s; sending the player anyway`);
+    return true;
+}
+
+// Runs OnReady / OnFail when the server listens. Answers within about 1.5 s when it already does (Ramsgate, a running
+// Dojo or hunt), so nothing changes there; otherwise it finishes in the background and the next status poll sends them.
+async function WhenListening(ServerId: string | undefined, What: string, OnReady: () => void, OnFail: () => void){
+    const Wait = WaitForListening(ServerId, What).catch(() => true);
+    const First = await Promise.race([Wait, Sleep(1500).then(() => "later" as const)]);
+    if(First === "later"){
+        Wait.then((Ok) => (Ok ? OnReady() : OnFail())).catch(() => { });
+        return;
+    }
+    if(First) OnReady(); else OnFail();
+}
+
 async function JoinOpenHunt(HuntId: string, PlayerId: string){
     if(HUNT_JOIN_WINDOW_MS === 0) return false;
     const Now = Date.now();
@@ -68,9 +115,13 @@ async function JoinOpenHunt(HuntId: string, PlayerId: string){
         if(H.HuntId !== HuntId || H.Players.includes(PlayerId) || H.Players.length >= HUNT_PLAYER_LIMIT) continue;
         if(!(await ServerStillUp(H.ServerId))){ H.OpenedAt = 0; continue; }
         H.Players.push(PlayerId);
-        MatchmakingResultMap.set(PlayerId, { Ready: true, CandidateId: crypto.randomUUID(), HuntId: HuntId, Host: H.Host, Port: H.Port });
+        const Entry = { Ready: false, CandidateId: crypto.randomUUID(), HuntId: HuntId, Host: H.Host, Port: H.Port };
+        MatchmakingResultMap.set(PlayerId, Entry);
+        await WhenListening(H.ServerId, HuntId, () => { Entry.Ready = true; }, () => {
+            if(MatchmakingResultMap.get(PlayerId) === Entry) MatchmakingResultMap.delete(PlayerId);
+        });
         logger.info(`mm: ${PlayerId} joins the open ${HuntId} at ${H.Host}:${H.Port} (${H.Players.length}/${HUNT_PLAYER_LIMIT}, started ${Math.round((Now - H.OpenedAt) / 1000)} s ago)`);
-        return true;
+        return MatchmakingResultMap.get(PlayerId) === Entry;
     }
     return false;
 }
@@ -151,17 +202,20 @@ async function PopQueue(HuntId: string){
         return;
     }
 
-    for(const Player of MatchmakingQueue!.Players){
-        const PlayerMatchmakingResultToUpdate = MatchmakingResultMap.get(Player);
-
-        if(PlayerMatchmakingResultToUpdate != undefined && PlayerMatchmakingResultToUpdate.HuntId === HuntId){
-            PlayerMatchmakingResultToUpdate.Host = GameOnDeployServer.host;
-            PlayerMatchmakingResultToUpdate.Port = GameOnDeployServer.port;
-            PlayerMatchmakingResultToUpdate.Ready = true;
-        }
-    }
-
     MatchmakingQueueMap.delete(HuntId);
+    const Entries = MatchmakingQueue!.Players.map((Player) => [Player, MatchmakingResultMap.get(Player)] as const)
+        .filter(([, E]) => E != undefined && E.HuntId === HuntId);
+    await WhenListening(GameOnDeployServer.serverId, HuntId, () => {
+        for(const [, E] of Entries){
+            E!.Host = GameOnDeployServer.host;
+            E!.Port = GameOnDeployServer.port;
+            E!.Ready = true;
+        }
+    }, () => {
+        for(const [Player, E] of Entries){
+            if(MatchmakingResultMap.get(Player) === E) MatchmakingResultMap.delete(Player);
+        }
+    });
 }
 
 export async function CheckAndUpdateQueueStatus(PlayerId: string){
@@ -252,15 +306,19 @@ export async function HandlePlayerMatchmaking(GameMode: string, GameArgs: string
                 return false;
             }
 
-            MatchmakingResultMap.set(PlayerId, {
-                Ready: true,
+            const Entry = {
+                Ready: false,
                 CandidateId: crypto.randomUUID(),
                 HuntId: HuntId,
                 Host: GameOnDeployServer.host,
                 Port: GameOnDeployServer.port
+            };
+            MatchmakingResultMap.set(PlayerId, Entry);
+            await WhenListening(GameOnDeployServer.serverId, HuntId || GameMode, () => { Entry.Ready = true; }, () => {
+                if(MatchmakingResultMap.get(PlayerId) === Entry) MatchmakingResultMap.delete(PlayerId);
             });
 
-            return true;
+            return MatchmakingResultMap.get(PlayerId) === Entry;
         }
         else{
             return await QueuePlayer(HuntId, PlayerId);
@@ -371,20 +429,28 @@ async function StartPartyCandidate(TheParty: NonNullable<ReturnType<typeof Party
         return false;
     }
 
-    for(const Member of Members){
-        const Entry = MatchmakingResultMap.get(Member);
-        if(Entry !== undefined && Entry.CandidateId === CandidateId){
-            Entry.Ready = true;
-            Entry.Host = Game.host;
-            Entry.Port = Game.port;
+    let Failed = false;
+    await WhenListening(Game.serverId, Hunt, () => {
+        for(const Member of Members){
+            const Entry = MatchmakingResultMap.get(Member);
+            if(Entry !== undefined && Entry.CandidateId === CandidateId){
+                Entry.Ready = true;
+                Entry.Host = Game.host;
+                Entry.Port = Game.port;
+            }
         }
-    }
+        MarkCandidateReady(TheParty, CandidateId, Game.host, Game.port);
+        if(Mode !== "CITY") NoteOpenHunt(Hunt, Game, Members);
+        logger.info(`mm: party P=${TheParty.PartyId} candidate ${CandidateId} ready at ${Game.host}:${Game.port}`);
+    }, () => {
+        Failed = true;
+        ClearCandidate(TheParty, CandidateId, "the game server did not start");
+        for(const Member of Members){
+            if(MatchmakingResultMap.get(Member)?.CandidateId === CandidateId) MatchmakingResultMap.delete(Member);
+        }
+    });
 
-    MarkCandidateReady(TheParty, CandidateId, Game.host, Game.port);
-    if(Mode !== "CITY") NoteOpenHunt(Hunt, Game, Members);
-    logger.info(`mm: party P=${TheParty.PartyId} candidate ${CandidateId} ready at ${Game.host}:${Game.port}`);
-
-    return true;
+    return !Failed;
 }
 
 // Where each player was last sent (for "Return with Party": who is on the leader's server)

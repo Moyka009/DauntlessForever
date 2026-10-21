@@ -25,3 +25,9 @@ exports.matchmakingRouter.post("/handle-matchmaking-for-player", express_2.defau
 exports.matchmakingRouter.get("/alive/:id", (req, res) => {
     res.json({ alive: (0, require("../controllers/gameservers").IsServerUp)(String(req.params.id)) });
 });
+// DF-LISTEN-162: has this game server started listening yet? (the metagame waits for this before sending players)
+exports.matchmakingRouter.get("/ready/:id", (req, res) => {
+    const G = require("../controllers/gameservers");
+    const Id = String(req.params.id);
+    res.json({ state: G.ServerListenState(Id) ?? "unknown", alive: G.IsServerUp(Id) });
+});
