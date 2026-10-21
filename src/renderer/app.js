@@ -324,6 +324,23 @@ function renderDetail() {
     pr.hidden = false; $('p-fill').style.width = (d.pct || 0) + '%';
     $('p-label').textContent = t('Downloading {version}', { version: v.id }); $('p-right').textContent = d.pct != null ? `${d.pct}%` : '';
     $('p-foot').textContent = d.total ? t('{done} of {total}', { done: d.done, total: d.total }) + (d.speed ? ', ' + d.speed : '') + (d.eta ? ', ' + t('about {eta} left', { eta: d.eta }) : '') : t('Reading the manifest...');
+    // DF-ASSEMBLE: after 100% the pieces are put together into the game files, then removed (minutes, no tool output)
+    const p2 = $('p2'), f2 = $('p2-fill');
+    if (d.stage && d.pct >= 100) {
+      p2.hidden = false;
+      $('p-foot').textContent = t('Download finished. Now putting the game files together; the launcher is not stuck.');
+      const mins = d.stageSecs >= 60 ? ' ' + t('({n} min so far)', { n: Math.floor(d.stageSecs / 60) }) : '';
+      if (d.stage === 'cleanup') {
+        f2.classList.add('busy'); f2.style.width = '100%';
+        $('p2-label').textContent = t('Tidying up the download'); $('p2-right').textContent = '';
+        $('p2-foot').textContent = t('Removing the downloaded pieces now that the game files are complete. Almost done.') + mins;
+      } else {
+        const known = d.stagePct != null;
+        f2.classList.toggle('busy', !known); f2.style.width = known ? d.stagePct + '%' : '100%';
+        $('p2-label').textContent = t('Putting the game files together'); $('p2-right').textContent = known ? d.stagePct + '%' : '';
+        $('p2-foot').textContent = (d.stageTotal ? t('{done} of {total} written.', { done: d.stageDone, total: d.stageTotal }) + ' ' : '') + t('This takes a few minutes, up to 20 on a hard drive.') + mins;
+      }
+    } else { p2.hidden = true; f2.classList.remove('busy'); }
   } else if (st.busy === 'setup' && setupAuto[v.id]) {
     // set-up after the download: a moving bar with the step it is on, so nobody thinks the launcher froze at 100%
     const lg = logs[v.id] || [];
@@ -332,6 +349,7 @@ function renderDetail() {
     $('p-label').textContent = t('Setting up {version}', { version: v.id }); $('p-right').textContent = t('a minute or two');
     $('p-foot').textContent = last ? last.slice(0, 120) : t('Installing the server files...');
   } else pr.hidden = true;
+  if (!(d && d.state === 'running')) $('p2').hidden = true;   // DF-ASSEMBLE: the second bar only while downloading
   if (!(st.busy === 'setup' && setupAuto[v.id])) $('p-fill').classList.remove('busy');
 
   // log

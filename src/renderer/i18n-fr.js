@@ -824,5 +824,12 @@
     "The friends server cannot be reached from this PC right now, so a new account cannot be made. Press Check connection to see why.": "Le serveur des amis est injoignable depuis ce PC pour l'instant, donc aucun nouveau compte ne peut \u00eatre cr\u00e9\u00e9. Appuyez sur V\u00e9rifier la connexion pour voir pourquoi.",
     "Your PC clock is more than 5 minutes off, so a new account would be refused too. Fix the clock first (Windows Settings > Time & language > Date & time > Set time automatically, Sync now).": "L'horloge du PC est d\u00e9cal\u00e9e de plus de 5 minutes, donc un nouveau compte serait refus\u00e9 aussi. Corrigez d'abord l'horloge (Param\u00e8tres Windows > Heure et langue > Date et heure > R\u00e9gler l'heure automatiquement, Synchroniser maintenant).",
     "Set a player name first (Settings > Player name).": "Choisissez d'abord un nom de joueur (Param\u00e8tres > Nom du joueur).",
+    "Download finished. Now putting the game files together; the launcher is not stuck.": "T\u00e9l\u00e9chargement termin\u00e9. Les fichiers du jeu sont maintenant assembl\u00e9s ; le launcher n'est pas bloqu\u00e9.",
+    "({n} min so far)": "({n} min jusqu'ici)",
+    "Tidying up the download": "Nettoyage du t\u00e9l\u00e9chargement",
+    "Removing the downloaded pieces now that the game files are complete. Almost done.": "Suppression des morceaux t\u00e9l\u00e9charg\u00e9s, les fichiers du jeu sont complets. Presque fini.",
+    "Putting the game files together": "Assemblage des fichiers du jeu",
+    "{done} of {total} written.": "{done} sur {total} \u00e9crits.",
+    "This takes a few minutes, up to 20 on a hard drive.": "Cela prend quelques minutes, jusqu'\u00e0 20 sur un disque dur.",
   };
 })(typeof module === 'object' && module.exports ? module.exports : (window.DF_I18N = window.DF_I18N || {}));

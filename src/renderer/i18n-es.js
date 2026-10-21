@@ -827,5 +827,12 @@
     "The friends server cannot be reached from this PC right now, so a new account cannot be made. Press Check connection to see why.": "Ahora no se puede llegar al servidor de amigos desde este PC, as\u00ed que no se puede crear una cuenta nueva. Pulsa Comprobar conexi\u00f3n para ver por qu\u00e9.",
     "Your PC clock is more than 5 minutes off, so a new account would be refused too. Fix the clock first (Windows Settings > Time & language > Date & time > Set time automatically, Sync now).": "El reloj del PC va desfasado m\u00e1s de 5 minutos, as\u00ed que una cuenta nueva tambi\u00e9n ser\u00eda rechazada. Arregla primero el reloj (Configuraci\u00f3n de Windows > Hora e idioma > Fecha y hora > Establecer la hora autom\u00e1ticamente, Sincronizar ahora).",
     "Set a player name first (Settings > Player name).": "Primero elige un nombre de jugador (Ajustes > Nombre de jugador).",
+    "Download finished. Now putting the game files together; the launcher is not stuck.": "Descarga terminada. Ahora se juntan los archivos del juego; el launcher no est\u00e1 colgado.",
+    "({n} min so far)": "({n} min hasta ahora)",
+    "Tidying up the download": "Limpiando la descarga",
+    "Removing the downloaded pieces now that the game files are complete. Almost done.": "Borrando las piezas descargadas ahora que los archivos del juego est\u00e1n completos. Casi listo.",
+    "Putting the game files together": "Juntando los archivos del juego",
+    "{done} of {total} written.": "{done} de {total} escritos.",
+    "This takes a few minutes, up to 20 on a hard drive.": "Tarda unos minutos, hasta 20 en un disco duro.",
   };
 })(typeof module === 'object' && module.exports ? module.exports : (window.DF_I18N = window.DF_I18N || {}));

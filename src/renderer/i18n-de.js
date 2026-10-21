@@ -819,5 +819,12 @@
     "The friends server cannot be reached from this PC right now, so a new account cannot be made. Press Check connection to see why.": "Der Freunde-Server ist von diesem PC gerade nicht erreichbar, daher kann kein neues Konto erstellt werden. Dr\u00fccke Verbindung pr\u00fcfen, um den Grund zu sehen.",
     "Your PC clock is more than 5 minutes off, so a new account would be refused too. Fix the clock first (Windows Settings > Time & language > Date & time > Set time automatically, Sync now).": "Die Uhr deines PCs geht mehr als 5 Minuten falsch, daher w\u00fcrde auch ein neues Konto abgelehnt. Stell zuerst die Uhr richtig (Windows-Einstellungen > Zeit und Sprache > Datum und Uhrzeit > Uhrzeit automatisch festlegen, Jetzt synchronisieren).",
     "Set a player name first (Settings > Player name).": "Leg zuerst einen Spielernamen fest (Einstellungen > Spielername).",
+    "Download finished. Now putting the game files together; the launcher is not stuck.": "Download fertig. Jetzt werden die Spieldateien zusammengesetzt; der Launcher h\u00e4ngt nicht.",
+    "({n} min so far)": "(bisher {n} Min.)",
+    "Tidying up the download": "Download wird aufger\u00e4umt",
+    "Removing the downloaded pieces now that the game files are complete. Almost done.": "Die heruntergeladenen Teile werden entfernt, die Spieldateien sind komplett. Fast fertig.",
+    "Putting the game files together": "Spieldateien werden zusammengesetzt",
+    "{done} of {total} written.": "{done} von {total} geschrieben.",
+    "This takes a few minutes, up to 20 on a hard drive.": "Das dauert ein paar Minuten, auf einer Festplatte bis zu 20.",
   };
 })(typeof module === 'object' && module.exports ? module.exports : (window.DF_I18N = window.DF_I18N || {}));

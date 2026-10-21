@@ -23,6 +23,39 @@ function toolOk() {
   } catch { return false; }
 }
 
+// DF-ASSEMBLE (Oct 21): after the bar reaches 100% the tool still glues the downloaded pieces (.manifest-cache) into
+// the game files, then deletes the pieces. It prints nothing while it does that (minutes on a hard drive), so players
+// thought the launcher froze at 100%. The launcher now measures what is written instead: the game files' size against
+// the installed size from version.json, then "tidying up" while the pieces are being removed.
+function gameBytes(dir) {
+  let n = 0;
+  const walk = (d) => {
+    let list = []; try { list = fs.readdirSync(d, { withFileTypes: true }); } catch { return; }
+    for (const e of list) {
+      if (e.name === '.manifest-cache') continue;
+      const f = path.join(d, e.name);
+      if (e.isDirectory()) walk(f); else { try { n += fs.statSync(f).size; } catch {} }
+    }
+  };
+  walk(dir);
+  return n;
+}
+function watchAssembly(v, outDir, onProgress) {
+  const totalB = (Number(v.download && v.download.installedGB) || 0) * 1073741824;   // installedGB is the manifest's GB (GiB): 1.14.7 15.39 = 16.5e9 bytes
+  const cache = path.join(outDir, '.manifest-cache');
+  const t0 = Date.now();
+  const tick = () => {
+    const done = gameBytes(outDir);
+    const gb = (x) => (x / 1073741824).toFixed(2) + ' GB';
+    if (totalB && done >= totalB * 0.995 && fs.existsSync(cache)) {
+      onProgress({ stage: 'cleanup', stagePct: null, stageDone: gb(done), stageTotal: gb(totalB), stageSecs: Math.round((Date.now() - t0) / 1000) });
+    } else {
+      onProgress({ stage: 'assemble', stagePct: totalB ? Math.min(100, Math.floor(done * 100 / totalB)) : null, stageDone: gb(done), stageTotal: totalB ? gb(totalB) : '', stageSecs: Math.round((Date.now() - t0) / 1000) });
+    }
+  };
+  tick();
+  return setInterval(tick, 3000);
+}
 // onProgress({ pct, done, total, speed, eta, line }) ; resolves { code, failed, summary }
 function download(v, outDir, onProgress, onLine) {
   return new Promise((resolve) => {
@@ -34,6 +67,7 @@ function download(v, outDir, onProgress, onLine) {
     const child = spawn(toolPath(), args, { windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'] });
     active.set(v.id, child);
     let summary = '', failed = null, total = null, lastErrLine = '', errorLine = '';
+    let assembly = null;   // DF-ASSEMBLE: the second bar's timer, started at 100%
     // e.g. "Downloading  45% |████    | (994 MB/12 GB, 272 MB/s) [3s:40s]"  or  "(12/12 GB, 260 MB/s)" (unit once)
     const re = /(\d{1,3})%.*?\(([\d.]+(?:\s*[KMGT]?i?B)?)\s*\/\s*([\d.]+\s*[KMGT]?i?B)(?:,\s*([^)\]]+))?\)(?:\s*\[([^\]]*)\])?/;
     child.stderr.on('data', (d) => {
@@ -45,6 +79,7 @@ function download(v, outDir, onProgress, onLine) {
           let done = m[2].trim(), total = m[3].trim();
           if (!/[A-Za-z]/.test(done)) done += ' ' + total.replace(/^[\d.]+\s*/, '');   // "12/12 GB" -> "12 GB"
           onProgress({ pct: +m[1], done, total, speed: m[4] || '', eta: prettyEta(m[5] || ''), line: piece.trim() });
+          if (+m[1] >= 100 && !assembly) assembly = watchAssembly(v, outDir, onProgress);
         }
         else if (/^\s*Downloading\b.*%/.test(piece)) { /* a progress line in a shape we did not expect: not for the log */ }
         else {
@@ -64,8 +99,8 @@ function download(v, outDir, onProgress, onLine) {
         const c = /Chunks:\s*(\d+)/.exec(l); if (c) total = +c[1];
       }
     });
-    child.on('exit', (code) => { active.delete(v.id); resolve({ code: code == null ? 1 : code, failed, total, summary, lastErrLine, errorLine }); });
-    child.on('error', (e) => { active.delete(v.id); resolve({ code: 1, error: 'Could not start the download tool: ' + e.message }); });
+    child.on('exit', (code) => { if (assembly) clearInterval(assembly); active.delete(v.id); resolve({ code: code == null ? 1 : code, failed, total, summary, lastErrLine, errorLine }); });
+    child.on('error', (e) => { if (assembly) clearInterval(assembly); active.delete(v.id); resolve({ code: 1, error: 'Could not start the download tool: ' + e.message }); });
   });
 }
 

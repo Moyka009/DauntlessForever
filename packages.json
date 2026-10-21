@@ -18,14 +18,14 @@
                      }
                  ],
     "launcher":  {
-                     "version":  "0.2.21",
+                     "version":  "0.2.22",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "Settings \u003e Friends account: Check connection explains sign-in problems (data cap pages, Wi-Fi logins, antivirus, PC clock) and Reset account fixes a lost friends account",
+                     "notes":  "After the download reaches 100%, a second bar shows the game files being put together (it used to look stuck at 100%)",
                      "date":  "2026-10-21",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.21.asar",
-                                 "sha256":  "041208c6a140118e0bd8ce9dfaacada5f5bc897800de132d84ca573b42a8ff78",
-                                 "size":  1034692,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.22.asar",
+                                 "sha256":  "e3a986277371b4fc0ba27d3fc535ecd375e2ac0616067de1a18edc94d4b8ba4e",
+                                 "size":  1040697,
                                  "minShell":  "0.2.4"
                              }
                  }
