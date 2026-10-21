@@ -21,6 +21,7 @@ param(
     [int]$DeployPid = 0,           # 1.6.2 only: the deploy server (starts the game server copies)
     [int]$RamsgatePort = 0,
     [string]$PingUrl = '',
+    [int]$ParentPid = 0,           # the PLAY window (start.ps1): when it is gone, this watch ends
     [int]$TestCode = 0             # shows that error for 20 s and closes (to see what the box looks like)
 )
 $ErrorActionPreference = 'SilentlyContinue'
@@ -29,9 +30,10 @@ $LogDir = Join-Path $Root 'logs'; $DataDir = Join-Path $Root 'data'
 New-Item -ItemType Directory -Force $LogDir | Out-Null
 $LogFile = Join-Path $LogDir 'watch.log'
 $NoticeFile = Join-Path $DataDir 'watch_notice.json'   # written by the backend (Error 6)
+$StopFile = Join-Path $DataDir 'watch_stop'            # written by start.ps1 as soon as the game has closed
 if (-not $RamsgatePort) { $RamsgatePort = if ($Version -eq '1.6.2') { 8777 } else { 8780 } }
 if (-not $PingUrl) { $PingUrl = if ($Version -eq '1.6.2') { 'http://127.0.0.1:61000/dauntless-status' } else { 'http://127.0.0.1:63000/_recorder/ping' } }
-Remove-Item -LiteralPath $NoticeFile -Force -ErrorAction SilentlyContinue
+Remove-Item -LiteralPath $NoticeFile, $StopFile -Force -ErrorAction SilentlyContinue
 [IO.File]::WriteAllText($LogFile, ("{0:yyyy-MM-dd HH:mm:ss} watch started ({1})`r`n" -f (Get-Date), $Version))
 
 $Texts = @{
@@ -90,6 +92,8 @@ function Show-Error([int]$code, [string]$extra = '') {
     $foot.Text = ("Dauntless {0}  {1:HH:mm}   Asking for help? Post this screenshot or say 'Error {2}' in the Discord." -f $Version, (Get-Date), $code)
     if (-not $win.IsVisible) { $win.Show() }
 }
+# the only way out: the box is hidden first, then the process ends, so nothing can stay on screen
+function End-Watch([string]$why) { Log $why; try { $timer.Stop(); $win.Hide() } catch {}; [Environment]::Exit(0) }
 function Hide-Error([int]$code) { if ($S.Active -eq $code) { $S.Active = 0; $win.Hide() } }
 
 $timer = New-Object System.Windows.Threading.DispatcherTimer
@@ -97,12 +101,16 @@ $timer.Interval = [TimeSpan]::FromSeconds(2)
 $timer.Add_Tick({
     try {
         $S.Tick++
-        if ($TestCode) { if ($S.Tick -eq 1) { Show-Error $TestCode '(test)' }; if ($S.Tick -ge 10) { $win.Close() }; return }
-        # --- the game: closes this watch when it is gone (10 s), or after 3 minutes if it never appeared
-        if ($S.Tick % 3 -eq 1) {
+        if ($TestCode) { if ($S.Tick -eq 1) { Show-Error $TestCode '(test)' }; if ($S.Tick -ge 10) { End-Watch 'test done' }; return }
+        # --- the end: the game closed (start.ps1 says so), or the PLAY window is gone. Checked before anything else,
+        #     so the backend closing at shutdown never shows as Error 1.
+        if (Test-Path -LiteralPath $StopFile) { End-Watch 'game closed, watch ends' }
+        if ($ParentPid -and -not (Get-Process -Id $ParentPid -ErrorAction SilentlyContinue)) { End-Watch 'PLAY window closed, watch ends' }
+        # fallback for an older start.ps1 without -ParentPid: the game process itself
+        if (-not $ParentPid -and $S.Tick % 3 -eq 1) {
             if ((PlayerGame).Count -gt 0) { $S.SeenGame = $true; $S.GoneSince = $null }
-            elseif ($S.SeenGame) { if (-not $S.GoneSince) { $S.GoneSince = Get-Date } elseif (((Get-Date) - $S.GoneSince).TotalSeconds -gt 10) { Log 'game closed, watch ends'; $win.Close(); return } }
-            elseif (((Get-Date) - $S.Started).TotalMinutes -gt 3) { Log 'game never appeared, watch ends'; $win.Close(); return }
+            elseif ($S.SeenGame) { if (-not $S.GoneSince) { $S.GoneSince = Get-Date } elseif (((Get-Date) - $S.GoneSince).TotalSeconds -gt 10) { End-Watch 'game closed, watch ends' } }
+            elseif (((Get-Date) - $S.Started).TotalMinutes -gt 3) { End-Watch 'game never appeared, watch ends' }
         }
         # --- 1 / 7 / 2: backend
         if (-not (Alive $BackendPid)) { Show-Error 1; return }

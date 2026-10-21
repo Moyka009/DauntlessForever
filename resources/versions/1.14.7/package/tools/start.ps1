@@ -38,11 +38,12 @@ function Start-DfWatch([int]$BackendPid, [int]$DeployPid = 0) {
     $w = Join-Path $PSScriptRoot 'df-watch.ps1'
     if (-not (Test-Path -LiteralPath $w)) { return }
     try {
-        $a = @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-WindowStyle', 'Hidden', '-File', ('"' + $w + '"'), '-Version', '1.14.7', '-Root', ('"' + $Root + '"'), '-BackendPid', "$BackendPid")
+        $a = @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-WindowStyle', 'Hidden', '-File', ('"' + $w + '"'), '-Version', '1.14.7', '-Root', ('"' + $Root + '"'), '-BackendPid', "$BackendPid", '-ParentPid', "$PID")
         if ($DeployPid) { $a += @('-DeployPid', "$DeployPid") }
         Start-Process -FilePath 'powershell.exe' -ArgumentList $a -WindowStyle Hidden | Out-Null
     } catch { Say "    (the error box could not start: $($_.Exception.Message))" 'Yellow' }
 }
+function Stop-DfWatch { try { [IO.File]::WriteAllText((Join-Path $Root 'data\watch_stop'), 'stop') } catch {} }   # the game closed: the box goes away
 function Show-DfWatchErrors {
     $f = Join-Path $Root 'logs\watch.log'
     if (-not (Test-Path -LiteralPath $f)) { return }
@@ -140,6 +141,7 @@ if ($NoGame) {
     Start-DfWatch -BackendPid $watchPid
     try { & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot 'play-1147.ps1'); if ($LASTEXITCODE -ne 0) { $playOk = $false } }
     catch { $playOk = $false; Say $_.Exception.Message 'Yellow' }
+    Stop-DfWatch
     Show-DfWatchErrors
 }
 

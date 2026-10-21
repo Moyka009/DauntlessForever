@@ -2,19 +2,19 @@
     "packages":  [
                      {
                          "id":  "1.6.2",
-                         "packageVersion":  "2026-10-21.3",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-21.3.zip",
-                         "sha256":  "05cbfcd189751379deeca4a165ddec6bdb06b482cf57220f7d00a9ec01f4c35c",
+                         "packageVersion":  "2026-10-21.4",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-21.4.zip",
+                         "sha256":  "4c19570af49f382c00e25d84d08b491eb6157a55fce9389fae188a54cb36a7a7",
                          "date":  "2026-10-21",
-                         "note":  "Slow PCs: the game now waits until a new island, tutorial or Dojo server is ready instead of timing out"
+                         "note":  "Error box no longer stays on screen after the game closes, and no false Error 1 at shutdown"
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-21",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-21.zip",
-                         "sha256":  "210dbef6221039781d10e1c053353837f21f04e1ff482274f0750f516c2d7f4a",
+                         "packageVersion":  "2026-10-21.2",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-21.2.zip",
+                         "sha256":  "cedc7dbd65dc38e0a805d070148d7f08b7a9d36a527f699693b48262d435fa85",
                          "date":  "2026-10-21",
-                         "note":  "High CPU fixed (Ramsgate 50% to 15% on the same PC, hunt FPS back): the crash guard\u0027s per-object checks no longer call into Windows"
+                         "note":  "Error box no longer stays on screen after the game closes, and no false Error 1 at shutdown"
                      }
                  ],
     "launcher":  {
