@@ -18,14 +18,14 @@
                      }
                  ],
     "launcher":  {
-                     "version":  "0.2.19",
+                     "version":  "0.2.20",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "",
-                     "date":  "2026-10-19",
+                     "notes":  "Mods page shows each mod\u0027s name, description and hotkeys; Provy in Credits",
+                     "date":  "2026-10-21",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.19.asar",
-                                 "sha256":  "a1a1bfea6f1ba944d9fa12937d5cb066be718bf28cad20d5c6cbc6861fab66b2",
-                                 "size":  1008641,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.20.asar",
+                                 "sha256":  "27344f4edf2d3d2cfeb23ee61c19ad2abfac42cf454fc875b37f5a984179b7bc",
+                                 "size":  1010071,
                                  "minShell":  "0.2.4"
                              }
                  }
