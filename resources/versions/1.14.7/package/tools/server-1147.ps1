@@ -6,7 +6,7 @@ server-1147.ps1 - the Dauntless 1.14.7 game server (a second copy of the game in
 Normally started for you by "2 - PLAY.bat" (tools\start.ps1). By hand, from the package folder:
 
   -Run       start the server (Ramsgate, UDP port 8780). When the game asks for a place outside the city (training
-             grounds, a hunt), a second hidden server copy is started on that map (UDP port 8781) and the game travels there.
+             grounds, a hunt), a hidden server copy is started on that map (UDP 8781 and up, one per place) and the game travels there.
              Press Q in this window to stop it. Logs go to upload\server_logs.zip (PC name and user name blanked).
   -Stop      close every server copy of the game and clear the marker files in the data folder.
              The player's own game is left alone.
@@ -165,8 +165,12 @@ function Describe-Exit($proc, [datetime]$started, [string]$engineLog) {
 }
 $modsFile = Join-Path $dataDir "mods.txt"
 foreach ($f in @($wantedFile, $huntMarker)) { if (Test-Path -LiteralPath $f) { Remove-Item -LiteralPath $f -Force -ErrorAction SilentlyContinue } }
-$script:hunt = $null; $script:spare = $null; $script:huntCount = 0; $script:huntFailedId = ""
-$WarmPort = $HuntPort + 1
+$script:hunts = [ordered]@{}; $script:spare = $null; $script:huntCount = 0; $script:failedIds = @{}
+# DF-MULTIHUNT-1147 (Oct 21): one hunt server per place. Players who are not in a party each get their own hunt server
+# (a party shares one), on UDP 8781-8787: the ports the firewall rules, the relay and the join proxy already carry.
+# Another one is only started with enough free memory; otherwise that player is told why and stays in Ramsgate.
+$MaxHuntPort = $Port + 7
+$MinFreeGB = 3
 $urlOk = "^/Game/[A-Za-z0-9_/.?=:,+\-]{1,900}$"
 # off unless the Mods page turned "Trials Quick Retry" on (data\mods.txt trialsretry=on); data\warm.txt (all|off|trials) overrides
 function Warm-Mode {
@@ -178,9 +182,16 @@ function Warm-Mode {
 function Warm-Wanted($h) { $m = Warm-Mode; return ($m -eq "all") -or ($m -eq "trials" -and "$($h.Label)" -match "TRIAL") }
 function Free-RamGB { try { return [math]::Round((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory / 1MB, 1) } catch { return 99 } }
 function Strip-Players([string]$u) { return ($u -replace '\?PlayerHuntIds=[^?]*', '') }
+function Free-HuntPort {
+    $used = @{}
+    foreach ($h in @($script:hunts.Values)) { $used[[int]$h.Port] = $true }
+    if ($script:spare) { $used[[int]$script:spare.Port] = $true }
+    for ($fp = $HuntPort; $fp -le $MaxHuntPort; $fp++) { if (-not $used.ContainsKey($fp)) { return $fp } }
+    return 0
+}
 function Start-Hunt($w, [int]$port, [bool]$isSpare) {
     $script:huntCount++; $n = $script:huntCount
-    $slot = if ($port -eq $HuntPort) { "2" } else { "3" }
+    $slot = "$($port - $Port + 1)"    # 8781 -> srvhome2, 8782 -> srvhome3, ... (each copy keeps its own private home)
     $hHome = Join-Path $WorkDir "srvhome$slot"
     $hLocal = Join-Path $hHome "AppData\Local"; $hRoaming = Join-Path $hHome "AppData\Roaming"
     $hCfg = Join-Path $hLocal "Archon\Saved\Config\WindowsClient"; $hEos = Join-Path $WorkDir "eos_srv$slot"
@@ -190,7 +201,7 @@ function Start-Hunt($w, [int]$port, [bool]$isSpare) {
     # no game mode is set, so the map brings its own
     $u = "$($w.url)"; $q = $u.IndexOf("?"); $hMap = $u; $hOpts = ""
     if ($q -ge 0) { $hMap = $u.Substring(0, $q); $hOpts = $u.Substring($q) }
-    $hIni = "; Written by server-1147.ps1 for the second server.`r`n[/Script/EngineSettings.GameMapsSettings]`r`nGameDefaultMap=$hMap`r`nServerDefaultMap=$hMap`r`nLocalMapOptions=$hOpts`r`n`r`n" + $driverIni
+    $hIni = "; Written by server-1147.ps1 for a hunt server.`r`n[/Script/EngineSettings.GameMapsSettings]`r`nGameDefaultMap=$hMap`r`nServerDefaultMap=$hMap`r`nLocalMapOptions=$hOpts`r`n`r`n" + $driverIni
     [System.IO.File]::WriteAllText((Join-Path $hCfg "Engine.ini"), $hIni, [System.Text.Encoding]::ASCII)
     $log = Join-Path $logDir "server_$port.log"
     if (Test-Path -LiteralPath $log) { Remove-Item -LiteralPath $log -Force -ErrorAction SilentlyContinue }
@@ -198,22 +209,31 @@ function Start-Hunt($w, [int]$port, [bool]$isSpare) {
     $env:USERPROFILE = $hHome; $env:LOCALAPPDATA = $hLocal; $env:APPDATA = $hRoaming; $env:EOS_OFFLINE_DIR = $hEos; $env:D1147_PORT = "$port"
     $hp = Start-Process -FilePath $exe -ArgumentList $gameArgs -WorkingDirectory $exeDir -RedirectStandardOutput $hEng -RedirectStandardError $hErr -WindowStyle Hidden -PassThru
     Set-ServerSpeed $hp
-    $rec = @{ Proc = $hp; Id = "$($w.id)"; Url = $u; Label = "$($w.label)"; N = $n; Shown = 0; Started = (Get-Date); Listening = $false; UnwantedSince = $null; Reuse = [bool]$w.reuse; Port = $port; Log = $log; Spare = $isSpare; Eng = $hEng }
+    $rec = @{ Proc = $hp; Id = "$($w.id)"; Url = $u; Label = "$($w.label)"; N = $n; Shown = 0; Started = (Get-Date); Listening = $false; UnwantedSince = $null; Reuse = [bool]$w.reuse; Port = $port; Log = $log; Spare = $isSpare; Eng = $hEng; ForId = "" }
     if (-not $isSpare -and (Test-Path -LiteralPath $huntFailedFile)) { Remove-Item -LiteralPath $huntFailedFile -Force -ErrorAction SilentlyContinue }
     Write-Host ""
     if ($isSpare) {
         $script:spare = $rec
         Write-Host ("SPARE SERVER warming up (pid {0}, port {1}) for: {2}. A retry switches to it at once." -f $hp.Id, $port, $w.label) -ForegroundColor Cyan
     } else {
-        $script:hunt = $rec
-        Write-Host ("SECOND SERVER starting (pid {0}, port {1}) for: {2}" -f $hp.Id, $port, $w.label) -ForegroundColor Green
+        $script:hunts[$rec.Id] = $rec
+        Write-Host ("HUNT SERVER starting (pid {0}, port {1}) for: {2}" -f $hp.Id, $port, $w.label) -ForegroundColor Green
         Write-Host ("  map and options: {0}" -f $u)
+        if ($script:hunts.Count -gt 1) { Write-Host ("  {0} hunt servers are running now (one per place)." -f $script:hunts.Count) }
         Write-Host "  The game shows its matchmaking screen until this server is ready (about a minute)."
     }
+    return $rec
 }
+# data\server_hunt.json: every listening hunt server in "list"; the newest also at the top (older readers)
 function Write-HuntMarker {
-    $h = $script:hunt
-    [System.IO.File]::WriteAllText($huntMarker, ('{{"pid":{0},"port":{1},"host":"127.0.0.1","id":"{2}"}}' -f $h.Proc.Id, $h.Port, $h.Id), [System.Text.Encoding]::ASCII)
+    $up = @($script:hunts.Values | Where-Object { $_.Listening })
+    if (-not $up.Count) { if (Test-Path -LiteralPath $huntMarker) { Remove-Item -LiteralPath $huntMarker -Force -ErrorAction SilentlyContinue }; return }
+    $items = @($up | ForEach-Object { '{{"pid":{0},"port":{1},"host":"127.0.0.1","id":"{2}"}}' -f $_.Proc.Id, $_.Port, $_.Id })
+    $last = $up[$up.Count - 1]
+    $json = '{{"pid":{0},"port":{1},"host":"127.0.0.1","id":"{2}","list":[{3}]}}' -f $last.Proc.Id, $last.Port, $last.Id, ($items -join ',')
+    $tmp = "$huntMarker.tmp"
+    [System.IO.File]::WriteAllText($tmp, $json, [System.Text.Encoding]::ASCII)
+    Move-Item -LiteralPath $tmp -Destination $huntMarker -Force
 }
 function Stop-Rec($h, [string]$Why, [string]$What) {
     if (-not $h) { return }
@@ -221,20 +241,25 @@ function Stop-Rec($h, [string]$Why, [string]$What) {
     try { if (Test-Path -LiteralPath $h.Log) { Copy-Item -LiteralPath $h.Log -Destination (Join-Path $logDir ("place{0}_loader.log" -f $h.N)) -Force } } catch { }
     Write-Host ("{0} stopped: {1}. Its logs: place{2}_engine.log, place{2}_loader.log" -f $What, $Why, $h.N) -ForegroundColor Yellow
 }
-function Stop-Hunt([string]$Why) {
-    $h = $script:hunt; if (-not $h) { return }
-    if (Test-Path -LiteralPath $huntMarker) { Remove-Item -LiteralPath $huntMarker -Force -ErrorAction SilentlyContinue }
-    Stop-Rec $h $Why "SECOND SERVER"
-    $script:hunt = $null
+function Stop-Hunt($h, [string]$Why) {
+    if (-not $h) { return }
+    if ($script:hunts.Contains($h.Id) -and $script:hunts[$h.Id] -eq $h) { $script:hunts.Remove($h.Id) }
+    Write-HuntMarker
+    Stop-Rec $h $Why ("HUNT SERVER (port {0})" -f $h.Port)
+    if ($script:spare -and $script:spare.ForId -eq $h.Id -and $Why -notmatch "spare server takes over") { Stop-Spare $Why }
 }
 function Stop-Spare([string]$Why) {
     $s = $script:spare; if (-not $s) { return }
-    Stop-Rec $s $Why "SPARE SERVER"
     $script:spare = $null
+    Stop-Rec $s $Why "SPARE SERVER"
+}
+function Fail-Hunt($h, [string]$why) {
+    if ($h.Spare) { Stop-Spare $why; return }
+    $script:failedIds[$h.Id] = $true; Write-HuntFailed $h.Id $why; Stop-Hunt $h $why
 }
 # tail a copy's loader log; returns $false when the copy is gone
 function Watch-Rec($h) {
-    $tag = if ($h.Spare) { "[spare]" } else { "[2nd]" }
+    $tag = if ($h.Spare) { "[spare]" } else { "[$($h.Port)]" }
     $ll = @(Read-Shared $h.Log | Where-Object { $_ })
     for ($i = $h.Shown; $i -lt $ll.Count; $i++) { Write-Host ("  $tag " + $ll[$i]) -ForegroundColor DarkCyan }
     if ($ll.Count -gt $h.Shown) { $h.Shown = $ll.Count }
@@ -243,56 +268,78 @@ function Watch-Rec($h) {
         if ($txt -match "LISTENING on UDP port") {
             $h.Listening = $true
             if ($h.Spare) { Write-Host ("SPARE SERVER READY on port {0} after {1} seconds." -f $h.Port, $waited) -ForegroundColor Cyan }
-            else { Write-HuntMarker; Write-Host ("SECOND SERVER READY on port {0} after {1} seconds. The game travels there by itself." -f $h.Port, $waited) -ForegroundColor Green }
+            else { Write-HuntMarker; Write-Host ("HUNT SERVER READY on port {0} after {1} seconds. The game travels there by itself." -f $h.Port, $waited) -ForegroundColor Green }
         }
-        elseif ($txt -match "stopping here|InitListen on port \d+ = 0") { $why = "it could not open UDP port $($h.Port) (another program or a Windows port reservation holds it; STOP bat, or net stop winnat / net start winnat as admin)"; if ($h.Spare) { Stop-Spare $why } else { $script:huntFailedId = $h.Id; Write-HuntFailed $h.Id $why; Stop-Hunt $why }; return $false }
-        elseif ($waited -ge $WaitSeconds) { $why = "it did not come up within $WaitSeconds seconds (see logs\place$($h.N)_engine.log)"; if ($h.Spare) { Stop-Spare $why } else { $script:huntFailedId = $h.Id; Write-HuntFailed $h.Id $why; Stop-Hunt $why }; return $false }
+        elseif ($txt -match "stopping here|InitListen on port \d+ = 0") { Fail-Hunt $h "it could not open UDP port $($h.Port) (another program or a Windows port reservation holds it; STOP bat, or net stop winnat / net start winnat as admin)"; return $false }
+        elseif ($waited -ge $WaitSeconds) { Fail-Hunt $h "it did not come up within $WaitSeconds seconds (see logs\place$($h.N)_engine.log)"; return $false }
     }
-    if ($h.Proc.HasExited) { $why = Describe-Exit $h.Proc $h.Started $h.Eng; if ($h.Spare) { Stop-Spare $why } else { $script:huntFailedId = $h.Id; Write-HuntFailed $h.Id $why; Stop-Hunt $why }; return $false }
+    if ($h.Proc.HasExited) { Fail-Hunt $h (Describe-Exit $h.Proc $h.Started $h.Eng); return $false }
     return $true
 }
-function Step-Hunt {
+# data\wanted.json: every place a player asked for in "list" (one entry at the top for an older backend)
+function Read-Wanted {
     $w = $null
     if (Test-Path -LiteralPath $wantedFile) { try { $w = (Read-Shared $wantedFile) -join "`n" | ConvertFrom-Json } catch { $w = $null } }
-    if ($w -and (-not $w.id -or "$($w.url)" -notmatch $urlOk)) { $w = $null }
-    $h = $script:hunt
-    if ($w) {
-        if ($h -and $h.Id -ne "$($w.id)") {
-            $s = $script:spare
-            if ($h.Reuse -and $w.reuse -and $h.Url -eq "$($w.url)" -and -not $h.Proc.HasExited) {
-                $h.Id = "$($w.id)"; if ($h.Listening) { Write-HuntMarker }
-                Write-Host "  [2nd] the same place was asked for again: using the server that is already up" -ForegroundColor DarkCyan
-            }
-            elseif ($s -and -not $s.Proc.HasExited -and (Strip-Players $s.Url) -eq (Strip-Players "$($w.url)")) {
-                # DF-WARM-1147: a retry of the same place: the spare takes over, no new boot
-                Stop-Hunt "a retry: the spare server takes over"
-                $script:spare = $null
-                $s.Id = "$($w.id)"; $s.Label = "$($w.label)"; $s.Reuse = [bool]$w.reuse; $s.Spare = $false; $s.UnwantedSince = $null
-                $script:hunt = $s
-                if ($s.Listening) { Write-HuntMarker; Write-Host ("SPARE SERVER TAKES OVER on port {0}: ready at once." -f $s.Port) -ForegroundColor Green }
-                else { Write-Host ("SPARE SERVER TAKES OVER on port {0}: still starting." -f $s.Port) -ForegroundColor Green }
-            }
-            else { Stop-Hunt "another place was asked for"; Stop-Spare "another place was asked for" }
+    if (-not $w) { return @() }
+    $all = if ($null -ne $w.list) { @($w.list) } else { @($w) }
+    return @($all | Where-Object { $_ -and $_.id -and "$($_.url)" -match $urlOk })
+}
+function Step-Hunt {
+    $wl = @(Read-Wanted)
+    $ids = @{}; foreach ($w in $wl) { $ids["$($w.id)"] = $true }
+    foreach ($w in $wl) {
+        $id = "$($w.id)"
+        if ($script:hunts.Contains($id)) { $script:hunts[$id].UnwantedSince = $null; continue }
+        if ($script:failedIds.ContainsKey($id)) { continue }
+        # the same place (Training Grounds) asked for again under a new id: the server that is already up is used
+        $old = @($script:hunts.Values | Where-Object { -not $ids.ContainsKey($_.Id) -and $_.Reuse -and $w.reuse -and $_.Url -eq "$($w.url)" -and -not $_.Proc.HasExited }) | Select-Object -First 1
+        if ($old) {
+            $script:hunts.Remove($old.Id); $old.Id = $id; $old.UnwantedSince = $null; $script:hunts[$id] = $old
+            if ($old.Listening) { Write-HuntMarker }
+            Write-Host ("  [{0}] the same place was asked for again: using the server that is already up" -f $old.Port) -ForegroundColor DarkCyan
+            continue
         }
-        if (-not $script:hunt -and $script:huntFailedId -ne "$($w.id)") {
-            $port = $HuntPort; if ($script:spare -and $script:spare.Port -eq $HuntPort) { $port = $WarmPort }
-            Start-Hunt $w $port $false
+        # DF-WARM-1147: a retry of the same place: the spare takes over, no new boot
+        $s = $script:spare
+        if ($s -and -not $s.Proc.HasExited -and (Strip-Players $s.Url) -eq (Strip-Players "$($w.url)")) {
+            $prev = $null; if ($s.ForId -and $script:hunts.Contains($s.ForId)) { $prev = $script:hunts[$s.ForId] }
+            if ($prev -and -not $ids.ContainsKey($prev.Id)) { Stop-Hunt $prev "a retry: the spare server takes over" }
+            $script:spare = $null
+            $s.Id = $id; $s.Label = "$($w.label)"; $s.Reuse = [bool]$w.reuse; $s.Spare = $false; $s.UnwantedSince = $null; $s.ForId = ""
+            $script:hunts[$id] = $s
+            if ($s.Listening) { Write-HuntMarker; Write-Host ("SPARE SERVER TAKES OVER on port {0}: ready at once." -f $s.Port) -ForegroundColor Green }
+            else { Write-Host ("SPARE SERVER TAKES OVER on port {0}: still starting." -f $s.Port) -ForegroundColor Green }
+            continue
         }
-        if ($script:hunt) { $script:hunt.UnwantedSince = $null }
+        # a new place: places nobody wants any more are closed first, so their memory goes to the new one
+        foreach ($h in @($script:hunts.Values | Where-Object { -not $ids.ContainsKey($_.Id) })) { Stop-Hunt $h "another place was asked for" }
+        if ($script:spare -and -not $ids.ContainsKey("$($script:spare.ForId)")) { Stop-Spare "another place was asked for" }
+        $port = Free-HuntPort
+        if (-not $port -and $script:spare) { Stop-Spare "a hunt server for another place needs its port"; $port = Free-HuntPort }
+        if (-not $port) { $script:failedIds[$id] = $true; Write-HuntFailed $id ("all {0} hunt server slots are in use (UDP {1}-{2}). Join another player's hunt (party up) or wait until one comes back" -f ($MaxHuntPort - $HuntPort + 1), $HuntPort, $MaxHuntPort); continue }
+        if ($script:hunts.Count -ge 1) {
+            $free = Free-RamGB
+            if ($free -lt $MinFreeGB -and $script:spare) { Stop-Spare "a hunt server for another place needs the memory"; Start-Sleep -Seconds 2; $free = Free-RamGB }
+            if ($free -lt $MinFreeGB) { $script:failedIds[$id] = $true; Write-HuntFailed $id ("not enough free memory for another hunt server on the host PC ({0} GB free, {1} GB needed; {2} hunt server(s) already running). Join the other player's hunt (party up) or wait until they are back" -f $free, $MinFreeGB, $script:hunts.Count); continue }
+        }
+        [void](Start-Hunt $w $port $false)
     }
-    elseif ($h) {
+    # places nobody wants any more (everyone left): closed after 90 s
+    foreach ($h in @($script:hunts.Values)) {
+        if ($ids.ContainsKey($h.Id)) { continue }
         if ($null -eq $h.UnwantedSince) { $h.UnwantedSince = Get-Date }
-        elseif (((Get-Date) - $h.UnwantedSince).TotalSeconds -gt 90) { Stop-Hunt "the player left that place"; Stop-Spare "the player left that place" }
+        elseif (((Get-Date) - $h.UnwantedSince).TotalSeconds -gt 90) { Stop-Hunt $h "the players left that place" }
     }
-    if ($script:hunt) { [void](Watch-Rec $script:hunt) }
+    foreach ($h in @($script:hunts.Values)) { [void](Watch-Rec $h) }
     if ($script:spare) { [void](Watch-Rec $script:spare) }
-    # DF-WARM-1147: warm a spare for the place in use
-    $h = $script:hunt
-    if ($h -and $h.Listening -and -not $script:spare -and (Warm-Wanted $h)) {
-        $free = Free-RamGB
-        $wp = $HuntPort; if ($h.Port -eq $HuntPort) { $wp = $WarmPort }
-        if ($free -ge 4) { Start-Hunt @{ id = ""; url = $h.Url; label = $h.Label; reuse = $h.Reuse } $wp $true }
-        elseif (-not $h.WarmSkipped) { $h.WarmSkipped = $true; Write-Host ("  (no spare server: only {0} GB of RAM free, 4 needed)" -f $free) -ForegroundColor DarkYellow }
+    # DF-WARM-1147: warm a spare for the newest place in use that wants one
+    if (-not $script:spare) {
+        $h = @($script:hunts.Values | Where-Object { $_.Listening -and $ids.ContainsKey($_.Id) -and (Warm-Wanted $_) }) | Select-Object -Last 1
+        if ($h) {
+            $free = Free-RamGB; $wp = Free-HuntPort
+            if ($free -ge 4 -and $wp) { $sp = Start-Hunt @{ id = ""; url = $h.Url; label = $h.Label; reuse = $h.Reuse } $wp $true; $sp.ForId = $h.Id }
+            elseif (-not $h.WarmSkipped) { $h.WarmSkipped = $true; Write-Host ("  (no spare server: {0} GB of RAM free, 4 needed{1})" -f $free, $(if ($wp) { '' } else { '; no free port' })) -ForegroundColor DarkYellow }
+        }
     }
 }
 
@@ -322,7 +369,7 @@ while ($true) {
     Start-Sleep -Milliseconds 500
 }
 if (Test-Path -LiteralPath $marker) { Remove-Item -LiteralPath $marker -Force }
-try { Stop-Hunt "the city server is stopping"; Stop-Spare "the city server is stopping" } catch { }
+try { foreach ($h in @($script:hunts.Values)) { Stop-Hunt $h "the city server is stopping" }; Stop-Spare "the city server is stopping" } catch { }
 foreach ($f in @($wantedFile, $huntMarker)) { if (Test-Path -LiteralPath $f) { Remove-Item -LiteralPath $f -Force -ErrorAction SilentlyContinue } }
 if (-not $p.HasExited) { Stop-Process -Id $p.Id -Force; Start-Sleep -Seconds 2 }
 Write-Host ""

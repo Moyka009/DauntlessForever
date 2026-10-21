@@ -10,22 +10,22 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-21.3",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-21.3.zip",
-                         "sha256":  "dac40c62d8d04aa863ceb2c0081e57ba92e966a0a40fa0f9d796b6546581184e",
+                         "packageVersion":  "2026-10-21.5",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-21.5.zip",
+                         "sha256":  "09f8dee817d19b2fe5423c4f66ebdcecc84ebadf1769f1d58159c7393146d949",
                          "date":  "2026-10-21",
-                         "note":  "In-game text chat, servers run at High priority (fixes hunt hitching), loadout loop fix"
+                         "note":  "Host mode: players who are not grouped each get their own hunt (up to 7 at once)"
                      }
                  ],
     "launcher":  {
-                     "version":  "0.2.22",
+                     "version":  "0.2.23",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "After the download reaches 100%, a second bar shows the game files being put together (it used to look stuck at 100%)",
+                     "notes":  "Friends work on networks that block secure connections (dorm, school, work): the launcher falls back to the plain connection by itself",
                      "date":  "2026-10-21",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.22.asar",
-                                 "sha256":  "e3a986277371b4fc0ba27d3fc535ecd375e2ac0616067de1a18edc94d4b8ba4e",
-                                 "size":  1040697,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.23.asar",
+                                 "sha256":  "27c9dfef10fea3905250f83782a70ef13cb506136dbbeb3f591be0f52e6acee1",
+                                 "size":  1043753,
                                  "minShell":  "0.2.4"
                              }
                  }

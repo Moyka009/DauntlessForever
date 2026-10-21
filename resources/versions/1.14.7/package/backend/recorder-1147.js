@@ -230,27 +230,43 @@ function travel(method, key, body) {
   }
   return { status: 405, json: {}, note: 'travel: GET or PUT' };
 }
-// DF-LAN-1147: the place outside the city that the second server is for, and who is (going) there.
-let place = null;
-const multiplayer1147 = require('./multiplayer1147').create({root:ROOT,getState:()=>state,liveServer}); // KK-MULTIPLAYER-R4-R1
+// DF-LAN-1147 / DF-MULTIHUNT-1147 (Oct 21): the places outside the city that hunt servers are for, and who is (going)
+// there. Several at once: players who are not in a party each get their own hunt server (tools\server-1147.ps1 starts
+// one per place on UDP 8781-8787); a party shares one, and Training Grounds is shared by everyone.
+const places = new Map();
+const multiplayer1147 = require('./multiplayer1147').create({root:ROOT,getState:()=>state,liveServer,huntServer}); // KK-MULTIPLAYER-R4-R1
+function placeOf(key) { for (const pl of places.values()) if (pl.owners.has(key)) return pl; return null; }
+function dropPlace(pl) { multiplayer1147.retire(pl.id); places.delete(pl.id); writeWanted(); }
+function addPlace(pl, reuse) { pl.reuse = !!reuse; pl.asked = new Date().toISOString(); places.set(pl.id, pl); writeWanted(); return pl; }
 function maintainPlace(key) {
-  place=multiplayer1147.recover(place);
-  multiplayer1147.touch(key); multiplayer1147.prune(place);
-  if(place&&!place.owners.size){multiplayer1147.retire(place.id);place=null;setWanted(null);}
+  multiplayer1147.recover(places);
+  multiplayer1147.touch(key);
+  for (const pl of [...places.values()]) { multiplayer1147.prune(pl); if (!pl.owners.size) dropPlace(pl); }
+}
+// the listening hunt server for one place (data\server_hunt.json lists every one), or null
+function huntServer(id) {
+  try {
+    const f = JSON.parse(fs.readFileSync(HUNT_SERVER_FILE, 'utf8').replace(/^\uFEFF/, ''));
+    const srv = (Array.isArray(f.list) ? f.list : [f]).find((x) => x && x.id === id && x.port && x.pid);
+    if (!srv) return null;
+    try { process.kill(srv.pid, 0); } catch (e) { if (e.code !== 'EPERM') return null; }
+    return srv;
+  } catch (e) { return null; }
 }
 const placeBase = (u) => String(u || '').replace(/\?PlayerHuntIds=[^?]*/g, '');
 function trialsRetryOn() {   // DF-WARM-1147: data\mods.txt trialsretry=on (launcher Mods page)
   try { return fs.readFileSync(path.join(DATA_DIR, 'mods.txt'), 'utf8').split(/\r?\n/).some((l) => l.trim().toLowerCase() === 'trialsretry=on'); } catch (e) { return false; }
 }
 function leavePlace(key) {
-  place=multiplayer1147.recover(place);
-  if (!place) return;
-  place.owners.delete(key);
-  if (!place.owners.size) { multiplayer1147.retire(place.id);place = null; setWanted(null); }
+  multiplayer1147.recover(places);
+  for (const pl of [...places.values()]) if (pl.owners.delete(key) && !pl.owners.size) dropPlace(pl);
 }
-function setWanted(w) {
+// data\wanted.json for tools\server-1147.ps1: every place in "list"; the newest also at the top (older readers)
+function writeWanted() {
+  const list = [...places.values()].filter((pl) => pl.url).map((pl) => ({ id: pl.id, url: pl.url, label: pl.label, reuse: !!pl.reuse, at: pl.asked || new Date().toISOString() }));
   try {
-    if (!w) { if (fs.existsSync(WANTED_FILE)) fs.unlinkSync(WANTED_FILE); return; }
+    if (!list.length) { if (fs.existsSync(WANTED_FILE)) fs.unlinkSync(WANTED_FILE); return; }
+    const w = Object.assign({}, list[list.length - 1], { list });
     const tmp = WANTED_FILE + '.tmp'; fs.writeFileSync(tmp, JSON.stringify(w)); fs.renameSync(tmp, WANTED_FILE);
   } catch (e) { throw quality.httpError(503, 'Hunt request could not be saved; retry after checking disk space'); }
 }
@@ -728,7 +744,7 @@ function restoreMultiplayerParties(){
 function persistMultiplayerParties(){state.multiplayer1147Parties=[...parties.values()].map(p=>({id:p.id,leader:p.leader,members:[...p.members],created:p.created}));try{saveState();}catch(e){parties.clear();partyOfAcc.clear();multiplayerPartiesLoaded=false;restoreMultiplayerParties();throw e;}}
 function availableMultiplayerCandidate(cd){
  if(!cd||cd.city!==false)return false;
- const srv=liveServer(HUNT_SERVER_FILE);
+ const srv=huntServer(cd.id);
  return !!(srv&&srv.id===cd.id)||Date.now()-(cd.asked||0)<=5*60*1000;
 }
 function groupOf(acc) { restoreMultiplayerParties();const id = partyOfAcc.get(acc); return id ? parties.get(id) || null : null; }
@@ -770,7 +786,7 @@ function partyHunt(P) {
   const lp = playerOfAcc(P.leader); const cd = lp && lp.candidate;
   if (leaderHome(cd)) return { id: cd.id, playerHuntId: null, gauntletLevel: null, live: !!liveServer(SERVER_FILE) };
   if (!cd || cd.city !== false || (!PARTY_FOLLOW_TRAINING && cd.gameType === 'TRAINING_GROUND') || !availableMultiplayerCandidate(cd)) return null;
-  const srv = liveServer(HUNT_SERVER_FILE);
+  const srv = huntServer(cd.id);
   return { id: cd.id, playerHuntId: cd.playerHuntId || null, gauntletLevel: cd.gauntletLevel ?? null, live: !!(srv && srv.id === cd.id) };
 }
 function partyReply(P) {
@@ -784,7 +800,7 @@ function partyReply(P) {
 function soloReply(p, build) {
   if (!p.partyId) { p.partyId = partyIdFor(build); saveState(); }
   const cd = p.candidate || null;
-  const srv=cd?liveServer(cd.city===false?HUNT_SERVER_FILE:SERVER_FILE):null;
+  const srv=cd?(cd.city===false?huntServer(cd.id):liveServer(SERVER_FILE)):null;
   const ready=!!(srv&&(cd.city!==false||srv.id===cd.id));
   return { candidateId: cd ? cd.id : null, candidateState: cd ? (ready ? 'IN_PROGRESS' : 'MATCHING') : null, gauntletLevel: (cd && cd.gauntletLevel) ?? null, leaderPlayerId: p.accountId, partyId: p.partyId, playerHuntId: cd ? cd.playerHuntId : null,
     playerStates: [{ consoleSessionId: null, displayName: p.username, isMemberOfCandidate: !!cd, platform: 'win', playerId: p.accountId }] };
@@ -1056,31 +1072,31 @@ const routes = [
       const accs = grp && grp.leader === p.accountId ? grp.members : [p.accountId];
       dest.url += `?PlayerHuntIds=${accs.map((a) => `${a}:${b.playerHuntId}`).join(',')}`;
     }
-    // DF-LAN-1147: one second server serves everyone. A player asking for the place another player is already in
-    // joins it; a different place while someone else is out there sends this player back to Ramsgate instead of
-    // closing the other player's server.
+    // DF-MULTIHUNT-1147: a player joins their party's place for this map (Training Grounds: anyone's); everyone else
+    // gets their own hunt server, so players who are not grouped can hunt different places at the same time.
     const me = keyFor(c.req);
     const mates = partyMateKeys(p);
     let joinId = null;
     if (!dest.city) {
       const base = placeBase(dest.url);
+      const mine = placeOf(me);
+      const ours = (pl) => [...pl.owners].every((k) => k === me || mates.has(k));
       // DF-WARM-1147: with Trials Quick Retry on, a retry of the trial the player (and only their party) is already
       // in asks for a FRESH server under a new id, so tools\server-1147.ps1 hands over the spare it kept warm.
-      if (place && place.base === base && b.gameType === 'TRIALS' && trialsRetryOn() && [...place.owners].every((k) => k === me || mates.has(k))) {
-        for (const k of [...place.owners]) if (k !== me) leavePlace(k);
-        leavePlace(me); place = null;
+      if (mine && mine.base === base && b.gameType === 'TRIALS' && trialsRetryOn() && ours(mine)) {
+        for (const k of [...mine.owners]) leavePlace(k);
         console.log('Trials Quick Retry: a retry: asking for a fresh trial server (the spare takes over)');
       }
-      if (place && place.base === base) { place.owners.add(me); joinId = place.id; dest.url = place.url; }
-      else if (follow && (!place || place.id !== follow.id) && !(place && [...place.owners].some(k=>k!==me&&!mates.has(k)))) {
-        // the leader's place is not (or no longer) the one being served: ask for it again under the same id
-        place = { id: follow.id, url: dest.url, base, label: dest.label, at: Date.now(), owners: new Set([me, keyOfAcc(groupOf(p.accountId).leader)].filter(Boolean)) };
-        setWanted({ id: follow.id, url: dest.url, label: dest.label, reuse: false, at: new Date().toISOString() });
-        joinId = follow.id;
+      const join = (follow && places.get(follow.id)) || [...places.values()].find((pl) => pl.base === base && pl.owners.size && (ours(pl) || (b.gameType === 'TRAINING_GROUND' && pl.reuse)));
+      if (join) {
+        if (placeOf(me) && placeOf(me) !== join) leavePlace(me);
+        join.owners.add(me); joinId = join.id; dest.url = join.url || dest.url;
       }
-      else if (place && [...place.owners].some((k) => k !== me && !mates.has(k))) {
-        dest.note = `another player is in ${place.label}: go there too, or wait for them to come back. Staying in Ramsgate`;
-        dest.city = true; delete dest.url;
+      else if (follow) {
+        // the leader's place is not (or no longer) being served: ask for it again under the same id
+        leavePlace(me);
+        addPlace({ id: follow.id, url: dest.url, base, label: dest.label, at: Date.now(), owners: new Set([me, keyOfAcc(groupOf(p.accountId).leader)].filter(Boolean)) }, false);
+        joinId = follow.id;
       }
     } else leavePlace(me);
     const prevPlaceId = p.candidate && p.candidate.city === false ? p.candidate.id : null;
@@ -1092,8 +1108,7 @@ const routes = [
     // Outside the city: ask server-211.ps1 (through a small file) to start a second server on that map.
     if (!dest.city && !joinId) {
       leavePlace(me);
-      place = { id: p.candidate.id, url: dest.url, base: placeBase(dest.url), label: dest.label, at: Date.now(), owners: new Set([me]) };
-      setWanted({ id: p.candidate.id, url: dest.url, label: dest.label, reuse: b.gameType === 'TRAINING_GROUND', at: new Date().toISOString() });
+      addPlace({ id: p.candidate.id, url: dest.url, base: placeBase(dest.url), label: dest.label, at: Date.now(), owners: new Set([me]) }, b.gameType === 'TRAINING_GROUND');
     }
     saveState();
     return J({ candidateId: p.candidate.id, gameMode: p.candidate.gameMode, huntId: null, status: 'MATCHING', statusReason: null },
@@ -1106,7 +1121,7 @@ const routes = [
     // as the party poll shows the leader's candidate)
     const follow = partyFollowTarget(p, null);
     const mates = partyMateKeys(p);
-    const busyElse = follow && follow.city === false && place && place.id !== follow.id && [...place.owners].some((k) => k !== keyFor(c.req) && !mates.has(k));
+    const busyElse = false;   // DF-MULTIHUNT-1147: the leader's place always gets its own hunt server
     if (follow && follow.city !== false && p.candidate && p.candidate.id !== follow.id) {   // DF-PARTY-HOME: back to Ramsgate with the leader
       leavePlace(keyFor(c.req));
       p.candidate = { id: follow.id, gameMode: 'CITY', gameType: null, huntId: null, playerHuntId: null, buildId: follow.buildId,
@@ -1118,18 +1133,16 @@ const routes = [
       if (p.candidate && p.candidate.city === false) leavePlace(me);
       p.candidate = { id: follow.id, gameMode: follow.gameMode, gameType: follow.gameType, huntId: follow.huntId, playerHuntId: follow.playerHuntId,
         buildId: follow.buildId, gameSessionId: crypto.randomBytes(16).toString('hex'), city: false, url: follow.url, label: follow.label + ' (with the party)', asked: Date.now() };
-      if (place && place.id === follow.id) place.owners.add(me);
-      else {
-        place = { id: follow.id, url: follow.url, base: placeBase(follow.url), label: follow.label, at: Date.now(), owners: new Set([me, keyOfAcc(groupOf(p.accountId).leader)].filter(Boolean)) };
-        setWanted({ id: follow.id, url: follow.url, label: follow.label, reuse: false, at: new Date().toISOString() });
-      }
+      const fpl = places.get(follow.id);
+      if (fpl) fpl.owners.add(me);
+      else addPlace({ id: follow.id, url: follow.url, base: placeBase(follow.url), label: follow.label, at: Date.now(), owners: new Set([me, keyOfAcc(groupOf(p.accountId).leader)].filter(Boolean)) }, false);
       saveState();
       partyLog(`${p.accountId} follows the leader to ${follow.label}`);
     }
     const cd = p.candidate;
     if (!cd) return { status: 404, note: 'no match was asked for' };
     const city = cd.city !== false;
-    let srv = liveServer(city ? SERVER_FILE : HUNT_SERVER_FILE);
+    let srv = city ? liveServer(SERVER_FILE) : huntServer(cd.id);
     if (srv && !city && srv.id !== cd.id) srv = null;                       // a server for an earlier destination
     const out = { candidateId: cd.id, candidateStatusPeriodMillis: srv ? 10000 : 3000, gameMode: cd.gameMode, huntId: cd.huntId, playerStates: { [p.accountId]: {} } };
     if (srv) out.serverInfo = { buildId: cd.buildId, gameSessionId: cd.gameSessionId, host: (PUBLIC_HOST && (!srv.host || srv.host === '127.0.0.1')) ? PUBLIC_HOST : (srv.host || '127.0.0.1'), port: srv.port + (PUBLIC_HOST ? PUBLIC_PORT_OFFSET : 0) };
@@ -1140,7 +1153,7 @@ const routes = [
     const failed = !srv && !city && (!!why || waited > 300);
     out.status = srv ? 'IN_PROGRESS' : failed ? 'FAILED' : 'MATCHING'; out.statusDuration = 0.0; out.statusReason = failed ? (why || 'no server started for this destination') : null;
     if (why && !cd.failedSaid) { cd.failedSaid = true; console.log('HUNT SERVER FAILED: ' + why); }
-    if(failed&&place&&place.id===cd.id){place.owners.delete(keyFor(c.req));if(!place.owners.size){multiplayer1147.retire(place.id);setWanted(null);place=null;}}
+    if(failed){const fp=places.get(cd.id);if(fp){fp.owners.delete(keyFor(c.req));if(!fp.owners.size)dropPlace(fp);}}
     return J(out, srv ? `game server on port ${srv.port}` : failed ? 'gave up after 5 minutes: no server came up for this destination'
       : city ? 'waiting: the game server is not running' : `waiting ${waited}s for the second server (${liveServer(SERVER_FILE) ? 'starting' : 'server-211.ps1 -Run is not running'})`);
   }],

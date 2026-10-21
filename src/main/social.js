@@ -105,14 +105,42 @@ async function measureRelays() {
 }
 
 // ------------------------------------------------------------------ signed requests
-function call(method, apiPath, body, unsigned, timeoutMs) {
+// DF-SOCIAL-FALLBACK (Oct 21): some dorm, school and work networks cut the secure connection to sites they do not
+// know (the TLS handshake is reset). When the secure address cannot be reached at all, the same request goes to the
+// plain address of the same server (network.json social.fallback, else the built-in one); requests are signed either
+// way. After that works, the plain address is used for 10 minutes before the secure one is tried again.
+// HTTP answers (401, 403...) never switch: only a connection that could not be made.
+const FALLBACK_MS = 10 * 60 * 1000;
+let plainUntil = 0, plainSaid = false;
+const fallbackBase = () => (network.social && typeof network.social.fallback === 'string' && /^http:\/\//.test(network.social.fallback) ? network.social.fallback : LEGACY_SOCIAL);
+const connectionFailed = (e) => !!e && !e.status;
+function usingPlain() { return /^https:/i.test(network.social.url) && Date.now() < plainUntil; }
+async function call(method, apiPath, body, unsigned, timeoutMs) {
+  const secure = network.social.url;
+  if (!/^https:/i.test(secure)) return callAt(secure, method, apiPath, body, unsigned, timeoutMs);
+  if (Date.now() < plainUntil) {
+    try { return await callAt(fallbackBase(), method, apiPath, body, unsigned, timeoutMs); }
+    catch (e) { if (!connectionFailed(e)) throw e; plainUntil = 0; }   // the plain one is gone now (another network): back to secure
+  }
+  try { return await callAt(secure, method, apiPath, body, unsigned, timeoutMs); }
+  catch (e) {
+    if (!connectionFailed(e)) throw e;
+    let r;
+    try { r = await callAt(fallbackBase(), method, apiPath, body, unsigned, timeoutMs); }
+    catch (e2) { if (connectionFailed(e2)) throw e; throw e2; }   // both unreachable: the secure address's reason
+    plainUntil = Date.now() + FALLBACK_MS;
+    if (!plainSaid) { plainSaid = true; try { ctx.log(`Friends: the secure connection is blocked on this network (${e.code || e.message}); using the plain connection to the same server.`); } catch {} }
+    return r;
+  }
+}
+function callAt(base, method, apiPath, body, unsigned, timeoutMs) {
   return new Promise((resolve, reject) => {
-    const url = new URL(apiPath, network.social.url);
+    const url = new URL(apiPath, base);
     const data = body === undefined ? '' : JSON.stringify(body);
     const headers = { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(data) };
     const me = identity();
     if (!unsigned) {
-      if (!me) return reject(new Error('not signed in'));
+      if (!me) return reject(Object.assign(new Error('not signed in'), { status: -1 }));
       const time = Date.now();
       headers['X-DF-Id'] = me.id; headers['X-DF-Time'] = String(time);
       headers['X-DF-Sig'] = crypto.createHmac('sha256', me.secret).update(`${time}\n${method}\n${url.pathname}\n${data}`).digest('hex');
@@ -121,13 +149,14 @@ function call(method, apiPath, body, unsigned, timeoutMs) {
     const req = lib.request(url, { method, headers, timeout: timeoutMs || 10000 }, (res) => {
       let b = ''; res.setEncoding('utf8'); res.on('data', d => b += d);
       res.on('end', () => {
-        let j = {}; try { j = b ? JSON.parse(b) : {}; } catch {}
-        if (res.statusCode >= 200 && res.statusCode < 300) resolve(j);
+        let j = {}, bad = false; try { j = b ? JSON.parse(b) : {}; } catch { bad = true; }
+        if (res.statusCode >= 200 && res.statusCode < 300 && !bad) resolve(j);
+        else if (bad && res.statusCode >= 200 && res.statusCode < 400) { const e = new Error('a web page answered instead of the friends service (internet provider or network filter)'); e.status = res.statusCode; reject(e); }
         else { const e = new Error(j.error || ('HTTP ' + res.statusCode)); e.status = res.statusCode; reject(e); }
       });
     });
-    req.on('timeout', () => req.destroy(new Error('the friends service did not answer')));
-    req.on('error', (e) => reject(new Error(e.code === 'ECONNREFUSED' || e.code === 'ETIMEDOUT' ? 'the friends service is not reachable' : e.message)));
+    req.on('timeout', () => { const e = new Error('the friends service did not answer'); e.code = 'TIMEOUT'; req.destroy(e); });
+    req.on('error', (e) => { const x = new Error(e.code === 'ECONNREFUSED' || e.code === 'ETIMEDOUT' || e.code === 'TIMEOUT' ? 'the friends service is not reachable' : e.message); x.code = e.code; reject(x); });
     req.end(data);
   });
 }
@@ -574,11 +603,14 @@ async function diagnose() {
     // the launcher uses the secure address: a provider page on the plain one only matters when the secure one fails too
     if (main.ok && !legacy.ok) legacy.text = legacy.text.replace(/^FAIL/, 'NOTE') + ' Not a problem right now: the launcher uses the secure connection.';
     lines.push(legacy.text);
+    // DF-SOCIAL-FALLBACK: secure blocked, plain fine: the launcher uses the plain one, nothing to fix
+    if (!main.ok && legacy.ok && !main.redirected) { plainUntil = Date.now() + FALLBACK_MS; lines.push('OK   The launcher uses the plain connection instead: this network blocks the secure one, friends still work.'); }
   }
-  if (!main.ok && (main.redirected || (legacy && legacy.redirected)))
+  const reachable = main.ok || !!(legacy && legacy.ok && !main.redirected);
+  if (!reachable && (main.redirected || (legacy && legacy.redirected)))
     todo.push('Your internet provider is stopping the launcher. If you are on a data plan, check whether your monthly data is used up (top up or wait for the reset). On Wi-Fi at a hotel, school or work, open a browser and log in to the Wi-Fi first.');
-  else if (!main.ok && main.intercepted) todo.push('Something is opening the launcher\'s secure connection: usually an antivirus "web shield" / "HTTPS scanning" (turn it off for the launcher or add an exception), or your internet provider showing its own page (data cap used up, Wi-Fi login: open a browser to see it).');
-  else if (!main.ok) todo.push('Allow the Dauntless Forever launcher in your firewall and antivirus, check your internet, then press Check connection again.');
+  else if (!reachable && main.intercepted) todo.push('Something is opening the launcher\'s secure connection: usually an antivirus "web shield" / "HTTPS scanning" (turn it off for the launcher or add an exception), or your internet provider showing its own page (data cap used up, Wi-Fi login: open a browser to see it).');
+  else if (!reachable) todo.push('Allow the Dauntless Forever launcher in your firewall and antivirus, check your internet, then press Check connection again.');
   // 3. the PC clock (signed requests more than 5 minutes off are refused, which looks like a lost account)
   const off = main.clockOffS !== undefined && main.clockOffS !== null ? main.clockOffS : (legacy && legacy.clockOffS !== undefined ? legacy.clockOffS : null);
   let clockBad = false;
@@ -592,7 +624,7 @@ async function diagnose() {
   const me = identity();
   let accountGone = false;
   if (!me) { lines.push('??   Account: not signed up yet (the launcher signs up with your player name by itself)'); }
-  else if (!main.ok) { lines.push(`??   Account: ${me.name} (could not check: the server is not reachable)`); }
+  else if (!reachable) { lines.push(`??   Account: ${me.name} (could not check: the server is not reachable)`); }
   else {
     try {
       const s = await call('GET', '/v1/state', undefined, false, 8000);
@@ -613,13 +645,17 @@ async function diagnose() {
   else lines.push('Everything looks fine.');
   const report = lines.join('\n');
   try { ctx.log('Friends: connection check\n' + report); } catch {}
-  return { report, accountGone, clockBad, reachable: main.ok };
+  return { report, accountGone, clockBad, reachable };
 }
 // A fresh account with the player's name. The old one is only renamed (social.old-<time>.json), never deleted, and only
 // after the new one exists, so a failed reset leaves everything as it was.
 async function resetAccount() {
   if (offlineMode()) throw new Error('Offline Forever mode is on (Settings). Turn it off first.');
-  const main = await probeService(network.social.url, 'Friends server');
+  let main = await probeService(network.social.url, 'Friends server');
+  if (!main.ok && /^https:/i.test(network.social.url) && !main.redirected) {   // DF-SOCIAL-FALLBACK
+    const plain = await probeService(fallbackBase(), 'Plain connection');
+    if (plain.ok) { main = plain; plainUntil = Date.now() + FALLBACK_MS; }
+  }
   if (!main.ok) throw new Error('The friends server cannot be reached from this PC right now, so a new account cannot be made. Press Check connection to see why.');
   if (main.clockOffS !== null && main.clockOffS !== undefined && Math.abs(main.clockOffS) > CLOCK_LIMIT_S)
     throw new Error('Your PC clock is more than 5 minutes off, so a new account would be refused too. Fix the clock first (Windows Settings > Time & language > Date & time > Set time automatically, Sync now).');
