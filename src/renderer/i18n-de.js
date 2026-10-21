@@ -826,5 +826,21 @@
     "Putting the game files together": "Spieldateien werden zusammengesetzt",
     "{done} of {total} written.": "{done} von {total} geschrieben.",
     "This takes a few minutes, up to 20 on a hard drive.": "Das dauert ein paar Minuten, auf einer Festplatte bis zu 20.",
+    // DF-REPORTS: More > Send my logs
+    "Send my logs to the Dauntless Forever team": "Meine Logs an das Dauntless-Forever-Team senden",
+    "Send my logs": "Meine Logs senden",
+    "Sends this version's logs to the Dauntless Forever team with your name and what happened. Your PC name and Windows user name are blanked out in them.": "Sendet die Logs dieser Version mit deinem Namen und dem, was passiert ist, an das Dauntless-Forever-Team. Dein PC-Name und dein Windows-Benutzername werden darin unkenntlich gemacht.",
+    "Your name (so we know who to answer)": "Dein Name (damit wir wissen, wem wir antworten)",
+    "Your name or Discord name": "Dein Name oder Discord-Name",
+    "What happened?": "Was ist passiert?",
+    "For example: the game froze when I opened crafting, after about 10 minutes of playing": "Zum Beispiel: Das Spiel ist beim \u00d6ffnen der Schmiede eingefroren, nach etwa 10 Minuten Spielzeit",
+    "Send": "Senden",
+    "Send my {version} logs": "Meine {version}-Logs senden",
+    "Say what happened (a few words is fine).": "Schreib, was passiert ist (ein paar W\u00f6rter reichen).",
+    "Packing and sending your logs...": "Logs werden gepackt und gesendet...",
+    "Sent. Your report number is #{n}. Mention it on Discord so we can find it.": "Gesendet. Deine Berichtsnummer ist #{n}. Nenn sie auf Discord, damit wir sie finden.",
+    "Could not send the logs: {error}": "Die Logs konnten nicht gesendet werden: {error}",
+    "The launcher is not signed in to the online service yet. If Offline Forever mode is on in Settings, turn it off, wait a moment, then send again.": "Der Launcher ist noch nicht beim Online-Dienst angemeldet. Wenn der Offline-Forever-Modus in den Einstellungen an ist, schalte ihn aus, warte kurz und sende dann erneut.",
+    "Already sending your logs.": "Deine Logs werden schon gesendet.",
   };
 })(typeof module === 'object' && module.exports ? module.exports : (window.DF_I18N = window.DF_I18N || {}));

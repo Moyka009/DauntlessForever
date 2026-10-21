@@ -753,6 +753,29 @@ ipcMain.handle('game:check', async (_e, id) => {
   log('check', id, JSON.stringify({ ok: res.ok, checked: res.checked, bad: (res.bad || []).length, repaired: res.repaired, error: res.error }));
   return res;
 });
+// DF-REPORTS (Oct 21): More > "Send my logs": this version's logs, the player's name and what happened go to the
+// friends service, and the dashboard lists them for download (report.js).
+const RPT = require('./report');
+let reportBusy = false;
+ipcMain.handle('report:send', async (_e, id, name, reason) => {
+  const v = byId(id); if (!v) return { ok: false, error: 'unknown version' };
+  const S = require('./social');
+  name = String(name || '').trim(); reason = String(reason || '').trim();
+  if (reason.length < 3) return { ok: false, error: 'Say what happened (a few words is fine).' };
+  if (!S.identity()) return { ok: false, error: 'The launcher is not signed in to the online service yet. If Offline Forever mode is on in Settings, turn it off, wait a moment, then send again.' };
+  if (reportBusy) return { ok: false, error: 'Already sending your logs.' };
+  reportBusy = true;
+  try {
+    const info = { pkg: V.installedPackageVersion(v), launcher: AU.info().version || app.getVersion() };
+    const { zip, files } = RPT.collect(v, info);
+    log('report', id, `${files} files, ${zip.length} bytes`);
+    const r = await S.call('POST', '/v1/report', { name: name.slice(0, 40), reason: reason.slice(0, 2000), version: v.id, pkg: info.pkg,
+      launcher: info.launcher, zip: zip.toString('base64') }, false, 240000);
+    log('report', id, 'sent as #' + r.report);
+    return { ok: true, report: r.report, kb: Math.round(zip.length / 1024) };
+  } catch (e) { log('report', id, 'failed: ' + e.message); return { ok: false, error: e.message }; }
+  finally { reportBusy = false; }
+});
 ipcMain.handle('game:partialInfo', (_e, id) => { const v = byId(id); return v ? partialInfo(v) : null; });
 // Delete an unfinished (or broken) download to get the space back. Never touches a complete, correct game,
 // and only ever the launcher's own download folder for this version.

@@ -100,6 +100,7 @@
       <button data-act="opengame">Open the game folder</button>
       <button data-act="openver">Open this version's launcher folder (save, logs)</button>
       <button data-act="logs">Get the logs for asking for help</button>
+      <button data-act="report">Send my logs to the Dauntless Forever team</button>
       <button data-act="firewall">Fix the firewall (allow the launcher, Node and the game)</button>
       <button data-act="readme">Read this version's README</button>
       <button data-act="delpartial" class="danger">Delete the unfinished download (frees space)</button>
@@ -480,6 +481,20 @@
   <h2 id="season-doc-title">Rewards</h2>
   <div class="season-doc" id="season-doc-body" data-i18n-skip></div>
   <form method="dialog"><button class="ghost">Close</button></form>
+</dialog>
+
+<dialog id="dlg-report">
+  <h2 id="report-title">Send my logs</h2>
+  <p id="report-text">Sends this version's logs to the Dauntless Forever team with your name and what happened. Your PC name and Windows user name are blanked out in them.</p>
+  <label class="report-label" for="report-name">Your name (so we know who to answer)</label>
+  <div class="fr-line"><input id="report-name" class="fr-input" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Your name or Discord name"></div>
+  <label class="report-label" for="report-reason">What happened?</label>
+  <textarea id="report-reason" class="fr-input report-reason" maxlength="2000" rows="5" placeholder="For example: the game froze when I opened crafting, after about 10 minutes of playing"></textarea>
+  <p class="action-note" id="report-msg" aria-live="polite"></p>
+  <div class="dlg-actions">
+    <button class="ghost" id="report-cancel">Cancel</button>
+    <button class="primary small-btn" id="report-send">Send</button>
+  </div>
 </dialog>
 
 <dialog id="dlg-name">

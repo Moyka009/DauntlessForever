@@ -1196,6 +1196,7 @@ function wire() {
       n.className = r && r.ok ? 'action-note' : 'action-note err';
     }
     if (act === 'logs') { L.openLogs(v.id); const n = $('action-note'); n.textContent = t('Send the two zips in the upload folder (client_logs.zip, server_logs.zip). Your PC name and user name are blanked out in them.'); n.className = 'action-note'; }
+    if (act === 'report') openReport(v);   // DF-REPORTS
     if (act === 'delpartial') {
       const n = $('action-note');
       const r = await L.deletePartial(v.id);
@@ -1204,6 +1205,34 @@ function wire() {
       await refresh(v.id);
     }
     if (act === 'readme') { $('readme-title').textContent = `${v.name} README`; $('readme-body').textContent = (await L.readme(v.id)) || t('(no README in this package)'); $('dlg-readme').showModal(); }
+  });
+  // DF-REPORTS (Oct 21): More > "Send my logs": the player's name and what happened, sent with this version's logs
+  let reportFor = null;
+  async function openReport(v) {
+    reportFor = v;
+    $('report-title').textContent = t('Send my {version} logs', { version: v.name });
+    const msg = $('report-msg'); msg.textContent = ''; msg.className = 'action-note';
+    $('report-send').disabled = false; $('report-send').hidden = false; $('report-cancel').textContent = t('Cancel');
+    $('report-reason').disabled = false; $('report-name').disabled = false;
+    if (!$('report-name').value) { try { const p = await L.playerGet(); $('report-name').value = (p && p.name) || ''; } catch {} }
+    if (!$('dlg-report').open) $('dlg-report').showModal();
+    setTimeout(() => $('report-reason').focus(), 30);
+  }
+  $('report-cancel').addEventListener('click', () => $('dlg-report').close());
+  $('report-send').addEventListener('click', async () => {
+    const v = reportFor; if (!v) return;
+    const reason = $('report-reason').value.trim(), msg = $('report-msg');
+    if (reason.length < 3) { msg.textContent = t('Say what happened (a few words is fine).'); msg.className = 'action-note err'; $('report-reason').focus(); return; }
+    $('report-send').disabled = true; $('report-reason').disabled = true; $('report-name').disabled = true;
+    msg.className = 'action-note'; msg.textContent = t('Packing and sending your logs...');
+    const r = await L.sendReport(v.id, $('report-name').value.trim(), reason);
+    if (r && r.ok) {
+      msg.textContent = t('Sent. Your report number is #{n}. Mention it on Discord so we can find it.', { n: r.report });
+      $('report-reason').value = ''; $('report-send').hidden = true; $('report-cancel').textContent = t('Close');
+    } else {
+      msg.textContent = t('Could not send the logs: {error}', { error: tm(r && r.error) || '?' }); msg.className = 'action-note err';
+      $('report-send').disabled = false; $('report-reason').disabled = false; $('report-name').disabled = false;
+    }
   });
   $('btn-log-clear').addEventListener('click', () => { if (selected) { logs[selected] = []; renderDetail(); } });
   $('set-sky').addEventListener('click', () => { const on = Sky.toggle(); $('set-sky').textContent = on ? t('Turn off') : t('Turn on'); });

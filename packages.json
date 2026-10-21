@@ -18,14 +18,14 @@
                      }
                  ],
     "launcher":  {
-                     "version":  "0.2.25",
+                     "version":  "0.2.26",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "More \u003e Check the game files: finds missing or damaged game files and downloads only those again",
+                     "notes":  "More \u003e Send my logs: send your logs to the Dauntless Forever team with your name and what happened",
                      "date":  "2026-10-21",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.25.asar",
-                                 "sha256":  "c3bd430070bb5e32f0548a4e257ab9a749dcd24aaa24e078a51df09e74f2910f",
-                                 "size":  8146075,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.26.asar",
+                                 "sha256":  "4bd24e2e841c17a12a6d70255d3fefef1fff3c6ca2fdd03d153d1aad7b274e8a",
+                                 "size":  8163253,
                                  "minShell":  "0.2.4"
                              }
                  }

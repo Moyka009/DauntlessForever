@@ -831,5 +831,21 @@
     "Putting the game files together": "Assemblage des fichiers du jeu",
     "{done} of {total} written.": "{done} sur {total} \u00e9crits.",
     "This takes a few minutes, up to 20 on a hard drive.": "Cela prend quelques minutes, jusqu'\u00e0 20 sur un disque dur.",
+    // DF-REPORTS: More > Send my logs
+    "Send my logs to the Dauntless Forever team": "Envoyer mes journaux \u00e0 l'\u00e9quipe Dauntless Forever",
+    "Send my logs": "Envoyer mes journaux",
+    "Sends this version's logs to the Dauntless Forever team with your name and what happened. Your PC name and Windows user name are blanked out in them.": "Envoie les journaux de cette version \u00e0 l'\u00e9quipe Dauntless Forever avec ton nom et ce qui s'est pass\u00e9. Le nom de ton PC et ton nom d'utilisateur Windows y sont masqu\u00e9s.",
+    "Your name (so we know who to answer)": "Ton nom (pour savoir \u00e0 qui r\u00e9pondre)",
+    "Your name or Discord name": "Ton nom ou ton nom Discord",
+    "What happened?": "Que s'est-il pass\u00e9 ?",
+    "For example: the game froze when I opened crafting, after about 10 minutes of playing": "Par exemple : le jeu a fig\u00e9 quand j'ai ouvert la forge, apr\u00e8s environ 10 minutes de jeu",
+    "Send": "Envoyer",
+    "Send my {version} logs": "Envoyer mes journaux {version}",
+    "Say what happened (a few words is fine).": "Dis ce qui s'est pass\u00e9 (quelques mots suffisent).",
+    "Packing and sending your logs...": "Pr\u00e9paration et envoi de tes journaux...",
+    "Sent. Your report number is #{n}. Mention it on Discord so we can find it.": "Envoy\u00e9. Ton num\u00e9ro de rapport est #{n}. Indique-le sur Discord pour qu'on le retrouve.",
+    "Could not send the logs: {error}": "Impossible d'envoyer les journaux : {error}",
+    "The launcher is not signed in to the online service yet. If Offline Forever mode is on in Settings, turn it off, wait a moment, then send again.": "Le launcher n'est pas encore connect\u00e9 au service en ligne. Si le mode Offline Forever est activ\u00e9 dans les Param\u00e8tres, d\u00e9sactive-le, attends un instant, puis renvoie.",
+    "Already sending your logs.": "Tes journaux sont d\u00e9j\u00e0 en cours d'envoi.",
   };
 })(typeof module === 'object' && module.exports ? module.exports : (window.DF_I18N = window.DF_I18N || {}));

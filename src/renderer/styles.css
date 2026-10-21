@@ -443,3 +443,9 @@ html:not([lang="en"]) .menu { max-width: 100%; }
 html:not([lang="en"]) .menu button { white-space: normal; }
 html:not([lang="en"]) .nav-new { padding: 1px 5px; font-size: 10px; }
 .mod-keys { margin-top: 3px; } .mod-keys b { color: var(--ink); font-weight: 600; }
+
+/* DF-REPORTS: More > Send my logs */
+#dlg-report { width: min(560px, 92vw); }
+.report-label { display: block; color: var(--ink-2, #a9b6c1); font-size: 13px; margin: 12px 0 6px; }
+#dlg-report .fr-input { max-width: none; width: 100%; box-sizing: border-box; }
+.report-reason { resize: vertical; min-height: 96px; font: inherit; }

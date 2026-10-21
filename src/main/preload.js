@@ -35,6 +35,7 @@ contextBridge.exposeInMainWorld('launcher', {
   openVersionFolder: invoke('open:versionFolder'),
   openGameFolder: invoke('open:gameFolder'),
   openLogs: invoke('open:logs'),
+  sendReport: invoke('report:send'),                  // DF-REPORTS: More > Send my logs
   fixFirewall: invoke('fix:firewall'),
   readme: invoke('read:readme'),
   onLog: on('log:line'),
