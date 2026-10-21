@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-21.7",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-21.7.zip",
-                         "sha256":  "0096451f4c1e597dfb985057c67569fd3571bc761a2676daddbc2a3c6d15b455",
+                         "packageVersion":  "2026-10-21.8",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-21.8.zip",
+                         "sha256":  "0bd0488c40d74b7158b5ba9121d67fcd07f39b902113675a1daeb8c9ad6e1d79",
                          "date":  "2026-10-21",
-                         "note":  "Game Rule: When you host - your own Game Rules apply when hosting for friends"
+                         "note":  "Mods page: Boss Health Bar description and hotkeys"
                      }
                  ],
     "launcher":  {

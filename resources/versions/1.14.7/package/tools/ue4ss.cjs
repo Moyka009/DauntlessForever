@@ -87,7 +87,9 @@ const BOSSBAR = 'Boss Health Bar';   // built into this package's loader, not a 
 const TRIALS = 'Trials Quick Retry';   // DF-WARM-1147: a spare trial server, in tools\server-1147.ps1; no UE4SS needed
 function mods(p) {
   const m = mode();
-  const boss = { name: BOSSBAR, on: m.bossbar, builtin: false, scripts: true, df: true };
+  const boss = { name: BOSSBAR, on: m.bossbar, builtin: false, scripts: true, df: true,
+    about: 'The behemoth\'s name and health at the top of the screen, with a bar for each of its parts below it. Play in borderless or windowed mode.',
+    keys: [['Ctrl+Alt+Arrow keys', 'move the bar (while it shows)'], ['Ctrl+Alt+Home', 'put it back in the middle']] };   // the loader saves the position
   const trials = { name: TRIALS, on: m.trialsretry, builtin: false, scripts: true, df: true, noUe4ss: true, about: 'Retry in a trial is instant: a spare copy of the trial warms up while you play (host PC, about 4 GB of free RAM).' };
   return [boss, trials, ...ue4ssMods(p)];
 }
