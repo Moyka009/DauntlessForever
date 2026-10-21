@@ -847,5 +847,14 @@
     "Could not send the logs: {error}": "Impossible d'envoyer les journaux : {error}",
     "The launcher is not signed in to the online service yet. If Offline Forever mode is on in Settings, turn it off, wait a moment, then send again.": "Le launcher n'est pas encore connect\u00e9 au service en ligne. Si le mode Offline Forever est activ\u00e9 dans les Param\u00e8tres, d\u00e9sactive-le, attends un instant, puis renvoie.",
     "Already sending your logs.": "Tes journaux sont d\u00e9j\u00e0 en cours d'envoi.",
+    // DF-NOSANDBOX: launcher folder the sandbox cannot read
+    "Fix the folder permissions": "R\u00e9parer les droits du dossier",
+    "Not now": "Pas maintenant",
+    "The launcher started with Windows' sandbox turned off": "Le launcher a d\u00e9marr\u00e9 avec le bac \u00e0 sable de Windows d\u00e9sactiv\u00e9",
+    "The folder the launcher is in does not let Windows' sandbox read it (common on a drive that was added later), so the launcher could not open normally. It works like this, but it is safer to fix the folder. \"Fix the folder permissions\" gives read access to that folder only and asks for admin once:": "Le dossier du launcher ne laisse pas le bac \u00e0 sable de Windows le lire (fr\u00e9quent sur un disque ajout\u00e9 plus tard), donc le launcher ne pouvait pas s'ouvrir normalement. Il fonctionne ainsi, mais il est plus s\u00fbr de r\u00e9parer le dossier. \"R\u00e9parer les droits du dossier\" donne l'acc\u00e8s en lecture \u00e0 ce dossier seulement et demande les droits administrateur une fois :",
+    "Folder fixed": "Dossier r\u00e9par\u00e9",
+    "The next time you open the launcher it uses the sandbox again. If it does not open then, it turns the sandbox off again by itself.": "La prochaine fois que tu ouvres le launcher, il utilise de nouveau le bac \u00e0 sable. S'il ne s'ouvre pas, il le d\u00e9sactive de nouveau tout seul.",
+    "Could not fix the folder": "Impossible de r\u00e9parer le dossier",
+    "The launcher keeps working with the sandbox off.": "Le launcher continue de fonctionner avec le bac \u00e0 sable d\u00e9sactiv\u00e9.",
   };
 })(typeof module === 'object' && module.exports ? module.exports : (window.DF_I18N = window.DF_I18N || {}));

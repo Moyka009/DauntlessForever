@@ -18,14 +18,14 @@
                      }
                  ],
     "launcher":  {
-                     "version":  "0.2.26",
+                     "version":  "0.2.27",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "More \u003e Send my logs: send your logs to the Dauntless Forever team with your name and what happened",
+                     "notes":  "Fix for the launcher closing at start when its folder is on a drive Windows\u0027 sandbox cannot read",
                      "date":  "2026-10-21",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.26.asar",
-                                 "sha256":  "4bd24e2e841c17a12a6d70255d3fefef1fff3c6ca2fdd03d153d1aad7b274e8a",
-                                 "size":  8163253,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.27.asar",
+                                 "sha256":  "9db3d4a472406385f04aed698b1b9d5a06a6634aea8e1b2cec59b2cdd1c69201",
+                                 "size":  8177171,
                                  "minShell":  "0.2.4"
                              }
                  }

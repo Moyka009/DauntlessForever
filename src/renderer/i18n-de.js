@@ -842,5 +842,14 @@
     "Could not send the logs: {error}": "Die Logs konnten nicht gesendet werden: {error}",
     "The launcher is not signed in to the online service yet. If Offline Forever mode is on in Settings, turn it off, wait a moment, then send again.": "Der Launcher ist noch nicht beim Online-Dienst angemeldet. Wenn der Offline-Forever-Modus in den Einstellungen an ist, schalte ihn aus, warte kurz und sende dann erneut.",
     "Already sending your logs.": "Deine Logs werden schon gesendet.",
+    // DF-NOSANDBOX: launcher folder the sandbox cannot read
+    "Fix the folder permissions": "Ordnerrechte reparieren",
+    "Not now": "Nicht jetzt",
+    "The launcher started with Windows' sandbox turned off": "Der Launcher wurde mit ausgeschalteter Windows-Sandbox gestartet",
+    "The folder the launcher is in does not let Windows' sandbox read it (common on a drive that was added later), so the launcher could not open normally. It works like this, but it is safer to fix the folder. \"Fix the folder permissions\" gives read access to that folder only and asks for admin once:": "Der Ordner des Launchers l\u00e4sst die Windows-Sandbox nicht lesen (h\u00e4ufig auf sp\u00e4ter hinzugef\u00fcgten Laufwerken), deshalb konnte der Launcher nicht normal starten. So funktioniert er, aber es ist sicherer, den Ordner zu reparieren. \"Ordnerrechte reparieren\" gibt nur diesem Ordner Lesezugriff und fragt einmal nach Administratorrechten:",
+    "Folder fixed": "Ordner repariert",
+    "The next time you open the launcher it uses the sandbox again. If it does not open then, it turns the sandbox off again by itself.": "Beim n\u00e4chsten \u00d6ffnen nutzt der Launcher wieder die Sandbox. Wenn er dann nicht startet, schaltet er sie selbst wieder aus.",
+    "Could not fix the folder": "Der Ordner konnte nicht repariert werden",
+    "The launcher keeps working with the sandbox off.": "Der Launcher l\u00e4uft weiter mit ausgeschalteter Sandbox.",
   };
 })(typeof module === 'object' && module.exports ? module.exports : (window.DF_I18N = window.DF_I18N || {}));

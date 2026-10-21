@@ -39,6 +39,10 @@ const FROM_WINDOWS = process.argv.includes('--hostmode');
 let closeOk = false;   // Host Mode was stopped on the way out: the window may close now
 const log = (...a) => { try { fs.appendFileSync(P.launcherLog(), new Date().toISOString() + ' ' + a.join(' ') + '\n'); } catch {} };
 const send = (ch, payload) => { if (win && !win.isDestroyed()) win.webContents.send(ch, payload); };
+// DF-NOSANDBOX (Oct 21): a launcher folder Windows' sandbox cannot read (a drive added later) made the launcher close
+// at once with no window. Such a start goes again with the sandbox off, and the window offers to fix the folder (sandbox.js).
+const SBX = require('./sandbox');
+SBX.early({ alreadyOff: UNDER_WINE, log: (t) => log('launcher', t) });
 
 // After a launcher update the bundled server files are copied into the player's folders before the launcher opens.
 // That can take a minute (thousands of files, antivirus), so a small window says so instead of showing nothing.
@@ -92,7 +96,7 @@ function createWindow() {
     webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false, sandbox: true, backgroundThrottling: false },
   });
   win.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'));
-  win.once('ready-to-show', () => { try { AU.markGood(); } catch {} if (FROM_WINDOWS) { win.showInactive(); win.minimize(); } else win.show(); });
+  win.once('ready-to-show', () => { try { AU.markGood(); } catch {} try { SBX.windowShown(win, (s, p) => I18N.t(s, p)); } catch {} if (FROM_WINDOWS) { win.showInactive(); win.minimize(); } else win.show(); });
   // never leave a game orphaned without saying so
   win.on('close', (e) => {
     // Host Mode runs without a window of its own: closing the launcher would leave a server nobody can stop

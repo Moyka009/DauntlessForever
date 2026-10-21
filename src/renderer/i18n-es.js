@@ -850,5 +850,14 @@
     "Could not send the logs: {error}": "No se pudieron enviar los registros: {error}",
     "The launcher is not signed in to the online service yet. If Offline Forever mode is on in Settings, turn it off, wait a moment, then send again.": "El launcher a\u00fan no ha iniciado sesi\u00f3n en el servicio en l\u00ednea. Si el modo Offline Forever est\u00e1 activado en Ajustes, desact\u00edvalo, espera un momento y vuelve a enviar.",
     "Already sending your logs.": "Ya se est\u00e1n enviando tus registros.",
+    // DF-NOSANDBOX: launcher folder the sandbox cannot read
+    "Fix the folder permissions": "Arreglar los permisos de la carpeta",
+    "Not now": "Ahora no",
+    "The launcher started with Windows' sandbox turned off": "El launcher se inici\u00f3 con el sandbox de Windows desactivado",
+    "The folder the launcher is in does not let Windows' sandbox read it (common on a drive that was added later), so the launcher could not open normally. It works like this, but it is safer to fix the folder. \"Fix the folder permissions\" gives read access to that folder only and asks for admin once:": "La carpeta del launcher no deja que el sandbox de Windows la lea (pasa a menudo en discos a\u00f1adidos m\u00e1s tarde), as\u00ed que el launcher no pod\u00eda abrirse normalmente. Funciona as\u00ed, pero es m\u00e1s seguro arreglar la carpeta. \"Arreglar los permisos de la carpeta\" da acceso de lectura solo a esa carpeta y pide permisos de administrador una vez:",
+    "Folder fixed": "Carpeta arreglada",
+    "The next time you open the launcher it uses the sandbox again. If it does not open then, it turns the sandbox off again by itself.": "La pr\u00f3xima vez que abras el launcher volver\u00e1 a usar el sandbox. Si entonces no se abre, lo desactivar\u00e1 otra vez por s\u00ed solo.",
+    "Could not fix the folder": "No se pudo arreglar la carpeta",
+    "The launcher keeps working with the sandbox off.": "El launcher sigue funcionando con el sandbox desactivado.",
   };
 })(typeof module === 'object' && module.exports ? module.exports : (window.DF_I18N = window.DF_I18N || {}));
