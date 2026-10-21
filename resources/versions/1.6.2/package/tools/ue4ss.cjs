@@ -192,6 +192,8 @@ async function install() {
   const [cmd, a, b] = process.argv.slice(2);
   if (cmd === 'status') {
     const p = places(), m = mode();
+    // bundled mods (DamageMeter, healthbar) show on the Mods page as soon as UE4SS is there, not only after a Play
+    if (fs.existsSync(p.dll)) { try { bundledMods(p); } catch {} }
     return out({ ok: true, installed: fs.existsSync(p.dll), on: m.on, servers: m.servers, folder: p.mods, mods: mods(p) });
   }
   if (cmd === 'install') return out(await install());

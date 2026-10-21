@@ -2,11 +2,11 @@
     "packages":  [
                      {
                          "id":  "1.6.2",
-                         "packageVersion":  "2026-10-21",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-21.zip",
-                         "sha256":  "dde35248b648ff3503a7bebfb708bee3d9e8954078fe047ded7c28a0b84ddcb7",
+                         "packageVersion":  "2026-10-21.2",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-21.2.zip",
+                         "sha256":  "9c9f58b7992d77f43ffcc81620a711889ba7b7f9dc82993f1320fb20986d40b6",
                          "date":  "2026-10-21",
-                         "note":  "Provy Health Bars mod (off until you turn it on in Mods); mods show their keys"
+                         "note":  "Bundled mods show on the Mods page right away"
                      },
                      {
                          "id":  "1.14.7",
