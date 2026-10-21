@@ -89,6 +89,8 @@ contextBridge.exposeInMainWorld('launcher', {
   socialCancelOnline: invoke('social:cancelOnline'),
   socialSetAllowRandoms: invoke('social:setAllowRandoms'),
   socialSetOffline: invoke('social:setOffline'),
+  socialDiagnose: invoke('social:diagnose'),          // Settings > Friends account: connection report
+  socialResetAccount: invoke('social:resetAccount'),  // a fresh friends account (same name); the old file is kept
   onSocialUpdate: on('social:update'),
   // Voice (main/voice.js, renderer/voice.js)
   voiceState: invoke('voice:state'),

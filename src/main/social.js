@@ -328,7 +328,7 @@ async function poll() {
       }
     }
   } catch (e) {
-    lastError = e.status === 401 ? 'Your friends account was not recognised by the server.' : e.message;
+    lastError = e.status === 401 ? 'Your friends account was not recognised by the server. Settings > Friends account can check why and fix it.' : e.message;
   } finally {
     push();
     // in someone's game: a little more often, so a host closing reaches this PC in time to save the character home
@@ -502,6 +502,144 @@ function guestSideClosing() {
   try { if (Notification.isSupported()) new Notification({ title: require('./i18n').t('{name} is closing their game', { name: hc.name }), body: require('./i18n').t('In about {secs} seconds. Your character is being saved home now.', { secs }) }).show(); } catch {}
 }
 
+// ------------------------------------------------------------------ Settings > Friends account (DF-ACCOUNT, Oct 21)
+// "Check connection" writes a short report a player can paste in Discord; "Reset account" makes a fresh friends account
+// (same player name, empty friends list) when the server no longer knows the old one. Both replace the PowerShell steps
+// that were sent to players by hand.
+const LEGACY_SOCIAL = 'http://209.145.57.41:7080';   // the plain-HTTP door, kept open on the VPS: a second probe
+const CLOCK_LIMIT_S = 5 * 60;                         // the service refuses signed requests more than 5 minutes off
+// One GET, redirects NOT followed (an internet provider's quota or login page shows up as a redirect or a web page)
+function rawGet(urlStr, timeoutMs) {
+  return new Promise((resolve, reject) => {
+    let url; try { url = new URL(urlStr); } catch (e) { return reject(e); }
+    const lib = url.protocol === 'https:' ? https : http;
+    const t0 = Date.now();
+    const req = lib.request(url, { method: 'GET', headers: { 'User-Agent': 'DauntlessForever' }, timeout: timeoutMs || 8000 }, (res) => {
+      let b = ''; res.setEncoding('utf8');
+      res.on('data', d => { if (b.length < 4096) b += d; });
+      res.on('end', () => resolve({ status: res.statusCode, headers: res.headers, body: b, ms: Date.now() - t0 }));
+    });
+    req.on('timeout', () => { const e = new Error('timeout'); e.code = 'TIMEOUT'; req.destroy(e); });
+    req.on('error', reject);
+    req.end();
+  });
+}
+// What a failed connection most likely means, in words a player understands
+function netProblem(e) {
+  const c = String((e && e.code) || '');
+  if (c === 'ENOTFOUND' || c === 'EAI_AGAIN') return 'the server name could not be looked up (no internet, or a DNS problem)';
+  if (c === 'ECONNREFUSED') return 'the connection was refused (a firewall or antivirus may be blocking the launcher)';
+  if (c === 'TIMEOUT' || c === 'ETIMEDOUT') return 'no answer (no internet, or a firewall is blocking the launcher)';
+  if (c === 'ECONNRESET') return 'the connection was cut (a firewall, antivirus or your internet provider closed it)';
+  if (/CERT|SSL|TLS|SELF_SIGNED|UNABLE_TO_VERIFY|ERR_TLS/i.test(c + ' ' + ((e && e.message) || ''))) return 'the secure connection was intercepted (your internet provider showing its own page, e.g. data cap used up or a Wi-Fi login, or an antivirus web shield)';
+  return (e && (e.code || e.message)) || 'unknown error';
+}
+const looksLikeJson = (r) => /json/i.test(String(r.headers['content-type'] || '')) || /^\s*[{[]/.test(r.body || '');
+// Probe one address of the friends service: { ok, text, clockOffS }
+async function probeService(base, label) {
+  try {
+    const r = await rawGet(new URL('/v1/health', base).toString(), 8000);
+    const date = Date.parse(r.headers.date || '');
+    const clockOffS = Number.isFinite(date) ? Math.round((Date.now() - date) / 1000) : null;
+    if (r.status >= 300 && r.status < 400) {
+      let to = String(r.headers.location || ''); try { to = new URL(to, base).host; } catch {}
+      return { ok: false, redirected: true, text: `FAIL ${label}: your internet provider sent the launcher to another page${to ? ' (' + to + ')' : ''} instead of our server. This is usually a "data cap used up" page or a Wi-Fi login page.` };
+    }
+    if (r.status === 200 && looksLikeJson(r)) {
+      let j = {}; try { j = JSON.parse(r.body); } catch {}
+      if (j && j.ok) return { ok: true, clockOffS, text: `OK   ${label}: reachable (${r.ms} ms)` };
+    }
+    if (!looksLikeJson(r)) return { ok: false, redirected: true, clockOffS, text: `FAIL ${label}: a web page answered instead of our server (HTTP ${r.status}). This is usually a "data cap used up" page, a Wi-Fi login page or a filter.` };
+    return { ok: false, clockOffS, text: `FAIL ${label}: the server answered HTTP ${r.status}` };
+  } catch (e) {
+    const why = netProblem(e);
+    return { ok: false, intercepted: /intercepted/.test(why), text: `FAIL ${label}: ${why}` };
+  }
+}
+async function diagnose() {
+  const lines = [], todo = [];
+  const base = network.social.url;
+  lines.push(`Dauntless Forever ${launcherVersion()}  -  connection check ${new Date().toISOString().replace('T', ' ').slice(0, 19)} UTC`);
+  lines.push(`Friends server: ${base}`);
+  if (offlineMode()) { lines.push('NOTE Offline Forever mode is on (Settings): the launcher does not sign in at all.'); todo.push('Turn off Offline Forever mode in Settings to use the Friends page.'); }
+  // 1. the internet in general (GitHub is where launcher and server-file updates come from)
+  try { const r = await rawGet(NETWORK_URL, 8000); lines.push(r.status === 200 ? `OK   Internet: GitHub reachable (${r.ms} ms)` : `FAIL Internet: GitHub answered HTTP ${r.status}`); }
+  catch (e) { lines.push(`FAIL Internet: GitHub not reachable: ${netProblem(e)}`); }
+  // 2. the friends service, on its address and on the plain-HTTP door (a quota page only catches the plain one)
+  const main = await probeService(base, 'Friends server');
+  lines.push(main.text);
+  let legacy = null;
+  if (/^https:/i.test(base)) {
+    legacy = await probeService(LEGACY_SOCIAL, 'Plain connection test');
+    // the launcher uses the secure address: a provider page on the plain one only matters when the secure one fails too
+    if (main.ok && !legacy.ok) legacy.text = legacy.text.replace(/^FAIL/, 'NOTE') + ' Not a problem right now: the launcher uses the secure connection.';
+    lines.push(legacy.text);
+  }
+  if (!main.ok && (main.redirected || (legacy && legacy.redirected)))
+    todo.push('Your internet provider is stopping the launcher. If you are on a data plan, check whether your monthly data is used up (top up or wait for the reset). On Wi-Fi at a hotel, school or work, open a browser and log in to the Wi-Fi first.');
+  else if (!main.ok && main.intercepted) todo.push('Something is opening the launcher\'s secure connection: usually an antivirus "web shield" / "HTTPS scanning" (turn it off for the launcher or add an exception), or your internet provider showing its own page (data cap used up, Wi-Fi login: open a browser to see it).');
+  else if (!main.ok) todo.push('Allow the Dauntless Forever launcher in your firewall and antivirus, check your internet, then press Check connection again.');
+  // 3. the PC clock (signed requests more than 5 minutes off are refused, which looks like a lost account)
+  const off = main.clockOffS !== undefined && main.clockOffS !== null ? main.clockOffS : (legacy && legacy.clockOffS !== undefined ? legacy.clockOffS : null);
+  let clockBad = false;
+  if (off === null) lines.push('??   PC clock: could not compare (no answer from the server)');
+  else if (Math.abs(off) > CLOCK_LIMIT_S) {
+    clockBad = true;
+    lines.push(`FAIL PC clock: ${Math.round(Math.abs(off) / 60)} minutes ${off > 0 ? 'ahead' : 'behind'} (the server refuses more than 5)`);
+    todo.push('Fix the PC clock: Windows Settings > Time & language > Date & time > turn on "Set time automatically" and press "Sync now". Then press Check connection again. Do not reset the account for this.');
+  } else lines.push(`OK   PC clock: right (${Math.abs(off)} s off)`);
+  // 4. the account itself
+  const me = identity();
+  let accountGone = false;
+  if (!me) { lines.push('??   Account: not signed up yet (the launcher signs up with your player name by itself)'); }
+  else if (!main.ok) { lines.push(`??   Account: ${me.name} (could not check: the server is not reachable)`); }
+  else {
+    try {
+      const s = await call('GET', '/v1/state', undefined, false, 8000);
+      const tag = s && s.me && s.me.tag ? '#' + s.me.tag : '';
+      lines.push(`OK   Account: ${me.name}${tag}, ${(s && s.friends ? s.friends.length : 0)} friend(s)`);
+    } catch (e) {
+      if (e.status === 401 && !clockBad) {
+        accountGone = true;
+        lines.push(`FAIL Account: the server does not know this launcher's account (${me.name})`);
+        todo.push('Press "Reset account" below. You keep your name; your friends need to add you again. Slayers and saves are not touched.');
+      } else if (e.status === 401) lines.push(`FAIL Account: refused, because of the PC clock (${me.name})`);
+      else if (e.status === 403) { lines.push(`FAIL Account: ${e.message}`); }
+      else lines.push(`FAIL Account: ${e.message}`);
+    }
+  }
+  lines.push('');
+  if (todo.length) { lines.push('What to do:'); todo.forEach((x, i) => lines.push(`${i + 1}. ${x}`)); }
+  else lines.push('Everything looks fine.');
+  const report = lines.join('\n');
+  try { ctx.log('Friends: connection check\n' + report); } catch {}
+  return { report, accountGone, clockBad, reachable: main.ok };
+}
+// A fresh account with the player's name. The old one is only renamed (social.old-<time>.json), never deleted, and only
+// after the new one exists, so a failed reset leaves everything as it was.
+async function resetAccount() {
+  if (offlineMode()) throw new Error('Offline Forever mode is on (Settings). Turn it off first.');
+  const main = await probeService(network.social.url, 'Friends server');
+  if (!main.ok) throw new Error('The friends server cannot be reached from this PC right now, so a new account cannot be made. Press Check connection to see why.');
+  if (main.clockOffS !== null && main.clockOffS !== undefined && Math.abs(main.clockOffS) > CLOCK_LIMIT_S)
+    throw new Error('Your PC clock is more than 5 minutes off, so a new account would be refused too. Fix the clock first (Windows Settings > Time & language > Date & time > Set time automatically, Sync now).');
+  const old = identity();
+  const name = require('./player').get() || (old && old.name) || '';
+  if (!name) throw new Error('Set a player name first (Settings > Player name).');
+  const r = await call('POST', '/v1/register', { name }, true);
+  const f = socialFile();
+  if (fs.existsSync(f)) {
+    const stamp = new Date().toISOString().replace(/[-:]/g, '').replace('T', '-').slice(0, 15);
+    try { fs.renameSync(f, path.join(path.dirname(f), `social.old-${stamp}.json`)); } catch {}
+  }
+  writeJson(f, { id: r.id, secret: r.secret, name: r.name, server: network.social.url, created: new Date().toISOString() });
+  state = null; lastError = '';
+  ctx.log(`Friends: account reset, signed up again as ${r.name}` + (old ? ` (the old account file was kept as social.old-*.json)` : ''));
+  push();
+  setTimeout(poll, 100);
+  return { name: r.name };
+}
+
 // ------------------------------------------------------------------ IPC
 function init(c) {
   ctx = c;
@@ -578,6 +716,9 @@ function init(c) {
     poll();
     return publicState();
   });
+  // Settings > Friends account (DF-ACCOUNT)
+  ipcMain.handle('social:diagnose', async () => { try { return Object.assign({ ok: true }, await diagnose()); } catch (e) { return { ok: false, error: e.message }; } });
+  ipcMain.handle('social:resetAccount', async () => { try { return Object.assign({ ok: true }, await resetAccount()); } catch (e) { return { ok: false, error: e.message }; } });
   loadNetwork().then(() => { poll(); measureRelays(); });
   // network.json is read again every 10 minutes, so switching online play off (or moving the server) reaches open launchers
   setInterval(() => { loadNetwork().then(() => { push(); measureRelays(); }).catch(() => {}); }, 10 * 60 * 1000);

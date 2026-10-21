@@ -105,6 +105,40 @@ async function fillSettings() {
   fillGameLanguage();
   fillKeepFiles();
   fillRunning();
+  fillAccount();
+}
+// Settings > Friends account (DF-ACCOUNT, Oct 21): who this launcher is signed in as, a connection report players can
+// paste in Discord, and a reset when the server no longer knows the account (replaces the PowerShell steps)
+async function fillAccount() {
+  let s = null; try { s = await L.socialState(); } catch {}
+  const el = $('set-acct');
+  if (!s) { el.textContent = t('Could not read the friends account.'); return; }
+  if (s.offlineMode) el.textContent = t('Offline Forever mode is on: the launcher does not sign in.');
+  else if (s.error) el.textContent = tm(s.error);
+  else if (s.signedIn) el.textContent = t('Signed in as {name}. If friends or Play online stop working, Check connection tells you why.', { name: s.name + (s.tag ? '#' + s.tag : '') });
+  else el.textContent = t('Not signed in yet. The launcher signs up with your player name by itself.');
+}
+async function accountCheck() {
+  const b = $('set-acct-check'), rep = $('set-acct-report');
+  b.disabled = true; b.textContent = t('Checking...');
+  rep.hidden = false; rep.textContent = t('Checking the connection, this takes a few seconds...');
+  let r = null; try { r = await L.socialDiagnose(); } catch (e) { r = { ok: false, error: e.message }; }
+  b.disabled = false; b.textContent = t('Check connection');
+  rep.textContent = r && r.ok ? r.report : (tm(r && r.error) || t('The check could not run.'));
+  $('set-acct-copy').hidden = !(r && r.ok);
+  fillAccount();
+}
+async function accountReset() {
+  const ok = await confirm(t('Reset your friends account?'),
+    t('You get a new friends account with the same player name. Your friends list starts empty: your friends need to add you again. Your Slayers, saves and game files are not touched. Use this when the Friends panel says your account was not recognised. If your PC clock is wrong, fix the clock instead.'));
+  if (!ok) return;
+  const b = $('set-acct-reset'); b.disabled = true; b.textContent = t('Resetting...');
+  let r = null; try { r = await L.socialResetAccount(); } catch (e) { r = { ok: false, error: e.message }; }
+  b.disabled = false; b.textContent = t('Reset account');
+  const rep = $('set-acct-report'); rep.hidden = false;
+  rep.textContent = r && r.ok ? t('Done. You are signed in again as {name}. Ask your friends to add you again.', { name: r.name }) : (tm(r && r.error) || t('The reset did not work.'));
+  $('set-acct-copy').hidden = true;
+  fillAccount();
 }
 // "What you are running": server files, the files set-up put in the game folder (short hash, OK or not), backend
 async function fillRunning() {
@@ -1154,6 +1188,11 @@ function wire() {
   $('nav').addEventListener('click', (e) => { const b = e.target.closest('.nav-item'); if (b) showPage(b.dataset.page); });
   $('set-games-pick').addEventListener('click', async () => { const p = await L.pickGamesRoot(); if (p) { info.gamesRoot = p; $('set-games').textContent = p; renderDetail(); } });
   $('set-data-open').addEventListener('click', () => L.openPath(info.dataRoot));
+  $('set-acct-check').addEventListener('click', accountCheck);
+  $('set-acct-reset').addEventListener('click', accountReset);
+  $('set-acct-copy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText($('set-acct-report').textContent); $('set-acct-copy').textContent = t('Copied'); setTimeout(() => { $('set-acct-copy').textContent = t('Copy report'); }, 1500); } catch {}
+  });
   $('set-files-copy').addEventListener('click', async () => {
     try { await navigator.clipboard.writeText($('set-files').textContent); $('set-files-copy').textContent = t('Copied'); setTimeout(() => { $('set-files-copy').textContent = t('Copy'); }, 1500); } catch {}
   });

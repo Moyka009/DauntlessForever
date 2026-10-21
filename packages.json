@@ -18,14 +18,14 @@
                      }
                  ],
     "launcher":  {
-                     "version":  "0.2.20",
+                     "version":  "0.2.21",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "Mods page shows each mod\u0027s name, description and hotkeys; Provy in Credits",
+                     "notes":  "Settings \u003e Friends account: Check connection explains sign-in problems (data cap pages, Wi-Fi logins, antivirus, PC clock) and Reset account fixes a lost friends account",
                      "date":  "2026-10-21",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.20.asar",
-                                 "sha256":  "27344f4edf2d3d2cfeb23ee61c19ad2abfac42cf454fc875b37f5a984179b7bc",
-                                 "size":  1010071,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.21.asar",
+                                 "sha256":  "041208c6a140118e0bd8ce9dfaacada5f5bc897800de132d84ca573b42a8ff78",
+                                 "size":  1034692,
                                  "minShell":  "0.2.4"
                              }
                  }
