@@ -82,6 +82,8 @@ try {
     # --- 2. the normal PLAY: backend stays on this PC only (the relay reaches it from inside), games are sent to the relay
     Remove-Item Env:\RECORDER_BIND -ErrorAction SilentlyContinue
     $env:RECORDER_PUBLIC_HOST = $ip
+    # DF-HOSTRULES: a game open to everyone always uses the standard Game Rules; with friends the host's own apply
+    if ($Public) { $env:DF_PUBLIC_GAME = '1' } else { Remove-Item Env:\DF_PUBLIC_GAME -ErrorAction SilentlyContinue }
     $env:RECORDER_PUBLIC_PORT_OFFSET = "$($base - 8780)"
     $env:RECORDER_PUBLIC_BACKEND_PORT = "$base"
     Say ''

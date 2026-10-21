@@ -156,14 +156,22 @@ if (Test-Path -LiteralPath $rulesDef) {
 # runs on this backend, so it uses the standard settings in online.env, whatever this PC's backend .env or Game Rules
 # say. Values set here win over the same lines in .env (node --env-file never replaces a variable already set).
 # Solo play is untouched: there the player's own .env and Game Rules apply.
+# DF-HOSTRULES (Oct 21): with friends (Host with friends, LAN host) the Game Rule "When you host" = Use my rules (the
+# default) keeps the host's own Game Rules: the RULE_ lines of online.env are skipped then. Games open to everyone
+# (DF_PUBLIC_GAME=1: Allow randoms, Play online) and "Standard rules" use all of online.env, as before.
 if ($env:DF_HOSTING -eq '1') {
     $onlineEnv = Join-Path $Root 'online.env'
     if (Test-Path -LiteralPath $onlineEnv) {
+        $keepMine = ($env:DF_PUBLIC_GAME -ne '1') -and ("$env:RULE_HOST_RULES" -ne '0')
         $n = 0
         foreach ($line in Get-Content -LiteralPath $onlineEnv -ErrorAction SilentlyContinue) {
-            if ($line -match '^\s*([A-Z][A-Z0-9_]*)\s*=\s*(.*?)\s*$') { Set-Item -Path "Env:$($Matches[1])" -Value $Matches[2]; $n++ }
+            if ($line -match '^\s*([A-Z][A-Z0-9_]*)\s*=\s*(.*?)\s*$') {
+                if ($keepMine -and $Matches[1] -like 'RULE_*') { continue }
+                Set-Item -Path "Env:$($Matches[1])" -Value $Matches[2]; $n++
+            }
         }
-        Say "    Hosting: standard online settings ($n from online.env); your own .env and Game Rules apply to solo play." 'Green'
+        if ($keepMine) { Say "    Hosting with friends: your own Game Rules apply to everyone in your game (Game Rules > When you host). Standard online settings for the rest ($n from online.env)." 'Green' }
+        else { Say "    Hosting: standard online settings and normal Game Rules ($n from online.env); your own Game Rules apply to solo play." 'Green' }
     }
 }
 $meta = Start-Process -FilePath $node -ArgumentList @('--env-file=.env', 'dist/server.js') -WorkingDirectory $MetaDir -WindowStyle Hidden `

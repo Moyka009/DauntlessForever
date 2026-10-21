@@ -390,6 +390,24 @@
           "+40"
         ]
       ]
+    },
+    {
+      "key": "host_rules",
+      "env": "RULE_HOST_RULES",
+      "title": "When you host",
+      "blurb": "Host with friends or LAN: Use my rules = your Game Rules on this page apply to everyone in your game, and the players who join you take home what they earn with them. Standard rules = everyone plays with normal rules while you host. Games open to everyone (Allow randoms, Play online) always use the standard rules.",
+      "default": "1",
+      "tested": false,
+      "choices": [
+        [
+          "1",
+          "Use my rules"
+        ],
+        [
+          "0",
+          "Standard rules"
+        ]
+      ]
     }
   ]
 }

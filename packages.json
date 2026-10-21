@@ -2,19 +2,19 @@
     "packages":  [
                      {
                          "id":  "1.6.2",
-                         "packageVersion":  "2026-10-21.5",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-21.5.zip",
-                         "sha256":  "fdee989392f144386462dae7dda779e32b9a16074c43faac00c67bf47dc14e11",
+                         "packageVersion":  "2026-10-21.6",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-21.6.zip",
+                         "sha256":  "c37158c0a9109b280ffab117b8f816ecb1919775e609d77aa316e2f1dcc53cce",
                          "date":  "2026-10-21",
-                         "note":  "Servers run at High priority (fixes hunt hitching on some PCs)"
+                         "note":  "Game Rule: When you host - your own Game Rules apply when hosting for friends"
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-21.6",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-21.6.zip",
-                         "sha256":  "fb9ebccfc34d1f114ddf6bc93bbd7a1b106c6f87ca52b01e826098e9b507a1a2",
+                         "packageVersion":  "2026-10-21.7",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-21.7.zip",
+                         "sha256":  "0096451f4c1e597dfb985057c67569fd3571bc761a2676daddbc2a3c6d15b455",
                          "date":  "2026-10-21",
-                         "note":  "Game Rule: Extra loadout slots (+10 to +40). Playing with friends: you AND the host MUST both have these server files"
+                         "note":  "Game Rule: When you host - your own Game Rules apply when hosting for friends"
                      }
                  ],
     "launcher":  {

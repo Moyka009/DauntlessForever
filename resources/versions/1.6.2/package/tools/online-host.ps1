@@ -109,9 +109,10 @@ try {
     Remove-Item Env:\BIND_HOST -ErrorAction SilentlyContinue   # backend stays on this PC only: the relay reaches it locally
     $env:DF_HOSTING = '1'                                # others play on this backend: start.ps1 uses the standard online.env
     if ($Public) {
+        $env:DF_PUBLIC_GAME = '1'                       # DF-HOSTRULES: open to everyone = standard Game Rules
         $env:HUNT_JOIN_WINDOW_SEC = '180'
         Say 'Open to everyone: players from "Play online" can join you, and join your hunts in the first 3 minutes.' 'Green'
-    } else { Remove-Item Env:\HUNT_JOIN_WINDOW_SEC -ErrorAction SilentlyContinue }
+    } else { Remove-Item Env:\HUNT_JOIN_WINDOW_SEC, Env:\DF_PUBLIC_GAME -ErrorAction SilentlyContinue }
     Say ''
     if ($HostMode) {
         Say 'Starting Host Mode: the backend and the game servers, no game window (log: logs\hostmode.log)...'
