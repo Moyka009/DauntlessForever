@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-21.10",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-21.10.zip",
-                         "sha256":  "c0273d8fe25ec07e8906418b8f5ac66ffb7f790cf4c3fb6ba6438dac992a2db4",
-                         "date":  "2026-10-21",
-                         "note":  "Boss Health Bar crash fix"
+                         "packageVersion":  "2026-10-22",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-22.zip",
+                         "sha256":  "7e87fc428e83d6030b8a238acc1695f62b131bcf2966f5d234ba8804705fe57a",
+                         "date":  "2026-10-22",
+                         "note":  "Party members no longer drop out of the party after an escalation or trial"
                      }
                  ],
     "launcher":  {

@@ -719,6 +719,7 @@ const PARTY_HUNT_FOLLOW_MS = 15 * 60 * 1000;   // members can still follow the l
 // The party also follows the leader into the training grounds (1.6.2 and the live game did not). On for now: in 1.14.7 the
 // training grounds are the one place every player can reach, so it is how a party gets somewhere together. false = old way.
 const PARTY_FOLLOW_TRAINING = true;
+const PARTY_HOME_SKIP = new Set(['ESCALATION', 'TRIALS']);   // DF-PARTY-ENDSCREEN: no "back with the leader" after these
 const parties = new Map();      // partyId -> { id, leader, members: [accountId], created, build }
 const partyOfAcc = new Map();   // accountId -> partyId (only parties of two or more)
 const invitesTo = new Map();    // accountId -> [{ partyId, sender, senderName, at }]
@@ -1100,11 +1101,18 @@ const routes = [
       }
     } else leavePlace(me);
     const prevPlaceId = p.candidate && p.candidate.city === false ? p.candidate.id : null;
+    const prevType = p.candidate && p.candidate.city === false ? p.candidate.gameType : null;   // DF-PARTY-ENDSCREEN
     p.candidate = { id: joinId || ('local1$' + crypto.randomBytes(16).toString('hex')), gameMode: b.gameMode || 'CITY', gameType: b.gameType || null,
       huntId: Array.isArray(b.hunts) && b.hunts.length ? b.hunts[0] : null, playerHuntId: b.playerHuntId || null, gauntletLevel: b.gameType === 'GAUNTLET' ? b.gauntlet_level : null,
       buildId: b.buildId || '647472_rel-1.14.7_shipping', gameSessionId: crypto.randomBytes(16).toString('hex'),
       city: dest.city, url: dest.url || null, label: dest.label, asked: Date.now() };
-    if (dest.city && prevPlaceId) p.candidate.returnFrom = prevPlaceId;   // DF-PARTY-HOME
+    // DF-PARTY-HOME: the leader's way home is offered to the party. DF-PARTY-ENDSCREEN (Oct 22): not after an escalation
+    // or a trial. Those end on the game's own results screen: the members' games did not take the trip there, left the
+    // party, and for about 3 minutes left again after every re-invite (report 18). They come home by themselves.
+    // Hunts and patrols keep it (the party comes back with the leader).
+    if (dest.city && prevPlaceId && !PARTY_HOME_SKIP.has(String(prevType || ''))) p.candidate.returnFrom = prevPlaceId;
+    else if (dest.city && prevPlaceId && groupOf(p.accountId) && groupOf(p.accountId).leader === p.accountId)
+      partyLog(`${p.accountId} goes back to Ramsgate after ${prevType}: the party is not pulled along (the game brings them back itself)`);
     // Outside the city: ask server-211.ps1 (through a small file) to start a second server on that map.
     if (!dest.city && !joinId) {
       leavePlace(me);
