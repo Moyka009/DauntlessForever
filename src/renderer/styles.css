@@ -449,3 +449,16 @@ html:not([lang="en"]) .nav-new { padding: 1px 5px; font-size: 10px; }
 .report-label { display: block; color: var(--ink-2, #a9b6c1); font-size: 13px; margin: 12px 0 6px; }
 #dlg-report .fr-input { max-width: none; width: 100%; box-sizing: border-box; }
 .report-reason { resize: vertical; min-height: 96px; font: inherit; }
+
+/* DF-ICONS-CENTER (Oct 21): the done tick in the steps and the Friends + were drawn from a rotated box and a text
+   glyph, which sit a pixel or two off centre. The tick is now a small centred shape (CSS mask) and the + two plain bars, sized so they
+   start on a whole pixel (26px circle - 14px tick, 34px x 36px button - 12px plus), so they stay sharp. */
+.step.done .step-n::before { width: 14px; height: 14px; border: 0; transform: translateY(2px); background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.4 6.2 5 8.7 9.6 3.6' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.4 6.2 5 8.7 9.6 3.6' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; }
+.fp-add { height: 36px; box-sizing: border-box; }   /* whole pixels, so the + is not drawn between two */
+.fp-add .fr-input { height: 100%; box-sizing: border-box; }
+.fp-add .fp-add-btn { display: grid; place-items: center; width: 37px; }   /* friends.css loads later: needs the extra .fp-add */
+.fp-add-btn > span { position: relative; display: block; width: 12px; height: 12px; font-size: 0; }   /* two plain bars: snapped to whole pixels at any Windows scaling */
+.fp-add-btn > span::before, .fp-add-btn > span::after { content: ""; position: absolute; background: currentColor; }
+.fp-add-btn > span::before { left: 0; top: 5px; width: 12px; height: 2px; }
+.fp-add-btn > span::after { left: 5px; top: 0; width: 2px; height: 12px; }

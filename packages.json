@@ -18,14 +18,14 @@
                      }
                  ],
     "launcher":  {
-                     "version":  "0.2.27",
+                     "version":  "0.2.28",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "Fix for the launcher closing at start when its folder is on a drive Windows\u0027 sandbox cannot read",
+                     "notes":  "The tick in the steps and the Friends + are centred",
                      "date":  "2026-10-21",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.27.asar",
-                                 "sha256":  "9db3d4a472406385f04aed698b1b9d5a06a6634aea8e1b2cec59b2cdd1c69201",
-                                 "size":  8177171,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.28.asar",
+                                 "sha256":  "520cdf24f9d10ab3976c45aef6bb2447d93c4708df7e02b4599b43c7eb0e9b92",
+                                 "size":  8178929,
                                  "minShell":  "0.2.4"
                              }
                  }
