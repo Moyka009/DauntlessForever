@@ -2,30 +2,30 @@
     "packages":  [
                      {
                          "id":  "1.6.2",
-                         "packageVersion":  "2026-10-21.7",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-21.7.zip",
-                         "sha256":  "1d88e3c66837df6ffc40f9dbd57d941973b8aa224671acc2776c834c648c757f",
-                         "date":  "2026-10-21",
-                         "note":  "Log zips no longer include graphics driver shader caches"
+                         "packageVersion":  "2026-10-23",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-23.zip",
+                         "sha256":  "d1ddb1646ad9cf7f5626d67bb1a77fc30f4c1426400b1a2243959e0bc4a58f59",
+                         "date":  "2026-10-23",
+                         "note":  "Crowns added on the Inventory page now show in game (add them again if one never showed)"
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-22",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-22.zip",
-                         "sha256":  "7e87fc428e83d6030b8a238acc1695f62b131bcf2966f5d234ba8804705fe57a",
-                         "date":  "2026-10-22",
-                         "note":  "Party members no longer drop out of the party after an escalation or trial"
+                         "packageVersion":  "2026-10-23",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-23.zip",
+                         "sha256":  "4a8ba2f496412d3c04f8e987cd9c750ead92d1991beeb305315d032e0c388334",
+                         "date":  "2026-10-23",
+                         "note":  "Inventory page: gear and cosmetics for 1.14.7 (hair, face, crowns, gliders, titles, skins, dyes, emotes)"
                      }
                  ],
     "launcher":  {
-                     "version":  "0.2.28",
+                     "version":  "0.2.29",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "The tick in the steps and the Friends + are centred",
-                     "date":  "2026-10-21",
+                     "notes":  "Opens with one click, Forever Hunts banner, 1.14.7 gear and cosmetics on the Inventory page",
+                     "date":  "2026-10-23",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.28.asar",
-                                 "sha256":  "520cdf24f9d10ab3976c45aef6bb2447d93c4708df7e02b4599b43c7eb0e9b92",
-                                 "size":  8178929,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.29.asar",
+                                 "sha256":  "4acc3960a866a3f74b26a105e9b38bc2efa24834d1c834ac2ebb03c0702be9d8",
+                                 "size":  8286995,
                                  "minShell":  "0.2.4"
                              }
                  }

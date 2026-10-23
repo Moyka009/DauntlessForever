@@ -856,5 +856,27 @@
     "The next time you open the launcher it uses the sandbox again. If it does not open then, it turns the sandbox off again by itself.": "La prochaine fois que tu ouvres le launcher, il utilise de nouveau le bac \u00e0 sable. S'il ne s'ouvre pas, il le d\u00e9sactive de nouveau tout seul.",
     "Could not fix the folder": "Impossible de r\u00e9parer le dossier",
     "The launcher keeps working with the sandbox off.": "Le launcher continue de fonctionner avec le bac \u00e0 sable d\u00e9sactiv\u00e9.",
+    // DF-FH-BANNER: Forever Hunts banner
+    "Forever Hunts": "Forever Hunts",
+    "The hunt never ends.": "La chasse ne finit jamais.",
+    "Learn more": "En savoir plus",
+    // DF-INV-1147: 1.14.7 gear and cosmetics on the Inventory page
+    "Not in the {version} item list: {list}": "Pas dans la liste d'objets de {version} : {list}",
+    "Dyes": "Teintures",
+    "Emotes": "Emotes",
+    "Emojis": "Emojis",
+    "Titles": "Titres",
+    "Character appearance": "Apparence du personnage",
+    "Curiosities (charges)": "Curiosit\u00e9s (charges)",
+    "Omnicells": "Omnicellules",
+    "Crowns and accessories": "Couronnes et accessoires",
+    "Hair and face": "Cheveux et visage",
+    "Armour skins": "Apparences d'armure",
+    "Weapon skins": "Apparences d'arme",
+    "Lantern skins": "Apparences de lanterne",
+    "Gliders": "Planeurs",
+    "Pets": "Familiers",
+    // DF-STARTWIN: the Starting window
+    "Starting the launcher...": "D\u00e9marrage du launcher...",
   };
 })(typeof module === 'object' && module.exports ? module.exports : (window.DF_I18N = window.DF_I18N || {}));

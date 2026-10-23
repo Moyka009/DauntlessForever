@@ -757,8 +757,9 @@ async function renderItems(reload) {
   };
 }
 
-// Gear part of the Inventory page (versions whose helper returns gear + a gear catalog, 1.6.2 first).
-let gearConfirm = null;
+// Gear part of the Inventory page (versions whose helper returns gear + a gear catalog: 1.6.2, and 1.14.7 since DF-INV-1147,
+// whose helper also sends gearTypes, the order of its kinds).
+let gearConfirm = null, gearFilter = '', gearFilterVer = null;
 function renderGear(cur, ch, note) {
   const cat = cur.d.save && cur.d.save.gearCatalog;
   $('item-gear').hidden = !(cat && Array.isArray(ch.gear));
@@ -780,7 +781,7 @@ function renderGear(cur, ch, note) {
       if (r.removed && r.removed.length) parts.push(t('Removed {list}', { list: r.removed.map(nm).join(', ') }));
       if (r.already && r.already.length) parts.push(t('Already yours: {list}', { list: r.already.map(nm).join(', ') }));
       if (r.equipped && r.equipped.length) parts.push(t('Equipped, so kept: {list} (unequip it in game first)', { list: r.equipped.map(nm).join(', ') }));
-      if (r.unknown && r.unknown.length) parts.push(t('Not a 1.6.2 gear item: {list}', { list: r.unknown.join(', ') }));
+      if (r.unknown && r.unknown.length) parts.push(itemVer === '1.6.2' ? t('Not a 1.6.2 gear item: {list}', { list: r.unknown.join(', ') }) : t('Not in the {version} item list: {list}', { version: itemVer, list: r.unknown.join(', ') }));
       itemNote = (parts.join('. ') || what) + '. ' + t('You will see it the next time you play {version}.', { version: itemVer });
       itemErr = !(r.added && r.added.length) && !(r.removed && r.removed.length);
     }
@@ -809,11 +810,19 @@ function renderGear(cur, ch, note) {
     allBtn.disabled = false; gearConfirm = null; renderItems(true);
   };
   const host = $('gear-list'); host.innerHTML = '';
-  const order = ['Weapons', 'Armour', 'Lanterns', 'Weapon parts', 'Accessories', 'Banners', 'Flares'];
+  const order = Array.isArray(cur.d.save.gearTypes) ? cur.d.save.gearTypes : ['Weapons', 'Armour', 'Lanterns', 'Weapon parts', 'Accessories', 'Banners', 'Flares'];
   const owned = ch.gear.map(g => ({ ...g, name: (names.get(g.id) || [g.id, g.id, 'Other'])[1], type: (names.get(g.id) || [g.id, g.id, 'Other'])[2] }))
     .sort((a, b) => (order.indexOf(a.type) - order.indexOf(b.type)) || a.name.localeCompare(b.name));
   if (!owned.length) host.innerHTML = `<div class="season-row"><div class="season-kind">${esc(t('No gear yet.'))}</div></div>`;
-  for (const g of owned) {
+  // Show: one kind at a time
+  if (gearFilterVer !== itemVer) { gearFilter = ''; gearFilterVer = itemVer; }
+  const kinds = [...new Set(owned.map(g => g.type))].sort((a, b) => order.indexOf(a) - order.indexOf(b));
+  if (gearFilter && !kinds.includes(gearFilter)) gearFilter = '';
+  const fsel = $('gear-filter');
+  fsel.innerHTML = `<option value="">${esc(t('All'))} (${fmtN(owned.length)})</option>` + kinds.map(k => `<option value="${esc(k)}"${k === gearFilter ? ' selected' : ''}>${esc(t(k))} (${fmtN(owned.filter(g => g.type === k).length)})</option>`).join('');
+  fsel.onchange = () => { gearFilter = fsel.value; gearConfirm = null; renderItems(false); };
+  $('gear-filter-row').hidden = kinds.length < 2;
+  for (const g of (gearFilter ? owned.filter(x => x.type === gearFilter) : owned)) {
     const r = document.createElement('div'); r.className = 'season-row gear-row';
     r.innerHTML = `<div><div class="season-name">${esc(g.name)}</div><div class="season-kind">${esc(t(g.type))} <code>${esc(g.id)}</code></div></div>
       <div class="item-have">${g.level ? esc(t('Level {n}', { n: g.level })) : ''}${g.equipped ? ` <span class="tag ok">${esc(t('Equipped'))}</span>` : ''}</div>

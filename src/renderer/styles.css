@@ -462,3 +462,42 @@ html:not([lang="en"]) .nav-new { padding: 1px 5px; font-size: 10px; }
 .fp-add-btn > span::before, .fp-add-btn > span::after { content: ""; position: absolute; background: currentColor; }
 .fp-add-btn > span::before { left: 0; top: 5px; width: 12px; height: 2px; }
 .fp-add-btn > span::after { left: 5px; top: 0; width: 2px; height: 12px; }
+
+/* DF-FH-BANNER (Oct 22): the Play page ends with the Forever Hunts banner instead of the Works / Not yet notes,
+   and the More menu opens as a popup over it (it no longer pushes the page down). */
+#notes { display: none !important; }
+#more-menu { position: absolute; z-index: 30; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55); }
+.fh-banner { position: relative; display: flex; align-items: stretch; margin-top: 26px; max-width: 960px; height: 206px; overflow: hidden;
+  border: 1px solid var(--line-2); border-left: 3px solid var(--brass); border-radius: 8px; background: var(--bg-2);
+  color: var(--ink); text-decoration: none; cursor: pointer; }
+.fh-banner::before { content: ""; position: absolute; inset: 0 0 0 30%; background: url("forever-hunts.jpg") center 40% / cover no-repeat; }
+.fh-banner::after { content: ""; position: absolute; inset: 0 0 0 30%; background: linear-gradient(90deg, var(--bg-2) 0%, rgba(21, 28, 36, 0.55) 22%, rgba(21, 28, 36, 0) 50%); }
+.fh-text { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 30px; }
+.fh-kicker { color: var(--brass); font-size: 12.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.fh-title { font-family: var(--display); font-size: 40px; font-weight: 700; line-height: 1.05; letter-spacing: 0.01em; text-transform: uppercase; margin-top: 6px; }
+.fh-sub { color: var(--ink-2); font-size: 17px; margin-top: 4px; }
+.fh-more { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; color: var(--brass-2); font-weight: 600; font-size: 14px; }
+.fh-banner:hover { border-color: #6b5520; border-left-color: var(--brass-2); }
+.fh-banner:hover .fh-more { text-decoration: underline; }
+.fh-banner:focus-visible { outline: 2px solid var(--aether); outline-offset: 2px; }
+
+/* DF-FH-DOCK (Oct 23): the Forever Hunts banner is docked to the bottom edge of the Play page, edge to edge, like a
+   frame over the page: with room to spare it sits flush at the bottom, and on a long page (1.14.7 note, small
+   windows) it stays at the bottom while the page scrolls behind it. The More menu still opens over it. */
+#page-play:not([hidden]) { display: flex; flex-direction: column; min-height: 100%; padding-bottom: 0; box-sizing: border-box; }
+#page-play .fh-banner { position: sticky; bottom: 0; z-index: 5; flex: none; margin: auto -40px 0; padding-top: 0; width: auto; max-width: none;
+  height: 172px; border: 0; border-top: 1px solid var(--line-2); border-radius: 0; box-shadow: 0 -14px 28px rgba(0, 0, 0, 0.45); }
+#page-play .fh-banner::before, #page-play .fh-banner::after { inset: 0 0 0 34%; }
+#page-play .fh-text { padding: 0 40px; }
+#page-play .fh-title { font-size: 36px; }
+#page-play .fh-more { margin-top: 14px; }
+#page-play > :nth-last-child(2) { margin-bottom: 26px; }
+#page-play .fh-banner:hover { border-top-color: #6b5520; }
+#more-menu { z-index: 30; }
+@media (max-width: 1000px) { #page-play .fh-banner { margin-left: -24px; margin-right: -24px; } #page-play .fh-text { padding: 0 24px; } }
+@media (max-height: 760px) { #page-play .fh-banner { height: 136px; } #page-play .fh-title { font-size: 30px; } #page-play .fh-sub { font-size: 15px; } #page-play .fh-more { margin-top: 8px; } }
+
+/* DF-FH-RAYS (Oct 23): the banner is only a picture for now (no link, no hover). DF-FH-LIGHT: moving sun shafts and
+   falling dust are drawn by fh-banner.js on this canvas over the picture. */
+#page-play .fh-banner, #page-play .fh-banner:hover { cursor: default; border-top-color: var(--line-2); }
+.fh-rays { position: absolute; top: 0; left: 34%; width: 66%; height: 100%; pointer-events: none; }

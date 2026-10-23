@@ -32,7 +32,11 @@ if (UNDER_WINE) { app.commandLine.appendSwitch('no-sandbox'); app.commandLine.ap
 // One launcher at a time: opening it again brings the open window forward (two launchers would both poll the
 // friends service, both run voice, and fight over the same files)
 if (!app.requestSingleInstanceLock()) { app.quit(); process.exit(0); }
-app.on('second-instance', () => { if (win && !win.isDestroyed()) { if (win.isMinimized()) win.restore(); win.show(); win.focus(); } });
+app.on('second-instance', () => {
+  // DF-STARTWIN: a second start while the first is still opening shows whatever is up so far
+  if (win && !win.isDestroyed()) { showMain('second start'); if (win.isMinimized()) win.restore(); win.show(); win.focus(); }
+  else if (startWin && !startWin.isDestroyed()) { startWin.show(); startWin.focus(); }
+});
 
 // Opened by Windows at login for Host Mode (Host Mode page: "Start with Windows"): start minimized, then start Host Mode
 const FROM_WINDOWS = process.argv.includes('--hostmode');
@@ -55,7 +59,9 @@ async function syncWithPleaseWait() {
   const todo = registry.filter(v => { try { return V.needsSync(v) && !kept(v); } catch { return false; } });
   if (!todo.length) return null;
   let wait = null;
-  try {
+  // DF-STARTWIN: the "Starting" window is already up, so it becomes the "please wait" window
+  if (startWin && !startWin.isDestroyed()) { wait = startWin; setStartText(I18N.t('Dauntless Forever is updating'), I18N.t('Copying the new server files. This can take a minute, please wait.')); if (!wait.isVisible()) wait.show(); }
+  else try {
     wait = new BrowserWindow({ width: 440, height: 150, frame: false, resizable: false, show: false, center: true, skipTaskbar: false,
       title: 'Dauntless Forever', backgroundColor: '#0f1419', icon: path.join(P.bundledRoot(), app.isPackaged ? 'icon.png' : '../build/icon.png'),
       webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true } });
@@ -84,6 +90,49 @@ async function syncWithPleaseWait() {
   }
   return null;
 }
+// DF-STARTWIN (Oct 23): players had to open the launcher twice. Its window stays hidden until its page has drawn
+// (ready-to-show), which can take a while and on some PCs does not come at all. With nothing on screen and nothing in
+// the taskbar the first start looked like it had not opened, and the second start only showed the hidden window.
+// Now a small "Starting" window is up at once, and the launcher window shows on ready-to-show or, at the latest, a
+// moment after its page has loaded (15 seconds whatever happens), in front of the other windows.
+let startWin = null, mainShown = false;
+function startPage(title, text) {
+  return '<!doctype html><meta charset="utf-8"><body style="margin:0;background:#0f1419;color:#e6edf3;font:14px Segoe UI,sans-serif;display:flex;' +
+    'flex-direction:column;justify-content:center;height:100vh;padding:0 26px;box-sizing:border-box;border:1px solid #27333f">' +
+    '<div id="t" style="font-size:16px;font-weight:600;margin-bottom:6px">' + htmlText(title) + '</div>' +
+    '<div id="m" style="color:#9fb0c2">' + htmlText(text) + '</div>' +
+    '<div id="n" style="color:#66788c;margin-top:10px;font-size:12px">&nbsp;</div></body>';
+}
+function setStartText(title, text) {
+  if (!startWin || startWin.isDestroyed()) return;
+  startWin.webContents.executeJavaScript(`document.getElementById('t').textContent = ${JSON.stringify(title)}; document.getElementById('m').textContent = ${JSON.stringify(text)};`).catch(() => {});
+}
+async function showStarting() {
+  if (FROM_WINDOWS) return;   // Host Mode at Windows login starts minimized, without it
+  try {
+    startWin = new BrowserWindow({ width: 440, height: 150, frame: false, resizable: false, closable: false, show: false, center: true,
+      title: 'Dauntless Forever', backgroundColor: '#0f1419', icon: path.join(P.bundledRoot(), app.isPackaged ? 'icon.png' : '../build/icon.png'),
+      webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true } });
+    await startWin.loadURL('data:text/html;charset=utf-8,' + encodeURIComponent(startPage('Dauntless Forever', I18N.t('Starting the launcher...'))));
+    if (!mainShown && !startWin.isDestroyed()) startWin.show();
+  } catch (e) { log('launcher', 'starting window: ' + e.message); }   // kept (hidden) until the launcher window is up: closing the only window would quit
+}
+// Shows the launcher window once (ready-to-show, page loaded, timeout or a second start) and closes the "Starting" window
+function showMain(why) {
+  if (mainShown || !win || win.isDestroyed()) return;
+  mainShown = true;
+  try { AU.markGood(); } catch {}
+  try { SBX.windowShown(win, (s, p) => I18N.t(s, p)); } catch {}
+  if (FROM_WINDOWS) { win.showInactive(); win.minimize(); }
+  else {
+    win.show();
+    // Windows keeps a window that a slow start opens behind the others; this brings it to the front once
+    try { win.setAlwaysOnTop(true); win.focus(); win.setAlwaysOnTop(false); } catch {}
+  }
+  if (startWin && !startWin.isDestroyed()) startWin.destroy();
+  startWin = null;
+  if (why !== 'ready') log('launcher', `window shown (${why}): ready-to-show had not come`);
+}
 function createWindow() {
   win = new BrowserWindow({
     width: 1340, height: 800, minWidth: 940, minHeight: 620,
@@ -96,7 +145,9 @@ function createWindow() {
     webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false, sandbox: true, backgroundThrottling: false },
   });
   win.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'));
-  win.once('ready-to-show', () => { try { AU.markGood(); } catch {} try { SBX.windowShown(win, (s, p) => I18N.t(s, p)); } catch {} if (FROM_WINDOWS) { win.showInactive(); win.minimize(); } else win.show(); });
+  win.once('ready-to-show', () => showMain('ready'));
+  win.webContents.once('did-finish-load', () => setTimeout(() => showMain('page loaded'), 1500));   // DF-STARTWIN
+  setTimeout(() => showMain('15 s'), 15000);
   // never leave a game orphaned without saying so
   win.on('close', (e) => {
     // Host Mode runs without a window of its own: closing the launcher would leave a server nobody can stop
@@ -119,6 +170,7 @@ function createWindow() {
 
 app.whenReady().then(async () => {
   P.ensureDir(P.dataRoot());
+  await showStarting();   // DF-STARTWIN: something on screen at once
   if (UNDER_WINE) log('launcher', 'running under Wine/Proton/CrossOver: sandbox and GPU off');
   // voice chat: the window may use the microphone (it only ever shows the launcher's own pages)
   require('electron').session.defaultSession.setPermissionRequestHandler((_wc, perm, cb) => cb(perm === 'media' || perm === 'clipboard-sanitized-write' || perm === 'fullscreen'));
@@ -126,7 +178,7 @@ app.whenReady().then(async () => {
   const pleaseWait = await syncWithPleaseWait();   // after an update: copy the new server files in, with a "please wait" window
   createWindow();
   // closed only once the launcher's own window exists (closing the last window would quit the app)
-  if (pleaseWait) win.once('ready-to-show', () => { if (!pleaseWait.isDestroyed()) pleaseWait.destroy(); });
+  if (pleaseWait && pleaseWait !== startWin) win.once('show', () => { if (!pleaseWait.isDestroyed()) pleaseWait.destroy(); });
   // Friends page: its own IPC handlers and the online-status poll (social.js)
   require('./social').init({ get registry() { return registry; }, byId: (id) => byId(id), runner: R, send, log: (t) => log('social', t) });
   // One player name for every version and the Friends page (player.js)
@@ -588,7 +640,8 @@ async function runItems(v, args) {
   if (!node || !fs.existsSync(node)) node = (await findNode() || {}).path;
   if (!node) return { ok: false, error: 'Node.js was not found. Run Set up first.' };
   return new Promise((resolve) => {
-    execFile(node, [path.join(v.dataDir, 'tools', 'items.js'), ...args], { cwd: v.dataDir, timeout: 30000, windowsHide: true }, (e, out) => {
+    // DF-INV-1147: a save with every cosmetic unlocked lists thousands of items, more than execFile's 1 MB default
+    execFile(node, [path.join(v.dataDir, 'tools', 'items.js'), ...args], { cwd: v.dataDir, timeout: 30000, windowsHide: true, maxBuffer: 32 * 1024 * 1024 }, (e, out) => {
       try { resolve(JSON.parse(String(out || '').trim())); }
       catch { resolve({ ok: false, error: e ? `Could not read the save (${e.message.split('\n')[0]}).` : 'Could not read the save.' }); }
     });

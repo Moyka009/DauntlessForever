@@ -859,5 +859,27 @@
     "The next time you open the launcher it uses the sandbox again. If it does not open then, it turns the sandbox off again by itself.": "La pr\u00f3xima vez que abras el launcher volver\u00e1 a usar el sandbox. Si entonces no se abre, lo desactivar\u00e1 otra vez por s\u00ed solo.",
     "Could not fix the folder": "No se pudo arreglar la carpeta",
     "The launcher keeps working with the sandbox off.": "El launcher sigue funcionando con el sandbox desactivado.",
+    // DF-FH-BANNER: Forever Hunts banner
+    "Forever Hunts": "Forever Hunts",
+    "The hunt never ends.": "La caza nunca termina.",
+    "Learn more": "M\u00e1s informaci\u00f3n",
+    // DF-INV-1147: 1.14.7 gear and cosmetics on the Inventory page
+    "Not in the {version} item list: {list}": "No est\u00e1 en la lista de objetos de {version}: {list}",
+    "Dyes": "Tintes",
+    "Emotes": "Gestos",
+    "Emojis": "Emojis",
+    "Titles": "T\u00edtulos",
+    "Character appearance": "Apariencia del personaje",
+    "Curiosities (charges)": "Curiosidades (cargas)",
+    "Omnicells": "Omnic\u00e9lulas",
+    "Crowns and accessories": "Coronas y accesorios",
+    "Hair and face": "Pelo y cara",
+    "Armour skins": "Aspectos de armadura",
+    "Weapon skins": "Aspectos de arma",
+    "Lantern skins": "Aspectos de linterna",
+    "Gliders": "Planeadores",
+    "Pets": "Mascotas",
+    // DF-STARTWIN: the Starting window
+    "Starting the launcher...": "Iniciando el launcher...",
   };
 })(typeof module === 'object' && module.exports ? module.exports : (window.DF_I18N = window.DF_I18N || {}));

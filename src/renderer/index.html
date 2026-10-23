@@ -123,6 +123,16 @@
       <div class="note-col"><h3>Works so far</h3><ul id="d-works"></ul></div>
       <div class="note-col"><h3>Not yet</h3><ul id="d-not"></ul></div>
     </div>
+
+    <!-- DF-FH-BANNER (Oct 22): Forever Hunts teaser, a picture only (no link yet). DF-FH-LIGHT: moving sun shafts and dust over it (fh-banner.js) -->
+    <div class="fh-banner" id="fh-banner" aria-label="Forever Hunts, coming soon">
+      <canvas class="fh-rays" id="fh-rays" aria-hidden="true"></canvas>
+      <span class="fh-text">
+        <span class="fh-kicker">Coming soon</span>
+        <span class="fh-title">Forever Hunts</span>
+        <span class="fh-sub">The hunt never ends.</span>
+      </span>
+    </div>
   </div>
 </section>
 
@@ -274,6 +284,8 @@
       <div class="item-add-row" id="gear-all-row" hidden><button class="ghost" id="gear-all-btn">Unlock all cosmetics</button><span class="small">Every dye, emote, title, skin, banner and flare in the list below, for this character.</span></div>
       <div class="item-add-row"><input id="gear-add" list="gear-options" placeholder="Type a name or ID, e.g. Skarn's Vengeance" spellcheck="false" autocomplete="off"><button class="ghost" id="gear-add-btn">Add gear</button></div>
       <datalist id="gear-options"></datalist>
+      <!-- DF-INV-1147: show one kind at a time (a save with every cosmetic has thousands) -->
+      <div class="item-add-row" id="gear-filter-row" hidden><label class="item-char">Show <select id="gear-filter"></select></label></div>
       <div class="season-list gear-list" id="gear-list"></div>
     </div>
     <details class="item-more" id="item-more">
@@ -522,6 +534,7 @@
 <script src="i18n-de.js"></script>
 <script src="i18n.js"></script>
 <script src="sky.js"></script>
+<script src="fh-banner.js"></script>
 <script src="app.js"></script>
 <script src="friends.js"></script>
 <script src="voice.js"></script>
