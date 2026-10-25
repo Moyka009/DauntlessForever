@@ -208,7 +208,7 @@ function travel(method, key, body) {
   if (method === 'GET') {
     const p = state.players[key];
     if (!p) return { status: 404, json: { error: 'no character of this player here' }, note: 'travel: nothing to send home' };
-    const out = Object.assign({}, p); delete out.candidate; delete out.partyId;
+    const out = Object.assign({}, p); delete out.candidate; delete out.partyId; delete out.partyRejoin; delete out.partyRejoinDone;
     return J({ player: out, at: new Date().toISOString() }, `travel: ${key.slice(0, 8)} goes home (${(out.characters || []).length} character(s))`);
   }
   if (method === 'PUT') {
@@ -220,7 +220,7 @@ function travel(method, key, body) {
       if (ch.data !== undefined && ch.data !== null) { try { JSON.parse(ch.data); } catch (e) { return { status: 400, json: { error: `character ${ch.name} has broken data` }, note: 'travel: refused, broken data' }; } }
     }
     const p = Object.assign({}, rec);
-    delete p.candidate; delete p.partyId;
+    delete p.candidate; delete p.partyId; delete p.partyRejoin; delete p.partyRejoinDone;
     p.accountId = idFrom('account:' + key);          // the host's id for this guest (home ids can be the same on every PC)
     p.travelledIn = new Date().toISOString();
     if (state.players[key]) state.travelBackups = Object.assign(state.travelBackups || {}, { [key]: state.players[key] });
@@ -762,8 +762,14 @@ function partyRemove(P, acc, why) {
   if (!P || !P.members.includes(acc)) return;
   P.members = P.members.filter((m) => m !== acc);
   if (partyOfAcc.get(acc) === P.id) partyOfAcc.delete(acc);
+  // DF-PARTY-NEWID: the one who left never gets the same id back either (2-PC test Oct 25: the leader left the automatic
+  // party, was put back into a party with that same id 10 s later, and left it again 1.6 s after)
+  { const lp = playerOfAcc(acc); if (lp && lp.partyId === P.id) lp.partyId = partyIdFor(P.id.includes('_') ? Buffer.from(P.id.slice(P.id.indexOf('_') + 1), 'base64').toString() : undefined); }
   if (P.members.length <= 1) {
-    // one left: back to their own party of one (their solo id is kept on the player record)
+    // one left: back to their own party of one. DF-PARTY-NEWID (Oct 24; reports 66 94): with a NEW solo party id. With
+    // the old one, the next group reused the id the member's game had just left, and that game left it again ~7 s
+    // after accepting (the first re-invite after an escalation; the second always held).
+    for (const m of P.members) { const lp = playerOfAcc(m); if (lp) lp.partyId = partyIdFor(P.id.includes('_') ? Buffer.from(P.id.slice(P.id.indexOf('_') + 1), 'base64').toString() : undefined); }
     for (const m of P.members) partyOfAcc.delete(m);
     parties.delete(P.id);
     for (const [r, l] of invitesTo) invitesTo.set(r, l.filter((i) => i.partyId !== P.id));
@@ -814,8 +820,83 @@ function soloReply(p, build) {
   return { candidateId: cd ? cd.id : null, candidateState: cd ? (ready ? 'IN_PROGRESS' : 'MATCHING') : null, gauntletLevel: (cd && cd.gauntletLevel) ?? null, leaderPlayerId: p.accountId, partyId: p.partyId, playerHuntId: cd ? cd.playerHuntId : null,
     playerStates: [{ consoleSessionId: null, displayName: p.username, isMemberOfCandidate: !!cd, platform: 'win', playerId: p.accountId }] };
 }
+// DF-PARTY-REJOIN (Oct 24; reports 18 66 94, 7 escalations in one day): when the leader goes back to Ramsgate from an
+// escalation or a trial, the members' games stay on the island, and about 2 s after the leader's player is gone from
+// that island server they leave the party by themselves (leave, solo party, Return to Ramsgate; both members in the
+// same second). Pulling them along did not help (Oct 22): the summary screen takes the city candidate and sits on it.
+// So the drop is noted here, and the member is put back into the leader's party as soon as their game is in Ramsgate.
+const PARTY_REJOIN_LEADER_HOME_MS = 90 * 1000;    // the leader went home this recently
+const PARTY_REJOIN_TTL_MS = 180 * 1000;           // the member has this long to arrive
+const PARTY_REJOIN_SETTLE_MS = 12 * 1000;         // after the member asked for Ramsgate (their game is loading it)
+function partyNoteDrop(p, P) {
+  // The game spends one more "leave" on the first party it is in after the drop, whoever made it (2-PC test Oct 25:
+  // the automatic party was left 0.2 s after the poll showed it, the member's own next party 7 s after the leader
+  // joined). So a party left within 20 s of an automatic rejoin is rejoined once more; the second one holds.
+  const done = p.partyRejoinDone;
+  if (done && done.leader === P.leader && Date.now() - done.at < 20 * 1000 && !done.again) {
+    delete p.partyRejoinDone;
+    p.partyRejoin = { leader: P.leader, from: done.from, at: Date.now(), until: Date.now() + PARTY_REJOIN_TTL_MS, again: true, notBefore: Date.now() + 4000 };
+    partyLog(`${p.accountId} left the automatic party ${Math.round((Date.now() - done.at) / 1000)} s after joining it (the game's one-shot leave): rejoins once more`);
+    return;
+  }
+  const lp = playerOfAcc(P.leader); const cd = lp && lp.candidate;
+  if (!cd || cd.city === false || !cd.partyHome || Date.now() - (cd.asked || 0) > PARTY_REJOIN_LEADER_HOME_MS) return;
+  if (!p.candidate || p.candidate.city !== false) return;   // the member is not on the island the leader just left
+  p.partyRejoin = { leader: P.leader, from: cd.partyHome, at: Date.now(), until: Date.now() + PARTY_REJOIN_TTL_MS };
+  partyLog(`${p.accountId} dropped out of ${P.id.slice(0, 8)} on the leader's way home from ${cd.partyHome}: rejoins automatically in Ramsgate`);
+}
+function partyRejoin(p, build) {
+  const r = p.partyRejoin; if (!r) return;
+  const now = Date.now();
+  const drop = (why) => { delete p.partyRejoin; saveState(); if (why) partyLog(`${p.accountId} is not put back into the party: ${why}`); };
+  if (now > r.until) return drop('too late');
+  if (r.notBefore && now < r.notBefore) return;
+  if (groupOf(p.accountId)) return drop('');   // grouped again by hand (an invite was accepted)
+  const cd = p.candidate;
+  if (!cd || cd.city === false || now - (cd.asked || 0) < PARTY_REJOIN_SETTLE_MS) return;   // not back in Ramsgate yet
+  const lp = playerOfAcc(r.leader);
+  if (!lp || now - (partySeen.get(r.leader) || 0) > 60 * 1000) return drop('the leader is gone');
+  if (lp.candidate && lp.candidate.city === false) return drop('the leader is on a hunt again');
+  let P = groupOf(r.leader);
+  if (P) { if (P.members.length >= PARTY_MAX) return drop('the party is full'); }
+  else {
+    if (!lp.partyId) lp.partyId = partyIdFor(build);
+    P = { id: lp.partyId, leader: r.leader, members: [r.leader], created: now };
+    parties.set(P.id, P); partyOfAcc.set(r.leader, P.id);
+  }
+  P.members.push(p.accountId); partyOfAcc.set(p.accountId, P.id);
+  P.autoAt = now; P.autoAgain = !!r.again;   // the leader's game may spend its own one-shot leave on this party
+  invitesTo.set(p.accountId, (invitesTo.get(p.accountId) || []).filter((i) => i.sender !== r.leader));
+  partyPresence(p, P);   // DF-PARTY-PRESENCE
+  delete p.partyRejoin; p.partyRejoinDone = { leader: r.leader, from: r.from, at: now, again: !!r.again }; persistMultiplayerParties();
+  partyLog(`${p.accountId} rejoined ${P.id.slice(0, 8)} automatically${r.again ? ' (second time)' : ''} (leader ${P.leader}, back from ${r.from}); ${P.members.length} members`);
+}
+// DF-PARTY-PRESENCE (Oct 25, the guest's own log): "UArchonPartyPrimary::UpdateParty - Leaving party due to all members
+// being offline". The game takes a party member's online state from chat presence; this chat server sends none
+// (no friends store), so a member counts as online only once its game has joined the party's chat room and seen the
+// others there. When the party poll came first (after an escalation, or right after an accept) the game left.
+// Every party poll now tells the polling game, over chat, that its party members are online (from their own
+// chat sessions, both under their sign-in id and under their account id).
+function partyPresence(p, P) {
+  try {
+    if (!P || !chat || !chat.byUid || typeof chat.send !== 'function') return;
+    const sessionsOf = (acc) => { const q = playerOfAcc(acc); const uid = q && String(q.epicId || '').toLowerCase(); return ((uid && chat.byUid.get(uid)) || []).filter((S) => S && !S.Ended && S.Uid && S.Resource && S.Domain); };
+    // every member hears every other member (2-PC test: the guest, told at the accept, stayed; the leader, told
+    // only later, left), whoever's poll it is
+    for (const a of P.members) for (const b of P.members) {
+      if (a === b) continue;
+      const to = sessionsOf(b); if (!to.length) continue;
+      for (const S of sessionsOf(a)) for (const T of to) {
+        for (const from of [`${S.Uid}@${S.Domain}/${S.Resource}`, `${a}@${S.Domain}/${S.Resource}`])
+          chat.send(T, `<presence xmlns="jabber:client" from="${from}" to="${T.Uid}@${T.Domain}/${T.Resource}"/>`);
+      }
+    }
+  } catch (e) { /* presence is a hint; the party itself never depends on it */ }
+}
 function partyPoll(p, build) {
   partySeen.set(p.accountId, Date.now()); partySweep();
+  partyRejoin(p, build);   // DF-PARTY-REJOIN
+  partyPresence(p, groupOf(p.accountId));   // DF-PARTY-PRESENCE
   const P = groupOf(p.accountId);
   return P ? J(partyReply(P), `party of ${P.members.length}${P.leader === p.accountId ? ' (leader)' : ''}`) : J(soloReply(p, build), 'solo party');
 }
@@ -861,6 +942,7 @@ function partyAccept(p, id) {
   partySeen.set(inv.sender, partySeen.get(inv.sender) || Date.now());
   persistMultiplayerParties();
   partyLog(`${p.accountId} joined ${P.id.slice(0, 8)} (leader ${P.leader}); ${P.members.length} members`);
+  partyPresence(p, P);   // DF-PARTY-PRESENCE
   return J(partyReply(P), `joined ${nameOfAcc(P.leader)}'s party (${P.members.length})`);
 }
 function partyDecline(p, b) {
@@ -872,7 +954,22 @@ function partyDecline(p, b) {
   }
   return J({}, 'party invite declined or withdrawn');
 }
-function partyLeave(p) { const P = groupOf(p.accountId); if (P) partyRemove(P, p.accountId, 'left'); return J({}, P ? 'left the party' : 'not in a party'); }
+function partyLeave(p) {
+  const P = groupOf(p.accountId);
+  if (P && P.leader !== p.accountId) partyNoteDrop(p, P);   // DF-PARTY-REJOIN
+  // The leader's game does the same one-shot leave (2-PC test Oct 25: 2.8 s after the automatic rejoin, the member
+  // stayed). Its members are put back once more, into the same leader's party.
+  if (P && P.leader === p.accountId && P.autoAt && !P.autoAgain && Date.now() - P.autoAt < 20 * 1000) {
+    for (const m of P.members) {
+      if (m === p.accountId) continue; const mp = playerOfAcc(m); if (!mp) continue;
+      mp.partyRejoin = { leader: p.accountId, from: 'the leader\'s one-shot leave', at: Date.now(), until: Date.now() + PARTY_REJOIN_TTL_MS, again: true, notBefore: Date.now() + 4000 };
+      delete mp.partyRejoinDone;
+    }
+    partyLog(`${p.accountId} (leader) left the automatic party ${Math.round((Date.now() - P.autoAt) / 1000)} s after it formed (the game's one-shot leave): the party is put back once more`);
+  }
+  if (P) partyRemove(P, p.accountId, 'left');
+  return J({}, P ? 'left the party' : 'not in a party');
+}
 function partyKick(p, m) {
   const P = groupOf(p.accountId);
   if (!P || P.leader !== p.accountId || m === p.accountId || !P.members.includes(m)) return { status: 403, json: {}, note: 'party kick: not allowed' };
@@ -1127,8 +1224,10 @@ const routes = [
     // party, and for about 3 minutes left again after every re-invite (report 18). They come home by themselves.
     // Hunts and patrols keep it (the party comes back with the leader).
     if (dest.city && prevPlaceId && !PARTY_HOME_SKIP.has(String(prevType || ''))) p.candidate.returnFrom = prevPlaceId;
-    else if (dest.city && prevPlaceId && groupOf(p.accountId) && groupOf(p.accountId).leader === p.accountId)
-      partyLog(`${p.accountId} goes back to Ramsgate after ${prevType}: the party is not pulled along (the game brings them back itself)`);
+    else if (dest.city && prevPlaceId && groupOf(p.accountId) && groupOf(p.accountId).leader === p.accountId) {
+      p.candidate.partyHome = String(prevType || '');   // DF-PARTY-REJOIN: members dropping out on this trip are put back
+      partyLog(`${p.accountId} goes back to Ramsgate after ${prevType}: the party is not pulled along (the game brings them back itself; members are put back into the party in Ramsgate)`);
+    }
     // Outside the city: ask server-211.ps1 (through a small file) to start a second server on that map.
     if (!dest.city && !joinId) {
       leavePlace(me);
@@ -1262,12 +1361,26 @@ const routes = [
     return J(wrapped(trackOut(p, id, progressOf(p).tracks[id] || {})), 'guess'); }],
   ['progression', 'POST', /^\/progression\/(?!objectives\/|tracked_objectives\/)[^/]+\/([^/]+)\/(-?\d+)\/?$/, (c) => grantTrack(c)],
   // DF-REFORGE-1147: reforge resets the weapon to level 1. The old XP is kept in reforgedXp (nothing reads it yet).
+  // DF-BANKED-XP-1147 (Oct 25, report 147): XP earned past level 20 is the weapon's banked XP. It is kept in bankedXp at
+  // the reset, and the game pays it out right after with POST /progression/purchase/<acc>/<track>/<xp> (see below).
   ['progression', 'DELETE', /^\/progression\/(?!objectives\/|tracked_objectives\/)[^/]+\/(ExperienceTrack_Weapon_[A-Za-z]+)\/?$/, (c) => {
     const p = playerFor(c.req); const pr = progressOf(p); const id = decodeURIComponent(c.match[1]);
     const cur = pr.tracks[id] || (pr.tracks[id] = { progress: 0 });
+    const banked = Math.max(0, (Number(cur.progress) || 0) - weaponMaxXp(id));
+    cur.bankedXp = (Number(cur.bankedXp) || 0) + banked;
     cur.reforgedXp = (Number(cur.reforgedXp) || 0) + (Number(cur.progress) || 0); cur.progress = 0; cur.confirmed_fremium_rank = 0; cur.confirmed_premium_rank = 0;
-    saveState(); reforgeLog(`${p.accountId}: ${id} reset to level 1 (reforged XP ${cur.reforgedXp})`);
-    return J(wrapped(trackOut(p, id, cur)), `${id} reset to level 1`);
+    saveState(); reforgeLog(`${p.accountId}: ${id} reset to level 1 (reforged XP ${cur.reforgedXp}, banked XP ${cur.bankedXp})`);
+    return J(wrapped(trackOut(p, id, cur)), `${id} reset to level 1, ${cur.bankedXp} XP banked`);
+  }],
+  // DF-BANKED-XP-1147: the game spends the banked XP on the reforged weapon (amount = the XP past level 20 it saw).
+  // Paid once: never more than what was banked at the reset; a repeated call pays the rest (usually nothing).
+  ['progression', 'POST', /^\/progression\/purchase\/[^/]+\/(ExperienceTrack_Weapon_[A-Za-z]+)\/(\d+)\/?$/, (c) => {
+    const p = playerFor(c.req); const pr = progressOf(p); const id = decodeURIComponent(c.match[1]);
+    const cur = pr.tracks[id] || (pr.tracks[id] = { progress: 0 });
+    const asked = Math.max(0, Number(c.match[2]) || 0), bank = Math.max(0, Number(cur.bankedXp) || 0), paid = Math.min(asked, bank);
+    if (paid > 0) { cur.progress = (Number(cur.progress) || 0) + paid; cur.bankedXp = bank - paid; cur.confirmed_date = isoNow(); saveState(); }
+    reforgeLog(`${p.accountId}: ${id} banked XP paid ${paid} of ${asked} asked (bank ${bank} -> ${Number(cur.bankedXp) || 0}), now ${cur.progress}`);
+    return J(wrapped(trackOut(p, id, cur)), `${id} banked XP +${paid}${paid < asked ? ` (asked ${asked}, banked ${bank})` : ''}`);
   }],
   ['progression', 'PUT', /^\/progression\/(?!objectives\/|tracked_objectives\/)[^/]+\/([^/]+)\/(-?\d+)\/?$/, (c) => grantTrack(c)],
   ['progression', 'POST', /^\/progression\/[^/]+\/([^/]+)\/(\d+)\/confirm\/([^/]+)\/?$/, (c) => { const p = playerFor(c.req); const pr = progressOf(p); const id = decodeURIComponent(c.match[1]);
@@ -1373,7 +1486,8 @@ const bounties1147 = require('./bounties1147').create({playerFor,bearerOf,sessio
 const equipment1147 = require('./equipment1147').create({playerFor,bearerOf,sessions,getPlayers:()=>Object.values(state.players||{}),saveState,next:c=>bounties1147.handle(c)});
 const dyes1147 = require('./dyes1147').create({playerFor,bearerOf,sessions,inventoryOf,saveState,next:c=>equipment1147.handle(c)});
 const storeRams1147 = require('./store-rams1147').create({playerFor,bearerOf,sessions,inventoryOf,saveState,loadCapture,next:c=>dyes1147.handle(c)}); // DF-STORE-RAMS-1147
-const modes1147 = require('./modes1147').create({playerFor,bearerOf,sessions,getPlayers:()=>Object.values(state.players||{}),saveState,next:c=>storeRams1147.handle(c)});
+const transmogDrops1147 = require('./transmog-drops1147').create({playerFor,bearerOf,sessions,next:c=>storeRams1147.handle(c)}); // DF-TRANSMOG-DROPS-1147
+const modes1147 = require('./modes1147').create({playerFor,bearerOf,sessions,getPlayers:()=>Object.values(state.players||{}),saveState,next:c=>transmogDrops1147.handle(c)});
 
 
 // KK-LOADOUTS-1147-R1
@@ -1612,5 +1726,17 @@ function prestigeRanks(j) {
     x.requirements = [{ rank_id: 0, xp_required: 0 }];
     for (let r = 1; r <= 100; r++) x.requirements.push({ rank_id: r, xp_required: 1 });
   }
+}
+// DF-BANKED-XP-1147: XP for level 20 of a weapon track (sum of its ranks in the progression config; 27,775 in 1.14.7).
+const weaponMaxCache = new Map();
+function weaponMaxXp(id) {
+  if (weaponMaxCache.has(id)) return weaponMaxCache.get(id);
+  let total = 27775;
+  try {
+    const j = loadCapture('Progression/Config.json'); const paths = j && ((j.payload && j.payload.paths) || j.paths);
+    const x = Array.isArray(paths) ? paths.find((q) => q && q.progression_id === id) : null;
+    if (x && Array.isArray(x.requirements) && x.requirements.length) { const t = x.requirements.reduce((a, r) => a + (Number(r && r.xp_required) || 0), 0); if (t > 0) total = t; }
+  } catch (e) { /* keep the default */ }
+  weaponMaxCache.set(id, total); return total;
 }
 function reforgeLog(msg) { try { fs.appendFileSync(path.join(LOG_DIR, 'reforge.log'), `${new Date().toISOString()} ${msg}\n`); } catch (e) { /* logs are optional */ } }

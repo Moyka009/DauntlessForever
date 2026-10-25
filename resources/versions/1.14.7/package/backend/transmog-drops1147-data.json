@@ -1,0 +1,14 @@
+{
+  "note": "Transmog Stone drops (DF-TRANSMOG-DROPS-1147). Every number here can be changed; the backend reads this file at start. chance is 0 to 1 (0.35 = 35%).",
+  "catalogId": "CURRENCY_TOKEN_TRANSMOG",
+  "kill": { "chance": 0.35, "stones": 1 },
+  "killNote": "A behemoth killed on a hunting ground or patrol (the game's PlayerLoot grant with one kill).",
+  "missionEnd": {
+    "ESCALATION": { "chance": 1, "stones": 1 },
+    "TRIALS": { "chance": 1, "stones": 1 },
+    "other": { "chance": 0.35, "stones": 1 }
+  },
+  "missionEndNote": "The end of an escalation (its last behemoth), a trial, or another mission such as a pursuit or story mission (the game's End of Mission grant). The hunt type comes from the player's own island hunt.",
+  "heroic": { "pattern": "Heroic", "stones": 2 },
+  "heroicNote": "When the hunt id contains this word (for example CR19_PlayerHunt_Escalation_Randall_Heroic), a drop gives this many stones instead."
+}

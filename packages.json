@@ -2,19 +2,19 @@
     "packages":  [
                      {
                          "id":  "1.6.2",
-                         "packageVersion":  "2026-10-23",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-23.zip",
-                         "sha256":  "d1ddb1646ad9cf7f5626d67bb1a77fc30f4c1426400b1a2243959e0bc4a58f59",
-                         "date":  "2026-10-23",
-                         "note":  "Crowns added on the Inventory page now show in game (add them again if one never showed)"
+                         "packageVersion":  "2026-10-25",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-25.zip",
+                         "sha256":  "b64ea54e1277613e27af88b9775242bf0088d26cb3e591fe4a927963ce86031e",
+                         "date":  "2026-10-25",
+                         "note":  "Send my logs includes the loader log and Windows crash records"
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-23",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-23.zip",
-                         "sha256":  "4a8ba2f496412d3c04f8e987cd9c750ead92d1991beeb305315d032e0c388334",
-                         "date":  "2026-10-23",
-                         "note":  "Inventory page: gear and cosmetics for 1.14.7 (hair, face, crowns, gliders, titles, skins, dyes, emotes)"
+                         "packageVersion":  "2026-10-25.2",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-25.2.zip",
+                         "sha256":  "0dc582bdac01e7b31a313a4f43a1fa38bda0bd35165f5830729e9a3aaba8b909",
+                         "date":  "2026-10-25",
+                         "note":  "parties stay together, crash guard 3, hunt servers without the GPU, Rams store, banked reforge XP, Transmog Stones"
                      }
                  ],
     "launcher":  {

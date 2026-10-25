@@ -27,7 +27,9 @@ $GamePaks = @(
     [pscustomobject]@{ Name = 'zzzz_Mega1147_HuntPass_P.pak'; Hash = '7D64B5DCFB133FD19FBB54142D1C0F2713C954721A9D01B981BF9A4B3C91B7B1'; Old = @(); What = 'Hunt Pass seasons (KombatKing)' },
     [pscustomobject]@{ Name = 'zzzzzzzzzzzzzzzz_HammerReload1147_P.pak'; Hash = 'F8A1449FD2C70FE915B455BEAF4428AE128D0C163AAF9A2E66554C62B2451E34'; Old = @(); What = 'War Hammer reload fix (KombatKing)' },
     # KombatKing's Item Expiry R1 (AGPL-3.0, source\KombatKing-1147-Oct18-source.zip): Season 11A potions and the Springtide egg token do not expire
-    [pscustomobject]@{ Name = 'zzzzzzzzzzzzzzzz_ItemExpiry1147_P.pak'; Hash = 'C71F64758B7B70DC523DA66FCEC47319B330CC8D72E425AC94265FF4C15C029D'; Old = @(); What = 'Item expiry fix (KombatKing)' }
+    [pscustomobject]@{ Name = 'zzzzzzzzzzzzzzzz_ItemExpiry1147_P.pak'; Hash = 'C71F64758B7B70DC523DA66FCEC47319B330CC8D72E425AC94265FF4C15C029D'; Old = @(); What = 'Item expiry fix (KombatKing)' },
+    # DF-STORE-RAMS-ICON (Oct 25): currency_table row id_currency_event_01 (the Rams store's price label) with the Rams icon and name
+    [pscustomobject]@{ Name = 'zzzzzzzzzzzzzzzz_RamsStore1147_P.pak'; Hash = '0AD4AE2278F13FA5C27BCE4A1B2090DBC1957D2FE26D1B45A9CD5C2C6B2C97AB'; Old = @(); What = 'Rams store price icon' }
 )
 $ExeRel       = 'Archon\Binaries\Win64\Dauntless-Win64-Shipping.exe'
 $CapturesUrl  = 'https://github.com/EisigesEis/DauntlessEndpointDocumentation/archive/refs/heads/main.zip'

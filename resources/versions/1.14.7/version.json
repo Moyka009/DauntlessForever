@@ -43,7 +43,7 @@
                  },
     "package":  {
                     "dir":  "package",
-                    "packageVersion":  "2026-10-23",
+                    "packageVersion":  "2026-10-25.2",
                     "setup":  "tools/setup.ps1",
                     "uninstallArgs":  [
                                           "-Uninstall"
@@ -92,6 +92,10 @@
                                            {
                                                "rel":  "Archon/Content/Paks/zzzzzzzzzzzzzzzz_ItemExpiry1147_P.pak",
                                                "sha256":  "C71F64758B7B70DC523DA66FCEC47319B330CC8D72E425AC94265FF4C15C029D"
+                                           },
+                                           {
+                                               "rel":  "Archon/Content/Paks/zzzzzzzzzzzzzzzz_RamsStore1147_P.pak",
+                                               "sha256":  "0AD4AE2278F13FA5C27BCE4A1B2090DBC1957D2FE26D1B45A9CD5C2C6B2C97AB"
                                            }
                                        ],
                     "setupDoneFiles":  [

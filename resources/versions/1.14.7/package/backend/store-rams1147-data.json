@@ -1,28 +1,341 @@
 {
-  "note": "Rams store offers (step 1: one test dye). price is in Rams (CURRENCY_NOTES). Prices for step 2 follow the Dauntless Revived table.",
-  "disabledFreePacks": [
-    "dyes1147_all_dyes"
-  ],
-  "disabledFreePacksNote": "Free packs taken off the store so dyes are bought with Rams. Items players already own are kept. Remove an id here to bring that pack back.",
-  "offers": [
+ "note": "Rams store (DF-STORE-RAMS-1147). Every price is in Rams (CURRENCY_NOTES). Prices follow the Dauntless Revived table (dyes 5,000; weapons 2,500; armour, banners and lanterns 750; sigils and flares 250); emotes are not in that table (1,000 here). Change any number here; the backend reads this file at start.",
+ "labelCurrencyId": "id_currency_event_01",
+ "labelCurrencyNote": "The 1.14.7 client only draws prices in platinum, cell dust, steel marks, gilded marks and event_01 (id_currency_notes shows as platinum -1). Offers are labelled with this id, the store balance reports the player's Rams under it, and every purchase is charged in Rams. displayDescription always says the price in Rams.",
+ "labelTests": [],
+ "labelTestsNote": "Label test only: one tile labelled with cell dust, to compare with the event_01 tiles in game. Empty this list when the label is decided.",
+ "offerIdPrefix": "sku_",
+ "offerIdPrefixNote": "Offer id = this + lowercase catalog id. sku_ is the client's own store picture key (UI/Store/StoreItemsTable), so items that have a store picture show it.",
+ "onlyWithPicture": true,
+ "onlyWithPictureNote": "true: only items with a store picture (store-rams1147-pictures.json) are sold; false: every item, default tile for the rest.",
+ "itemTags": [
+  {
+   "idPattern": "^WP_AC_",
+   "tags": [
+    "skin_weapon_ac"
+   ]
+  },
+  {
+   "idPattern": "^WP_EB_",
+   "tags": [
+    "skin_weapon_eb"
+   ]
+  },
+  {
+   "idPattern": "^WP_DP_",
+   "tags": [
+    "skin_weapon_dp"
+   ]
+  },
+  {
+   "idPattern": "^WP_IH_",
+   "tags": [
+    "skin_weapon_ih"
+   ]
+  },
+  {
+   "idPattern": "^WP_GA_",
+   "tags": [
+    "skin_weapon_ga"
+   ]
+  },
+  {
+   "idPattern": "^WP_MS_",
+   "tags": [
+    "skin_weapon_ms"
+   ]
+  },
+  {
+   "idPattern": "^WP_CB_",
+   "tags": [
+    "skin_weapon_cb"
+   ]
+  },
+  {
+   "idPattern": "^BNC_FABRIC_",
+   "tags": [
+    "personality_fabric"
+   ]
+  },
+  {
+   "idPattern": "^BNC_(MESH|STANDARD|ANIMATION|VFX)_",
+   "tags": [
+    "personality_standard"
+   ]
+  }
+ ],
+ "itemTagsNote": "Store tabs: the client shows an offer under a tab when its tags hold that tab's tag (UI/Store/store_view_model). Category tags below carry the rest: dye_armour, skin_armour, skin_lantern, social_emote, personality_flaresigil, cells_fusion, supplies_supplies.",
+ "includeUnnamed": false,
+ "includeUnnamedNote": "Items whose catalog name is only their id (no English name in catalog-1147.json) are left out unless this is true.",
+ "excludeIds": [
+  "DYE_RESTRICTED_ORANGE04_GLOWING_DURABLE",
+  "BNC_VFX_001",
+  "LT_TEST",
+  "QI_BASIC_FLARE_DURABLE",
+  "AR_KAT_ARMS",
+  "AR_KAT_CHEST",
+  "AR_KAT_HELM",
+  "AR_KAT_LEGS"
+ ],
+ "excludeIdPatterns": [
+  "^GD_FRAME_",
+  "^MP_PUFFLEHOP_",
+  "_TEST(_|$)",
+  "^AR_UNEQUIPPED",
+  "^TITLE_(FOUNDER_|PARTNER|TRANSLATOR_|TWITCHPRIME_|RAMSGUARD_SUPPORTER_|10B_COMMUNITY|TEAMCAPTAIN)"
+ ],
+ "excludeIdPatternsNote": "The TITLE_ line keeps titles that were given for something (founders, partners, translators, Twitch Prime, Ramsguard supporters, community, team captain) out of the shop. Remove a name from it to sell that title too.",
+ "excludeNamePatterns": [
+  "^~DNT~",
+  "\\btest\\b",
+  "^Unequipped$"
+ ],
+ "categories": [
+  {
+   "key": "dye",
+   "name": "Dye",
+   "source": "^dyes_item_catalog\\.uasset$",
+   "idPattern": "^DYE_",
+   "price": 5000,
+   "tags": [
+    "webstore",
+    "store_tab_style",
+    "dyes",
+    "dye_armour",
+    "cat_item_armour_dye"
+   ]
+  },
+  {
+   "key": "armour",
+   "name": "Armour transmog",
+   "source": "^armour_cosmetic_catalog\\.uasset$",
+   "idPattern": "^AR_",
+   "price": 750,
+   "tags": [
+    "webstore",
+    "store_tab_style",
+    "cat_item_armour_transmog",
+    "cat_item_armour",
+    "skin_armour"
+   ]
+  },
+  {
+   "key": "weapon",
+   "name": "Weapon transmog",
+   "source": "^weapon_[a-z]+_cosmetic_catalog\\.uasset$",
+   "idPattern": "^WP_",
+   "price": 2500,
+   "tags": [
+    "webstore",
+    "store_tab_style",
+    "store_tab_weapons",
+    "cat_item_weapon_skin"
+   ]
+  },
+  {
+   "key": "emote",
+   "name": "Emote",
+   "source": "^emotes_catalog\\.uasset$",
+   "idPattern": "^EM_",
+   "price": 1000,
+   "tags": [
+    "webstore",
+    "store_tab_style",
+    "cat_item_emote",
+    "social_emote"
+   ]
+  },
+  {
+   "key": "lantern",
+   "name": "Lantern",
+   "source": "^lantern_cosmetic_catalog\\.uasset$",
+   "idPattern": "^LT_",
+   "price": 750,
+   "tags": [
+    "webstore",
+    "store_tab_hunting",
+    "cat_item_lantern_skin",
+    "cat_item_lantern",
+    "skin_lantern"
+   ]
+  },
+  {
+   "key": "flare",
+   "name": "Flare",
+   "source": "^flare_catalog\\.uasset$",
+   "idPattern": "^QI_FLARE_",
+   "price": 250,
+   "tags": [
+    "webstore",
+    "store_tab_hunting",
+    "cat_item_flare",
+    "personality_flaresigil"
+   ]
+  },
+  {
+   "key": "banner",
+   "name": "Banner",
+   "source": "^banner_customization_catalog\\.uasset$",
+   "idPattern": "^BNC_(FABRIC|MESH|STANDARD|ANIMATION|VFX)_",
+   "price": 750,
+   "tags": [
+    "webstore",
+    "store_tab_hunting",
+    "cat_item_banner"
+   ]
+  },
+  {
+   "key": "sigil",
+   "name": "Sigil",
+   "source": "^banner_customization_catalog\\.uasset$",
+   "idPattern": "^BNC_SIGIL_",
+   "price": 250,
+   "tags": [
+    "webstore",
+    "store_tab_hunting",
+    "cat_item_banner_sigil",
+    "cat_item_banner",
+    "personality_flaresigil"
+   ]
+  },
+  {
+   "key": "title",
+   "name": "Title",
+   "source": "^title_catalog\\.uasset$",
+   "idPattern": "^TITLE_",
+   "price": 500,
+   "tags": [
+    "webstore",
+    "personality_character",
+    "cat_item_title"
+   ]
+  },
+  {
+   "key": "emoji",
+   "name": "Emoji",
+   "source": "^emojis_catalog\\.uasset$",
+   "idPattern": "^EJ_",
+   "price": 250,
+   "tags": [
+    "webstore",
+    "social_emojis",
+    "cat_item_emoji"
+   ]
+  },
+  {
+   "key": "facehair",
+   "name": "Facial hair",
+   "source": "^character_creator_catalog\\.uasset$",
+   "idPattern": "^CC_FACEHAIR_",
+   "price": 750,
+   "tags": [
+    "webstore",
+    "personality_character",
+    "cat_item_hair_style"
+   ]
+  },
+  {
+   "key": "toy",
+   "name": "Toy",
+   "source": "^toys_catalog\\.uasset$",
+   "idPattern": "^TY_",
+   "price": 250,
+   "tags": [
+    "webstore",
+    "personality_flaresigil",
+    "cat_item_toy"
+   ]
+  }
+ ],
+ "extraOffers": [
+  {
+   "sku": "storerams1147_fusion_slot_2",
+   "name": "Middleman Fusion Slot 2",
+   "description": "Permanently unlock this additional cell fusion slot.",
+   "price": 5000,
+   "tags": [
+    "exchange_vendor_slot_2",
+    "webstore",
+    "cells_fusion"
+   ],
+   "entitlement": "exchange_slot_2"
+  },
+  {
+   "sku": "storerams1147_fusion_slot_3",
+   "name": "Middleman Fusion Slot 3",
+   "description": "Permanently unlock this additional cell fusion slot.",
+   "price": 10000,
+   "tags": [
+    "exchange_vendor_slot_3",
+    "webstore",
+    "cells_fusion"
+   ],
+   "entitlement": "exchange_slot_3"
+  },
+  {
+   "sku": "storerams1147_patrol_keys_5",
+   "name": "5 Patrol Keys",
+   "description": "Five Patrol Keys.",
+   "price": 1000,
+   "repeatable": true,
+   "tags": [
+    "webstore",
+    "supplies_supplies",
+    "store_tab_supplies"
+   ],
+   "items": [
     {
-      "sku": "storerams1147_test_dye",
-      "name": "Heatwave Dye",
-      "description": "Test offer: costs 500 Rams.",
-      "price": 500,
-      "tags": [
-        "webstore",
-        "dyes",
-        "dye_armour",
-        "cat_item_armour_dye"
-      ],
-      "items": [
-        {
-          "catalogId": "DYE_ASHORANGE_DURABLE",
-          "quantity": 1,
-          "kind": "stack"
-        }
-      ]
+     "catalogId": "TOKEN_DAILY_PATROL_BONUS_PURCHASED",
+     "quantity": 5,
+     "kind": "stack"
     }
-  ]
+   ]
+  },
+  {
+   "sku": "storerams1147_premium_bounty_tokens_5",
+   "name": "5 Premium Bounty Tokens",
+   "description": "Five Premium Bounty Tokens.",
+   "price": 1500,
+   "repeatable": true,
+   "tags": [
+    "webstore",
+    "supplies_supplies",
+    "store_tab_supplies"
+   ],
+   "items": [
+    {
+     "catalogId": "TOKEN_BOUNTY_DRAFT_PREMIUM",
+     "quantity": 5,
+     "kind": "stack"
+    }
+   ]
+  },
+  {
+   "sku": "storerams1147_ace_chips_10",
+   "name": "10 Ace Chips",
+   "description": "Ten Ace Chips (speed up a Middleman fusion).",
+   "price": 1000,
+   "repeatable": true,
+   "tags": [
+    "webstore",
+    "supplies_supplies",
+    "store_tab_supplies"
+   ],
+   "items": [
+    {
+     "catalogId": "CURRENCY_TOKEN_EXCHANGE_SPEED_UP",
+     "quantity": 10,
+     "kind": "stack"
+    }
+   ]
+  }
+ ],
+ "disabledFreePacks": [
+  "dyes1147_all_dyes",
+  "feature_25_chips_keys_premium",
+  "bundle_reward_login_daily",
+  "mega1147_exchange_slot_2",
+  "mega1147_exchange_slot_3"
+ ],
+ "disabledFreePacksNote": "Free claims switched off: All Dyes Pack, the Ace Chips/Patrol Keys/Premium Bounty Tokens pack, the Daily Ramsgate Gift and the free Middleman Fusion Slots. Players keep what they already claimed. Remove an id to bring a pack back. Lady Luck bundles are not touched."
 }
