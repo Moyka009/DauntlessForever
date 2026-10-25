@@ -46,7 +46,7 @@
     else if (S.phase === 'creating') sub = t('The game is open on its own: create your Slayer, then close the game and Forever puts you in a world.');
     else if (S.phase === 'needHost') sub = t('No world is open and nobody who is asking has run the host check. Run it now (20 s) and host, or wait for a world.');
     else if (S.world) sub = (S.helper ? (S.ownGame ? t('This PC runs the world; your game is in it. ') : t('Host Mode: this PC runs a world for others, no game here. ')) : '') + t('{host}\'s {mode} world, {n} player(s), hunts {h}/{max} (8 per hunt)', { host: S.world.hostName || '', mode: S.world.mode || '', n: S.world.players, h: (S.world.hunts || []).length, max: S.world.maxHunts || '?' }) + (S.standbyName ? t(', standby: {name}', { name: S.standbyName }) : '');
-    else if (S.helper && S.phase === 'hosting') sub = t('Host Mode: starting a world for others (no game on this PC)');
+    else if (S.helper && S.phase === 'hosting') sub = S.autoPlay ? t('Starting your world... your game opens by itself in a moment (about 30 s).') : t('Host Mode: starting a world for others (no game on this PC)');
     if (S.role === 'standby' && S.standby) sub += ' - ' + (S.standby.injected ? t('your backup copy is ready to take over') : S.standby.prewarmed ? t('your backup copy is starting') : t('getting the hunt from the host'));
     if (S.hostClosing) sub += ' - ' + t('the host is leaving in {s} s', { s: Math.ceil((S.hostClosing.inMs || 0) / 1000) });
     if (S.noStandby && (S.phase === 'playing' || S.phase === 'hosting')) sub += ' - ' + t('no standby: if the host leaves, the hunt ends. Run the host check to help.');
@@ -140,7 +140,7 @@
     if (fresh && fresh.exists && fresh.created) { stat(f, t('Name'), fresh.name); stat(f, t('Slayer level'), String(fresh.level)); stat(f, t('Weapons at level 20'), `${fresh.l20} / 7`); stat(f, t('Reforges'), String(fresh.reforges)); stat(f, t('Gear score'), String(fresh.score), true); }
     else if (fresh && fresh.exists) stat(f, t('Status'), t('made - not played yet'));
     else stat(f, t('Status'), fresh && fresh.error ? fresh.error : t('none yet - made when you press Play'));
-    const bf = el('button', stepDone ? 'primary-sm' : 'ghost', t('Play Forever - fresh character')); bf.id = 'fv-play-fresh'; bf.disabled = !!S.missing || (S.phase !== 'off' && !(S.helper && S.phase === 'hosting' && !S.ownGame));
+    const bf = el('button', stepDone ? 'primary-sm' : 'ghost', t('Play Forever - fresh character')); bf.id = 'fv-play-fresh'; bf.disabled = !!S.missing || !!S.autoPlay || (S.phase !== 'off' && !(S.helper && S.phase === 'hosting' && !S.ownGame));   // DF-FV-AUTOPLAY: the game opens by itself
     bf.onclick = async () => { const r = await L.foreverPlay('fresh'); if (!r.ok) note(r.error, true); };
     f.append(bf);
     // Host Mode card: this PC runs a world for others and plays in it with the fresh character; the game can close and reopen
@@ -156,7 +156,7 @@
       a.append(bh);
       if (!hasScore) a.append(el('p', 'small', t('Run the host check (above) and press Send first.')));
     } else {
-      a.append(el('p', 'small', S.ownGame ? (S.away ? t('Your game is open in {host}\'s world (where the people are); your own world keeps running here.', { host: S.away.hostName || '?' }) : t('Your game is open in your world. Close it whenever you like; the world stays up.')) : t('Your world is running. Press Play Forever - fresh character: your game goes where the people are, or into your own world when that is it. The world keeps running when you close your game.')));
+      a.append(el('p', 'small', S.ownGame ? (S.away ? t('Your game is open in {host}\'s world (where the people are); your own world keeps running here.', { host: S.away.hostName || '?' }) : t('Your game is open in your world. Close it whenever you like; the world stays up.')) : (S.autoPlay ? t('Your world is starting. Your game opens in it by itself, no need to press Play again.') : t('Your world is running. Press Play Forever - fresh character: your game goes where the people are, or into your own world when that is it. The world keeps running when you close your game.'))));
     }
   }
   async function refreshBoard() { try { await L.foreverBoard(); } catch {} try { await L.foreverCards(); } catch {} try { await L.foreverLeaderboard(); } catch {} }

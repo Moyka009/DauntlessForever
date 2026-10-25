@@ -365,7 +365,7 @@ async function startHost(rules) {
     run.then(() => { if (S.phase !== 'off' && !folding && S.helper && !oldWorldPending) stop('Host Mode ended'); else if (!S.helper) log('the world this PC hosted is closed'); });   // after a step-down the world closing is expected: the game plays on elsewhere
     startHostHelpers();
     hostBeatLoop();
-    waitForOwnWorld().then((ok) => { if (!ok || S.phase !== 'hosting') return; if (S.autoPlay) { S.autoPlay = false; log('your world is up: opening your game in it'); playInOwnWorld().catch((e) => log('could not open your game: ' + e.message, true)); } else log('your world is up: press Play Forever - fresh character to play in it'); });
+    waitForOwnWorld().then((ok) => { if (!ok || S.phase !== 'hosting') return; if (S.autoPlay) { S.autoPlay = false; push(); log('your world is up: opening your game in it'); playInOwnWorld().catch((e) => log('could not open your game: ' + e.message, true)); } else log('your world is up: press Play Forever - fresh character to play in it'); });
     return;
   }
   run = ctx.runner.runVisible(FV + ':host', 'host', script, ['-Public'], 'Dauntless Forever - hosting a world (keep open)', { closeWhenDone: true, env: ENV(), cwd: dir() });   // the window closes by itself when the game ends
@@ -893,7 +893,7 @@ async function cards() {
 function publicState() {
   return { allowed: !!S.allowed, setup: setupState, stale: !!S.stale, cards: S.cards || null, phase: S.phase, mode: S.mode, role: S.role, world: S.world, why: S.why || '', error: S.error || '', season: S.season || 'S1',
     standbyName: S.standbyName || '', standby: standby ? { prewarmed: standby.prewarmed, ready: standby.ready, adopted: standby.adopted, code: standby.code } : null,
-    hostClosing: S.hostClosing || null, noStandby: !!S.noStandby, character: S.character || null, clientDll: !!S.clientDll, missing: missing(), score: S.score || null, check: S.check || null, board: S.board || null, leaderboard: S.leaderboard || null, helper: !!S.helper, ownGame: !!S.ownGame, away: S.away || null, pings: (() => { try { return ctx.social.relayPings ? ctx.social.relayPings() : {}; } catch { return {}; } })(), log: logLines.slice(-60) };
+    hostClosing: S.hostClosing || null, noStandby: !!S.noStandby, character: S.character || null, clientDll: !!S.clientDll, missing: missing(), score: S.score || null, check: S.check || null, board: S.board || null, leaderboard: S.leaderboard || null, helper: !!S.helper, autoPlay: !!S.autoPlay, ownGame: !!S.ownGame, away: S.away || null, pings: (() => { try { return ctx.social.relayPings ? ctx.social.relayPings() : {}; } catch { return {}; } })(), log: logLines.slice(-60) };
 }
 function init(c) {
   ctx = c;

@@ -18,14 +18,14 @@
                      }
                  ],
     "launcher":  {
-                     "version":  "0.3.0",
+                     "version":  "0.3.1",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "Forever Hunts beta: new Forever tab",
+                     "notes":  "Play Forever: shows that your game opens by itself while your world starts",
                      "date":  "2026-10-25",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.3.0.asar",
-                                 "sha256":  "eeb80883b4c8d0df65a2b1025f95e13e4978573c818ae71c195ac1720f194471",
-                                 "size":  8617660,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.3.1.asar",
+                                 "sha256":  "b438cbd9c68fa9dc2907879bfa2327869977aa4cd47d0134d0ff84b626e03ad0",
+                                 "size":  8617957,
                                  "minShell":  "0.2.4"
                              }
                  }
