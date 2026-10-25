@@ -7,12 +7,20 @@ const fail=(status,message)=>{const e=Error(message);e.status=status;throw e;};
 const ok=payload=>({status:200,json:{code:null,message:'OK',payload},note:'modes1147: native season / saved progress'});
 function unpack(n){if(!Number.isSafeInteger(n)||n<=PACK||n>PACK+MAX_LEVEL)fail(400,'Invalid 1.14.7 Gauntlet season/level');return n-PACK;}
 function huntUrl(id){const h=hunts[id];if(!h)return'';const m=h.maps[0];return m.map+'?MaxPlayers='+h.max+(h.behemoth?'?MonsterClass='+h.behemoth:'')+(m.tod?'?TODClass='+m.tod:'')+'?HuntID='+id+(h.game?'?game='+h.game:'');}
+// DF-TRIAL-BOSS-1147: 1..22 from the Game Rule (game-rules1147 sets DF_TRIAL_BOSS); 0 = this week's boss
+function trialPick(){
+ if(process.env.DF_VER==='forever'||/[\\/]versions[\\/]forever[\\/]/i.test(__dirname))return 0;
+ const n=Number(process.env.DF_TRIAL_BOSS)||0;return Number.isInteger(n)&&n>=1&&n<=22?n:0;
+}
 function destination(b){
  if(b.gameMode!=='ISLAND')return null;
  if(b.gameType==='TRIALS'){
-  const id=Array.isArray(b.hunts)&&b.hunts[0];if(!hunts[id]||id==='CR19_MatchmakerHunt_Gauntlet')return null;
-  // Use the client's scheduled ID. Never choose a different week's opponent here.
-  return{city:false,label:'ISLAND/TRIALS '+(b.playerHuntId||id),url:huntUrl(id)};
+  let id=Array.isArray(b.hunts)&&b.hunts[0];if(!hunts[id]||id==='CR19_MatchmakerHunt_Gauntlet')return null;
+  // The client's scheduled ID, unless the Game Rule "Trial boss" picks one (DF-TRIAL-BOSS-1147): same tier (Hard or
+  // Elite), the picked boss. Never in Forever worlds (their own install) - those always fight the week's boss.
+  const pick=trialPick();
+  if(pick){const m=/^(Arena_MatchmakerHunt_(?:Hard|Elite)_New_)\d{3}$/.exec(id),alt=m&&m[1]+String(pick).padStart(3,'0');if(alt&&hunts[alt])id=alt;}
+  return{city:false,label:'ISLAND/TRIALS '+(id!==b.hunts[0]?id+' (picked)':(b.playerHuntId||id)),url:huntUrl(id)};
  }
  if(b.gameType!=='GAUNTLET')return null;
  unpack(b.gauntlet_level);

@@ -17,10 +17,23 @@ function readSettings(root,hosting){
   if(!def||!def.choices.some(c=>String(c[0])===m[2]))throw error('Invalid Game Rules setting: '+(m?m[1]:'line'));
   settings[m[1]]=Number(m[2]);
  }
+ // DF-FOREVER-RULES (Oct 25): a Forever world (its own install) always plays standard rules, whatever the files say,
+ // with 40 extra loadout slots. Weekend events come from data/forever_event.txt (same key=value lines, written for the
+ // whole world, never by the player); only the rate rules and the free_* switches can be changed there.
+ if(process.env.DF_VER==='forever'||/[\\/]versions[\\/]forever[\\/]?$/i.test(path.resolve(root))){
+  for(const r of defs.rules)if(r.key!=='forever_hunts')settings[r.key]=['free_crafting','rare_core_kill','free_platinum','trial_boss'].includes(r.key)?0:r.key==='host_rules'?1:1;
+  settings.extra_loadout_slots=40;settings.trial_boss=0;
+  const ev=path.join(root,'data/forever_event.txt'),EVENT=new Set(['universal_xp','weapon_xp','pass_xp','mastery_xp','materials','rams','weapon_merits','exploration_merits','rare_cores','rare_core_kill','free_crafting','free_platinum']);
+  if(fs.existsSync(ev))for(const line of fs.readFileSync(ev,'utf8').replace(/^\uFEFF/,'').split(/\r?\n/)){
+   const m=/^\s*([a-z_]+)\s*=\s*([0-9.]+)\s*$/.exec(line),def=m&&EVENT.has(m[1])&&defs.rules.find(r=>r.key===m[1]);
+   if(def&&def.choices.some(c=>String(c[0])===m[2]))settings[m[1]]=Number(m[2]);
+  }
+  return Object.freeze(settings);
+ }
  // DF-HOSTRULES: with friends the host's own rules apply ("When you host" = Use my rules, the default); games open to
  // everyone (DF_PUBLIC_GAME=1: Allow randoms, Play online) and "Standard rules" reset them to normal
  const standard=hosting&&(process.env.DF_PUBLIC_GAME==='1'||settings.host_rules===0);
- if(standard)for(const key of Object.keys(settings))if(key!=='extra_loadout_slots'&&key!=='host_rules'&&key!=='forever_hunts'/*DF-FOREVERHUNTS-1147*/)settings[key]=['free_crafting','rare_core_kill','free_platinum'].includes(key)?0:1; // DF-LOADOUT-SLOTS: kept when hosting (only adds slots)
+ if(standard)for(const key of Object.keys(settings))if(key!=='extra_loadout_slots'&&key!=='host_rules'&&key!=='forever_hunts'/*DF-FOREVERHUNTS-1147*/)settings[key]=['free_crafting','rare_core_kill','free_platinum','trial_boss'/*DF-TRIAL-BOSS-1147*/].includes(key)?0:1; // DF-LOADOUT-SLOTS: kept when hosting (only adds slots)
  return Object.freeze(settings);
 }
 function create(root,options={}){
@@ -28,7 +41,7 @@ function create(root,options={}){
  const bind=options.bind??(arg('--bind')||process.env.RECORDER_BIND||'127.0.0.1');
  const hosting=options.hosting??(process.env.DF_HOSTING==='1'||!['127.0.0.1','::1','localhost'].includes(bind)||!!(arg('--public')||process.env.RECORDER_PUBLIC_HOST));
  const settings=readSettings(root,hosting);
- process.env.DF_EXTRA_LOADOUT_SLOTS=String(settings.extra_loadout_slots||0); // DF-LOADOUT-SLOTS: read by loadouts-fix1147
+ process.env.DF_EXTRA_LOADOUT_SLOTS=String(settings.extra_loadout_slots||0); process.env.DF_TRIAL_BOSS=String(settings.trial_boss||0); // DF-TRIAL-BOSS-1147: read by modes1147 // DF-LOADOUT-SLOTS: read by loadouts-fix1147
  const data=JSON.parse(fs.readFileSync(path.join(__dirname,'game-rules1147-data.json'),'utf8'));
  const materials=new Set(data.materials),kills=new Set(data.killTokens);
  const factor=id=>id==='CURRENCY_NOTES'?settings.rams:id==='CURRENCY_PJM_WEAPON'?settings.weapon_merits:id==='CURRENCY_PJM_AIRSHIP'?settings.exploration_merits:id===data.rareCore?settings.rare_cores:materials.has(id)?settings.materials:1;

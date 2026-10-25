@@ -1,439 +1,541 @@
 {
-  "_comment": "1.14.7 Game Rules. Launcher writes choices to data/rules.txt. Backend reads them at startup. All native gameplay checks remain pending.",
-  "rules": [
-    {
-      "key": "universal_xp",
-      "env": "RULE_UNIVERSAL_XP",
-      "title": "Universal progression rate",
-      "blurb": "Applies to recognized player, weapon, Hunt Pass and mastery progression grants. Does not change Escalation saves.",
-      "default": "1",
-      "tested": false,
-      "choices": [
-        [
-          "0.5",
-          "0.5x"
-        ],
-        [
-          "1",
-          "1x"
-        ],
-        [
-          "1.5",
-          "1.5x"
-        ],
-        [
-          "2",
-          "2x"
-        ],
-        [
-          "3",
-          "3x"
-        ],
-        [
-          "5",
-          "5x"
-        ]
-      ]
-    },
-    {
-      "key": "weapon_xp",
-      "env": "RULE_WEAPON_XP",
-      "title": "Weapon XP speed",
-      "blurb": "Multiplies recognized weapon ExperienceTrack grants. Requires the game server to send those grants.",
-      "default": "1",
-      "tested": false,
-      "choices": [
-        [
-          "0.5",
-          "0.5x"
-        ],
-        [
-          "1",
-          "1x"
-        ],
-        [
-          "1.5",
-          "1.5x"
-        ],
-        [
-          "2",
-          "2x"
-        ],
-        [
-          "3",
-          "3x"
-        ],
-        [
-          "5",
-          "5x"
-        ]
-      ]
-    },
-    {
-      "key": "pass_xp",
-      "env": "RULE_PASS_XP",
-      "title": "Hunt Pass XP speed",
-      "blurb": "Multiplies progress grants for Hunt Pass tracks found in the original 1.14.7 season table.",
-      "default": "1",
-      "tested": false,
-      "choices": [
-        [
-          "0.5",
-          "0.5x"
-        ],
-        [
-          "1",
-          "1x"
-        ],
-        [
-          "1.5",
-          "1.5x"
-        ],
-        [
-          "2",
-          "2x"
-        ],
-        [
-          "3",
-          "3x"
-        ],
-        [
-          "5",
-          "5x"
-        ]
-      ]
-    },
-    {
-      "key": "mastery_xp",
-      "env": "RULE_MASTERY_XP",
-      "title": "Mastery progress speed",
-      "blurb": "Multiplies mastery-track progress grants; quest and challenge objective counters are unchanged.",
-      "default": "1",
-      "tested": false,
-      "choices": [
-        [
-          "0.5",
-          "0.5x"
-        ],
-        [
-          "1",
-          "1x"
-        ],
-        [
-          "1.5",
-          "1.5x"
-        ],
-        [
-          "2",
-          "2x"
-        ],
-        [
-          "3",
-          "3x"
-        ],
-        [
-          "5",
-          "5x"
-        ]
-      ]
-    },
-    {
-      "key": "materials",
-      "env": "RULE_MATERIALS",
-      "title": "Material reward amount",
-      "blurb": "Multiplies catalog-verified material rewards, including Aethersparks and Cell Dust. Costs and purchases keep normal quantities.",
-      "default": "1",
-      "tested": false,
-      "choices": [
-        [
-          "0.5",
-          "0.5x"
-        ],
-        [
-          "1",
-          "1x"
-        ],
-        [
-          "1.5",
-          "1.5x"
-        ],
-        [
-          "2",
-          "2x"
-        ],
-        [
-          "3",
-          "3x"
-        ],
-        [
-          "5",
-          "5x"
-        ]
-      ]
-    },
-    {
-      "key": "rams",
-      "env": "RULE_RAMS",
-      "title": "Rams reward amount",
-      "blurb": "Multiplies Rams rewards in eligible additive transactions, not shop purchases or refunds.",
-      "default": "1",
-      "tested": false,
-      "choices": [
-        [
-          "0.5",
-          "0.5x"
-        ],
-        [
-          "1",
-          "1x"
-        ],
-        [
-          "1.5",
-          "1.5x"
-        ],
-        [
-          "2",
-          "2x"
-        ],
-        [
-          "3",
-          "3x"
-        ],
-        [
-          "5",
-          "5x"
-        ]
-      ]
-    },
-    {
-      "key": "weapon_merits",
-      "env": "RULE_WEAPON_MERITS",
-      "title": "Combat Merit reward amount",
-      "blurb": "Multiplies Combat Merit rewards. Spending remains normal.",
-      "default": "1",
-      "tested": false,
-      "choices": [
-        [
-          "0.5",
-          "0.5x"
-        ],
-        [
-          "1",
-          "1x"
-        ],
-        [
-          "1.5",
-          "1.5x"
-        ],
-        [
-          "2",
-          "2x"
-        ],
-        [
-          "3",
-          "3x"
-        ],
-        [
-          "5",
-          "5x"
-        ]
-      ]
-    },
-    {
-      "key": "exploration_merits",
-      "env": "RULE_EXPLORATION_MERITS",
-      "title": "Exploration Merit reward amount",
-      "blurb": "Multiplies Airship/Exploration Merit rewards. Spending remains normal.",
-      "default": "1",
-      "tested": false,
-      "choices": [
-        [
-          "0.5",
-          "0.5x"
-        ],
-        [
-          "1",
-          "1x"
-        ],
-        [
-          "1.5",
-          "1.5x"
-        ],
-        [
-          "2",
-          "2x"
-        ],
-        [
-          "3",
-          "3x"
-        ],
-        [
-          "5",
-          "5x"
-        ]
-      ]
-    },
-    {
-      "key": "rare_cores",
-      "env": "RULE_RARE_CORES",
-      "title": "Rare Core reward amount",
-      "blurb": "Multiplies Rare Cell Core quantities, including cores added by the per-kill toggle.",
-      "default": "1",
-      "tested": false,
-      "choices": [
-        [
-          "0.5",
-          "0.5x"
-        ],
-        [
-          "1",
-          "1x"
-        ],
-        [
-          "1.5",
-          "1.5x"
-        ],
-        [
-          "2",
-          "2x"
-        ],
-        [
-          "3",
-          "3x"
-        ],
-        [
-          "5",
-          "5x"
-        ]
-      ]
-    },
-    {
-      "key": "rare_core_kill",
-      "env": "RULE_RARE_CORE_KILL",
-      "title": "Rare Core per Behemoth kill",
-      "blurb": "Adds a Rare Cell Core when an eligible inventory transaction contains a known Behemoth kill token. Does not invent kill events.",
-      "default": "0",
-      "tested": false,
-      "choices": [
-        [
-          "0",
-          "Off"
-        ],
-        [
-          "1",
-          "On"
-        ]
-      ]
-    },
-    {
-      "key": "free_crafting",
-      "env": "RULE_FREE_CRAFTING",
-      "title": "Free crafting",
-      "blurb": "Keeps ingredients for exact catalog-matched equipment crafting and upgrade transactions. You still need the recipe unlock and ingredients once. Does not waive shop, fusion or reforge costs.",
-      "default": "0",
-      "tested": false,
-      "choices": [
-        [
-          "0",
-          "Off"
-        ],
-        [
-          "1",
-          "On"
-        ]
-      ]
-    },
-    {
-      "key": "free_platinum",
-      "env": "RULE_FREE_PLATINUM",
-      "title": "Free platinum",
-      "blurb": "Platinum prices become 0: store offers, Hunt Pass rank skips and extra loadout slots. Platinum you own is kept. Off when hosting friends. By KombatKing.",
-      "default": "0",
-      "tested": false,
-      "choices": [
-        [
-          "0",
-          "Off"
-        ],
-        [
-          "1",
-          "On"
-        ]
-      ]
-    },
-    {
-      "key": "extra_loadout_slots",
-      "env": "RULE_EXTRA_LOADOUT_SLOTS",
-      "title": "Extra loadout slots",
-      "blurb": "Free extra loadout slots on top of the starter slot and the five Slayer's Path slots, no platinum needed. Slots you get are kept, even if you turn this back to Normal. They show the next time you sign in. Playing with friends: you AND the host MUST both have server files with this rule, or your loadouts will not load on the host.",
-      "default": "0",
-      "tested": false,
-      "choices": [
-        [
-          "0",
-          "Normal"
-        ],
-        [
-          "10",
-          "+10"
-        ],
-        [
-          "20",
-          "+20"
-        ],
-        [
-          "30",
-          "+30"
-        ],
-        [
-          "40",
-          "+40"
-        ]
-      ]
-    },
-    {
-      "key": "host_rules",
-      "env": "RULE_HOST_RULES",
-      "title": "When you host",
-      "blurb": "Host with friends or LAN: Use my rules = your Game Rules on this page apply to everyone in your game, and the players who join you take home what they earn with them. Standard rules = everyone plays with normal rules while you host. Games open to everyone (Allow randoms, Play online) always use the standard rules.",
-      "default": "1",
-      "tested": false,
-      "choices": [
-        [
-          "1",
-          "Use my rules"
-        ],
-        [
-          "0",
-          "Standard rules"
-        ]
-      ]
-    },
-    {
-      "key": "forever_hunts",
-      "env": "RULE_FOREVER_HUNTS",
-      "title": "Forever Hunts (open hunts)",
-      "blurb": "Hunts you host stay open to everyone on your server: a player asking for the same hunt drops into it while there is room and the behemoth is alive. A party that does not fit gets its own hunt. Not for trials, Gauntlet, escalations or the Training Grounds.",
-      "default": "0",
-      "tested": false,
-      "choices": [
-        [
-          "0",
-          "Off"
-        ],
-        [
-          "4",
-          "Up to 4 players"
-        ],
-        [
-          "6",
-          "Up to 6 players"
-        ],
-        [
-          "8",
-          "Up to 8 players"
-        ]
-      ]
-    }
-  ]
+    "_comment": "1.14.7 Game Rules. Launcher writes choices to data/rules.txt. Backend reads them at startup. All native gameplay checks remain pending.",
+    "rules": [
+        {
+            "key": "universal_xp",
+            "env": "RULE_UNIVERSAL_XP",
+            "title": "Universal progression rate",
+            "blurb": "Applies to recognized player, weapon, Hunt Pass and mastery progression grants. Does not change Escalation saves.",
+            "default": "1",
+            "tested": false,
+            "choices": [
+                [
+                    "0.5",
+                    "0.5x"
+                ],
+                [
+                    "1",
+                    "1x"
+                ],
+                [
+                    "1.5",
+                    "1.5x"
+                ],
+                [
+                    "2",
+                    "2x"
+                ],
+                [
+                    "3",
+                    "3x"
+                ],
+                [
+                    "5",
+                    "5x"
+                ]
+            ]
+        },
+        {
+            "key": "weapon_xp",
+            "env": "RULE_WEAPON_XP",
+            "title": "Weapon XP speed",
+            "blurb": "Multiplies recognized weapon ExperienceTrack grants. Requires the game server to send those grants.",
+            "default": "1",
+            "tested": false,
+            "choices": [
+                [
+                    "0.5",
+                    "0.5x"
+                ],
+                [
+                    "1",
+                    "1x"
+                ],
+                [
+                    "1.5",
+                    "1.5x"
+                ],
+                [
+                    "2",
+                    "2x"
+                ],
+                [
+                    "3",
+                    "3x"
+                ],
+                [
+                    "5",
+                    "5x"
+                ]
+            ]
+        },
+        {
+            "key": "pass_xp",
+            "env": "RULE_PASS_XP",
+            "title": "Hunt Pass XP speed",
+            "blurb": "Multiplies progress grants for Hunt Pass tracks found in the original 1.14.7 season table.",
+            "default": "1",
+            "tested": false,
+            "choices": [
+                [
+                    "0.5",
+                    "0.5x"
+                ],
+                [
+                    "1",
+                    "1x"
+                ],
+                [
+                    "1.5",
+                    "1.5x"
+                ],
+                [
+                    "2",
+                    "2x"
+                ],
+                [
+                    "3",
+                    "3x"
+                ],
+                [
+                    "5",
+                    "5x"
+                ]
+            ]
+        },
+        {
+            "key": "mastery_xp",
+            "env": "RULE_MASTERY_XP",
+            "title": "Mastery progress speed",
+            "blurb": "Multiplies mastery-track progress grants; quest and challenge objective counters are unchanged.",
+            "default": "1",
+            "tested": false,
+            "choices": [
+                [
+                    "0.5",
+                    "0.5x"
+                ],
+                [
+                    "1",
+                    "1x"
+                ],
+                [
+                    "1.5",
+                    "1.5x"
+                ],
+                [
+                    "2",
+                    "2x"
+                ],
+                [
+                    "3",
+                    "3x"
+                ],
+                [
+                    "5",
+                    "5x"
+                ]
+            ]
+        },
+        {
+            "key": "materials",
+            "env": "RULE_MATERIALS",
+            "title": "Material reward amount",
+            "blurb": "Multiplies catalog-verified material rewards, including Aethersparks and Cell Dust. Costs and purchases keep normal quantities.",
+            "default": "1",
+            "tested": false,
+            "choices": [
+                [
+                    "0.5",
+                    "0.5x"
+                ],
+                [
+                    "1",
+                    "1x"
+                ],
+                [
+                    "1.5",
+                    "1.5x"
+                ],
+                [
+                    "2",
+                    "2x"
+                ],
+                [
+                    "3",
+                    "3x"
+                ],
+                [
+                    "5",
+                    "5x"
+                ]
+            ]
+        },
+        {
+            "key": "rams",
+            "env": "RULE_RAMS",
+            "title": "Rams reward amount",
+            "blurb": "Multiplies Rams rewards in eligible additive transactions, not shop purchases or refunds.",
+            "default": "1",
+            "tested": false,
+            "choices": [
+                [
+                    "0.5",
+                    "0.5x"
+                ],
+                [
+                    "1",
+                    "1x"
+                ],
+                [
+                    "1.5",
+                    "1.5x"
+                ],
+                [
+                    "2",
+                    "2x"
+                ],
+                [
+                    "3",
+                    "3x"
+                ],
+                [
+                    "5",
+                    "5x"
+                ]
+            ]
+        },
+        {
+            "key": "weapon_merits",
+            "env": "RULE_WEAPON_MERITS",
+            "title": "Combat Merit reward amount",
+            "blurb": "Multiplies Combat Merit rewards. Spending remains normal.",
+            "default": "1",
+            "tested": false,
+            "choices": [
+                [
+                    "0.5",
+                    "0.5x"
+                ],
+                [
+                    "1",
+                    "1x"
+                ],
+                [
+                    "1.5",
+                    "1.5x"
+                ],
+                [
+                    "2",
+                    "2x"
+                ],
+                [
+                    "3",
+                    "3x"
+                ],
+                [
+                    "5",
+                    "5x"
+                ]
+            ]
+        },
+        {
+            "key": "exploration_merits",
+            "env": "RULE_EXPLORATION_MERITS",
+            "title": "Exploration Merit reward amount",
+            "blurb": "Multiplies Airship/Exploration Merit rewards. Spending remains normal.",
+            "default": "1",
+            "tested": false,
+            "choices": [
+                [
+                    "0.5",
+                    "0.5x"
+                ],
+                [
+                    "1",
+                    "1x"
+                ],
+                [
+                    "1.5",
+                    "1.5x"
+                ],
+                [
+                    "2",
+                    "2x"
+                ],
+                [
+                    "3",
+                    "3x"
+                ],
+                [
+                    "5",
+                    "5x"
+                ]
+            ]
+        },
+        {
+            "key": "rare_cores",
+            "env": "RULE_RARE_CORES",
+            "title": "Rare Core reward amount",
+            "blurb": "Multiplies Rare Cell Core quantities, including cores added by the per-kill toggle.",
+            "default": "1",
+            "tested": false,
+            "choices": [
+                [
+                    "0.5",
+                    "0.5x"
+                ],
+                [
+                    "1",
+                    "1x"
+                ],
+                [
+                    "1.5",
+                    "1.5x"
+                ],
+                [
+                    "2",
+                    "2x"
+                ],
+                [
+                    "3",
+                    "3x"
+                ],
+                [
+                    "5",
+                    "5x"
+                ]
+            ]
+        },
+        {
+            "key": "rare_core_kill",
+            "env": "RULE_RARE_CORE_KILL",
+            "title": "Rare Core per Behemoth kill",
+            "blurb": "Adds a Rare Cell Core when an eligible inventory transaction contains a known Behemoth kill token. Does not invent kill events.",
+            "default": "0",
+            "tested": false,
+            "choices": [
+                [
+                    "0",
+                    "Off"
+                ],
+                [
+                    "1",
+                    "On"
+                ]
+            ]
+        },
+        {
+            "key": "free_crafting",
+            "env": "RULE_FREE_CRAFTING",
+            "title": "Free crafting",
+            "blurb": "Keeps ingredients for exact catalog-matched equipment crafting and upgrade transactions. You still need the recipe unlock and ingredients once. Does not waive shop, fusion or reforge costs.",
+            "default": "0",
+            "tested": false,
+            "choices": [
+                [
+                    "0",
+                    "Off"
+                ],
+                [
+                    "1",
+                    "On"
+                ]
+            ]
+        },
+        {
+            "key": "free_platinum",
+            "env": "RULE_FREE_PLATINUM",
+            "title": "Free platinum",
+            "blurb": "Platinum prices become 0: store offers, Hunt Pass rank skips and extra loadout slots. Platinum you own is kept. Off when hosting friends. By KombatKing.",
+            "default": "0",
+            "tested": false,
+            "choices": [
+                [
+                    "0",
+                    "Off"
+                ],
+                [
+                    "1",
+                    "On"
+                ]
+            ]
+        },
+        {
+            "key": "extra_loadout_slots",
+            "env": "RULE_EXTRA_LOADOUT_SLOTS",
+            "title": "Extra loadout slots",
+            "blurb": "Free extra loadout slots on top of the starter slot and the five Slayer's Path slots, no platinum needed. Slots you get are kept, even if you turn this back to Normal. They show the next time you sign in. Playing with friends: you AND the host MUST both have server files with this rule, or your loadouts will not load on the host.",
+            "default": "30",
+            "tested": false,
+            "choices": [
+                [
+                    "0",
+                    "Normal"
+                ],
+                [
+                    "10",
+                    "+10"
+                ],
+                [
+                    "20",
+                    "+20"
+                ],
+                [
+                    "30",
+                    "+30"
+                ],
+                [
+                    "40",
+                    "+40"
+                ]
+            ]
+        },
+        {
+            "key": "host_rules",
+            "env": "RULE_HOST_RULES",
+            "title": "When you host",
+            "blurb": "Host with friends or LAN: Use my rules = your Game Rules on this page apply to everyone in your game, and the players who join you take home what they earn with them. Standard rules = everyone plays with normal rules while you host. Games open to everyone (Allow randoms, Play online) always use the standard rules.",
+            "default": "1",
+            "tested": false,
+            "choices": [
+                [
+                    "1",
+                    "Use my rules"
+                ],
+                [
+                    "0",
+                    "Standard rules"
+                ]
+            ]
+        },
+        {
+            "key": "forever_hunts",
+            "env": "RULE_FOREVER_HUNTS",
+            "title": "Forever Hunts (open hunts)",
+            "blurb": "Hunts you host stay open to everyone on your server: a player asking for the same hunt drops into it while there is room and the behemoth is alive. A party that does not fit gets its own hunt. Not for trials, Gauntlet, escalations or the Training Grounds.",
+            "default": "0",
+            "tested": false,
+            "choices": [
+                [
+                    "0",
+                    "Off"
+                ],
+                [
+                    "4",
+                    "Up to 4 players"
+                ],
+                [
+                    "6",
+                    "Up to 6 players"
+                ],
+                [
+                    "8",
+                    "Up to 8 players"
+                ]
+            ]
+        },
+        {
+            "key": "trial_boss",
+            "env": "RULE_TRIAL_BOSS",
+            "title": "Trial boss",
+            "blurb": "Pick the behemoth you fight in Trials (Hard and Elite). This week's boss = the normal rotation. The game's Trials screen still shows this week's boss and art; you fight the one you picked. When you host, your pick applies to everyone in your game. Not used in Forever worlds or games open to everyone.",
+            "default": "0",
+            "tested": false,
+            "choices": [
+                [
+                    "0",
+                    "This week's boss"
+                ],
+                [
+                    "1",
+                    "Embermane"
+                ],
+                [
+                    "2",
+                    "Umbral Nayzaga"
+                ],
+                [
+                    "3",
+                    "Deadeye"
+                ],
+                [
+                    "4",
+                    "Pangar"
+                ],
+                [
+                    "5",
+                    "Kharabak"
+                ],
+                [
+                    "6",
+                    "Umbral Drask"
+                ],
+                [
+                    "7",
+                    "Moonreaver"
+                ],
+                [
+                    "8",
+                    "Thunderdeep"
+                ],
+                [
+                    "9",
+                    "Blaze Quillshot"
+                ],
+                [
+                    "10",
+                    "Umbral Koshai"
+                ],
+                [
+                    "11",
+                    "Trial 11"
+                ],
+                [
+                    "12",
+                    "Koshai"
+                ],
+                [
+                    "13",
+                    "Shrowd"
+                ],
+                [
+                    "14",
+                    "Trial 14"
+                ],
+                [
+                    "15",
+                    "Winterhorn"
+                ],
+                [
+                    "16",
+                    "Trial 16"
+                ],
+                [
+                    "17",
+                    "Trial 17"
+                ],
+                [
+                    "18",
+                    "Stormclaw"
+                ],
+                [
+                    "19",
+                    "Malkarion"
+                ],
+                [
+                    "20",
+                    "Rezakiri"
+                ],
+                [
+                    "21",
+                    "Riftstalker"
+                ],
+                [
+                    "22",
+                    "Drask"
+                ]
+            ]
+        }
+    ]
 }

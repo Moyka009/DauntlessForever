@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-25.2",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-25.2.zip",
-                         "sha256":  "0dc582bdac01e7b31a313a4f43a1fa38bda0bd35165f5830729e9a3aaba8b909",
+                         "packageVersion":  "2026-10-25.3",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-25.3.zip",
+                         "sha256":  "11e9275e381d802818955fc16b8e2973d987312765b07da025dff2d36f106e32",
                          "date":  "2026-10-25",
-                         "note":  "parties stay together, crash guard 3, hunt servers without the GPU, Rams store, banked reforge XP, Transmog Stones"
+                         "note":  "Trial boss Game Rule, +30 loadout slots by default, Forever worlds on base rules"
                      }
                  ],
     "launcher":  {
