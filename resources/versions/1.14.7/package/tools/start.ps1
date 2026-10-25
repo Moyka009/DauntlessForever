@@ -79,18 +79,22 @@ $recorder = Join-Path $Root 'backend\recorder-1147.js'
 $recProc = $null
 if (Test-Recorder) { Say '1/3 Local backend: already running.' 'Green' }
 else {
-    Say '1/3 Starting the local backend (a small minimized window)...'
-    if ($NoGame) {
-        # Host Mode: no window at all (a minimized console can be closed by hand, which kills the backend and kicks every
-        # player); what the backend prints goes to logs\recorder.out.log / recorder.err.log instead
-        $recProc = Start-Process -FilePath $node -ArgumentList ('"' + $recorder + '"') -WorkingDirectory $Root -WindowStyle Hidden -PassThru `
-            -RedirectStandardOutput (Join-Path $Root 'logs\recorder.out.log') -RedirectStandardError (Join-Path $Root 'logs\recorder.err.log')
-    } else {
-        $recProc = Start-Process -FilePath $node -ArgumentList ('"' + $recorder + '"') -WorkingDirectory $Root -WindowStyle Minimized -PassThru
-    }
+    Say '1/3 Starting the local backend...'
+    # No window, in every mode (DF-BACKENDLOG-1147, Oct 24; reports 144 75 152): what the backend prints goes to
+    # logs\recorder.out.log / recorder.err.log, so a backend that stops says why and Send my logs carries it. Before,
+    # Play kept it only in a minimized console that vanished with it (and closing that console by hand killed the game).
+    $recOut = Join-Path $Root 'logs\recorder.out.log'; $recErr = Join-Path $Root 'logs\recorder.err.log'
+    $recProc = Start-Process -FilePath $node -ArgumentList ('"' + $recorder + '"') -WorkingDirectory $Root -WindowStyle Hidden -PassThru `
+        -RedirectStandardOutput $recOut -RedirectStandardError $recErr
     $t0 = Get-Date
     while (-not (Test-Recorder)) {
-        if ($recProc.HasExited) { Fail "the local backend stopped right away. If this keeps happening, run STOP (if something got stuck).bat in the 1.14.7 folder, then try again." }
+        if ($recProc.HasExited) {
+            $why = ''
+            try { $why = ((Get-Content -LiteralPath $recErr -Tail 3 -ErrorAction Stop) -join ' ').Trim() } catch {}
+            if ($why.Length -gt 300) { $why = $why.Substring(0, 300) + '...' }
+            if ($why) { Say "    The backend said: $why" 'Yellow' }
+            Fail "the local backend stopped right away (exit code $($recProc.ExitCode)). If this keeps happening, run STOP (if something got stuck).bat in the 1.14.7 folder, then try again."
+        }
         if (((Get-Date) - $t0).TotalSeconds -gt 30) { Fail 'the local backend did not start within 30 seconds.' }
         Start-Sleep -Milliseconds 500
     }
