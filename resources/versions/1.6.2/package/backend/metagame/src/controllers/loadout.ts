@@ -136,7 +136,9 @@ export async function GetPersistentLoadoutForUserIdAndCharacterId(UserId: string
 // Upstream only stored slot 0. Now every slot 0..MAX_LOADOUT_SLOTS-1 can be saved: a new slot is appended, gaps are
 // filled with a copy of slot 0 (with its own slot_index). The active slot is kept in a small file per character
 // (<LOADOUT_STATE_DIR>\<userId>_<characterId>.json), so the loadouts table needs no change.
-export const MAX_LOADOUT_SLOTS = Math.max(1, Number(process.env.LOADOUT_SLOTS ?? 10));
+// DF-RULES-162B: Game Rule "Extra loadout slots" adds free slots on top (0-40), also while hosting.
+const EXTRA_LOADOUT_SLOTS = Math.min(40, Math.max(0, Math.floor(Number(process.env.RULE_EXTRA_LOADOUT_SLOTS ?? 0)) || 0));
+export const MAX_LOADOUT_SLOTS = Math.max(1, Number(process.env.LOADOUT_SLOTS ?? 10) || 10) + EXTRA_LOADOUT_SLOTS;
 const LOADOUT_STATE_DIR = process.env.LOADOUT_STATE_DIR ?? require("node:path").join(require("node:path").dirname(process.env.DB_FILENAME || "./undaunted.db"), "loadouts");
 
 function ActivePath(UserId: string, CharacterId: string) {

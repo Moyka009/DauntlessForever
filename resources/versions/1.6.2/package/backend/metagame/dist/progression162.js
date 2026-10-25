@@ -10,6 +10,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.REAL_OBJECTIVES = exports.MergedPaths = exports.PROGRESSION_MODE = void 0;
 exports.GetMergedProgressionConfig = GetMergedProgressionConfig;
 exports.ReforgeReward = ReforgeReward;
+exports.PendingTotalXp = PendingTotalXp;
 exports.NoteReforgePrepaid = NoteReforgePrepaid;
 exports.GrantTrackXp = GrantTrackXp;
 exports.ApplyProgressionPost = ApplyProgressionPost;
@@ -201,15 +202,14 @@ function FreshPairs(map, accountId) {
 function TakePair(map, accountId, amount) {
     const list = FreshPairs(map, accountId);
     const i = list.findIndex(e => e.amount === amount);
-    if (i < 0) return false;
+    if (i < 0)
+        return false;
     list.splice(i, 1);
     return true;
 }
 function PendingTotalXp(accountId) {
     return FreshPairs(pendingTotalXp, accountId).reduce((sum, e) => sum + e.added, 0);
 }
-exports.PendingTotalXp = PendingTotalXp;
-
 const prepaidReforges = new Map();
 function NoteReforgePrepaid(accountId) {
     const now = Date.now();
@@ -277,7 +277,8 @@ function GrantTrackXp(accountId, trackId, amountRaw) {
         if (trackId === "ExperienceTrack_PlayerLevel" && exports.PROGRESSION_MODE === "real") {
             if (TakePair(recentWeaponXp, accountId, amount)) {
                 logger_1.logger.info(`Progression: grant ${trackId} +${amount} not stored (its weapon grant already counted)`);
-            } else {
+            }
+            else {
                 const ahead = rules162_1.Rules.weaponXp !== 1 ? (0, rules162_1.ScaleXp)(amount, rules162_1.Rules.weaponXp) : amount;
                 FreshPairs(pendingTotalXp, accountId).push({ amount, added: ahead, t: Date.now() });
                 logger_1.logger.info(`Progression: grant ${trackId} +${amount} not stored; counted ahead (+${ahead}) until its weapon grant arrives`);
@@ -410,6 +411,31 @@ function ApplyProgressionPost(accountId, body) {
                     logger_1.logger.info(`Progression: ${track} +${gained} XP (total ${xp}, rank ${RankForXp(track, xp)})`);
                 }
             }
+            // DF-RULES-162B: Mastery progress rule (Game Rules). Extra points for what just completed, saved with the
+            // other bonus points, so changing the rule later never takes earned points away.
+            if (rules162_1.Rules.masteryXp > 1) {
+                const bonus = LoadBonus(accountId);
+                let extra = 0;
+                for (const [track, pts] of Object.entries(after.tracks)) {
+                    if (track === "MasteryTrack_PlayerLevel")
+                        continue;
+                    const gained = pts - (before.tracks[track] ?? 0);
+                    if (!(gained > 0))
+                        continue;
+                    const add = (0, rules162_1.ScaleXp)(gained, rules162_1.Rules.masteryXp) - gained;
+                    if (add > 0) {
+                        bonus.xp[track] = (bonus.xp[track] ?? 0) + add;
+                        extra += add;
+                    }
+                }
+                if (extra > 0) {
+                    SaveBonus(accountId, bonus);
+                    logger_1.logger.info(`[rules] mastery x${rules162_1.Rules.masteryXp}: +${extra} extra mastery points for ${accountId}`);
+                    const boosted = DeriveTotals(state, bonus.xp);
+                    (0, mastery_rewards_1.GrantMasteryRewards)(accountId, boosted.tracks, RankForXp);
+                    after.tracks = boosted.tracks;
+                }
+            }
             for (const [track, pts] of Object.entries(after.tracks)) {
                 const gained = pts - (before.tracks[track] ?? 0);
                 if (gained > 0)
@@ -468,9 +494,9 @@ function RebuildFromPostLog() {
 }
 // For the game server DLL: the player's saved objective progress as "id<TAB>value<TAB>completed" lines.
 // Only objectives whose bars would otherwise show 0 at login: in-progress one-time objectives and the repeatable
-// "Experience" ones. Falls back to the most recently saved player if the id isn't known (single-player setups).
+// "Experience" ones. Only ever that player's own file: an unknown id gets nothing. (It used to fall back to the most
+// recently saved player, which on a host handed the host's own progress to a joining friend.)
 function ObjectivesForPriming(accountId) {
-    // Only ever this player's own file: an unknown id gets nothing (no fallback to another player's progress)
     const file = StatePath(accountId);
     let objectives = {};
     try {

@@ -432,6 +432,26 @@ export function ApplyProgressionPost(accountId: string, body: any) {
                     logger.info(`Progression: ${track} +${gained} XP (total ${xp}, rank ${RankForXp(track, xp)})`);
                 }
             }
+            // DF-RULES-162B: Mastery progress rule (Game Rules). Extra points for what just completed, saved with the
+            // other bonus points, so changing the rule later never takes earned points away.
+            if (Rules.masteryXp > 1) {
+                const bonus = LoadBonus(accountId);
+                let extra = 0;
+                for (const [track, pts] of Object.entries(after.tracks)) {
+                    if (track === "MasteryTrack_PlayerLevel") continue;
+                    const gained = pts - (before.tracks[track] ?? 0);
+                    if (!(gained > 0)) continue;
+                    const add = ScaleXp(gained, Rules.masteryXp) - gained;
+                    if (add > 0) { bonus.xp[track] = (bonus.xp[track] ?? 0) + add; extra += add; }
+                }
+                if (extra > 0) {
+                    SaveBonus(accountId, bonus);
+                    logger.info(`[rules] mastery x${Rules.masteryXp}: +${extra} extra mastery points for ${accountId}`);
+                    const boosted = DeriveTotals(state, bonus.xp);
+                    GrantMasteryRewards(accountId, boosted.tracks, RankForXp);
+                    after.tracks = boosted.tracks;
+                }
+            }
             for (const [track, pts] of Object.entries(after.tracks)) {
                 const gained = pts - (before.tracks[track] ?? 0);
                 if (gained > 0) logger.info(`Progression: ${track} +${gained} (total ${pts}, rank ${RankForXp(track, pts)})`);

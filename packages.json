@@ -2,11 +2,11 @@
     "packages":  [
                      {
                          "id":  "1.6.2",
-                         "packageVersion":  "2026-10-25",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-25.zip",
-                         "sha256":  "b64ea54e1277613e27af88b9775242bf0088d26cb3e591fe4a927963ce86031e",
+                         "packageVersion":  "2026-10-25.2",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.6.2-2026-10-25.2.zip",
+                         "sha256":  "305000965256f28b21fd9acaa847eda663d9a3ce8b79fe21c1360d487eb0b9ec",
                          "date":  "2026-10-25",
-                         "note":  "Send my logs includes the loader log and Windows crash records"
+                         "note":  "Game Rules: universal rate, mastery, Rams, merits, rare cores, core on kill, trial boss, extra loadout slots"
                      },
                      {
                          "id":  "1.14.7",

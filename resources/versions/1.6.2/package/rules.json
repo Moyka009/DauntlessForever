@@ -15,7 +15,7 @@
     },
     {
       "key": "loot", "env": "RULE_LOOT", "title": "Loot amount",
-      "blurb": "More materials and Rams from every hunt.",
+      "blurb": "More materials, Rams and Cell Cores from every hunt.",
       "default": "1", "tested": false,
       "choices": [["1", "Normal"], ["2", "2x"], ["3", "3x"], ["5", "5x"], ["10", "10x"]]
     },
@@ -30,6 +30,60 @@
       "blurb": "Resupply beacons keep their charge, so you can stay in the Hunting Grounds as long as you like. Solo play only: games you host for others always have normal beacons. The beacon counter may still show 1/1.",
       "default": "0", "tested": false,
       "choices": [["0", "Off"], ["1", "On"]]
+    },
+    {
+      "key": "universal_xp", "env": "RULE_UNIVERSAL_XP", "title": "Universal progress rate",
+      "blurb": "Multiplies weapon XP, Hunt Pass XP and mastery progress at once, on top of their own rules below.",
+      "default": "1", "tested": false,
+      "choices": [["0.5", "0.5x"], ["1", "Normal"], ["1.5", "1.5x"], ["2", "2x"], ["3", "3x"], ["5", "5x"], ["10", "10x"]]
+    },
+    {
+      "key": "mastery_xp", "env": "RULE_MASTERY_XP", "title": "Mastery progress",
+      "blurb": "Extra mastery points each time a mastery box completes. Points you earn are kept if you change this later.",
+      "default": "1", "tested": false,
+      "choices": [["1", "Normal"], ["1.5", "1.5x"], ["2", "2x"], ["3", "3x"], ["5", "5x"], ["10", "10x"]]
+    },
+    {
+      "key": "rams", "env": "RULE_RAMS", "title": "Ram reward amount",
+      "blurb": "More Rams from every hunt, on top of Loot amount. Shop prices and spending stay normal.",
+      "default": "1", "tested": false,
+      "choices": [["1", "Normal"], ["1.5", "1.5x"], ["2", "2x"], ["3", "3x"], ["5", "5x"], ["10", "10x"]]
+    },
+    {
+      "key": "weapon_merits", "env": "RULE_WEAPON_MERITS", "title": "Combat Merit amount",
+      "blurb": "More Combat Merits from hunts. Spending stays normal.",
+      "default": "1", "tested": false,
+      "choices": [["1", "Normal"], ["1.5", "1.5x"], ["2", "2x"], ["3", "3x"], ["5", "5x"], ["10", "10x"]]
+    },
+    {
+      "key": "exploration_merits", "env": "RULE_EXPLORATION_MERITS", "title": "Exploration Merit amount",
+      "blurb": "More Airship (Exploration) Merits from hunts. Spending stays normal.",
+      "default": "1", "tested": false,
+      "choices": [["1", "Normal"], ["1.5", "1.5x"], ["2", "2x"], ["3", "3x"], ["5", "5x"], ["10", "10x"]]
+    },
+    {
+      "key": "rare_cores", "env": "RULE_RARE_CORES", "title": "Rare Cell Core amount",
+      "blurb": "More Rare Cell Cores from hunts, including the ones from the rule below.",
+      "default": "1", "tested": false,
+      "choices": [["1", "Normal"], ["1.5", "1.5x"], ["2", "2x"], ["3", "3x"], ["5", "5x"], ["10", "10x"]]
+    },
+    {
+      "key": "rare_core_kill", "env": "RULE_RARE_CORE_KILL", "title": "Rare Cell Core on behemoth kill",
+      "blurb": "Every behemoth kill also gives a Rare Cell Core.",
+      "default": "0", "tested": false,
+      "choices": [["0", "Off"], ["1", "On"]]
+    },
+    {
+      "key": "trial_boss", "env": "RULE_TRIAL_BOSS", "title": "Trial boss",
+      "blurb": "Pick the behemoth you fight in Trials (Hard and Elite). This week's boss = the normal rotation. When you host, your pick is used for everyone in your game; games open to everyone use this week's boss.",
+      "default": "0", "tested": false,
+      "choices": [["0", "This week's boss"], ["4", "Embermane"], ["44", "Stormclaw"], ["2", "Shrowd"], ["1", "Nayzaga"], ["61", "Umbral Nayzaga"], ["3", "Quillshot"], ["5", "Skraev"], ["6", "Kharabak"], ["7", "Koshai"], ["58", "Umbral Koshai"], ["8", "Rezakiri"], ["9", "Charrogg"], ["10", "Shrike"], ["11", "Skarn"], ["12", "Pangar"], ["45", "Boreus"], ["46", "Drask"], ["63", "Umbral Drask"], ["43", "Malkarion"]]
+    },
+    {
+      "key": "extra_loadout_slots", "env": "RULE_EXTRA_LOADOUT_SLOTS", "title": "Extra loadout slots",
+      "blurb": "Free loadout slots on top of the normal 10. Kept while you host.",
+      "default": "0", "tested": false,
+      "choices": [["0", "None"], ["5", "+5"], ["10", "+10"], ["20", "+20"], ["30", "+30"], ["40", "+40"]]
     },
     {
       "key": "host_rules", "env": "RULE_HOST_RULES", "title": "When you host",

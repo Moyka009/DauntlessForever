@@ -9,6 +9,15 @@
 //   RULE_PASS_XP        multiplier for Hunt Pass XP. 1 = normal.
 //   RULE_LOOT           multiplier for materials and Rams added by a hunt (pure "add" inventory transactions). 1 = normal.
 //   RULE_FREE_CRAFTING  1 = crafting and upgrading keep their materials and Rams (you still need them to start).
+// DF-RULES-162B (Oct 25), the same rules 1.14.7 has:
+//   RULE_UNIVERSAL_XP        multiplies weapon XP, Hunt Pass XP and mastery progress together (on top of each one).
+//   RULE_MASTERY_XP          extra mastery points when a mastery objective completes (1 = normal, never lowers).
+//   RULE_RAMS                multiplier for Rams a hunt adds (on top of Loot amount).
+//   RULE_WEAPON_MERITS       multiplier for Combat Merits (CURRENCY_PJM_WEAPON) a hunt adds.
+//   RULE_EXPLORATION_MERITS  multiplier for Airship Merits (CURRENCY_PJM_AIRSHIP) a hunt adds.
+//   RULE_RARE_CORES          multiplier for Rare Cell Cores (CONTAINER_CORE_GOLD_CELLCORE) a hunt adds.
+//   RULE_RARE_CORE_KILL      1 = a hunt reward with one behemoth kill token also gives a Rare Cell Core.
+//   RULE_TRIAL_BOSS / RULE_EXTRA_LOADOUT_SLOTS are read by tools\trials-schedule.cjs and controllers/loadout.ts.
 // Every rule logs a "[rules]" line when it changes something, so a test hunt shows exactly what it did.
 import { logger } from "./logger";
 
@@ -18,15 +27,42 @@ function Multiplier(name: string): number {
     return Math.min(10, Math.max(0.1, v));
 }
 
+const Universal = Multiplier("RULE_UNIVERSAL_XP");
+const Both = (a: number) => Math.min(100, Math.round(a * Universal * 1000) / 1000);
+
 export const Rules = {
-    weaponXp: Multiplier("RULE_WEAPON_XP"),
-    passXp: Multiplier("RULE_PASS_XP"),
+    weaponXp: Both(Multiplier("RULE_WEAPON_XP")),
+    passXp: Both(Multiplier("RULE_PASS_XP")),
+    masteryXp: Math.max(1, Both(Multiplier("RULE_MASTERY_XP"))),
     loot: Multiplier("RULE_LOOT"),
+    rams: Multiplier("RULE_RAMS"),
+    weaponMerits: Multiplier("RULE_WEAPON_MERITS"),
+    explorationMerits: Multiplier("RULE_EXPLORATION_MERITS"),
+    rareCores: Multiplier("RULE_RARE_CORES"),
+    rareCoreKill: (process.env.RULE_RARE_CORE_KILL ?? "0") === "1",
     freeCrafting: (process.env.RULE_FREE_CRAFTING ?? "0") === "1",
 };
 
-logger.info(`[rules] Game Rules: weapon XP x${Rules.weaponXp}, Hunt Pass XP x${Rules.passXp}, loot x${Rules.loot}, ` +
+logger.info(`[rules] Game Rules: weapon XP x${Rules.weaponXp}, Hunt Pass XP x${Rules.passXp}, mastery x${Rules.masteryXp} ` +
+    `(universal x${Universal}), loot x${Rules.loot}, Rams x${Rules.rams}, Combat Merits x${Rules.weaponMerits}, ` +
+    `Airship Merits x${Rules.explorationMerits}, Rare Cell Cores x${Rules.rareCores}, core per kill ${Rules.rareCoreKill ? "on" : "off"}, ` +
     `free crafting ${Rules.freeCrafting ? "on" : "off"}`);
+
+const RARE_CORE = "CONTAINER_CORE_GOLD_CELLCORE";
+const KILL_TOKEN = /^TOKEN_KILL_COUNT_[A-Z0-9]+_[A-Z0-9]+$/;
+// How much a hunt reward of this item is multiplied by. Merits are Slayer's Path currencies (IsProtected) and only
+// change by their own rules; everything else Loot amount already covered keeps it.
+function AddFactor(catalogId: string): number {
+    if (catalogId === "CURRENCY_PJM_WEAPON") return Rules.weaponMerits;
+    if (catalogId === "CURRENCY_PJM_AIRSHIP") return Rules.explorationMerits;
+    if (IsProtected(catalogId)) return 1;
+    let f = Rules.loot;
+    if (catalogId === "CURRENCY_NOTES") f *= Rules.rams;
+    if (catalogId === RARE_CORE) f *= Rules.rareCores;
+    return Math.min(100, f);
+}
+const AnyAddRule = () => Rules.loot !== 1 || Rules.rams !== 1 || Rules.weaponMerits !== 1 || Rules.explorationMerits !== 1
+    || Rules.rareCores !== 1 || Rules.rareCoreKill;
 
 // Scale an XP amount. Never rounds a real grant down to 0.
 export function ScaleXp(amount: number, factor: number): number {
@@ -55,17 +91,25 @@ export function ApplyInventoryRules(tx: InventoryRuleInput, transactionId: strin
     const touchesFusion = [...instancedAdd, ...instancedRemove, ...instancedSave].some((i) => i?.catalogId === "TOKEN_CELL_EXCHANGE");
 
     // Loot: a transaction that only ADDS stacked items (end-of-hunt rewards, gathering) gets more of them.
-    if (Rules.loot !== 1 && fromGameServer && stackedAdd.length > 0
+    if (AnyAddRule() && fromGameServer && stackedAdd.length > 0
         && stackedRemove.length === 0 && instancedRemove.length === 0 && instancedSave.length === 0 && !touchesFusion) {
         const changed: string[] = [];
-        tx.stackedAdd = stackedAdd.map((i) => {
+        let adds = stackedAdd;
+        // DF-RULES-162B: Rare Cell Core on behemoth kill (one kill token in the reward, no core in it already)
+        const kills = adds.filter((i) => KILL_TOKEN.test(String(i?.catalogId ?? "")) && Number(i?.quantity) > 0);
+        if (Rules.rareCoreKill && kills.length === 1 && Number(kills[0].quantity) <= 100 && !adds.some((i) => i?.catalogId === RARE_CORE)) {
+            adds = [...adds, { catalogId: RARE_CORE, quantity: Number(kills[0].quantity) }];
+            changed.push(`${RARE_CORE} +${kills[0].quantity} for ${kills[0].catalogId}`);
+        }
+        tx.stackedAdd = adds.map((i) => {
             const q = Number(i?.quantity);
-            if (IsProtected(i?.catalogId) || !(q > 0)) return i;
-            const nq = Math.max(1, Math.round(q * Rules.loot));
+            const f = AddFactor(String(i?.catalogId ?? ""));
+            if (f === 1 || !(q > 0)) return i;
+            const nq = Math.max(1, Math.round(q * f));
             if (nq !== q) changed.push(`${i.catalogId} ${q}->${nq}`);
             return { ...i, quantity: nq };
         });
-        if (changed.length) logger.info(`[rules] loot x${Rules.loot} on ${transactionId}: ${changed.join(", ")}`);
+        if (changed.length) logger.info(`[rules] hunt rewards on ${transactionId}: ${changed.join(", ")}`);
     }
 
     // Free crafting: a transaction that spends stacked items AND creates or changes gear (craft, upgrade) keeps them.
@@ -84,7 +128,7 @@ export function ApplyInventoryRules(tx: InventoryRuleInput, transactionId: strin
     }
 
     // While any inventory rule is on, describe each spending transaction once, so a test shows its real shape.
-    if ((Rules.freeCrafting || Rules.loot !== 1) && (stackedRemove.length > 0 || instancedRemove.length > 0) && !kept.length) {
+    if ((Rules.freeCrafting || AnyAddRule()) && (stackedRemove.length > 0 || instancedRemove.length > 0) && !kept.length) {
         const ids = (a: any[]) => a.map((i) => `${i?.catalogId}${i?.quantity != null ? " x" + i.quantity : ""}`).join(", ") || "-";
         logger.info(`[rules] untouched ${transactionId} (${fromGameServer ? "game server" : "client"}): ` +
             `add [${ids(instancedAdd)}] [${ids(stackedAdd)}] remove [${ids(instancedRemove)}] [${ids(stackedRemove)}] save [${ids(instancedSave)}]`);
