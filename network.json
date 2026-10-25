@@ -8,8 +8,14 @@
   "relays": [
     {
       "id": "us",
-      "name": "US East",
+      "name": "US Central",
       "host": "209.145.57.41",
+      "controlPort": 7000
+    },
+    {
+      "id": "useast",
+      "name": "US East",
+      "host": "13.140.234.113",
       "controlPort": 7000
     },
     {
@@ -22,6 +28,12 @@
       "id": "au",
       "name": "Australia",
       "host": "46.250.241.191",
+      "controlPort": 7000
+    },
+    {
+      "id": "jp",
+      "name": "Japan",
+      "host": "13.140.77.204",
       "controlPort": 7000
     }
   ],
