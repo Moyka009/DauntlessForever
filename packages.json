@@ -18,14 +18,14 @@
                      }
                  ],
     "launcher":  {
-                     "version":  "0.3.1",
+                     "version":  "0.3.2",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "Play Forever: shows that your game opens by itself while your world starts",
+                     "notes":  "Forever: only up-to-date installs can join a world",
                      "date":  "2026-10-25",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.3.1.asar",
-                                 "sha256":  "b438cbd9c68fa9dc2907879bfa2327869977aa4cd47d0134d0ff84b626e03ad0",
-                                 "size":  8617957,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.3.2.asar",
+                                 "sha256":  "bce6c3cf1643634cdc27f73153b0bd81cf11c9f20fccd8491816ea21577d1b6d",
+                                 "size":  8618813,
                                  "minShell":  "0.2.4"
                              }
                  }
