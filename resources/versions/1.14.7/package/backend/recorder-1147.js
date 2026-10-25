@@ -670,6 +670,15 @@ function grantTrackNative(c) {
   cur.progress = gameRules.sumTrack(id, cur.progress, gameRules.track(id, Number(c.match[2]) || 0)); huntpass1147.settle(p); saveState();
   return J(wrapped(trackOut(p, id, cur)), `${id} +${c.match[2]}, guess`);
 }
+// DF-TRACKED-QUESTS-1147 (Oct 25): the game saves which quest set / quests a player follows (current_set, e.g. the
+// new-player chain CR20_PJM_FTUE_00). It was thrown away, so a game that started on another server (a Forever world, a
+// friend's game) came back with no quest. Kept per player; it travels with the player's record.
+function saveTracked(c) {
+  const p = playerFor(c.req); const b = c.body && typeof c.body === 'object' ? c.body : {};
+  const list = (x) => Array.isArray(x) ? x.filter((v) => typeof v === 'string' || (v && typeof v === 'object')).slice(0, 200) : [];
+  p.trackedObjectives = { current_set: typeof b.current_set === 'string' ? b.current_set.slice(0, 128) : '', omitted_quests: list(b.omitted_quests), tracked_quests: list(b.tracked_quests), tracked_craftables: list(b.tracked_craftables) };
+  saveState(); return J(wrapped(null), 'saved set ' + (p.trackedObjectives.current_set || '(none)'));
+}
 function grantProgress(c) { const p=playerFor(c.req); return huntpass1147.atomic(p,()=>grantProgressNative(c)); }
 function grantTrack(c) { const p=playerFor(c.req); return huntpass1147.atomic(p,()=>grantTrackNative(c)); }
 function saveBounties(c) {
@@ -1311,7 +1320,7 @@ const routes = [
   ['progression', 'GET', /^\/game_tuning\/bounty_game_data\/?$/, CAP('Progression/Game Tuning/Bounty/GetData.md')],
   ['progression', 'GET', /^\/game_tuning\/bounty_game_data_daily\/?$/, CAP('Progression/Game Tuning/Bounty/GetDailyChallenges.md')],
   ['progression', 'GET', /^\/game_tuning\/bounty_game_data_weekly\/?$/, CAP('Progression/Game Tuning/Bounty/GetWeeklyChallenges.md')],
-  ['progression', 'POST', /^\/progression\/tracked_objectives\/[^/]*\/?$/, () => J(wrapped(null))],                              // captured
+  ['progression', 'POST', /^\/progression\/tracked_objectives\/[^/]*\/?$/, (c) => saveTracked(c)],   // DF-TRACKED-QUESTS-1147                              // captured
   // What the player has already met (townspeople talked to, tutorial hints read...). Captured shapes.
   ['progression', 'POST', /^\/encountered-content\/query\/[^/]*\/?$/, (c) => {
     const seen = playerFor(c.req).encountered || {};
@@ -1387,7 +1396,7 @@ const routes = [
     const cur = pr.tracks[id] || (pr.tracks[id] = { progress: 0 }); const rank = Number(c.match[2]) || 0;
     if (/prem/i.test(c.match[3])) cur.confirmed_premium_rank = rank; else cur.confirmed_fremium_rank = rank;
     cur.confirmed_date = isoNow(); saveState(); return J(wrapped(trackOut(p, id, cur)), 'rank confirmed, guess'); }],
-  ['progression', 'GET', /^\/progression\/tracked_objectives\/[^/]*\/?$/, (c) => J(wrapped({ current_set: '', omitted_quests: [], phx_account_id: playerFor(c.req).accountId, tracked_craftables: [], tracked_quests: [] }), 'empty')],
+  ['progression', 'GET', /^\/progression\/tracked_objectives\/[^/]*\/?$/, (c) => { const p = playerFor(c.req); const s = p.trackedObjectives || {}; return J(wrapped({ current_set: s.current_set || '', omitted_quests: s.omitted_quests || [], phx_account_id: p.accountId, tracked_craftables: s.tracked_craftables || [], tracked_quests: s.tracked_quests || [] }), s.current_set ? 'saved set ' + s.current_set : 'empty'); }],   // DF-TRACKED-QUESTS-1147
   // Cooldowns (daily grants, gathering spots...). Read back as a plain map { id: start time } - the game's reply
   // parser takes "payload" as a map of text values; saved by the game server as a list of { cooldown_id, cooldown_started_date }.
   ['progression', 'GET', /^\/cooldown\/[^/]*\/?$/, (c) => { const list = playerFor(c.req).cooldowns || []; return J(wrapped(cooldownMap(list)), list.length ? `${list.length} cooldown(s)` : 'none'); }],

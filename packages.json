@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-25.4",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-25.4.zip",
-                         "sha256":  "30750827ba643ad7f0d3252fc8fca68334b9b309a7ada2fd68dbd186cd383cdb",
+                         "packageVersion":  "2026-10-25.5",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-25.5.zip",
+                         "sha256":  "6a92653f1d6e049a48b7dccc2010eabd1a2783833e4bfeb8be31ead1842cb04a",
                          "date":  "2026-10-25",
-                         "note":  "ammo crash fix, Forever menu art"
+                         "note":  "quests kept per player"
                      }
                  ],
     "launcher":  {

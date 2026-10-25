@@ -43,7 +43,7 @@
                  },
     "package":  {
                     "dir":  "package",
-                    "packageVersion":  "2026-10-25.4",
+                    "packageVersion":  "2026-10-25.5",
                     "setup":  "tools/setup.ps1",
                     "uninstallArgs":  [
                                           "-Uninstall"
