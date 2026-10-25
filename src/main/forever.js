@@ -321,7 +321,9 @@ async function ask() {
   // data folder \ forever-newworld.txt: start a world of my own instead of joining one (merge testing; a streamer's own world later)
   let newWorld = false; try { newWorld = fs.existsSync(path.join(P.dataRoot(), 'forever-newworld.txt')); } catch {}
   const pings = (() => { try { return ctx.social.relayPings ? ctx.social.relayPings() : {}; } catch { return {}; } })();
-  const r = await api('POST', '/v1/forever/play', { mode: S.mode, region, pings, newWorld: newWorld || !!S.helper, helper: !!S.helper, world: S.wantWorld || undefined });
+  const fv = (() => { try { return JSON.parse(fs.readFileSync(path.join(dir(), 'version.json'), 'utf8').replace(/^\uFEFF/, '')).forever || {}; } catch { return {}; } })();   // DF-FV-VERSIONGATE: the director only lets current installs in
+  const r = await api('POST', '/v1/forever/play', { mode: S.mode, region, pings, newWorld: newWorld || !!S.helper, helper: !!S.helper, world: S.wantWorld || undefined, pack: fv.overlay || '', core: fv.core || '' });
+  if (r.action === 'update') { S.wantWorld = null; S.phase = 'off'; S.stale = true; await returnCharacter(); push(); throw new Error(r.why || 'Forever has an update. Press Update Forever first.'); }
   S.season = r.season || S.season;
   if (r.action === 'full' || r.action === 'gone') { S.wantWorld = null; S.phase = 'off'; await returnCharacter(); throw new Error((r.why || 'that world is not available') + '. Press Play Forever to join a world with room.'); }
   if (r.action === 'join') { S.world = r.world; await startJoin(r.world); }
@@ -453,8 +455,10 @@ async function playAway() {
   const region = (() => { try { return (ctx.social.relayPing() || {}).id || ''; } catch { return ''; } })();
   let newWorld = false; try { newWorld = fs.existsSync(path.join(P.dataRoot(), 'forever-newworld.txt')); } catch {}   // the own-world switch applies here too
   const pings = (() => { try { return ctx.social.relayPings ? ctx.social.relayPings() : {}; } catch { return {}; } })();
-  const r = await api('POST', '/v1/forever/play', { mode: S.mode, region, pings, newWorld, world: S.wantWorld || undefined });
+  const fv = (() => { try { return JSON.parse(fs.readFileSync(path.join(dir(), 'version.json'), 'utf8').replace(/^\uFEFF/, '')).forever || {}; } catch { return {}; } })();
+  const r = await api('POST', '/v1/forever/play', { mode: S.mode, region, pings, newWorld, world: S.wantWorld || undefined, pack: fv.overlay || '', core: fv.core || '' });
   S.wantWorld = null;
+  if (r.action === 'update') { S.stale = true; push(); throw new Error(r.why || 'Forever has an update. Stop, press Update Forever, then Play Forever.'); }
   if (r.action === 'full' || r.action === 'gone') throw new Error((r.why || 'that world is not available') + '. Press Play Forever to join a world with room.');
   if (r.action === 'join' && r.world && r.world.host !== (account && account.id)) return startAwayJoin(r.world);
   if (r.action === 'join' && r.world) { try { await api('POST', '/v1/forever/leaveWorld', {}); } catch {} }
