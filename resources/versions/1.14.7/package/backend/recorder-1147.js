@@ -1372,7 +1372,8 @@ const huntpass1147 = require('./huntpass1147').create({playerFor,bearerOf,sessio
 const bounties1147 = require('./bounties1147').create({playerFor,bearerOf,sessions,getPlayers:()=>Object.values(state.players||{}),saveState,loadCapture,next:c=>huntpass1147.handle(c)});
 const equipment1147 = require('./equipment1147').create({playerFor,bearerOf,sessions,getPlayers:()=>Object.values(state.players||{}),saveState,next:c=>bounties1147.handle(c)});
 const dyes1147 = require('./dyes1147').create({playerFor,bearerOf,sessions,inventoryOf,saveState,next:c=>equipment1147.handle(c)});
-const modes1147 = require('./modes1147').create({playerFor,bearerOf,sessions,getPlayers:()=>Object.values(state.players||{}),saveState,next:c=>dyes1147.handle(c)});
+const storeRams1147 = require('./store-rams1147').create({playerFor,bearerOf,sessions,inventoryOf,saveState,loadCapture,next:c=>dyes1147.handle(c)}); // DF-STORE-RAMS-1147
+const modes1147 = require('./modes1147').create({playerFor,bearerOf,sessions,getPlayers:()=>Object.values(state.players||{}),saveState,next:c=>storeRams1147.handle(c)});
 
 
 // KK-LOADOUTS-1147-R1

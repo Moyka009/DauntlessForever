@@ -68,6 +68,19 @@ try {
     # the game's own log from our DLL (it used to be the black console window)
     $own = Join-Path $Bin 'UndauntedClient.log'
     if (Test-Path -LiteralPath $own) { $files = @($files) + $own }
+    # DF-LOGS162 (Oct 24; reports 20 111 112 116 142 161): when the game closes by itself with no crash report, the
+    # loader's own log and Windows' crash record say why (faulting module and offset).
+    $ldr = Join-Path $HomeDir 'AppData\Local\d162_dxgi.log'
+    if (Test-Path -LiteralPath $ldr) { $files = @($files) + $ldr }
+    try {
+        $ev = Get-WinEvent -FilterHashtable @{ LogName = 'Application'; Id = 1000, 1001, 1002; StartTime = $startTime.AddMinutes(-1) } -MaxEvents 20 -ErrorAction Stop |
+            Where-Object { $_.Message -match 'Dauntless|UndauntedInternalServer|dxgi' }
+        if ($ev) {
+            $evFile = Join-Path $env:TEMP 'df162_windows_crashes.txt'
+            ($ev | ForEach-Object { '{0:u}  id {1}  {2}' -f $_.TimeCreated, $_.Id, ($_.Message -replace '\s+', ' ') }) | Set-Content -LiteralPath $evFile -Encoding ASCII
+            $files = @($files) + $evFile
+        }
+    } catch {}
     Save-LogZip $files 'client_logs.zip'
 } catch { Say "Could not collect the logs: $($_.Exception.Message)" 'Yellow' }
 exit 0

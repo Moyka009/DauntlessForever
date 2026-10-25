@@ -1,0 +1,28 @@
+{
+  "note": "Rams store offers (step 1: one test dye). price is in Rams (CURRENCY_NOTES). Prices for step 2 follow the Dauntless Revived table.",
+  "disabledFreePacks": [
+    "dyes1147_all_dyes"
+  ],
+  "disabledFreePacksNote": "Free packs taken off the store so dyes are bought with Rams. Items players already own are kept. Remove an id here to bring that pack back.",
+  "offers": [
+    {
+      "sku": "storerams1147_test_dye",
+      "name": "Heatwave Dye",
+      "description": "Test offer: costs 500 Rams.",
+      "price": 500,
+      "tags": [
+        "webstore",
+        "dyes",
+        "dye_armour",
+        "cat_item_armour_dye"
+      ],
+      "items": [
+        {
+          "catalogId": "DYE_ASHORANGE_DURABLE",
+          "quantity": 1,
+          "kind": "stack"
+        }
+      ]
+    }
+  ]
+}
