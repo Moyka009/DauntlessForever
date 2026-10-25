@@ -10,11 +10,11 @@
                      },
                      {
                          "id":  "1.14.7",
-                         "packageVersion":  "2026-10-25.3",
-                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-25.3.zip",
-                         "sha256":  "11e9275e381d802818955fc16b8e2973d987312765b07da025dff2d36f106e32",
+                         "packageVersion":  "2026-10-25.4",
+                         "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/1.14.7-2026-10-25.4.zip",
+                         "sha256":  "30750827ba643ad7f0d3252fc8fca68334b9b309a7ada2fd68dbd186cd383cdb",
                          "date":  "2026-10-25",
-                         "note":  "Trial boss Game Rule, +30 loadout slots by default, Forever worlds on base rules"
+                         "note":  "ammo crash fix, Forever menu art"
                      }
                  ],
     "launcher":  {

@@ -23,6 +23,11 @@ foreach ($gp in $GamePaks) {
     if ((Hash256 (Join-Path $cfg.GameDir "Archon\Content\Paks\$($gp.Name)")) -ne $gp.Hash) { Fail "the $($gp.What) is not in the game folder yet. Run `"1 - SETUP.bat`" again." }
 }
 if (@(Get-PlayerGame).Count -gt 0) { Fail 'the game is already running. Close it first.' }
+# DF-FOREVER-ART (Oct 25): a Forever install carries bin\zzzzzzzzzzzzzzzz_ForeverArt1147_P.pak (main menu video and
+# loading screens with community art); normal 1.14.7 does not, so the pak is put in or taken out here.
+try { $faN = 'zzzzzzzzzzzzzzzz_ForeverArt1147_P.pak'; $faS = Join-Path $Root "bin\$faN"; $faD = Join-Path $cfg.GameDir "Archon\Content\Paks\$faN"
+    if (Test-Path -LiteralPath $faS) { if ((Hash256 $faS) -ne (Hash256 $faD)) { Copy-Item -LiteralPath $faS -Destination $faD -Force } }
+    elseif (Test-Path -LiteralPath $faD) { Remove-Item -LiteralPath $faD -Force } } catch { Say "  (menu art not changed: $($_.Exception.Message))" 'DarkYellow' }
 # KK-MULTIPLAYER-R4-R1: unsupported fresh-character travel is refused before any host connection.
 $joinCheck=Join-Path $PSScriptRoot 'multiplayer-join-check1147.js'
 $joinNode=$cfg.Node;if(-not $joinNode -or -not(Test-Path -LiteralPath $joinNode)){$joinNode=Find-Node}
