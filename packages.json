@@ -19,11 +19,11 @@
                  ],
     "launcher":  {
                      "version":  "0.3.0",
-                     "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.3.0",
+                     "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
                      "notes":  "Forever Hunts beta: new Forever tab",
                      "date":  "2026-10-25",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/v0.3.0/app-0.3.0.asar",
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.3.0.asar",
                                  "sha256":  "eeb80883b4c8d0df65a2b1025f95e13e4978573c818ae71c195ac1720f194471",
                                  "size":  8617660,
                                  "minShell":  "0.2.4"
