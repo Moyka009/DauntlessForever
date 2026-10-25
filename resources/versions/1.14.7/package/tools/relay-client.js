@@ -7,6 +7,8 @@
 //
 // Usage: node relay-client.js <relay host> [control port] [status file]
 // Writes the status file (JSON) when connected: {"ip":"x.x.x.x","base":21000,"slot":0,"time":"..."}; deletes it on exit.
+// When the connection to the relay drops, it reconnects and asks for its own slot back (same ports), so the join
+// address and the game's ports stay the same. A relay without that (older) gives a new slot, as before.
 'use strict';
 const net = require('net');
 const dgram = require('dgram');
@@ -30,6 +32,7 @@ process.on('exit', clearStatus);
 for (const sig of ['SIGINT', 'SIGTERM', 'SIGBREAK']) process.on(sig, () => process.exit(0));
 
 let session = null;          // {token, tokenBuf, base, ip}
+let lastToken = '';          // the slot's token, kept across a dropped connection to ask for the same slot back
 let ctrl = null;
 let tunnel = null;
 const flows = new Map();     // "idx|ip|port" -> {sock, last}
@@ -87,7 +90,11 @@ function connect() {
     ctrl = net.connect(CONTROL_PORT, RELAY);
     ctrl.setNoDelay(true);
     ctrl.setKeepAlive(true, 15000);
-    ctrl.on('connect', () => ctrl.write(JSON.stringify({ op: 'hello', v: 1, key: RELAY_KEY }) + '\n'));
+    ctrl.on('connect', () => {
+        const hello = { op: 'hello', v: lastToken ? 2 : 1, key: RELAY_KEY };
+        if (lastToken) hello.resume = lastToken;
+        ctrl.write(JSON.stringify(hello) + '\n');
+    });
     ctrl.on('data', chunk => {
         buf += chunk.toString('utf8');
         let nl;
@@ -96,11 +103,22 @@ function connect() {
             let m; try { m = JSON.parse(line); } catch { continue; }
             if (m.op === 'ok') {
                 if (Number(m.tunnelPort)) TUNNEL_PORT = Number(m.tunnelPort);
+                const same = !!lastToken && m.token === lastToken;
+                if (lastToken && !same) {
+                    // a different slot: the old players' connections are gone
+                    for (const f of flows.values()) try { f.sock.close(); } catch {}
+                    flows.clear();
+                }
+                // a fresh tunnel socket after any drop (a network that blocked the old one may let a new one through);
+                // the players' local sockets stay, their replies go out through the new tunnel
+                if (lastToken && tunnel) { try { tunnel.close(); } catch {} tunnel = null; }
+                lastToken = m.token;
                 session = { token: m.token, tokenBuf: Buffer.from(m.token, 'hex'), base: m.base, ip: m.ip || RELAY, slot: m.slot };
                 startTunnel();
                 register();
                 writeStatus({ ip: session.ip, base: session.base, slot: session.slot, time: new Date().toISOString() });
-                log(`RELAY CONNECTED: players use ${session.ip}:${session.base} (slot ${session.slot})`);
+                if (same) log(`RELAY CONNECTED again on the same ports: players still use ${session.ip}:${session.base} (slot ${session.slot})`);
+                else log(`RELAY CONNECTED: players use ${session.ip}:${session.base} (slot ${session.slot})`);
             } else if (m.op === 'tcp' && session) {
                 attach(m.id);
             } else if (m.op === 'pong') {
@@ -112,10 +130,9 @@ function connect() {
     });
     ctrl.on('error', e => log('relay connection error:', e.code || e.message));
     ctrl.on('close', () => {
-        if (session) log('relay connection lost; reconnecting in 5 s (the join address may change)');
+        if (session) log('relay connection lost; reconnecting in 5 s and asking for the same ports');
+        // the players' sockets are kept: if the relay gives the same slot back, their games carry on
         session = null; clearStatus();
-        for (const f of flows.values()) try { f.sock.close(); } catch {}
-        flows.clear();
         setTimeout(connect, 5000);
     });
 }

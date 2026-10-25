@@ -238,8 +238,8 @@
     const title = $('vc-title');
     if (title) title.textContent = S.room ? (others.length ? t('Voice with {names}', { names: others.join(', ') }) : t('Voice: just you so far')) : t('Voice');
     if (S.room) status.textContent = c.muted ? t('Muted') : (c.mode === 'ptt' && c.pttKeyName ? t('Hold {key} to talk', { key: c.pttKeyName }) : how);
-    else if (S.available) status.textContent = (c.auto && !S.available.public) ? t('Joining voice...') : t('Ready: open the gear to join');
-    else status.textContent = t('Starts when you host or join');
+    else if (S.available) status.textContent = (c.auto && !S.available.public) ? t('Joining voice...') : (S.available.forever ? t('Your world has a voice room') : t('Ready to join'));
+    else status.textContent = t('Press Join when you are in a game or a world');
     status.title = S.room ? t('In voice: {name}', { name: S.room.name }) : '';
     if (S.error) setNote(tm(S.error), true);
     const micEl = $('vc-mic');
@@ -247,6 +247,8 @@
     const railV = $('fp-rail-voice'); if (railV) { railV.hidden = !S.room; railV.style.color = S.room && c.muted ? 'var(--ember)' : ''; }
 
     const jb = $('vc-join'); jb.hidden = !!S.room || !S.available;
+    const bb = $('vc-join-bar'); if (bb) { bb.hidden = !!S.room || !S.available; }
+    const lbb = $('vc-leave-bar'); if (lbb) { lbb.hidden = !S.room; }
     const lb = $('vc-leave'); lb.hidden = !S.room;
     const mb = $('vc-mute'); mb.hidden = !S.room; mb.textContent = c.muted ? t('Unmute') : t('Mute');
     mb.classList.toggle('on', !!c.muted);
@@ -304,6 +306,8 @@
 
   async function init() {
     $('vc-join').onclick = async () => { const r = await L.voiceJoin(); if (r && r.ok === false) setNote(tm(r.error), true); else setNote(''); };
+    const bb = $('vc-join-bar'); if (bb) bb.onclick = async () => { const r = await L.voiceJoin(); if (r && r.ok === false) setNote(tm(r.error), true); else setNote(''); };
+    const lbb = $('vc-leave-bar'); if (lbb) lbb.onclick = async () => { await L.voiceLeave(); };
     $('vc-leave').onclick = async () => { await L.voiceLeave(); setNote(t('You left voice. Join again any time.')); };
     $('vc-mute').onclick = () => L.voiceSettings({ muted: !(S && S.settings.muted) });
     $('vc-mode-ptt').onchange = () => L.voiceSettings({ mode: 'ptt' });

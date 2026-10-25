@@ -81,6 +81,7 @@ const onlineOn = () => !(network && network.online && network.online.enabled ===
 const onlineOffMessage = () => (network.online && network.online.message) || 'Online play is switched off for now.';
 // How far this PC is from the relay(s): the host page says when it is far (EU players on a US relay, say)
 let relayPing = null;    // { name, ms } of the fastest relay, or null
+let relayPings = {};     // every relay: id -> ms (Forever: the director places you by these)
 function measureOne(host, port) {
   return new Promise((resolve) => {
     const t0 = Date.now(); const s = require('net').connect({ host, port });
@@ -93,14 +94,15 @@ const relayList = () => (Array.isArray(network.relays) && network.relays.length 
 function regionOf(ip) { const r = relayList().find(x => x.host === ip); return r ? String(r.id || r.name || r.host) : ''; }
 async function measureRelays() {
   const list = relayList();
-  let best = null;
+  let best = null; const all = {};
   for (const r of list) {
     if (!r || !r.host) continue;
     let ms = null;
     for (let i = 0; i < 3; i++) { const m = await measureOne(r.host, Number(r.controlPort) || 7000); if (m !== null && (ms === null || m < ms)) ms = m; }
+    if (ms !== null) all[String(r.id || r.name || r.host)] = ms;
     if (ms !== null && (!best || ms < best.ms)) best = { name: r.name || r.host, ms, id: String(r.id || r.name || r.host) };
   }
-  relayPing = best;
+  relayPing = best; relayPings = all;
   push();
 }
 
@@ -766,5 +768,5 @@ module.exports = { init, shutdown, loadNetwork, getNetwork: () => network, call,
   setHostModeHooks: (h) => { hostModeHooks = h; }, startHostMode, stopHostNow, stopHostLater, announce, onlineOn, onlineOffMessage,
   hostingVersion: () => { const h = hostingVersion(); return h && hostingNow === h.v.id ? h : null; },
   guests: () => (hostingNow && state && state.guests) || [], friendsCount: () => ((state && state.friends) || []).length,
-  closingIn: () => (closing ? Math.max(0, Math.ceil((closing.until - Date.now()) / 1000)) : 0), relayPing: () => relayPing,
+  closingIn: () => (closing ? Math.max(0, Math.ceil((closing.until - Date.now()) / 1000)) : 0), relayPing: () => relayPing, relayPings: () => relayPings,
   regionName: (ip) => { const r = relayList().find(x => x.host === ip); return r ? String(r.name || r.id || ip) : ''; }, push: () => push(), poll: () => poll() };

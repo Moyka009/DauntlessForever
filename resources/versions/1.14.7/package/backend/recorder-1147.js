@@ -254,6 +254,14 @@ function huntServer(id) {
   } catch (e) { return null; }
 }
 const placeBase = (u) => String(u || '').replace(/\?PlayerHuntIds=[^?]*/g, '');
+// DF-FOREVERHUNTS-1147: may `me` (+ party mates not already there) join this open hunt? Room under the cap; a hunt
+// stays open until its server ends.
+function foreverRoom(pl, me, mates, max) {
+  const coming = 1 + [...mates].filter((k) => k !== me && !pl.owners.has(k)).length;
+  const there = [...pl.owners].filter((k) => k !== me).length;
+  if (there + coming > max) return false;
+  return true;
+}
 function trialsRetryOn() {   // DF-WARM-1147: data\mods.txt trialsretry=on (launcher Mods page)
   try { return fs.readFileSync(path.join(DATA_DIR, 'mods.txt'), 'utf8').split(/\r?\n/).some((l) => l.trim().toLowerCase() === 'trialsretry=on'); } catch (e) { return false; }
 }
@@ -1065,6 +1073,13 @@ const routes = [
       dest.city = false; dest.url = follow.url; dest.label = follow.label + ' (with the party)'; delete dest.note;
       b.playerHuntId = follow.playerHuntId || b.playerHuntId; b.gameMode = follow.gameMode; b.hunts = follow.huntId ? [follow.huntId] : b.hunts;
     }
+    // DF-FOREVERHUNTS-1147 (Oct 23): hunts open to everyone (Game Rule forever_hunts = max players, 0 = off). A hunt
+    // started under it is a shared place: anyone asking for the same hunt joins it (the game's own drop-in arrival)
+    // while there is room and the behemoth is alive; a party that does not fit gets its own hunt. Not for trials,
+    // Gauntlet, escalations, the tutorial or the Training Grounds.
+    const fhMax = Number(gameRules.settings.forever_hunts) || 0;
+    const fhOk = fhMax > 1 && !dest.city && !!dest.url && !follow && !['TRIALS', 'GAUNTLET', 'TRAINING_GROUND', 'FTUE', 'ESCALATION'].includes(String(b.gameType || ''));
+    if (fhOk) dest.url = /\?MaxPlayers=\d+/.test(dest.url) ? dest.url.replace(/\?MaxPlayers=\d+/, `?MaxPlayers=${fhMax}`) : dest.url + `?MaxPlayers=${fhMax}`;
     // The second server needs to know which player hunt each player is on: quest objectives check it
     // (UObjective::HasRequiredPlayerHuntTags / IsInRequiredRegion). The game server reads it from the map option
     // PlayerHuntIds=<account>:<player hunt>[,...] (UHuntSystemComponent::ReadPlayerHuntIDFromCommandLine). Oct 17.
@@ -1077,7 +1092,7 @@ const routes = [
     // gets their own hunt server, so players who are not grouped can hunt different places at the same time.
     const me = keyFor(c.req);
     const mates = partyMateKeys(p);
-    let joinId = null;
+    let joinId = null, fhPlaceId = null;   // DF-FOREVERHUNTS-1147
     if (!dest.city) {
       const base = placeBase(dest.url);
       const mine = placeOf(me);
@@ -1088,10 +1103,11 @@ const routes = [
         for (const k of [...mine.owners]) leavePlace(k);
         console.log('Trials Quick Retry: a retry: asking for a fresh trial server (the spare takes over)');
       }
-      const join = (follow && places.get(follow.id)) || [...places.values()].find((pl) => pl.base === base && pl.owners.size && (ours(pl) || (b.gameType === 'TRAINING_GROUND' && pl.reuse)));
+      const join = (follow && places.get(follow.id)) || [...places.values()].find((pl) => pl.base === base && pl.owners.size && (ours(pl) || (b.gameType === 'TRAINING_GROUND' && pl.reuse) || (fhOk && pl.forever && foreverRoom(pl, me, mates, fhMax))));   // DF-FOREVERHUNTS-1147: an open hunt with room is joined
       if (join) {
         if (placeOf(me) && placeOf(me) !== join) leavePlace(me);
         join.owners.add(me); joinId = join.id; dest.url = join.url || dest.url;
+        if (fhOk && join.forever) { fhPlaceId = join.id; joinId = 'local1$' + crypto.randomBytes(16).toString('hex'); }   // DF-FOREVERHUNTS-1147: fresh match id, same place
       }
       else if (follow) {
         // the leader's place is not (or no longer) being served: ask for it again under the same id
@@ -1105,7 +1121,7 @@ const routes = [
     p.candidate = { id: joinId || ('local1$' + crypto.randomBytes(16).toString('hex')), gameMode: b.gameMode || 'CITY', gameType: b.gameType || null,
       huntId: Array.isArray(b.hunts) && b.hunts.length ? b.hunts[0] : null, playerHuntId: b.playerHuntId || null, gauntletLevel: b.gameType === 'GAUNTLET' ? b.gauntlet_level : null,
       buildId: b.buildId || '647472_rel-1.14.7_shipping', gameSessionId: crypto.randomBytes(16).toString('hex'),
-      city: dest.city, url: dest.url || null, label: dest.label, asked: Date.now() };
+      city: dest.city, url: dest.url || null, label: dest.label, asked: Date.now(), placeId: fhPlaceId || undefined };   // DF-FOREVERHUNTS-1147
     // DF-PARTY-HOME: the leader's way home is offered to the party. DF-PARTY-ENDSCREEN (Oct 22): not after an escalation
     // or a trial. Those end on the game's own results screen: the members' games did not take the trip there, left the
     // party, and for about 3 minutes left again after every re-invite (report 18). They come home by themselves.
@@ -1116,7 +1132,7 @@ const routes = [
     // Outside the city: ask server-211.ps1 (through a small file) to start a second server on that map.
     if (!dest.city && !joinId) {
       leavePlace(me);
-      addPlace({ id: p.candidate.id, url: dest.url, base: placeBase(dest.url), label: dest.label, at: Date.now(), owners: new Set([me]) }, b.gameType === 'TRAINING_GROUND');
+      addPlace({ id: p.candidate.id, url: dest.url, base: placeBase(dest.url), label: dest.label, at: Date.now(), owners: new Set([me]), forever: fhOk }, b.gameType === 'TRAINING_GROUND');   // DF-FOREVERHUNTS-1147
     }
     saveState();
     return J({ candidateId: p.candidate.id, gameMode: p.candidate.gameMode, huntId: null, status: 'MATCHING', statusReason: null },
@@ -1150,8 +1166,9 @@ const routes = [
     const cd = p.candidate;
     if (!cd) return { status: 404, note: 'no match was asked for' };
     const city = cd.city !== false;
-    let srv = city ? liveServer(SERVER_FILE) : huntServer(cd.id);
-    if (srv && !city && srv.id !== cd.id) srv = null;                       // a server for an earlier destination
+    const cdPlace = cd.placeId || cd.id;   // DF-FOREVERHUNTS-1147: a rejoin's match id differs from its place id
+    let srv = city ? liveServer(SERVER_FILE) : huntServer(cdPlace);
+    if (srv && !city && srv.id !== cdPlace) srv = null;                       // a server for an earlier destination
     const out = { candidateId: cd.id, candidateStatusPeriodMillis: srv ? 10000 : 3000, gameMode: cd.gameMode, huntId: cd.huntId, playerStates: { [p.accountId]: {} } };
     if (srv) out.serverInfo = { buildId: cd.buildId, gameSessionId: cd.gameSessionId, host: (PUBLIC_HOST && (!srv.host || srv.host === '127.0.0.1')) ? PUBLIC_HOST : (srv.host || '127.0.0.1'), port: srv.port + (PUBLIC_HOST ? PUBLIC_PORT_OFFSET : 0) };
     const waited = Math.round((Date.now() - (cd.asked || Date.now())) / 1000);

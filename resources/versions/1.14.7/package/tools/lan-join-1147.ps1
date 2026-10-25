@@ -140,6 +140,13 @@ function Invoke-Travel([string]$What) {
 if ($node -and (Test-Path -LiteralPath $travelJs)) {
     if (-not $relayPort -and (Test-Recorder)) { Fail 'Dauntless 1.14.7 is still running on THIS PC (its backend answers). Close PLAY here first, then join again.' }
     $pending = $null; try { $pending = Get-Content -LiteralPath $pendingFile -Raw | ConvertFrom-Json } catch {}
+    # DF-TRAVEL-BADNOTE: a note that cannot be read (empty, cut off, locked) used to skip sending your character, so you
+    # played the host's own blank copy and could never come home. Put it aside and travel from this PC's save.
+    if (-not $pending -and (Test-Path -LiteralPath $pendingFile)) {
+        $bad = "$pendingFile.unreadable-$(Get-Date -Format yyyyMMdd-HHmmss)"
+        try { Move-Item -LiteralPath $pendingFile -Destination $bad -Force -ErrorAction Stop } catch { Remove-Item -LiteralPath $pendingFile -Force -ErrorAction SilentlyContinue }
+        Say 'An old travel note could not be read; ignoring it and sending the character saved on this PC.' 'Yellow'
+    }
     if ($pending -and ($pending.host -eq $hostLabel -or $pending.host -eq $addr)) {
         Say 'Your last game with this host did not bring your character home. Doing that first...'
         $env:TRAVEL_PENDING = '1'   # travel-1147.js keeps this PC's copy when it changed since that game (exit 4)

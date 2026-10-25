@@ -408,6 +408,32 @@
           "Standard rules"
         ]
       ]
+    },
+    {
+      "key": "forever_hunts",
+      "env": "RULE_FOREVER_HUNTS",
+      "title": "Forever Hunts (open hunts)",
+      "blurb": "Hunts you host stay open to everyone on your server: a player asking for the same hunt drops into it while there is room and the behemoth is alive. A party that does not fit gets its own hunt. Not for trials, Gauntlet, escalations or the Training Grounds.",
+      "default": "0",
+      "tested": false,
+      "choices": [
+        [
+          "0",
+          "Off"
+        ],
+        [
+          "4",
+          "Up to 4 players"
+        ],
+        [
+          "6",
+          "Up to 6 players"
+        ],
+        [
+          "8",
+          "Up to 8 players"
+        ]
+      ]
     }
   ]
 }

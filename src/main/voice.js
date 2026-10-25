@@ -16,7 +16,7 @@ const { spawn } = require('child_process');
 const { ipcMain } = require('electron');
 const settings = require('./settings');
 
-const DEFAULTS = { auto: true, mode: 'ptt', pttKey: null, vadLevel: 35, inputId: '', volumes: {}, muted: false };
+const DEFAULTS = { auto: false, mode: 'ptt', pttKey: null, vadLevel: 35, inputId: '', volumes: {}, muted: false };   // voice is opt-in: nobody lands in a room without pressing Join (Addison, Oct 24)
 
 let ctx = null;           // { social, send, log }
 let room = null;          // { id, name, iceServers }
@@ -134,7 +134,7 @@ function syncHelper() { if (needHelper()) { startHelper(); watchKey(); } else if
 // ------------------------------------------------------------------ the room
 function publicState() {
   const c = cfg();
-  const want = ctx.social.currentRoom();
+  const want = wantedRoom();
   return {
     room: room ? { id: room.id, name: room.name, iceServers: room.iceServers } : null,
     me: (ctx.social.identity() || {}).id || null,
@@ -145,6 +145,14 @@ function publicState() {
 }
 function push() { ctx.send('voice:update', publicState()); }
 
+// the room this player could be in: a friend's game (social), or the Forever world they are in (its host's id, the
+// world's voice room; it follows the world when the host changes)
+function wantedRoom() {
+  const r = ctx.social.currentRoom();
+  if (r) return r;
+  try { const fv = ctx.forever && ctx.forever.voiceRoom && ctx.forever.voiceRoom(); if (fv) return fv; } catch {}
+  return null;
+}
 async function join(target) {
   const r = await ctx.social.call('POST', '/v1/voice/join', { room: target.id });
   room = { id: r.room, name: target.name, iceServers: r.iceServers || [] };
@@ -184,7 +192,7 @@ async function pollLoop() {
 async function tick() {
   try {
     const c = cfg();
-    const want = ctx.social.offlineMode() ? null : ctx.social.currentRoom();
+    const want = ctx.social.offlineMode() ? null : wantedRoom();
     if (!want) { leftByUser = null; if (room && !joinedByUser) await leave(); }
     else if (room && room.id !== want.id && !joinedByUser) await leave();
     // a game open to everyone: voice starts only when the player presses Join voice (no strangers by surprise)
@@ -199,8 +207,8 @@ function init(c) {
   ctx = c;
   ipcMain.handle('voice:state', () => publicState());
   ipcMain.handle('voice:join', async () => {
-    const want = ctx.social.currentRoom();
-    if (!want) return { ok: false, error: 'Host a game or join a friend\'s game first.' };
+    const want = wantedRoom();
+    if (!want) return { ok: false, error: 'Host a game, join a friend\'s game, or be in a Forever world first.' };
     leftByUser = null; joinedByUser = true;
     try { if (!room) await join(want); return { ok: true }; } catch (e) { joinedByUser = false; return { ok: false, error: e.message }; }
   });

@@ -106,12 +106,22 @@ try {
     try { Invoke-RestMethod -Uri "http://${ip}:$base/_recorder/ping" -TimeoutSec 8 | Out-Null; $ok = $true } catch {}
     if ($ok) { Say 'Checked: your backend answers through the relay.' 'Green' }
     else { Say 'Warning: your backend did not answer through the relay yet. If your friend cannot join, send logs\relay.log and logs\gateway.log.' 'Yellow' }
+    # DF-RELAY-RESUME: the relay connection can drop and come back; relay-client asks for the same ports, but a relay
+    # that restarted (or an older one) gives new ones. Then the address this backend hands out is wrong: notice it.
+    function Test-RelayMoved {
+        try {
+            if (-not (Test-Path -LiteralPath $StatusFile)) { return $false }
+            $now = Get-Content -LiteralPath $StatusFile -Raw -ErrorAction Stop | ConvertFrom-Json
+            return ($now.base -and ([int]$now.base -ne $base))
+        } catch { return $false }
+    }
     if ($HostMode) {
         Say 'Host Mode is running. Players join from their launcher (Friends, or Play online when it is open to everyone).' 'Green'
         $relayLost = $false
         while (-not $play.HasExited) {
             if ($gateway.HasExited) { Say 'The backend gateway stopped: restarting Host Mode.' 'Yellow'; $relayLost = $true; break }
             if ($relay.HasExited) { Say 'The relay connection was lost: stopping, so the launcher can start Host Mode again.' 'Yellow'; $relayLost = $true; break }
+            if (Test-RelayMoved) { Say 'The relay gave this PC new ports after a dropped connection: restarting Host Mode so players get the new address.' 'Yellow'; $relayLost = $true; break }
             Start-Sleep -Seconds 2
         }
         if ($relayLost) {
@@ -132,9 +142,11 @@ try {
     Say '============================================================' 'Cyan'
     Say ''
     Say 'Keep this window open. When you close your game, PLAY shuts everything down and this window disconnects.'
+    $warnedMove = $false
     while (-not $play.HasExited) {
         if ($gateway.HasExited) { Say 'The backend gateway stopped. Close this game and start hosting again.' 'Yellow'; break }
         if ($relay.HasExited) { Say 'The relay connection program stopped. Friends cannot reach you until you start ONLINE - HOST again.' 'Yellow'; break }
+        if (-not $warnedMove -and (Test-RelayMoved)) { $warnedMove = $true; Say 'The relay connection dropped and came back on NEW ports: friends cannot join this session any more. Close your game and host again.' 'Yellow' }
         Start-Sleep -Seconds 2
     }
     $play.WaitForExit()

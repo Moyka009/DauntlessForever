@@ -2,3 +2,13 @@ node_modules/
 /dist/
 /resources/runtime/
 /wip/
+# local test leftovers, never for the repo
+*.bak
+*.whl
+/*.zip
+/_kit/
+/_kit2/
+/_to_delete/
+/_wip1147/
+/_wip_launcher/
+/tools/relay/

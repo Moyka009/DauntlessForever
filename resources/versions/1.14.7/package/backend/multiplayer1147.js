@@ -15,7 +15,7 @@ function create({root,getState,liveServer,huntServer}){
   const live=readList('data/server_hunt.json').map(x=>x&&x.id).filter(id=>id&&!retired.has(id)&&huntServer(id));
   for(const id of new Set([...live,...wanted.map(w=>w&&w.id).filter(Boolean)])){
    const w=wanted.find(x=>x&&x.id===id);
-   const rows=Object.entries(getState().players||{}).filter(([,p])=>p.candidate?.city===false&&p.candidate.id===id);
+   const rows=Object.entries(getState().players||{}).filter(([,p])=>p.candidate?.city===false&&(p.candidate.placeId||p.candidate.id)===id);
    const candidate=rows[0]?.[1].candidate;
    const url=candidate?.url||w?.url||null;
    const place={id,url,base:url?url.replace(/\?PlayerHuntIds=[^?]*/g,''):null,label:candidate?.label||w?.label||'an existing hunt',owners:new Set(rows.map(([key])=>key)),reuse:!!w?.reuse,asked:w?.at};
@@ -35,7 +35,7 @@ function create({root,getState,liveServer,huntServer}){
   if(live)place.at=Date.now();
   else if(Date.now()-place.at>DEAD_MS){place.owners.clear();return;}
   for(const key of place.owners){
-   if(key!==unknown){const cd=players[key]&&players[key].candidate;if(!cd||cd.city!==false||cd.id!==place.id){place.owners.delete(key);continue;}}
+   if(key!==unknown){const cd=players[key]&&players[key].candidate;if(!cd||cd.city!==false||(cd.placeId||cd.id)!==place.id){place.owners.delete(key);continue;}}   // DF-FOREVERHUNTS-1147: an open-hunt joiner's match id differs from its place id (candidate.placeId)
    if(key===unknown){if(!huntServer(place.id))place.owners.delete(key);continue;}
    if(Date.now()-(seen.get(key)||0)>LEASE_MS)place.owners.delete(key);
   }

@@ -33,6 +33,7 @@ function showPage(name) {
   for (const pg of document.querySelectorAll('.page')) pg.hidden = pg.id !== 'page-' + name;
   drawPage(name);
   document.querySelector('.content').scrollTop = 0;
+  try { document.dispatchEvent(new CustomEvent('page:shown', { detail: name })); } catch {}   // DF-FOREVER: page scripts listen
 }
 function drawPage(name) {
   if (name === 'settings') fillSettings();

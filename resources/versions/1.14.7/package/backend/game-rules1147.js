@@ -20,7 +20,7 @@ function readSettings(root,hosting){
  // DF-HOSTRULES: with friends the host's own rules apply ("When you host" = Use my rules, the default); games open to
  // everyone (DF_PUBLIC_GAME=1: Allow randoms, Play online) and "Standard rules" reset them to normal
  const standard=hosting&&(process.env.DF_PUBLIC_GAME==='1'||settings.host_rules===0);
- if(standard)for(const key of Object.keys(settings))if(key!=='extra_loadout_slots'&&key!=='host_rules')settings[key]=['free_crafting','rare_core_kill','free_platinum'].includes(key)?0:1; // DF-LOADOUT-SLOTS: kept when hosting (only adds slots)
+ if(standard)for(const key of Object.keys(settings))if(key!=='extra_loadout_slots'&&key!=='host_rules'&&key!=='forever_hunts'/*DF-FOREVERHUNTS-1147*/)settings[key]=['free_crafting','rare_core_kill','free_platinum'].includes(key)?0:1; // DF-LOADOUT-SLOTS: kept when hosting (only adds slots)
  return Object.freeze(settings);
 }
 function create(root,options={}){

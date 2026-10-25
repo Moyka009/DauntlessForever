@@ -116,4 +116,20 @@ contextBridge.exposeInMainWorld('launcher', {
   hostBackup: invoke('hostmode:backup'),
   hostOpenBackups: invoke('hostmode:openBackups'),
   onHostUpdate: on('hostmode:update'),
+  // Forever (main/forever.js, renderer/forever.js)
+  foreverState: invoke('forever:state'),
+  foreverPlay: invoke('forever:play'),              // ('fresh' | 'any', [world host id: join that world])
+  foreverStop: invoke('forever:stop'),
+  foreverBoard: invoke('forever:board'),
+  foreverLeaderboard: invoke('forever:leaderboard'),
+  foreverPlayOwn: invoke('forever:playOwn'),            // Host Mode: open this PC's game in its own world   // hosts ranked by what they gave the world
+  foreverCheck: invoke('forever:check'),            // the opt-in host check: runs, shows the numbers, sends nothing
+  foreverSendScore: invoke('forever:sendScore'),
+  foreverClearScore: invoke('forever:clearScore'),
+  foreverSetup: invoke('forever:setup'),             // builds versions\forever from 1.14.7 + the server's Forever files
+  foreverCards: invoke('forever:cards'),              // the two character cards (Forever character from the VPS, own 1.14.7 Slayer)
+  foreverAccess: invoke('forever:access'),
+  foreverCheckAndHost: invoke('forever:checkAndHost'),   // nobody is hosting: run the check, send, host
+  foreverWait: invoke('forever:wait'),
+  onForeverUpdate: on('forever:update'),
 });

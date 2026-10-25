@@ -23,6 +23,7 @@
   </div>
   <nav class="nav" id="nav">
     <button class="nav-item selected" data-page="play"><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M4.5 3v10l8-5z" fill="currentColor"/></svg></span>Play</button>
+    <button class="nav-item" data-page="forever" hidden><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 2.2c2.2 0 3.6 1.5 3.6 3.4 0 2.6-3.6 5.6-3.6 5.6S4.4 8.2 4.4 5.6C4.4 3.7 5.8 2.2 8 2.2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>Forever<span class="nav-new">Beta</span></button>
     <button class="nav-item" data-page="host"><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="4.5" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="2.5" y="9" width="11" height="4.5" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="5.2" cy="4.75" r=".9" fill="currentColor"/><circle cx="5.2" cy="11.25" r=".9" fill="currentColor"/></svg></span>Host Mode<span class="nav-dot" id="nav-host-dot" hidden></span></button>
     <button class="nav-item" data-page="seasons"><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 1.5 9.4 6.6 14.5 8 9.4 9.4 8 14.5 6.6 9.4 1.5 8 6.6 6.6z" fill="currentColor"/></svg></span>Seasons</button>
     <button class="nav-item" data-page="events"><span class="nav-ico" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 2.5 13.5 8 8 13.5 2.5 8z" fill="currentColor"/></svg></span>Events</button>
@@ -137,6 +138,59 @@
 </section>
 
 <!-- ============================================================ Host Mode -->
+<section class="page" id="page-forever" hidden>
+  <h1 class="page-title">Forever</h1>
+  <p class="lead">One world for everyone: open hunts up to 8, hosts that hand over without a loading-screen-to-menu, fresh seasonal characters. Press Play Forever and the director puts you in a world with room, or has this PC host one.</p>
+  <div id="fv-missing" class="card" hidden>
+    <div class="card-head"><h2 id="fv-missing-title">Forever is not set up on this PC</h2><span class="pill">Beta</span></div>
+    <p id="fv-missing-text"></p>
+    <div class="hm-inline"><button class="primary-sm" id="fv-setup">Set up Forever</button></div>
+  </div>
+  <div class="card" id="fv-steps" hidden>
+    <div class="card-head"><h2>Help make Forever better</h2><span class="pill">Step 1 of 1</span></div>
+    <p>Forever runs on players' PCs. A 20-second check tells the director whether this PC could host hunts for others. You see the numbers first; nothing is sent until you press Send. Play works either way.</p>
+    <div class="hm-inline"><button class="primary-sm" id="fv-step-check">Run the host check</button><button class="ghost hm-small" id="fv-step-skip">Skip</button></div>
+    <div id="fv-step-result" class="fv-check"></div>
+  </div>
+  <div class="hm-top">
+    <div class="hm-status">
+      <span class="hm-dot" id="fv-dot" aria-hidden="true"></span>
+      <div class="hm-status-text"><div class="hm-state" id="fv-state">Not playing</div><div class="hm-sub" id="fv-sub"></div></div>
+    </div>
+    <div class="hm-acts">
+      <button class="ghost" id="fv-stop" hidden>Stop</button>
+    </div>
+  </div>
+  <div class="fv-checklist" id="fv-checklist"></div>
+  <div class="fv-cards" id="fv-cards">
+    <div class="fv-card" id="fv-card-fresh"></div>
+    <div class="fv-card" id="fv-card-any"></div>
+  </div>
+  <div class="hm-inline" id="fv-needhost" hidden><button class="primary-sm" id="fv-needhost-check">Run the check and host</button><button class="ghost hm-small" id="fv-needhost-wait">Wait for a world</button></div>
+  <p class="action-note" id="fv-note" aria-live="polite"></p>
+  <p class="action-note err" id="fv-error" hidden></p>
+  <div class="hm-cols">
+    <div class="hm-col">
+      <h2 class="list-head">Open worlds <span class="small" id="fv-season"></span></h2>
+      <div class="season-list hm-list" id="fv-board"></div>
+    </div>
+    <div class="hm-col">
+      <h2 class="list-head">Hosting</h2>
+      <p class="small" id="fv-score"></p>
+      <p class="small">Want to help host hunts? The check takes about 20 seconds, measures this PC and your line, and shows you the numbers first. Nothing is sent until you press Send.</p>
+      <div class="hm-inline"><button class="ghost hm-small" id="fv-check">Run the host check</button><button class="ghost hm-small" id="fv-again" hidden>Run again</button><button class="primary-sm" id="fv-send" hidden>Send</button><button class="ghost hm-small" id="fv-clear" hidden>Stop hosting</button></div>
+      <div id="fv-check-result" class="fv-check"></div>
+
+    </div>
+  </div>
+  <div class="hm-col" id="fv-lb-wrap">
+    <h2 class="list-head">Hosts leaderboard <span class="small" id="fv-lb-sub"></span></h2>
+    <p class="small">Every host who ran a world: time hosted, players helped, player-minutes on their PC, hunts run, takeovers caught.</p>
+    <div class="fv-lb" id="fv-lb"></div>
+  </div>
+  <details class="hm-log-box"><summary>Forever log</summary><pre class="hm-log" id="fv-log" data-i18n-skip></pre></details>
+</section>
+
 <section class="page" id="page-host" hidden>
   <h1 class="page-title">Host Mode</h1>
   <p class="lead">Keep a server running on this PC: a Ramsgate that players join from their launcher, party up in and start hunts from. No game window opens here, and you can still press Play to join it yourself.</p>
@@ -457,6 +511,8 @@
       <div class="vc-bar">
         <span class="vc-mic" id="vc-mic"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><rect x="5.5" y="1.5" width="5" height="8.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 7.5a5 5 0 0 0 10 0M8 12.5V15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
         <div class="vc-bar-text"><div class="vc-title" id="vc-title">Voice</div><div class="vc-status" id="vc-status"></div></div>
+        <button class="primary-sm" id="vc-join-bar" hidden title="Join the voice room of the game or world you are in">Join voice</button>
+        <button class="vc-icon-btn" id="vc-leave-bar" hidden title="Leave voice">Leave</button>
         <button class="vc-icon-btn" id="vc-mute" hidden title="Mute your microphone">Mute</button>
         <button class="vc-icon-btn vc-gear" id="vc-gear" title="Voice settings" aria-label="Voice settings" aria-expanded="false"><svg viewBox="0 0 16 16" width="17" height="17" aria-hidden="true"><path d="M6.7 1.5h2.6l.4 1.8 1.2.7 1.8-.6 1.3 2.2-1.4 1.3v1.4l1.4 1.3-1.3 2.2-1.8-.6-1.2.7-.4 1.8H6.7l-.4-1.8-1.2-.7-1.8.6-1.3-2.2 1.4-1.3V7.6L2 6.3l1.3-2.2 1.8.6 1.2-.7z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></button>
       </div>
@@ -474,7 +530,7 @@
           <label class="vc-sens">Sensitivity <input type="range" id="vc-sens" min="0" max="100"></label>
         </div>
         <div class="vc-set"><label class="vc-field">Microphone <select id="vc-input" class="fr-input vc-select"></select></label></div>
-        <div class="vc-set"><label class="vc-radio"><input type="checkbox" id="vc-auto"> Join voice by itself when I host or join (not in games open to everyone)</label></div>
+        <div class="vc-set"><label class="vc-radio"><input type="checkbox" id="vc-auto"> Join voice by itself in friends' games (off by default; never in games open to everyone or Forever worlds)</label></div>
         <p class="small">Push to talk works while you are in the game; the game still sees the key, so pick one it does not use (mouse 4 or 5 work well).</p>
         <div class="dlg-actions"><button class="ghost" id="vc-close">Done</button></div>
       </dialog>
@@ -540,5 +596,6 @@
 <script src="voice.js"></script>
 <script src="player.js"></script>
 <script src="hostmode.js"></script>
+<script src="forever.js"></script>
 </body>
 </html>

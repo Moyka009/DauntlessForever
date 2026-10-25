@@ -70,7 +70,7 @@ function runVisible(id, kind, scriptPath, args, title, opts) {
     // cmd /c start /wait gives the script a real console (Read-Host, the folder picker) and waits for it.
     const cmdLine = `cmd.exe /d /c start "${title}" /wait ${PS} -NoProfile -ExecutionPolicy Bypass -Command "${psCmd}"`;
     const child = spawn('cmd.exe', [cmdLine.slice('cmd.exe '.length)],
-      { windowsHide: false, windowsVerbatimArguments: true, stdio: 'ignore', cwd: path.dirname(path.dirname(scriptPath)), env: freshEnv() });
+      { windowsHide: false, windowsVerbatimArguments: true, stdio: 'ignore', cwd: (opts && opts.cwd) || path.dirname(path.dirname(scriptPath)), env: Object.assign(freshEnv(), (opts && opts.env) || {}) });   // DF-FOREVER: opts.env / opts.cwd
     running.set(id, { kind, child });
     child.on('exit', (code) => { running.delete(id); resolve(code == null ? 1 : code); });
     child.on('error', () => { running.delete(id); resolve(1); });
@@ -78,11 +78,11 @@ function runVisible(id, kind, scriptPath, args, title, opts) {
 }
 
 // Hidden run with every output line reported. onLine(text, isError). Resolves with the exit code.
-function runHidden(id, kind, scriptPath, args, onLine) {
+function runHidden(id, kind, scriptPath, args, onLine, opts) {
   return new Promise((resolve) => {
     if (!IS_WIN) { return mockPlay(id, kind, onLine, resolve); }
     const child = spawn(PS, [...PS_ARGS, '-File', scriptPath, ...args],
-      { windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'], cwd: path.dirname(path.dirname(scriptPath)), env: freshEnv() });
+      { windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'], cwd: (opts && opts.cwd) || path.dirname(path.dirname(scriptPath)), env: Object.assign(freshEnv(), (opts && opts.env) || {}) });   // DF-FOREVER: opts.env / opts.cwd
     running.set(id, { kind, child });
     const feed = (stream, isErr) => {
       let buf = '';

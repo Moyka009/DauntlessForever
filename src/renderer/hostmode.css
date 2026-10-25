@@ -60,3 +60,33 @@
 .hm-log { margin: 8px 0 0; max-height: 260px; overflow: auto; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px;
   font-family: Consolas, "Cascadia Mono", monospace; font-size: 12px; line-height: 1.5; white-space: pre-wrap; color: var(--ink-2); }
 .hm-log .err { color: var(--brass-2); }
+
+/* DF-FOREVER: the Forever page (shares the Host Mode look) */
+.fv-check { margin-top: 8px; }
+.fv-row { display: grid; grid-template-columns: 110px 1fr 90px; gap: 8px; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,.06); font-size: 13px; }
+.fv-row .fv-p { text-align: right; opacity: .85; }
+.fv-world { padding: 8px 10px; }
+.fv-world-head { display: flex; gap: 8px; align-items: center; margin-bottom: 4px; }
+.fv-arrow { font-size: 13px; opacity: .85; margin-right: 6px; }
+
+.fv-checklist { display: flex; flex-wrap: wrap; gap: 14px; margin: 10px 0 14px; font-size: 13px; }
+.fv-check-item { display: flex; align-items: center; gap: 6px; opacity: .75; }
+.fv-check-item.ok { opacity: 1; }
+.fv-check-item .fv-tick { font-weight: 700; width: 14px; text-align: center; }
+.fv-check-item.ok .fv-tick { color: #5fd3a3; }
+.fv-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.fv-card { border: 1px solid rgba(255,255,255,.09); border-radius: 10px; padding: 14px; background: rgba(255,255,255,.025); display: flex; flex-direction: column; gap: 6px; }
+.fv-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.fv-card-title { font-size: 18px; font-weight: 700; color: #e8c15a; }
+.fv-stat { display: flex; justify-content: space-between; font-size: 13px; padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+.fv-stat-v { opacity: .9; } .fv-stat-v.hi { color: #5fd3a3; font-weight: 600; }
+.fv-card button { margin-top: 10px; align-self: flex-start; }
+.pill.gold { background: rgba(232,193,90,.18); color: #e8c15a; }
+@media (max-width: 900px) { .fv-cards { grid-template-columns: 1fr; } }
+
+/* Forever: hosts leaderboard */
+#fv-lb-wrap { margin-top: 18px; }
+.fv-lb-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.fv-lb-table th { text-align: left; font-weight: 600; opacity: .7; padding: 4px 8px; border-bottom: 1px solid rgba(255,255,255,.12); }
+.fv-lb-table td { padding: 5px 8px; border-bottom: 1px solid rgba(255,255,255,.06); }
+.fv-lb-table tr.fv-lb-you td { background: rgba(80, 200, 160, .10); font-weight: 600; }

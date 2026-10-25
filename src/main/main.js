@@ -160,6 +160,18 @@ function createWindow() {
       if (r === 2) { HM.shutdown().finally(() => { closeOk = true; setTimeout(() => { try { win.close(); } catch {} }, 1500); }); }
       return;
     }
+    // Forever: hosting a world (or standing by for one): closing the launcher hands the world over or ends it
+    const FH = (() => { try { return require('./forever').hostingNow(); } catch { return null; } })();
+    if (!closeOk && FH) {
+      e.preventDefault();
+      const msg = FH.isStandby ? I18N.t('You are the standby for a Forever world.') : I18N.t('You are hosting a Forever world with {n} player(s) in it.', { n: FH.players });
+      const detail = FH.isStandby ? I18N.t('If the host leaves while you are gone, their hunts have no backup. Minimize keeps you standing by.')
+        : (FH.standby ? I18N.t('Closing hands the world to the standby: everyone gets a short loading screen. Minimize keeps it running.') : I18N.t('There is no standby: closing ENDS the world and sends everyone to the menu. Minimize keeps it running.'));
+      const r = dialog.showMessageBoxSync(win, { type: 'warning', buttons: [I18N.t('Keep it running'), I18N.t('Minimize the launcher'), I18N.t('Stop and close')], defaultId: 1, cancelId: 0, message: msg, detail });
+      if (r === 1) win.minimize();
+      if (r === 2) { closeOk = true; try { require('./forever').shutdown(); } catch {} setTimeout(() => { try { win.close(); } catch {} }, 1500); }
+      return;
+    }
     if (!R.anyRunning().some(r => r.kind === 'play')) return;
     const r = dialog.showMessageBoxSync(win, { type: 'question', buttons: [I18N.t('Keep playing'), I18N.t('Close the launcher anyway')], defaultId: 0, cancelId: 0,
       message: I18N.t('The game is still running.'), detail: I18N.t('The servers it started keep running until the game closes by itself. If something is stuck, use "Stop everything" in the launcher first.') });
@@ -184,7 +196,10 @@ app.whenReady().then(async () => {
   // One player name for every version and the Friends page (player.js)
   require('./player').init({ get registry() { return registry; }, social: require('./social'), log: (t) => log('player', t) });
   // Voice chat with the people in your game (voice.js)
-  require('./voice').init({ social: require('./social'), send, log: (t) => log('voice', t) });
+  require('./voice').init({ social: require('./social'), forever: require('./forever'), send, log: (t) => log('voice', t) });
+  // Forever mode (forever.js): one world for everyone, run by the director on the VPS
+  require('./forever').init({ runner: R, send, log: (t) => log('forever', t), social: require('./social'),
+    nodeFor: async () => { let node = null; try { node = JSON.parse(fs.readFileSync(path.join(P.versionsDataDir(), 'forever', 'config.json'), 'utf8').replace(/^\uFEFF/, '')).Node; } catch {} if (!node || !fs.existsSync(node)) node = (await findNode() || {}).path; return node || null; } });
   // Host Mode: a server on this PC that stays up (hostmode.js)
   require('./hostmode').init({ get registry() { return registry; }, byId: (id) => byId(id), runner: R, send, log: (t) => log(t), social: require('./social'),
     status: async (id) => { const v = byId(id); return v ? V.status(v) : null; },
@@ -261,7 +276,7 @@ ipcMain.handle('community:info', async () => {
   try { const live = await U.fetchJson(U.COMMUNITY_URL); if (live && typeof live === 'object') Object.assign(community, live); } catch {}
   return { credits, community, supporters };
 });
-app.on('before-quit', () => { try { require('./hostmode').shutdown(); } catch {} try { require('./voice').shutdown(); } catch {} try { require('./social').shutdown(); } catch {} });
+app.on('before-quit', () => { try { require('./forever').shutdown(); } catch {} try { require('./hostmode').shutdown(); } catch {} try { require('./voice').shutdown(); } catch {} try { require('./social').shutdown(); } catch {} });
 app.on('window-all-closed', () => app.quit());
 // ---------------------------------------------------------------- helpers
 const byId = (id) => registry.find(v => v.id === id);

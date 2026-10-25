@@ -92,6 +92,22 @@ function collect(v, info) {
     const big = /^requests\.jsonl$/i.test(x.n);
     try { const t = tail(x.f, big ? TAIL_BIG : TAIL); add('logs/' + x.n, blank(t.data), t.mtime); if (t.cut) notes.push(`logs/${x.n}: only the last ${Math.round((big ? TAIL_BIG : TAIL) / 1024)} KB`); } catch {}
   }
+  // 2b. Forever mode lives in its own install (versions\forever): its logs and crash zips come along with a 1.14.7 report
+  if (v.id === '1.14.7') {
+    const fdir = path.join(P.versionsDataDir(), 'forever');
+    let ff = [];
+    try { ff = fs.readdirSync(path.join(fdir, 'logs')).filter(n => LOG_EXT.test(n)).map(n => ({ n, f: path.join(fdir, 'logs', n), st: fs.statSync(path.join(fdir, 'logs', n)) })).filter(x => x.st.isFile() && x.st.size > 0); } catch {}
+    ff.sort((a, b) => b.st.mtimeMs - a.st.mtimeMs);
+    for (const x of ff.slice(0, 30)) {
+      const big = /^requests\.jsonl$/i.test(x.n);
+      try { const t = tail(x.f, big ? TAIL_BIG : TAIL); add('forever/logs/' + x.n, blank(t.data), t.mtime); } catch {}
+    }
+    for (const z of ['client_logs.zip', 'server_logs.zip']) {
+      const zf = path.join(fdir, 'upload', z);
+      try { const st = fs.statSync(zf); if (st.size <= INNER_ZIP_MAX) add('forever/upload/' + z, fs.readFileSync(zf), st.mtime); } catch {}
+    }
+    if (ff.length) notes.push(`Forever mode logs included (${Math.min(30, ff.length)} files)`);
+  }
   // 3. the launcher's own log
   try { const t = tail(P.launcherLog(), TAIL_BIG); add('launcher.log', blank(t.data), t.mtime); } catch {}
   // 4. info.txt
