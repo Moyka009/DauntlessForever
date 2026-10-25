@@ -18,15 +18,15 @@
                      }
                  ],
     "launcher":  {
-                     "version":  "0.2.29",
-                     "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "Opens with one click, Forever Hunts banner, 1.14.7 gear and cosmetics on the Inventory page",
-                     "date":  "2026-10-23",
+                     "version":  "0.3.0",
+                     "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.3.0",
+                     "notes":  "Forever Hunts beta: new Forever tab",
+                     "date":  "2026-10-25",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.2.29.asar",
-                                 "sha256":  "4acc3960a866a3f74b26a105e9b38bc2efa24834d1c834ac2ebb03c0702be9d8",
-                                 "size":  8286995,
-                                 "minShell":  "0.2.4"
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/v0.3.0/app-0.3.0.asar",
+                                 "sha256":  "eeb80883b4c8d0df65a2b1025f95e13e4978573c818ae71c195ac1720f194471",
+                                 "size":  8617660,
+                                 "minShell":  "0.3.0"
                              }
                  }
 }

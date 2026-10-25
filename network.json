@@ -31,5 +31,8 @@
   },
   "social": {
     "url": "https://api.dauntlessforever.com"
+  },
+  "director": {
+    "url": "http://13.140.234.113:7080"
   }
 }

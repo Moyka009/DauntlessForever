@@ -2,6 +2,15 @@
   "_comment": "Patch notes shown in the launcher (newest first). The launcher also reads this file from the repo, so new notes need no build.",
   "notes": [
     {
+      "date": "2026-10-25",
+      "title": "Launcher 0.3.0: Forever Hunts beta",
+      "items": [
+        "New Forever tab: one shared Forever world on 1.14.7 with its own Forever character. Press Play Forever and the launcher finds you a world or starts one; if the host leaves, another player takes over and the hunt carries on.",
+        "Forever worlds always play on standard rules with 40 extra loadout slots. Your normal 1.14.7 save is not touched.",
+        "It is a beta: tell us what breaks with Send my logs."
+      ]
+    },
+    {
       "date": "2026-10-17",
       "title": "1.14.7: potions, hunt quests, equipment",
       "items": [
