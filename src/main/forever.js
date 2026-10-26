@@ -213,9 +213,27 @@ async function checkoutCharacter(season) {
     log('your Forever character is in place');
   }
   S.character = { season, exists: true, fresh: !(co.record.characters || []).length };
+  startCheckpoints();
+}
+// DF-FV-CHECKPOINT (Oct 25): while playing, the character on this PC is also saved on the director every 3 minutes (when
+// it changed), so a crash, a lost travel home or a bad world move costs minutes, not the session. The director keeps
+// the earlier copies too (DF-FV-HISTORY).
+let checkpointTimer = null, lastCheckpoint = '';
+function startCheckpoints() { clearInterval(checkpointTimer); lastCheckpoint = ''; checkpointTimer = setInterval(() => { checkpoint().catch(() => {}); }, 3 * 60 * 1000); }
+async function checkpoint() {
+  if (!character) return;
+  const own = ownForeverRecord(readJson(path.join(dataDir(), 'state.json'), null));
+  if (!own || !own.record || typeof own.record !== 'object') return;
+  const rec = Object.assign({}, own.record, { forever: true, season: character.season }); delete rec.candidate; delete rec.partyId;
+  if (!Array.isArray(rec.characters) || !rec.characters.length) return;
+  const h = crypto.createHash('sha256').update(JSON.stringify(rec)).digest('hex');
+  if (h === lastCheckpoint) return;
+  await api('PUT', '/v1/forever/character', { season: character.season, lease: character.lease, record: rec });
+  lastCheckpoint = h;
 }
 async function returnCharacter() {
   if (!character) return;
+  clearInterval(checkpointTimer); checkpointTimer = null;
   const c = character; character = null;
   try {
     const st = readJson(path.join(dataDir(), 'state.json'), null);
