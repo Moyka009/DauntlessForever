@@ -271,14 +271,30 @@ let checkpointTimer = null, lastCheckpoint = '';
 function startCheckpoints() { clearInterval(checkpointTimer); lastCheckpoint = ''; checkpointTimer = setInterval(() => { checkpoint().catch(() => {}); }, 3 * 60 * 1000); }
 async function checkpoint() {
   if (!character) return;
-  const own = ownForeverRecord(readJson(path.join(dataDir(), 'state.json'), null));
-  if (!own || !own.record || typeof own.record !== 'object') return;
-  const rec = Object.assign({}, own.record, { forever: true, season: character.season }); delete rec.candidate; delete rec.partyId;
+  // DF-FV-LIVESAVE (Oct 26): the copy on the PC the game plays on right now, through the join proxy (it follows host
+  // changes). Before, this read the home copy, which the join window refreshes from the FIRST host only: after a world
+  // move, or for a Host Mode host playing in another world, it stopped changing and nothing was saved for half an hour.
+  let source = await liveRecord();
+  if (!source) { const own = ownForeverRecord(readJson(path.join(dataDir(), 'state.json'), null)); source = own && own.record; }
+  if (!source || typeof source !== 'object') return;
+  const rec = Object.assign({}, source, { forever: true, season: character.season }); delete rec.candidate; delete rec.partyId;
   if (!Array.isArray(rec.characters) || !rec.characters.length) return;
   const h = crypto.createHash('sha256').update(JSON.stringify(rec)).digest('hex');
   if (h === lastCheckpoint) return;
   await api('PUT', '/v1/forever/character', { season: character.season, lease: character.lease, record: rec });
   lastCheckpoint = h;
+}
+// this player's record on the backend the game is connected to (127.0.0.1:63000 = the join proxy), or null
+function liveRecord() {
+  const key = ownKey();
+  if (!key || !/^[0-9a-f]{32}$/.test(key)) return Promise.resolve(null);
+  return new Promise((resolve) => {
+    const req = require('http').get({ host: '127.0.0.1', port: 63000, path: '/_travel/' + key, timeout: 10000 }, (res) => {
+      let b = ''; res.setEncoding('utf8'); res.on('data', (d) => { b += d; });
+      res.on('end', () => { try { const j = JSON.parse(b); resolve(res.statusCode === 200 && j && j.player && Array.isArray(j.player.characters) && j.player.characters.length ? j.player : null); } catch { resolve(null); } });
+    });
+    req.on('timeout', () => req.destroy()); req.on('error', () => resolve(null));
+  });
 }
 async function returnCharacter() {
   if (!character) return;
