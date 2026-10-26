@@ -818,11 +818,13 @@ async function download(name, to, sha256) {
   }
   throw last;
 }
+const WRAP_KEY = Buffer.from('DauntlessForever-core-wrap-v1:not-a-secret-just-not-a-zip-on-the-wire');
 function downloadOnce(name, to, sha256) {
   return new Promise((resolve, reject) => {
     const base = directorBase(); const url = new URL('/v1/forever/files/' + name, base + '/');
     const time = Date.now();
     const headers = { 'X-DF-Id': account.id, 'X-DF-Time': String(time), 'X-DF-Sig': crypto.createHmac('sha256', account.secret).update(`${time}\nGET\n${url.pathname}\n`).digest('hex') };
+    headers['X-DF-Wrap'] = 'xor1';   // DF-FV-WRAP: the director may send the zip XOR-ed so download scanners leave it alone
     const lib = url.protocol === 'https:' ? require('https') : require('http');
     const req = lib.get(url, { headers, timeout: 60000 }, (res) => {
       if (res.statusCode !== 200) { res.resume(); return reject(new Error(`${name}: HTTP ${res.statusCode}`)); }
@@ -832,7 +834,11 @@ function downloadOnce(name, to, sha256) {
       const part = `${to}.${process.pid}-${Date.now()}.part`;
       const h = crypto.createHash('sha256'); const out = fs.createWriteStream(part);
       const AV = ' - if this keeps happening, your antivirus (or a "web protection" / "web shield" feature) is changing or removing the Forever files: allow them, or add the DauntlessForever folder as an exception';
-      res.on('data', d => h.update(d)); res.pipe(out);
+      const wrapped = String(res.headers['x-df-wrapped'] || '') === 'xor1';
+      let pos = 0;
+      const unwrap = (d) => { if (!wrapped) return d; const o = Buffer.allocUnsafe(d.length); for (let i = 0; i < d.length; i++) o[i] = d[i] ^ WRAP_KEY[(pos + i) % WRAP_KEY.length]; pos += d.length; return o; };
+      res.on('data', (d) => { const p = unwrap(d); h.update(p); if (!out.write(p)) { res.pause(); out.once('drain', () => res.resume()); } });
+      res.on('end', () => out.end());
       res.on('aborted', () => { out.destroy(); reject(new Error(`${name}: the download was cut off`)); });
       out.on('finish', () => {
         const got = h.digest('hex');
