@@ -73,10 +73,39 @@ function directorBase() {
     if (/^https?:\/\//.test(u)) return u.replace(/\/+$/, '');
   } catch {}
   const n = ctx.social.getNetwork() || {};
+  // DF-FV-HTTPS (Oct 25): network.json "director": { "url": "http://ip:7080", "secure": "https://name" }. Launchers from
+  // 0.3.6 use "secure" and fall back to "url" for 30 min when "secure" cannot be reached at all (a network that blocks
+  // the name or HTTPS); older launchers only know "url". Same director, same accounts either way.
+  const fb = fallbackBase();
+  const sec = n.director && typeof n.director.secure === 'string' && /^https:\/\//.test(n.director.secure) ? n.director.secure.replace(/\/+$/, '') : '';
+  if (sec && !(fb && Date.now() < useFallbackUntil)) return sec;
   if (n.director && typeof n.director.url === 'string' && /^https?:\/\//.test(n.director.url)) return n.director.url.replace(/\/+$/, '');
   return String((n.social && n.social.url) || '').replace(/\/+$/, '');
 }
-function dcall(method, apiPath, body, timeoutMs) {
+let useFallbackUntil = 0;
+function fallbackBase() {
+  try { if (fs.existsSync(path.join(P.dataRoot(), 'forever-director.txt'))) return ''; } catch {}
+  const d = (ctx.social.getNetwork() || {}).director || {};
+  return typeof d.secure === 'string' && typeof d.url === 'string' && /^https?:\/\//.test(d.url) ? d.url.replace(/\/+$/, '') : '';
+}
+// every address the same director has had (the account made on one is valid on all of them)
+function directorAliases() {
+  const d = (ctx.social.getNetwork() || {}).director || {};
+  const all = [d.url, d.secure, ...(Array.isArray(d.aliases) ? d.aliases : [])].filter(x => typeof x === 'string').map(x => x.replace(/\/+$/, ''));
+  return all;
+}
+const NET_ERR = /ECONNREFUSED|ENOTFOUND|EAI_AGAIN|ECONNRESET|ETIMEDOUT|EHOSTUNREACH|ENETUNREACH|CERT|SSL|TLS|self.signed|did not answer/i;
+async function dcall(method, apiPath, body, timeoutMs) {
+  try { return await dcallOnce(method, apiPath, body, timeoutMs); }
+  catch (e) {
+    const fb = fallbackBase();
+    if (e.status || !fb || directorBase() === fb || !NET_ERR.test(String(e.code || '') + ' ' + e.message)) throw e;
+    log(`the Forever service did not answer at ${directorBase()} (${e.code || e.message}); using ${fb} for 30 minutes`, true);
+    useFallbackUntil = Date.now() + 30 * 60 * 1000;
+    return dcallOnce(method, apiPath, body, timeoutMs);
+  }
+}
+function dcallOnce(method, apiPath, body, timeoutMs) {
   return new Promise((resolve, reject) => {
     const base = directorBase();
     if (!base) return reject(new Error('no director address (network.json)'));
@@ -105,7 +134,7 @@ function dcall(method, apiPath, body, timeoutMs) {
 async function ensureAccount() {
   if (account) return account;
   const same = (a, b) => String(a || '').replace(/\/+$/, '') === String(b || '').replace(/\/+$/, '');
-  try { account = JSON.parse(fs.readFileSync(accountFile(), 'utf8')); if (account && account.id && account.secret && same(account.base, directorBase())) return account; account = null; } catch { account = null; }
+  try { account = JSON.parse(fs.readFileSync(accountFile(), 'utf8')); if (account && account.id && account.secret && (same(account.base, directorBase()) || directorAliases().some(a => same(a, account.base)))) return account; account = null; } catch { account = null; }   // DF-FV-HTTPS: the same director under another address keeps the account
   let name = 'Slayer';
   try { name = (require('./player').get() || '').trim() || name; } catch {}
   try { const me = ctx.social.identity(); if (me && me.name) name = me.name; } catch {}

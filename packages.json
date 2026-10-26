@@ -20,12 +20,12 @@
     "launcher":  {
                      "version":  "0.3.6",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "Forever set-up: a failed download no longer crashes the launcher",
+                     "notes":  "Forever: downloads over HTTPS when available; a failed download no longer crashes the launcher",
                      "date":  "2026-10-25",
                      "app":  {
                                  "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.3.6.asar",
-                                 "sha256":  "8e9636aaa82a5a2f411ef4a7144daabd749ab8e596ba92456bbb6a1e2fdd6a8e",
-                                 "size":  8624910,
+                                 "sha256":  "14a486de52a32856346c6c627bb5c640d7a566f2a16268fb6a449b8c95921670",
+                                 "size":  8626989,
                                  "minShell":  "0.2.4"
                              }
                  }
