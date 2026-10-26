@@ -895,6 +895,16 @@ function unzip(zipFile, into) {
     t.on('error', reject);
   });
 }
+// DF-FV-MORE / DF-FV-SETUPCLEAN (Oct 26, Magpie: "could not unpack forever-core.zip (tar exit 1)"): programs still running
+// from versions\forever (a backend, a backup server, a server copy with the core DLL in it) keep files locked, so the
+// update cannot replace them. Closes them; only ever called while Forever is off on this PC.
+async function killLeftovers() {
+  const d = dir().replace(/'/g, "''");
+  let n = 0;
+  await new Promise((res) => { try { const ps = spawn('powershell.exe', ['-NoProfile', '-Command', `$n = 0; Get-CimInstance Win32_Process | Where-Object { $_.ProcessId -ne ${process.pid} -and (($_.CommandLine -and $_.CommandLine.IndexOf('${d}', [StringComparison]::OrdinalIgnoreCase) -ge 0) -or ($_.ExecutablePath -and $_.ExecutablePath.StartsWith('${d}', [StringComparison]::OrdinalIgnoreCase)) -or ($_.Name -eq 'Dauntless-Win64-Shipping.exe' -and $_.CommandLine -match '(^|\s)-server(\s|$)')) } | ForEach-Object { try { Stop-Process -Id $_.ProcessId -Force -ErrorAction Stop; $n++ } catch {} }; Write-Output $n`], { windowsHide: true }); let out = ''; ps.stdout.on('data', (b) => { out += b; }); ps.on('exit', () => { n = parseInt(out, 10) || 0; res(); }); ps.on('error', res); setTimeout(res, 15000); } catch { res(); } });
+  if (n) { log('closed ' + n + ' leftover Forever program(s)'); await new Promise((r) => setTimeout(r, 1500)); }
+  return n;
+}
 async function setup(progress) {
   const say = (step) => { setupState = { step, error: '' }; if (progress) progress(step); push(); };
   const src = path.join(P.versionsDataDir(), '1.14.7');
@@ -919,6 +929,8 @@ async function setup(progress) {
   const ov = want('forever-overlay.zip'), ds = want('forever-core.zip');
   await download('forever-overlay.zip', path.join(tmp, 'forever-overlay.zip'), ov.sha256);
   await download('forever-core.zip', path.join(tmp, 'forever-core.zip'), ds.sha256);
+  say('closing anything Forever left running');
+  await killLeftovers();   // DF-FV-SETUPCLEAN: locked files made tar fail (exit 1)
   say('unpacking');
   await unzip(path.join(tmp, 'forever-overlay.zip'), d);          // backend\, tools\, rules.json over the package copies
   await unzip(path.join(tmp, 'forever-core.zip'), coreDir());
@@ -1073,10 +1085,7 @@ function init(c) {
   ipcMain.handle('forever:openFolder', async () => { try { const d = dir(); if (fs.existsSync(d)) await require('electron').shell.openPath(d); return { ok: fs.existsSync(d) }; } catch (e) { return { ok: false, error: e.message }; } });
   ipcMain.handle('forever:cleanup', async () => {
     if (S.phase !== 'off') return { ok: false, error: 'stop Forever first' };
-    const d = dir().replace(/'/g, "''");
-    let n = 0;
-    await new Promise((res) => { try { const ps = spawn('powershell.exe', ['-NoProfile', '-Command', `$n = 0; Get-CimInstance Win32_Process | Where-Object { $_.ProcessId -ne ${process.pid} -and (($_.CommandLine -and $_.CommandLine.IndexOf('${d}', [StringComparison]::OrdinalIgnoreCase) -ge 0) -or ($_.ExecutablePath -and $_.ExecutablePath.StartsWith('${d}', [StringComparison]::OrdinalIgnoreCase))) } | ForEach-Object { try { Stop-Process -Id $_.ProcessId -Force -ErrorAction Stop; $n++ } catch {} }; Write-Output $n`], { windowsHide: true }); let out = ''; ps.stdout.on('data', (b) => { out += b; }); ps.on('exit', () => { n = parseInt(out, 10) || 0; res(); }); ps.on('error', res); setTimeout(res, 15000); } catch { res(); } });
-    log('cleanup: closed ' + n + ' leftover Forever process(es)');
+    const n = await killLeftovers();
     return { ok: true, closed: n };
   });
   ipcMain.handle('forever:cards', async () => { try { return { ok: true, cards: await cards() }; } catch (e) { return { ok: false, error: e.message }; } });
