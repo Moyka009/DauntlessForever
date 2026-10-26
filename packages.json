@@ -18,14 +18,14 @@
                      }
                  ],
     "launcher":  {
-                     "version":  "0.3.4",
+                     "version":  "0.3.5",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "Forever: slower PCs can host, character saved on the server every 3 minutes, slim Forever Hunts banner",
+                     "notes":  "Forever: set-up retries a download that got cut off",
                      "date":  "2026-10-25",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.3.4.asar",
-                                 "sha256":  "12445754e75a2d85355d3a908b581e78721c302391433247766f3fb13cce4723",
-                                 "size":  8623575,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.3.5.asar",
+                                 "sha256":  "0fcdbc51caaf2339c2bb6b507145836afa5bb3d368dcfda5be13631556568d93",
+                                 "size":  8624035,
                                  "minShell":  "0.2.4"
                              }
                  }

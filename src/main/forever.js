@@ -780,7 +780,16 @@ function copyTree(src, dst) {
     try { fs.copyFileSync(src, dst); } catch (e) { if (/\.(log|lock|tmp)$/i.test(src) || /[\\/](Logs|Saved[\\/]Logs)[\\/]/i.test(src) || e.code === 'EBUSY') log('skipped (in use): ' + path.basename(src)); else throw e; }
   }
 }
-function download(name, to, sha256) {
+// DF-FV-DLRETRY (Oct 25): a busy director (everyone updating at once) can cut a download short: try 3 times
+async function download(name, to, sha256) {
+  let last;
+  for (let i = 0; i < 3; i++) {
+    try { return await downloadOnce(name, to, sha256); }
+    catch (e) { last = e; log(`${name}: download try ${i + 1} failed (${e.message})${i < 2 ? ', trying again' : ''}`, true); await new Promise(r => setTimeout(r, 3000 * (i + 1))); }
+  }
+  throw last;
+}
+function downloadOnce(name, to, sha256) {
   return new Promise((resolve, reject) => {
     const base = directorBase(); const url = new URL('/v1/forever/files/' + name, base + '/');
     const time = Date.now();
