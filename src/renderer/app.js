@@ -108,6 +108,7 @@ async function fillSettings() {
   fillKeepFiles();
   fillRunning();
   fillAccount();
+  foreverCheckRow();
 }
 // Settings > Friends account (DF-ACCOUNT, Oct 21): who this launcher is signed in as, a connection report players can
 // paste in Discord, and a reset when the server no longer knows the account (replaces the PowerShell steps)
@@ -129,6 +130,19 @@ async function accountCheck() {
   rep.textContent = r && r.ok ? r.report : (tm(r && r.error) || t('The check could not run.'));
   $('set-acct-copy').hidden = !(r && r.ok);
   fillAccount();
+}
+// Settings > Forever server (DF-FV-CHECKLINE, Oct 26): is the Forever server reachable (secure, then plain address) and is
+// the Forever tab open for this launcher. Runs when the Settings page opens and on the button.
+async function foreverCheckRow() {
+  const b = $('set-fv-check'), rep = $('set-fv-report'), sub = $('set-fv');
+  if (!b || !L.foreverCheck) return;
+  b.disabled = true; b.textContent = t('Checking...'); sub.textContent = t('Checking the Forever server...');
+  let r = null; try { r = await L.foreverCheck(); } catch (e) { r = { ok: false, error: e.message }; }
+  b.disabled = false; b.textContent = t('Check Forever');
+  const lines = (r && r.ok && r.lines) || [];
+  const bad = lines.some((l) => /^FAIL/.test(l)), note = lines.some((l) => /^NOTE/.test(l));
+  sub.textContent = !r || !r.ok ? (tm(r && r.error) || t('The check could not run.')) : bad ? t('Problem: see below.') : note ? t('Reachable, see the note below.') : t('Everything looks fine.');
+  rep.hidden = !lines.length; rep.textContent = lines.join('\n');
 }
 async function accountReset() {
   const ok = await confirm(t('Reset your friends account?'),
@@ -1267,6 +1281,7 @@ function wire() {
   $('set-games-pick').addEventListener('click', async () => { const p = await L.pickGamesRoot(); if (p) { info.gamesRoot = p; $('set-games').textContent = p; renderDetail(); } });
   $('set-data-open').addEventListener('click', () => L.openPath(info.dataRoot));
   $('set-acct-check').addEventListener('click', accountCheck);
+  $('set-fv-check').addEventListener('click', foreverCheckRow);
   $('set-acct-reset').addEventListener('click', accountReset);
   $('set-acct-copy').addEventListener('click', async () => {
     try { await navigator.clipboard.writeText($('set-acct-report').textContent); $('set-acct-copy').textContent = t('Copied'); setTimeout(() => { $('set-acct-copy').textContent = t('Copy report'); }, 1500); } catch {}
