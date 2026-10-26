@@ -141,7 +141,7 @@ async function foreverCheckRow() {
   b.disabled = false; b.textContent = t('Check Forever');
   const lines = (r && r.ok && r.lines) || [];
   const bad = lines.some((l) => /^FAIL/.test(l)), note = lines.some((l) => /^NOTE/.test(l));
-  sub.textContent = !r || !r.ok ? (tm(r && r.error) || t('The check could not run.')) : bad ? t('Problem: see below.') : note ? t('Reachable, see the note below.') : t('Everything looks fine.');
+  sub.textContent = !r || !r.ok ? ((r && r.error) || t('The check could not run (no answer from the launcher; restart it).')) : bad ? t('Problem: see below.') : note ? t('Reachable, see the note below.') : t('Everything looks fine.');
   rep.hidden = !lines.length; rep.textContent = lines.join('\n');
 }
 async function accountReset() {

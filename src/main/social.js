@@ -608,6 +608,7 @@ async function foreverCheckLines(todo) {
     const fv = (() => { try { return require('./forever').publicState(); } catch { return null; } })();
     if (offlineMode()) lines.push('NOTE Forever tab: hidden while Offline Forever mode is on.');
     else if (fv && fv.allowed) lines.push(`OK   Forever tab: open for this launcher (season ${fv.season || 'S1'})`);
+    else if (fv && fv.accessError) lines.push(`FAIL Forever tab: the launcher could not ask the Forever server (${fv.accessError}). Send your logs from the Play page (More -> Send my logs).`);
     else if (fv) lines.push('NOTE Forever tab: not open for this launcher yet. The launcher asks again every 30 s; if the Forever server is reachable above, the Forever team has to open it for you.');
   } catch { /* the Forever line is extra: never break the check */ }
   return lines;

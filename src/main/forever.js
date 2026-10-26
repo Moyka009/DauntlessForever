@@ -154,7 +154,21 @@ async function ensureAccount() {
   log(`this PC signed in to Forever as ${name} (${r.id.slice(0, 11)}...)`);
   return account;
 }
-async function api(method, apiPath, body) { await ensureAccount(); return dcall(method, apiPath, body); }
+async function api(method, apiPath, body) {
+  await ensureAccount();
+  try { return await dcall(method, apiPath, body); }
+  catch (e) {
+    // DF-FV-REREGISTER (Oct 26, Chabog): the Forever server no longer knows this PC's account ("not signed in"): every call
+    // failed and the Forever tab stayed hidden. Make a new account once and try again (a new account starts a new Forever character).
+    if (e && e.status === 401 && /unknown account/.test(e.message || '') && account && !apiPath.startsWith('/v1/register')) {
+      log(`the Forever server does not know this PC's account (${account.id.slice(0, 11)}...): signing in again`, true);
+      try { fs.renameSync(accountFile(), accountFile() + '.unknown-' + Date.now()); } catch {}
+      account = null; await ensureAccount();
+      return dcall(method, apiPath, body);
+    }
+    throw e;
+  }
+}
 
 // ------------------------------------------------------------------ install
 function installed() {
@@ -929,8 +943,13 @@ async function checkAccess() {
     if (exists(path.join(P.dataRoot(), 'forever-unlock.txt'))) S.allowed = true;
     else if (ctx.social.offlineMode()) { S.allowed = false; }
     else { const r = await api('GET', '/v1/forever/access', undefined); S.allowed = !!r.allowed; S.season = r.season || S.season; }
+    S.accessError = '';
     if (S.allowed && installed()) S.stale = await setupStale();
-  } catch { /* keep the last answer */ }
+  } catch (e) {   // keep the last answer; DF-FV-ACCESSLOG (Oct 26): say why once, so Check Forever and the logs show it
+    const why = (e && (e.status ? 'HTTP ' + e.status + ': ' : '') + (e.message || String(e))) || 'unknown error';
+    if (why !== S.accessError) log('could not ask the Forever server whether the tab is open: ' + why, true);
+    S.accessError = why;
+  }
   push();
   // while this launcher is not allowed yet, look again soon (someone may be adding it right now)
   clearTimeout(accessTimer); accessTimer = setTimeout(checkAccess, S.allowed ? 5 * 60 * 1000 : 30 * 1000);
@@ -999,7 +1018,7 @@ async function cards() {
 
 // ------------------------------------------------------------------ state + IPC
 function publicState() {
-  return { allowed: !!S.allowed, setup: setupState, stale: !!S.stale, cards: S.cards || null, phase: S.phase, mode: S.mode, role: S.role, world: S.world, why: S.why || '', error: S.error || '', season: S.season || 'S1',
+  return { allowed: !!S.allowed, accessError: S.accessError || '', setup: setupState, stale: !!S.stale, cards: S.cards || null, phase: S.phase, mode: S.mode, role: S.role, world: S.world, why: S.why || '', error: S.error || '', season: S.season || 'S1',
     standbyName: S.standbyName || '', standby: standby ? { prewarmed: standby.prewarmed, ready: standby.ready, adopted: standby.adopted, code: standby.code } : null,
     hostClosing: S.hostClosing || null, noStandby: !!S.noStandby, character: S.character || null, clientDll: !!S.clientDll, missing: missing(), score: S.score || null, check: S.check || null, board: S.board || null, leaderboard: S.leaderboard || null, helper: !!S.helper, autoPlay: !!S.autoPlay, ownGame: !!S.ownGame, away: S.away || null, pings: (() => { try { return ctx.social.relayPings ? ctx.social.relayPings() : {}; } catch { return {}; } })(), log: logLines.slice(-60) };
 }
