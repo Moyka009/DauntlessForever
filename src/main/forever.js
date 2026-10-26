@@ -798,10 +798,19 @@ function downloadOnce(name, to, sha256) {
     const req = lib.get(url, { headers, timeout: 60000 }, (res) => {
       if (res.statusCode !== 200) { res.resume(); return reject(new Error(`${name}: HTTP ${res.statusCode}`)); }
       P.ensureDir(path.dirname(to));
-      const h = crypto.createHash('sha256'); const out = fs.createWriteStream(to + '.part');
+      // DF-FV-DLSAFE (Oct 25): each try writes its own part file, and nothing here can throw outside the promise (an
+      // antivirus that deletes or changes the file mid-download used to crash the launcher with ENOENT on the rename)
+      const part = `${to}.${process.pid}-${Date.now()}.part`;
+      const h = crypto.createHash('sha256'); const out = fs.createWriteStream(part);
+      const AV = ' - if this keeps happening, your antivirus (or a "web protection" / "web shield" feature) is changing or removing the Forever files: allow them, or add the DauntlessForever folder as an exception';
       res.on('data', d => h.update(d)); res.pipe(out);
-      out.on('finish', () => { const got = h.digest('hex'); if (sha256 && got !== sha256) { try { fs.unlinkSync(to + '.part'); } catch {} return reject(new Error(`${name}: the download did not match (checksum)`)); } fs.renameSync(to + '.part', to); resolve(to); });
-      out.on('error', reject);
+      res.on('aborted', () => { out.destroy(); reject(new Error(`${name}: the download was cut off`)); });
+      out.on('finish', () => {
+        const got = h.digest('hex');
+        if (sha256 && got !== sha256) { try { fs.unlinkSync(part); } catch {} return reject(new Error(`${name}: the download did not match (checksum)` + AV)); }
+        try { fs.renameSync(part, to); resolve(to); } catch (e) { try { fs.unlinkSync(part); } catch {} reject(new Error(`${name}: the downloaded file disappeared (${e.code || e.message})` + AV)); }
+      });
+      out.on('error', (e) => reject(new Error(`${name}: could not write the download (${e.code || e.message})` + AV)));
     });
     req.on('timeout', () => req.destroy(new Error(name + ': timed out'))); req.on('error', reject);
   });

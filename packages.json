@@ -18,14 +18,14 @@
                      }
                  ],
     "launcher":  {
-                     "version":  "0.3.5",
+                     "version":  "0.3.6",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "Forever: set-up retries a download that got cut off",
+                     "notes":  "Forever set-up: a failed download no longer crashes the launcher",
                      "date":  "2026-10-25",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.3.5.asar",
-                                 "sha256":  "0fcdbc51caaf2339c2bb6b507145836afa5bb3d368dcfda5be13631556568d93",
-                                 "size":  8624035,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.3.6.asar",
+                                 "sha256":  "8e9636aaa82a5a2f411ef4a7144daabd749ab8e596ba92456bbb6a1e2fdd6a8e",
+                                 "size":  8624910,
                                  "minShell":  "0.2.4"
                              }
                  }
