@@ -186,6 +186,22 @@
     $('fv-needhost-check').onclick = async () => { const r = await L.foreverCheckAndHost(); if (!r.ok && r.error) note(r.error, true); };
     $('fv-needhost-wait').onclick = async () => { await L.foreverWait(); };
     $('fv-clear').onclick = async () => { const r = await L.foreverClearScore(); note(r.ok ? t('Taken back. This PC will not host.') : r.error, !r.ok); refreshBoard(); };
+    // DF-FV-MORE: the Play page's More menu, here. 1.14.7 items run the Play page's own action for 1.14.7.
+    $('fv-more').onclick = (e) => { e.stopPropagation(); $('fv-more-menu').hidden = !$('fv-more-menu').hidden; };
+    document.addEventListener('click', (e) => { if (!e.target.closest('#fv-more-menu') && !e.target.closest('#fv-more')) $('fv-more-menu').hidden = true; });
+    $('fv-more-menu').onclick = async (e) => {
+      const b = e.target.closest('button'); if (!b) return;
+      $('fv-more-menu').hidden = true;
+      const fv = b.dataset.fv, act = b.dataset.act;
+      if (fv === 'setup') { if (S && S.phase !== 'off') return note(t('Stop Forever first.'), true); note(t('Setting up Forever...')); const r = await L.foreverSetup(); if (!r.ok) note(r.error, true); else { note(t('Forever is set up.')); refreshBoard(); } return; }
+      if (fv === 'folder') { const r = await L.foreverOpenFolder(); if (!r.ok) note(r.error || t('Forever is not set up yet.'), true); return; }
+      if (fv === 'cleanup') { if (S && S.phase !== 'off') return note(t('Stop Forever first.'), true); note(t('Closing leftovers...')); const r = await L.foreverCleanup(); note(r.ok ? (r.closed ? t('Closed') + ' ' + r.closed + ' ' + t('leftover program(s). Try again now.') : t('Nothing was left running.')) : r.error, !r.ok); return; }
+      if (act) {
+        select('1.14.7');
+        if (['check', 'setup', 'logs'].includes(act)) showPage('play');   // these show their progress on the Play page
+        const real = document.querySelector('#more-menu [data-act="' + act + '"]'); if (real) real.click();
+      }
+    };
     L.onForeverUpdate((s) => { S = s; render(); });
     L.foreverState().then((s) => { S = s; render(); });
     document.addEventListener('page:shown', (e) => { if (e.detail === 'forever') { refreshBoard(); clearInterval(boardTimer); boardTimer = setInterval(refreshBoard, 15000); render(); } else { clearInterval(boardTimer); } });

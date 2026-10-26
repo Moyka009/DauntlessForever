@@ -126,7 +126,9 @@ contextBridge.exposeInMainWorld('launcher', {
   foreverCheck: invoke('forever:check'),            // the opt-in host check: runs, shows the numbers, sends nothing
   foreverSendScore: invoke('forever:sendScore'),
   foreverClearScore: invoke('forever:clearScore'),
-  foreverSetup: invoke('forever:setup'),             // builds versions\forever from 1.14.7 + the server's Forever files
+  foreverSetup: invoke('forever:setup'),
+  foreverOpenFolder: invoke('forever:openFolder'),   // DF-FV-MORE
+  foreverCleanup: invoke('forever:cleanup'),         // closes processes left running from versions\forever (only when Forever is off)             // builds versions\forever from 1.14.7 + the server's Forever files
   foreverCards: invoke('forever:cards'),              // the two character cards (Forever character from the VPS, own 1.14.7 Slayer)
   foreverAccess: invoke('forever:access'),
   foreverCheckAndHost: invoke('forever:checkAndHost'),   // nobody is hosting: run the check, send, host

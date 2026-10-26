@@ -18,12 +18,12 @@
                      }
                  ],
     "launcher":  {
-                     "version":  "0.3.9",
+                     "version":  "0.3.10",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "Forever: tidy scrollable world list, no Join this world button",
+                     "notes":  "",
                      "date":  "2026-10-25",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.3.9.asar",
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.3.10.asar",
                                  "sha256":  "221265fef42b46768d10d0e5de49571d23dfbc66320dbe95fdcb454fbcb4c03a",
                                  "size":  8628439,
                                  "minShell":  "0.2.4"

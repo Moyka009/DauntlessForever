@@ -1028,6 +1028,16 @@ function init(c) {
   });
   ipcMain.handle('forever:wait', async () => { if (S.phase !== 'needHost') return { ok: false }; S.phase = 'waiting'; push(); timer = setTimeout(() => ask().catch(e => { log(e.message, true); S.phase = 'off'; push(); }), 10000); return { ok: true }; });
   ipcMain.handle('forever:setup', async () => { if (S.phase !== 'off') return { ok: false, error: 'stop Forever first' }; try { await setup(); S.stale = false; push(); return { ok: true }; } catch (e) { setupState = { step: '', error: e.message }; S.error = e.message; push(); return { ok: false, error: e.message }; } });
+  // DF-FV-MORE: the Forever tab's More menu
+  ipcMain.handle('forever:openFolder', async () => { try { const d = dir(); if (fs.existsSync(d)) await require('electron').shell.openPath(d); return { ok: fs.existsSync(d) }; } catch (e) { return { ok: false, error: e.message }; } });
+  ipcMain.handle('forever:cleanup', async () => {
+    if (S.phase !== 'off') return { ok: false, error: 'stop Forever first' };
+    const d = dir().replace(/'/g, "''");
+    let n = 0;
+    await new Promise((res) => { try { const ps = spawn('powershell.exe', ['-NoProfile', '-Command', `$n = 0; Get-CimInstance Win32_Process | Where-Object { $_.ProcessId -ne ${process.pid} -and (($_.CommandLine -and $_.CommandLine.IndexOf('${d}', [StringComparison]::OrdinalIgnoreCase) -ge 0) -or ($_.ExecutablePath -and $_.ExecutablePath.StartsWith('${d}', [StringComparison]::OrdinalIgnoreCase))) } | ForEach-Object { try { Stop-Process -Id $_.ProcessId -Force -ErrorAction Stop; $n++ } catch {} }; Write-Output $n`], { windowsHide: true }); let out = ''; ps.stdout.on('data', (b) => { out += b; }); ps.on('exit', () => { n = parseInt(out, 10) || 0; res(); }); ps.on('error', res); setTimeout(res, 15000); } catch { res(); } });
+    log('cleanup: closed ' + n + ' leftover Forever process(es)');
+    return { ok: true, closed: n };
+  });
   ipcMain.handle('forever:cards', async () => { try { return { ok: true, cards: await cards() }; } catch (e) { return { ok: false, error: e.message }; } });
   ipcMain.handle('forever:access', async () => { await checkAccess(); return { allowed: !!S.allowed }; });
   ipcMain.handle('forever:closing', async (_e, seconds) => { S.closingIn = Math.max(0, Number(seconds) || 0); return { ok: true }; });

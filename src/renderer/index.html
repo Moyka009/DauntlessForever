@@ -179,7 +179,19 @@
       <h2 class="list-head">Hosting</h2>
       <p class="small" id="fv-score"></p>
       <p class="small">Want to help host hunts? The check takes about 20 seconds, measures this PC and your line, and shows you the numbers first. Nothing is sent until you press Send.</p>
-      <div class="hm-inline"><button class="ghost hm-small" id="fv-check">Run the host check</button><button class="ghost hm-small" id="fv-again" hidden>Run again</button><button class="primary-sm" id="fv-send" hidden>Send</button><button class="ghost hm-small" id="fv-clear" hidden>Stop hosting</button></div>
+      <div class="hm-inline"><button class="ghost hm-small" id="fv-check">Run the host check</button><button class="ghost hm-small" id="fv-again" hidden>Run again</button><button class="primary-sm" id="fv-send" hidden>Send</button><button class="ghost hm-small" id="fv-clear" hidden>Stop hosting</button><button class="ghost hm-small" id="fv-more">More</button></div>
+      <div class="menu" id="fv-more-menu" hidden>
+        <button data-fv="setup">Set up Forever again (fresh Forever files)</button>
+        <button data-fv="folder">Open the Forever folder (logs, files)</button>
+        <button data-fv="cleanup">Close anything Forever left running (fixes "tar exit 1")</button>
+        <button data-act="check">Check the 1.14.7 game files (repairs missing or damaged files)</button>
+        <button data-act="setup">Run 1.14.7 set-up again</button>
+        <button data-act="opengame">Open the game folder</button>
+        <button data-act="openver">Open the 1.14.7 launcher folder (save, logs)</button>
+        <button data-act="logs">Get the logs for asking for help</button>
+        <button data-act="report">Send my logs to the Dauntless Forever team</button>
+        <button data-act="firewall">Fix the firewall (allow the launcher, Node and the game)</button>
+      </div>
       <div id="fv-check-result" class="fv-check"></div>
 
     </div>
