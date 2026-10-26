@@ -126,13 +126,14 @@
     </div>
 
     <!-- DF-FH-BANNER (Oct 22): Forever Hunts teaser, a picture only (no link yet). DF-FH-LIGHT: moving sun shafts and dust over it (fh-banner.js) -->
-    <div class="fh-banner" id="fh-banner" aria-label="Forever Hunts, coming soon">
+    <div class="fh-banner" id="fh-banner" role="button" tabindex="0" aria-label="Forever Hunts beta: open the Forever tab">
       <canvas class="fh-rays" id="fh-rays" aria-hidden="true"></canvas>
       <span class="fh-text">
-        <span class="fh-kicker">Coming soon</span>
+        <span class="fh-kicker">Beta - live now</span>
         <span class="fh-title">Forever Hunts</span>
-        <span class="fh-sub">The hunt never ends.</span>
+        <span class="fh-sub">The hunt never ends. Open the Forever tab.</span>
       </span>
+      <button class="fh-close" id="fh-close" type="button" title="Hide this banner" aria-label="Hide this banner">&times;</button>
     </div>
   </div>
 </section>

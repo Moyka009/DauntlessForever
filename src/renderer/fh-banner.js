@@ -143,3 +143,15 @@ const FHLight = (() => {
   start();
   return { pause(p) { paused = !!p; if (paused) stop(); else start(); } };
 })();
+
+// DF-FH-SLIM (Oct 25): the banner opens the Forever tab (when this launcher has it); the x hides the banner for good
+(() => {
+  const b = document.getElementById('fh-banner'), x = document.getElementById('fh-close');
+  if (!b) return;
+  let hidden = false; try { hidden = localStorage.getItem('df-fh-hidden') === '1'; } catch {}
+  if (hidden) b.classList.add('fh-hidden');
+  const open = () => { const nav = document.querySelector('.nav-item[data-page="forever"]'); if (nav && !nav.hidden) nav.click(); };
+  b.addEventListener('click', (e) => { if (e.target === x) return; open(); });
+  b.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+  if (x) x.addEventListener('click', (e) => { e.stopPropagation(); b.classList.add('fh-hidden'); try { localStorage.setItem('df-fh-hidden', '1'); } catch {} });
+})();

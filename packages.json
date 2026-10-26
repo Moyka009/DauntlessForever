@@ -18,14 +18,14 @@
                      }
                  ],
     "launcher":  {
-                     "version":  "0.3.2",
+                     "version":  "0.3.3",
                      "url":  "https://github.com/addison2k/DauntlessForever/releases/tag/v0.2.10",
-                     "notes":  "Forever: only up-to-date installs can join a world",
+                     "notes":  "Forever: slower PCs can host (startup no longer cut off, fix by KombatKing); slim Forever Hunts banner",
                      "date":  "2026-10-25",
                      "app":  {
-                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.3.2.asar",
-                                 "sha256":  "bce6c3cf1643634cdc27f73153b0bd81cf11c9f20fccd8491816ea21577d1b6d",
-                                 "size":  8618813,
+                                 "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.3.3.asar",
+                                 "sha256":  "e57b180b99830f35e39ba2e544885c27e71e891d98f4278efe284965865ac74e",
+                                 "size":  8622323,
                                  "minShell":  "0.2.4"
                              }
                  }

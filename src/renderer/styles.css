@@ -507,3 +507,18 @@ html:not([lang="en"]) .nav-new { padding: 1px 5px; font-size: 10px; }
    falling dust are drawn by fh-banner.js on this canvas over the picture. */
 #page-play .fh-banner, #page-play .fh-banner:hover { cursor: default; border-top-color: var(--line-2); }
 .fh-rays { position: absolute; top: 0; left: 34%; width: 66%; height: 100%; pointer-events: none; }
+
+/* DF-FH-SLIM (Oct 25): Forever is live. The banner is a slim strip at the end of the Play page (no longer docked over
+   it, so the page scrolls to the bottom), opens the Forever tab, and the x hides it for good (Settings has no switch:
+   clearing it = delete df-fh-hidden in the launcher's storage). */
+#page-play .fh-banner { position: relative; bottom: auto; height: 76px; margin: 26px -40px 0; box-shadow: none; }
+#page-play .fh-text { flex-direction: row; align-items: baseline; gap: 14px; padding: 0 40px; }
+#page-play .fh-title { font-size: 24px; margin-top: 0; }
+#page-play .fh-kicker { font-size: 11.5px; }
+#page-play .fh-sub { font-size: 14px; margin-top: 0; }
+#page-play .fh-banner::before, #page-play .fh-banner::after { inset: 0 0 0 45%; }
+#page-play > :nth-last-child(2) { margin-bottom: 0; }
+.fh-close { position: absolute; z-index: 2; top: 8px; right: 10px; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line-2);
+  background: rgba(10, 14, 18, 0.65); color: var(--ink-2); font-size: 17px; line-height: 1; cursor: pointer; }
+.fh-close:hover { color: var(--ink); border-color: var(--ink-3); }
+.fh-banner.fh-hidden { display: none !important; }

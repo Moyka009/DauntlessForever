@@ -46,7 +46,7 @@ const toolsDir = () => path.join(dir(), 'tools');
 const coreDir = () => path.join(dir(), 'core');
 const coreTool = (name) => path.join(coreDir(), 'tools', (manifest() && manifest().tools && manifest().tools[name]) || (name + '.ps1'));
 const coreBin = (which) => path.join(coreDir(), 'bin', (manifest() && manifest()[which]) || '');
-const readJson = (f, d) => { try { return JSON.parse(fs.readFileSync(f, 'utf8').replace(/^﻿/, '')); } catch { return d; } };
+const readJson = (f, d) => { try { return JSON.parse(fs.readFileSync(f, 'utf8').replace(/^\uFEFF/, '')); } catch { return d; } };
 const exists = (f) => { try { return fs.existsSync(f); } catch { return false; } };
 const ENV = () => ({ DF_VER: FV });
 
@@ -364,10 +364,36 @@ async function startHost(rules) {
     // standby's backup, so this PC's own game can join its own world through the join proxy on 63000 - and leave again
     // without taking the world down
     run = ctx.runner.runHidden(FV + ':host', 'host', script, ['-Public', '-HostMode'], (line, isErr) => { if (isErr) log(line.slice(0, 200), true); }, { env: HM_ENV(), cwd: dir() });
-    run.then(() => { if (S.phase !== 'off' && !folding && S.helper && !oldWorldPending) stop('Host Mode ended'); else if (!S.helper) log('the world this PC hosted is closed'); });   // after a step-down the world closing is expected: the game plays on elsewhere
+    run.then((code) => {
+      if (S.phase === 'off' || S.phase === 'stopping') return;
+      if (!folding && S.helper && !oldWorldPending) {
+        log(`Forever Host Mode exited (code ${code}); check logs\\hostmode.log and logs\\recorder.err.log`, true);
+        stop('Host Mode ended').catch(e => log('host cleanup: ' + e.message, true));
+      } else if (!S.helper) log('the world this PC hosted is closed');
+    });
     startHostHelpers();
+    hostStartupReady = false;
+    // Director heartbeats must continue during slow startup. Only gate the backend's
+    // failure detector, which otherwise closes new Forever hosts after 2 misses.
     hostBeatLoop();
-    waitForOwnWorld().then((ok) => { if (!ok || S.phase !== 'hosting') return; if (S.autoPlay) { S.autoPlay = false; push(); log('your world is up: opening your game in it'); playInOwnWorld().catch((e) => log('could not open your game: ' + e.message, true)); } else log('your world is up: press Play Forever - fresh character to play in it'); });
+    waitForOwnWorld().then((ok) => {
+      if (S.phase !== 'hosting') return;
+      if (!ok) {
+        log('Forever Host Mode did not finish startup; inspect logs\\hostmode.log and logs\\recorder.err.log', true);
+        stop('host startup timed out').catch(e => log('host cleanup: ' + e.message, true));
+        return;
+      }
+      hostStartupReady = true;
+      backendMisses = 0;
+      log('your Forever backend and city server are ready; health monitoring is active');
+      if (S.autoPlay) {
+        S.autoPlay = false; push(); log('your world is up: opening your game in it');
+        playInOwnWorld().catch(e => log('could not open your game: ' + e.message, true));
+      } else log('your world is up: press Play Forever - fresh character to play in it');
+    }).catch(e => {
+      log('Forever startup check failed: ' + e.message, true);
+      if (S.phase === 'hosting') stop('host startup failed').catch(err => log('host cleanup: ' + err.message, true));
+    });
     return;
   }
   run = ctx.runner.runVisible(FV + ':host', 'host', script, ['-Public'], 'Dauntless Forever - hosting a world (keep open)', { closeWhenDone: true, env: ENV(), cwd: dir() });   // the window closes by itself when the game ends
@@ -523,14 +549,15 @@ function backendAlive(port) {
     req.on('error', () => resolve(false)); req.on('timeout', () => { req.destroy(); resolve(false); });
   });
 }
-let backendMisses = 0;
+let backendMisses = 0, hostStartupReady = false;
 function hostBeatLoop() {
   clearTimeout(hostTimer); backendMisses = 0;
   const tick = async () => {
     if (S.phase !== 'hosting') return;
-    // exiting the game shuts the backend down: that is the end of the session
+    // A new Forever host's backend can take minutes to start: don't treat this
+    // as a game closing. Keep talking to the director throughout startup.
     if (await backendAlive(standby && standby.adopted ? 64000 : S.helper ? 63000 + HM_OFFSET : 63000)) backendMisses = 0;
-    else if (++backendMisses >= 2) { stop('the game closed'); return; }
+    else if ((!S.helper || hostStartupReady) && ++backendMisses >= 3) { stop('backend stopped answering'); return; }
     const code = standby && standby.adopted ? standby.code : joinCode();
     const relay = standby && standby.adopted ? { ip: standby.relayIp, base: standby.relayBase } : relayInfo();
     if (code && /^\d+\.\d+\.\d+\.\d+:\d+$/.test(code)) {
@@ -643,7 +670,7 @@ async function foldInto(mg) {
   await startJoin(w);
 }
 function becomeHost() {
-  S.role = 'host'; S.phase = 'hosting'; S.world = null; push();
+  S.role = 'host'; S.phase = 'hosting'; S.world = null; hostStartupReady = true; push();   // an adopted world is already up: its health checks count from now
   log('this PC hosts the world now');
   startHostHelpers();
   clearTimeout(timer);
@@ -678,7 +705,7 @@ async function follow(go, away) {
 
 // ------------------------------------------------------------------ stop
 async function stop(why) {
-  if (S.phase === 'off') return;
+  if (S.phase === 'off' || S.phase === 'stopping') return;
   const wasHost = S.role === 'host', hadOldWorld = oldWorldPending;
   S.phase = 'stopping'; push();
   clearTimeout(timer); clearTimeout(hostTimer);
