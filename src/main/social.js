@@ -642,6 +642,25 @@ async function diagnose() {
       else lines.push(`FAIL Account: ${e.message}`);
     }
   }
+  // 5. DF-FV-CHECKLINE: the Forever tab. The Forever server decides who sees it; show whether it answers and what it said.
+  try {
+    const d = (network && network.director) || {};
+    const dirs = [d.secure, d.url].filter((x) => typeof x === 'string' && /^https?:\/\//.test(x)).map((x) => x.replace(/\/+$/, ''));
+    let fvReach = !dirs.length || offlineMode(), fvWhy = '';
+    for (const [i, b] of dirs.entries()) {
+      if (fvReach) break;
+      const p = await probeService(b, i ? 'Forever server (plain connection)' : 'Forever server');   // the Forever server is part of the same service: /v1/health
+      if (p.ok) { fvReach = true; lines.push(p.text); } else if (!fvWhy) fvWhy = p.text;
+    }
+    if (!fvReach) {
+      lines.push(fvWhy || 'FAIL Forever server: no answer');
+      todo.push('The Forever tab needs the Forever server: allow the Dauntless Forever launcher in your firewall and antivirus (turn off "web shield" / "HTTPS scanning" for it), then press Check connection again.');
+    }
+    const fv = (() => { try { return require('./forever').publicState(); } catch { return null; } })();
+    if (offlineMode()) lines.push('NOTE Forever tab: hidden while Offline Forever mode is on.');
+    else if (fv && fv.allowed) lines.push(`OK   Forever tab: open for this launcher (season ${fv.season || 'S1'})`);
+    else if (fv) lines.push('NOTE Forever tab: not open for this launcher yet. The launcher asks again every 30 s; if the Forever server is reachable above, the Forever team has to open it for you.');
+  } catch { /* the Forever line is extra: never break the check */ }
   lines.push('');
   if (todo.length) { lines.push('What to do:'); todo.forEach((x, i) => lines.push(`${i + 1}. ${x}`)); }
   else lines.push('Everything looks fine.');
