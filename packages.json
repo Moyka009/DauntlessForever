@@ -24,8 +24,8 @@
                      "date":  "2026-10-25",
                      "app":  {
                                  "url":  "https://github.com/addison2k/DauntlessForever/releases/download/packages/app-0.3.12.asar",
-                                 "sha256":  "0994e18537201af0c3aedf4d2700c7417ba211fdfe682b86060d75668ee9d86e",
-                                 "size":  8632532,
+                                 "sha256":  "ebc27707b64052ceb76e05bffe7aff19f90599f562567486dc967bfc7bd4929d",
+                                 "size":  8633051,
                                  "minShell":  "0.2.4"
                              }
                  }
