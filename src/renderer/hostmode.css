@@ -90,3 +90,10 @@
 .fv-lb-table th { text-align: left; font-weight: 600; opacity: .7; padding: 4px 8px; border-bottom: 1px solid rgba(255,255,255,.12); }
 .fv-lb-table td { padding: 5px 8px; border-bottom: 1px solid rgba(255,255,255,.06); }
 .fv-lb-table tr.fv-lb-you td { background: rgba(80, 200, 160, .10); font-weight: 600; }
+
+/* DF-FV-BOARD (Oct 25): the open worlds list scrolls in its own box */
+#fv-board { max-height: 340px; overflow-y: auto; padding-right: 4px; }
+#fv-board .fv-world { border-bottom: 1px solid var(--line); }
+#fv-board .fv-world:last-of-type { border-bottom: 0; }
+#fv-board .fv-hunts { color: var(--ink-2); margin-top: 2px; }
+#fv-board .fv-empty { padding: 8px 10px; color: var(--ink-3); }

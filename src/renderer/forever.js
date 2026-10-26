@@ -82,7 +82,10 @@
     // board
     const b = S.board, list = $('fv-board'); list.innerHTML = '';
     if (b && b.worlds && b.worlds.length) {
-      for (const w of b.worlds) {
+      // DF-FV-BOARD (Oct 25): a scrollable box, busiest worlds first (yours on top); empty worlds go into one line
+      const worldsSorted = [...b.worlds].sort((x, y) => (y.you ? 1 : 0) - (x.you ? 1 : 0) || (y.players || 0) - (x.players || 0));
+      const empty = worldsSorted.filter(w => !w.you && !(w.players > 0));
+      for (const w of worldsSorted.filter(w => w.you || w.players > 0)) {
         const card = el('div', 'season-item fv-world');
         const head = el('div', 'fv-world-head');
         const ms = w.region && S.pings && Number.isFinite(Number(S.pings[w.region])) ? Number(S.pings[w.region]) : null;
@@ -90,16 +93,17 @@
         card.append(head);
         if (w.names && w.names.length) card.append(el('div', 'small', t('with: {names}', { names: w.names.join(', ') })));
         const full = (w.players || 0) >= (w.cap || 8);
-        if (!w.you) {
-          const jb = el('button', 'ghost hm-small', full ? t('Full') : t('Join this world')); jb.disabled = full || !!S.missing || (S.phase !== 'off' && !(S.helper && S.phase === 'hosting' && !S.ownGame));
-          jb.onclick = async () => { const r = await L.foreverPlay(w.mode === 'any' ? 'any' : 'fresh', w.host); if (!r.ok) note(r.error, true); };
-          card.append(jb);
-        } else card.append(el('div', 'small', t('you are in this world')));
+        // DF-FV-NOJOINBTN (Oct 25): no "Join this world" button (it confused players); Play Forever picks the world
+        if (w.you) card.append(el('div', 'small', t('you are in this world')));
+        else if (full) card.append(el('div', 'small', t('full')));
         const inHunts = (w.hunts || []).reduce((n, h) => n + (h.players || 0), 0), inTown = Math.max(0, (w.players || 0) - inHunts);
-        if (w.hunts && w.hunts.length) for (const h of w.hunts) card.append(el('div', 'small', `${h.label || h.huntId || 'hunt'} - ${h.players}/${h.cap}${h.behemoth != null ? `, behemoth ${h.behemoth}%` : ''}`));
-        card.append(el('div', 'small', w.hunts && w.hunts.length ? t('Ramsgate - {n}', { n: inTown }) : t('everyone in Ramsgate ({n})', { n: inTown })));
+        const shortHunt = (h) => String(h.label || h.huntId || 'hunt').replace(/^.*\//, '').replace(/^\S*\s+/, '').replace(/^ShatteredIsles_/, '').replace(/_/g, ' ').replace(/^Island([A-Z])$/, 'Island $1') || 'hunt';
+        const parts = (w.hunts || []).map(h => `${shortHunt(h)} ${h.players}/${h.cap}`);
+        parts.push(t('Ramsgate {n}', { n: inTown }));
+        card.append(el('div', 'small fv-hunts', parts.join('  \u00b7  ')));
         list.append(card);
       }
+      if (empty.length) list.append(el('div', 'small fv-empty', t('{n} more world(s) waiting for players: {names}', { n: empty.length, names: empty.map(w => w.hostName).join(', ') })));
     } else list.append(el('p', 'small', t('No open worlds right now. Press Play Forever and one starts.')));
     $('fv-season').textContent = t('Season {s}', { s: S.season });
     // leaderboard
