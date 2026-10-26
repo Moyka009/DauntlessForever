@@ -93,7 +93,7 @@ contextBridge.exposeInMainWorld('launcher', {
   socialSetAllowRandoms: invoke('social:setAllowRandoms'),
   socialSetOffline: invoke('social:setOffline'),
   socialDiagnose: invoke('social:diagnose'),
-  foreverCheck: invoke('social:foreverCheck'),       // Settings > Forever server (DF-FV-CHECKLINE)          // Settings > Friends account: connection report
+  foreverServerCheck: invoke('social:foreverCheck'),   // Settings > Forever server (DF-FV-CHECKLINE; not foreverCheck = the host check)          // Settings > Friends account: connection report
   socialResetAccount: invoke('social:resetAccount'),  // a fresh friends account (same name); the old file is kept
   onSocialUpdate: on('social:update'),
   // Voice (main/voice.js, renderer/voice.js)

@@ -135,9 +135,9 @@ async function accountCheck() {
 // the Forever tab open for this launcher. Runs when the Settings page opens and on the button.
 async function foreverCheckRow() {
   const b = $('set-fv-check'), rep = $('set-fv-report'), sub = $('set-fv');
-  if (!b || !L.foreverCheck) return;
+  if (!b || !L.foreverServerCheck) return;
   b.disabled = true; b.textContent = t('Checking...'); sub.textContent = t('Checking the Forever server...');
-  let r = null; try { r = await L.foreverCheck(); } catch (e) { r = { ok: false, error: e.message }; }
+  let r = null; try { r = await L.foreverServerCheck(); } catch (e) { r = { ok: false, error: e.message }; }
   b.disabled = false; b.textContent = t('Check Forever');
   const lines = (r && r.ok && r.lines) || [];
   const bad = lines.some((l) => /^FAIL/.test(l)), note = lines.some((l) => /^NOTE/.test(l));
