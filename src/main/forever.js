@@ -97,7 +97,13 @@ function directorAliases() {
 const NET_ERR = /ECONNREFUSED|ENOTFOUND|EAI_AGAIN|ECONNRESET|ETIMEDOUT|EHOSTUNREACH|ENETUNREACH|CERT|SSL|TLS|self.signed|did not answer/i;
 async function dcall(method, apiPath, body, timeoutMs) {
   try { return await dcallOnce(method, apiPath, body, timeoutMs); }
-  catch (e) {
+  catch (e0) {
+    let e = e0;
+    // DF-FV-RESETRETRY: a kept-alive connection the server already closed answers ECONNRESET / socket hang up once;
+    // try again on a fresh connection before calling the address down (it was moving everyone to plain http for 30 min)
+    if (!e.status && /ECONNRESET|socket hang up|EPIPE/i.test(String(e.code || '') + ' ' + e.message)) {
+      try { return await dcallOnce(method, apiPath, body, timeoutMs, true); } catch (e2) { e = e2; }
+    }
     const fb = fallbackBase();
     if (e.status || !fb || directorBase() === fb || !NET_ERR.test(String(e.code || '') + ' ' + e.message)) throw e;
     log(`the Forever service did not answer at ${directorBase()} (${e.code || e.message}); using ${fb} for 30 minutes`, true);
@@ -105,7 +111,7 @@ async function dcall(method, apiPath, body, timeoutMs) {
     return dcallOnce(method, apiPath, body, timeoutMs);
   }
 }
-function dcallOnce(method, apiPath, body, timeoutMs) {
+function dcallOnce(method, apiPath, body, timeoutMs, fresh) {
   return new Promise((resolve, reject) => {
     const base = directorBase();
     if (!base) return reject(new Error('no director address (network.json)'));
@@ -118,7 +124,7 @@ function dcallOnce(method, apiPath, body, timeoutMs) {
       headers['X-DF-Sig'] = crypto.createHmac('sha256', account.secret).update(`${time}\n${method}\n${url.pathname}\n${data}`).digest('hex');
     }
     const lib = url.protocol === 'https:' ? require('https') : require('http');
-    const req = lib.request(url, { method, headers, timeout: timeoutMs || 15000 }, (res) => {
+    const req = lib.request(url, Object.assign({ method, headers, timeout: timeoutMs || 15000 }, fresh ? { agent: false } : {}), (res) => {
       let b = ''; res.setEncoding('utf8'); res.on('data', d => b += d);
       res.on('end', () => {
         let j = {}; try { j = b ? JSON.parse(b) : {}; } catch {}
