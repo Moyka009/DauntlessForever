@@ -199,20 +199,17 @@
     if(k==='legs')return /(_LEGS|_FEET|_BOOTS|_GREAVES| BOOT| GREAVE| STRIDE| TREAD| MARCH| ROOTS)/.test(s);
     return false;
   }
-  const fallbackImages = {weapon:'weapons',head:'Head',chest:'Torso',arms:'Arms',legs:'Legs',lantern:'Lantern',omnicell:'Omnicell',part:'Weapon',cell:'Omnicell'};
-  const safePath = x => typeof x==='string' && /^[A-Za-z0-9_\-/]+\.png$/.test(x) ? 'build-icons/'+x : '';
+  // Self-contained, original placeholder symbols. No third-party game art.
+  const fallbackLetters = {weapon:'W',head:'H',chest:'C',arms:'A',legs:'L',lantern:'N',omnicell:'O',part:'P',cell:'+'};
   function iconFor(it,slot) {
-    const ver=version(),exact=it&&icons[ver]&&icons[ver][it.id];
-    if(exact)return safePath(exact);
-    if(it && it.type==='Omnicells') {
-      const found=['Artificer','Bastion','Discipline','Iceborne','Revenant','Tempest'].find(w=>it.name.toLowerCase().includes(w.toLowerCase()));
-      if(found)return 'build-icons/omnicells/'+found+'.png';
-    }
-    const base=fallbackImages[(slot||'').replace(/cell[0-9]/,'cell')] || (it&&it.type==='Cells'?'Omnicell':'Weapon');
-    const folder=base==='weapons'?'generic/Weapon.png':'generic/'+base+'.png';
-    return 'build-icons/'+folder;
+    const kind = (slot||'').replace(/cell[0-9]/,'cell');
+    const letter = fallbackLetters[kind] || '?';
+    const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">'+
+      '<rect x="2" y="2" width="60" height="60" rx="10" fill="#203642" stroke="#64aab4" stroke-width="2"/>'+
+      '<text x="32" y="43" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="30" fill="#edf6fa">'+letter+'</text></svg>';
+    return 'data:image/svg+xml,'+encodeURIComponent(svg);
   }
-  function itemIcon(it,slot){const img=node('img','builds-item-image');img.loading='lazy';img.alt='';img.src=iconFor(it,slot);img.onerror=()=>{img.onerror=null;img.src='build-icons/generic/Weapon.png';};return img;}
+  function itemIcon(it,slot){const img=node('img','builds-item-image');img.loading='lazy';img.alt='';img.src=iconFor(it,slot);return img;}
   function currentLocks(){return new Set(Array.isArray(editor.locks)?editor.locks:[]);}
   function toggleLock(key){snapshot();const locks=currentLocks();locks.has(key)?locks.delete(key):locks.add(key);editor.locks=[...locks];showEditor();}
   function isTemp(it){return /^(\[temp\]|\[test\]|\[debug\])/i.test(it.name)||/(TEST|DEBUG|PLACEHOLDER)/.test(it.id);}
